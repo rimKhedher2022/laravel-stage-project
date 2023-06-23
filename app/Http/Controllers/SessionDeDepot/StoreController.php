@@ -12,7 +12,7 @@ class StoreController extends Controller
     public function __invoke(SessionDeDepotStoreRequest $request) {
 
 
-        $rapport = SessionDeDepot::create([
+        $session = SessionDeDepot::create([
   
             'date_debut' => $request->date_debut,
             'date_fin' =>$request->date_fin,
@@ -21,7 +21,7 @@ class StoreController extends Controller
 
         
 
-        return $rapport ;
+        return $session ;
 
 
 

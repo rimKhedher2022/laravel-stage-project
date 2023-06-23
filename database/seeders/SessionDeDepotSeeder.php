@@ -17,7 +17,7 @@ class SessionDeDepotSeeder extends Seeder
         SessionDeDepot::create([
         'date_debut'=>Carbon::now(), 
         'date_fin'=>Carbon::now()->addMonth(),
-        'user_id'=>'4',
+        'user_id'=>'3',
        ]);
     }
 }

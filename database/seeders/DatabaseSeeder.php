@@ -22,10 +22,14 @@ class DatabaseSeeder extends Seeder
     $this->call([
         EnseignantSeeder::class,
         StageSeeder::class,
+        RapportSeeder::class,
         EtudiantSeeder::class,
         EtudiantStageSeeder::class,
         EnseignantStageSeeder::class,
-        UserSeeder::class
+        UserSeeder::class,
+       
+        SessionDeDepotSeeder::class,
+        MessageDeRappelSeeder::class,
         // php artisan db:seed
         // les relations bin stage / enseignant / etudiant --> seeder
     ]);

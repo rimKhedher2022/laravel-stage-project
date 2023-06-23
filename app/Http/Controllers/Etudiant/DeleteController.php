@@ -11,10 +11,10 @@ class DeleteController extends Controller
     public function __invoke($id)  // une seule fonction
    {
 
-    $etudiant= Etudiant::find($id);
+    $etudiant = Etudiant::find($id);
     $user = $etudiant->user;
-    $etudiant->delete() ;
-    $user->delete() ;
+    $etudiant-> delete() ;
+    $user-> delete() ;
     return 'ok' ;
  //  objectif : delete user role = etudiant
    }

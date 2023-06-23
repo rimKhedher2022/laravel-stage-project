@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Etudiant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EtudiantStoreRequest;
+use App\Http\Requests\EtudiantUpdateRequest;
 use App\Models\Etudiant;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -12,31 +13,37 @@ use Illuminate\Support\Facades\Hash;
 
 class UpdateController extends Controller
 {
-    public function __invoke(EtudiantStoreRequest $request, $id) // une seule fonction
+    public function __invoke(EtudiantUpdateRequest $request, $id) // une seule fonction
    {
     $etudiant = Etudiant::find($id);
     $user = User::find($etudiant->user_id);
     
    
     
-    $user->update([
-        'nom' => $request->nom ,
-        'prenom' =>$request->prenom  ,
-        'email' =>$request->email  ,
-        'role' =>$request->role  ,
-        'password' => Hash::make($request->password) ,
-    ]);
+    $user->update(
+    //     [
+    //     'nom' => $request->nom ,
+    //     'prenom' =>$request->prenom  ,
+    //     'email' =>$request->email  ,
+    //     'role' =>$request->role  ,
+    //     'password' => Hash::make($request->password) ,
+    // ]
+    $request->all()
+);
        
   
 
 
-    $etudiant->update([
-            'cin'=>$request->cin ,
-            'niveau'=>$request->niveau ,
-            'specialite'=>$request->specialite ,
-            'numero_inscription'=>$request->numero_inscription ,
-            'user_id'=> $user->id,
-    ]);
+    $etudiant->update(
+    //     [
+    //         'cin'=>$request->cin ,
+    //         'niveau'=>$request->niveau ,
+    //         'specialite'=>$request->specialite ,
+    //         'numero_inscription'=>$request->numero_inscription ,
+    //         'user_id'=> $user->id,
+    // ]
+    $request->all()
+);
     
     return  $etudiant;
 

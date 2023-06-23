@@ -62,6 +62,7 @@ Route::prefix('etudiants')->group(function () {
     Route::delete('/{id}',DeleteController::class);
     Route::post('/{id}',UpdateController::class);
 });
+
 Route::prefix('enseignants')->group(function () {
     Route::get('/',IndexController::class);
     Route::get('/{id}',ShowController::class);
@@ -81,35 +82,37 @@ Route::prefix('stages')->group(function () {
     Route::get('/{id}',StageShowController::class);
     Route::post('/',StageStoreController::class);
     Route::delete('/{id}',StageDeleteController::class);
-    Route::put('/{id}',StageUpdateController::class);
+    Route::post('/{id}',StageUpdateController::class);
 });
+
 Route::prefix('societes')->group(function () {
     Route::get('/',SocieteIndexController::class);
     Route::get('/{id}',SocieteShowController::class);
     Route::post('/',SocieteStoreController::class);
     Route::delete('/{id}',SocieteDeleteController::class);
-    Route::put('/{id}',SocieteUpdateController::class);
+    Route::post('/{id}',SocieteUpdateController::class);
 });
 Route::prefix('rapports')->group(function () {
     Route::get('/',RapportIndexController::class);
     Route::get('/{id}',RapportShowController::class);
     Route::post('/',RapportStoreController::class);
     Route::delete('/{id}',RapportDeleteController::class);
-    Route::put('/{id}',RapportUpdateController::class);
+    Route::post('/{id}',RapportUpdateController::class);
 });
 Route::prefix('sessionsDeDepot')->group(function () {
     Route::get('/',SessionDeDepotIndexController::class);
     Route::get('/{id}',SessionDeDepotShowController::class);
     Route::post('/',SessionDeDepotStoreController::class);
     Route::delete('/{id}',SessionDeDepotDeleteController::class);
-    Route::put('/{id}',SessionDeDepotUpdateController::class);
+    Route::post('/{id}',SessionDeDepotUpdateController::class);
 });
+
 Route::prefix('messagesDeRappel')->group(function () {
     Route::get('/',MessageDeRappelIndexController::class);
     Route::get('/{id}',MessageDeRappelShowController::class);
     Route::post('/',MessageDeRappelStoreController::class);
     Route::delete('/{id}',MessageDeRappelDeleteController::class);
-   // Route::put('/{id}',MessageDeRappelUpdateController::class);
+    Route::post('/{id}',MessageDeRappelUpdateController::class);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
