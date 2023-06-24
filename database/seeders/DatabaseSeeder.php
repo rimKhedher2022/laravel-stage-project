@@ -1,37 +1,40 @@
 <?php
 
 namespace Database\Seeders;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Enums\RoleType;
 use App\Models\Enseignant;
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        //\App\Models\User::factory(10)->create();
-
-    
-    $this->call([
-        EnseignantSeeder::class,
-        StageSeeder::class,
-        RapportSeeder::class,
-        EtudiantSeeder::class,
-        EtudiantStageSeeder::class,
-        EnseignantStageSeeder::class,
-        UserSeeder::class,
-       
-        SessionDeDepotSeeder::class,
-        MessageDeRappelSeeder::class,
-        // php artisan db:seed
-        // les relations bin stage / enseignant / etudiant --> seeder
-    ]);
+        // DB::table('users')->insert([ 
+        //     'nom' => 'admin',
+        //     'prenom' => 'Admin',
+           
+        //     'email' => 'admin@argon.com',
+        //     'password' => bcrypt('secret') // 
+// register : les champs  postman
+        $this->call([
+            EnseignantSeeder::class,
+            StageSeeder::class,
+            RapportSeeder::class,
+            EtudiantSeeder::class,
+            EtudiantStageSeeder::class,
+            EnseignantStageSeeder::class,
+            UserSeeder::class,
+            SessionDeDepotSeeder::class,
+            MessageDeRappelSeeder::class,
+            // php artisan db:seed
+            // les relations bin stage / enseignant / etudiant --> seeder
+        ]);
     }
 }

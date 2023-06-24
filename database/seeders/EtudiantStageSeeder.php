@@ -14,8 +14,8 @@ class EtudiantStageSeeder extends Seeder
     public function run(): void
     {
         EtudiantStage::create([
-            'stage_id'=>'1',
-            'etudiant_id'=>'2',
+            'stage_id'=>1,
+            'etudiant_id'=>2,
         ]);
     }
 }

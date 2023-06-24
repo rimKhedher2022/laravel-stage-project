@@ -18,7 +18,7 @@ class RapportSeeder extends Seeder
         'filePath'=>'/jjdhd/kjdhd/d/f',
         'titre'=>'rapport pfe1',
         'date_depot'=>Carbon::now(),
-        'stage_id'=>'1',
+        'stage_id'=>1,
            ]);
        
     }

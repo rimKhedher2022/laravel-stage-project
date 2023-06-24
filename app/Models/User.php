@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RoleType;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Enums\RoleType;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -24,8 +24,6 @@ class User extends Authenticatable
         'nom', 'prenom', 'email','password','image','role',
     ];
 
-
-    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -47,11 +45,6 @@ class User extends Authenticatable
         'role'=> RoleType::class,
     ];
 
-    /**
-     * Get the user associated with the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function etudiant(): HasOne
     {
         return $this->hasOne(Etudiant::class);
@@ -92,4 +85,15 @@ class User extends Authenticatable
          return $this->hasMany(MessageDeRappel::class);
      }
     
+
+    /**
+     * Always encrypt the password when it is updated.
+     *
+     * @param $value
+    * @return string
+    */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

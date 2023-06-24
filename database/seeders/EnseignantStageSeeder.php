@@ -14,8 +14,8 @@ class EnseignantStageSeeder extends Seeder
     public function run(): void
     {
         EnseignantStage::create([
-            'stage_id'=>'1',
-            'enseignant_id'=>'1',
+            'stage_id'=>1,
+            'enseignant_id'=>1,
             'role'=>'role1',
         ]);
     }
