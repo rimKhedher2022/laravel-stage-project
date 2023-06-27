@@ -16,7 +16,11 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
-use App\Http\Controllers\ChangePassword;     
+use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\Stage\EditController;
+use App\Http\Controllers\Stage\IndexController as StageIndexController;
+use App\Http\Controllers\Stage\StoreController as StageStoreController;
+use App\Http\Controllers\Stage\UpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +59,27 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+	Route::get('/add-stage',[StageStoreController::class,'show'])->name('add-stage');
+	Route::get('/{id}',EditController::class)->name('edit-stage');
+	Route::post('/{id}',UpdateController::class)->name('stages.update');
+	Route::get('/stages',StageIndexController::class)->name('stages');
+	Route::post('/',[StageStoreController::class,'store'])->name('stage.store');
+
+	
+	// Etudiant routes
+	// Route::prefix('etudiants')->group(function () {
+		
+	
+
+	// }
+// );
+
+	
+
+
 });
+
+
 
 require __DIR__.'/auth.php';
 

@@ -20,19 +20,20 @@ class Stage extends Model
         'societe_id',
         'etat',
         'date_soutenance',
+        // binome id
         ];
 
         
     
    /**
-    * The roles that belong to the Stage
+    * The etudiants that belong to the Stage
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
     */
     //ok
    public function etudiants(): BelongsToMany
    {
-       return $this->belongsToMany(Etudiant::class);
+       return $this->belongsToMany(Etudiant::class); // etudiant_id
    }
  //ok
    public function enseignants(): BelongsToMany

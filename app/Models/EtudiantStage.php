@@ -10,6 +10,7 @@ class EtudiantStage extends Model
 
    
     use HasFactory;
+    protected $table = 'etudiant_stage';
     protected $fillable = [
         'stage_id',
         'etudiant_id',

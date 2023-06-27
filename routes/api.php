@@ -77,12 +77,16 @@ Route::prefix('administrateurs')->group(function () {
     Route::delete('/{id}',AdministrateurDeleteController::class);
     Route::post('/{id}',AdministrateurUpdateController::class);
 });
-Route::prefix('stages')->group(function () {
-    Route::get('/',StageIndexController::class);
-    Route::get('/{id}',StageShowController::class);
-    Route::post('/',StageStoreController::class);
-    Route::delete('/{id}',StageDeleteController::class);
-    Route::post('/{id}',StageUpdateController::class);
+Route::middleware('auth')->group(function(){
+    
+    Route::prefix('stages')->group(function () {
+        Route::get('/',StageIndexController::class);
+        Route::get('/{id}',StageShowController::class);
+       //Route::post('/',[StageStoreController::class,'store']);
+        Route::delete('/{id}',StageDeleteController::class);
+        Route::post('/{id}',StageUpdateController::class);
+    });
+
 });
 
 Route::prefix('societes')->group(function () {

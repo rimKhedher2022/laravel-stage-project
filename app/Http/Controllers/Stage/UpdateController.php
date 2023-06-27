@@ -28,6 +28,6 @@ class UpdateController extends Controller
 
        
 
-        return $stage ;
+    return back()->with('succes', 'stage mis a jour . ');
     }
 }

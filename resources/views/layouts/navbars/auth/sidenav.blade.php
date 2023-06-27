@@ -6,7 +6,7 @@
         <a class="navbar-brand m-0" href="{{ route('home') }}"
             target="_blank">
             <img src="./img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Argon Dashboard 2 Laravel</span>
+            <span class="ms-1 font-weight-bold">stage ++</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -42,6 +42,15 @@
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">User Management</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Stages</span>
                 </a>
             </li>
             <li class="nav-item mt-3">

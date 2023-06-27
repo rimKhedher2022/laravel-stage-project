@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('etudiants', function (Blueprint $table) {
             $table->id();
-            $table->string('cin');
-            $table->string('niveau');//à modifier
-            $table->string('specialite');//à modifier
-            $table->string('numero_inscription');//à modifier
+            $table->string('cin')->nullable();
+            $table->string('niveau')->nullable();//à modifier
+            $table->string('specialite')->nullable();//à modifier
+            $table->string('numero_inscription')->nullable();//à modifier
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
