@@ -71,8 +71,16 @@
                                     </td>
                                     <td class="align-middle text-end">
                                         <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                            <p class="text-sm font-weight-bold mb-0">Edit</p>
-                                            <p class="text-sm font-weight-bold mb-0 ps-2">Delete</p>
+
+                                            <a href='stages/{{$stage->id}}'>
+                                                <button  class="btn btn-primary btn-sm ms-auto">Modifier stage</button>
+                                            </a>
+                                             {{-- <p class="text-sm font-weight-bold mb-0">Edit</p> --}}
+                                           
+                                            {{-- <p class="text-sm font-weight-bold mb-0 ps-2">Delete</p> --}}
+                                            <a href ="">
+                                                <button  class="btn btn-secondary btn-sm ms-auto">Supprimer stage</button>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

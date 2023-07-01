@@ -17,6 +17,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\Stage\DeleteController as StageDeleteController;
 use App\Http\Controllers\Stage\EditController;
 use App\Http\Controllers\Stage\IndexController as StageIndexController;
 use App\Http\Controllers\Stage\StoreController as StageStoreController;
@@ -51,6 +52,7 @@ use App\Http\Controllers\Stage\UpdateController;
 // });
 
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -60,9 +62,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 	Route::get('/add-stage',[StageStoreController::class,'show'])->name('add-stage');
-	Route::get('/{id}',EditController::class)->name('edit-stage');
-	Route::post('/{id}',UpdateController::class)->name('stages.update');
+	Route::get('/stages/{id}',EditController::class)->name('edit-stage');
+	Route::post('/stages/{id}',UpdateController::class)->name('stages.update');
 	Route::get('/stages',StageIndexController::class)->name('stages');
+	Route::delete('/stages/{id}',StageDeleteController::class)->name('stages.delete');
 	Route::post('/',[StageStoreController::class,'store'])->name('stage.store');
 
 	
@@ -80,12 +83,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
 require __DIR__.'/auth.php';
-
-       
-            
-
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
@@ -107,3 +105,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+
+
+       
+            
+

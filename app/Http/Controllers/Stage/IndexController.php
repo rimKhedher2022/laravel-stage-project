@@ -18,9 +18,9 @@ class IndexController extends Controller
        
       // dd($id);
         $stages = $etudiant->stages; // (id == 2 )
-      // dd($stages);
+      //dd($stages);
        
-        return  view('pages.stages',['stages' => $stages]);
+     return  view('pages.stages',['stages' => $stages]);
  
     }
 }

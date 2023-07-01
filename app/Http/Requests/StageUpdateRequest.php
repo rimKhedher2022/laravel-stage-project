@@ -29,6 +29,8 @@ class StageUpdateRequest extends FormRequest
             // 'societe_id'=>'string',
             'etat'=>'string',
             'date_soutenance'=>'date',
+            'etudiant_id'=>'string',
+            
         ];
     }
 }

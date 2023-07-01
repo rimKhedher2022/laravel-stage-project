@@ -30,7 +30,7 @@ class StoreController extends Controller
             'societe_id'=>$request->societe_id,
             'etat'=>$request->etat,
             'date_soutenance'=>$request->date_soutenance,
-            // binome ?
+            
         ]);
         $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
         EtudiantStage::create([

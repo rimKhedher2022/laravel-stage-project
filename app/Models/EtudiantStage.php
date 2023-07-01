@@ -10,7 +10,7 @@ class EtudiantStage extends Model
 
    
     use HasFactory;
-    protected $table = 'etudiant_stage';
+    protected $table = 'etudiant_stage'; // pour lier les deux tables , pour présicer la table 
     protected $fillable = [
         'stage_id',
         'etudiant_id',
