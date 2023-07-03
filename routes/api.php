@@ -89,13 +89,13 @@ Route::middleware('auth')->group(function(){
 
 });
 
-Route::prefix('societes')->group(function () {
-    Route::get('/',SocieteIndexController::class);
-    Route::get('/{id}',SocieteShowController::class);
-    Route::post('/',SocieteStoreController::class);
-    Route::delete('/{id}',SocieteDeleteController::class);
-    Route::post('/{id}',SocieteUpdateController::class);
-});
+// Route::prefix('societes')->group(function () {
+//     Route::get('/',SocieteIndexController::class);
+//     Route::get('/{id}',SocieteShowController::class);
+//     Route::post('/',SocieteStoreController::class);
+//     Route::delete('/{id}',SocieteDeleteController::class);
+//     Route::post('/{id}',SocieteUpdateController::class);
+// });
 Route::prefix('rapports')->group(function () {
     Route::get('/',RapportIndexController::class);
     Route::get('/{id}',RapportShowController::class);

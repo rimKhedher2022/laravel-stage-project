@@ -17,6 +17,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\Societe\DeleteController as SocieteDeleteController;
+use App\Http\Controllers\Societe\EditController as SocieteEditController;
+use App\Http\Controllers\Societe\IndexController as SocieteIndexController;
+use App\Http\Controllers\Societe\StoreController as SocieteStoreController;
+use App\Http\Controllers\Societe\UpdateController as SocieteUpdateController;
 use App\Http\Controllers\Stage\DeleteController as StageDeleteController;
 use App\Http\Controllers\Stage\EditController;
 use App\Http\Controllers\Stage\IndexController as StageIndexController;
@@ -61,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 	Route::get('/add-stage',[StageStoreController::class,'show'])->name('add-stage');
 	Route::get('/stages/{id}',EditController::class)->name('edit-stage');
 	Route::post('/stages/{id}',UpdateController::class)->name('stages.update');
@@ -68,7 +74,13 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/stages/{id}',StageDeleteController::class)->name('stages.delete');
 	Route::post('/',[StageStoreController::class,'store'])->name('stage.store');
 
-	
+	Route::get('/add-societe',[SocieteStoreController::class,'show'])->name('add-societe');
+	Route::post('/ok',[SocieteStoreController::class,'store'])->name('societe.store');
+	Route::get('/societes',SocieteIndexController::class)->name('societes');
+	Route::delete('/societes/{id}',SocieteDeleteController::class)->name('societes.delete');
+	Route::get('/societes/{id}',SocieteEditController::class)->name('edit-societe');
+	Route::post('/societes/{id}',SocieteUpdateController::class)->name('societes.update');
+
 	// Etudiant routes
 	// Route::prefix('etudiants')->group(function () {
 		

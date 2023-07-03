@@ -106,8 +106,8 @@
                                     <div class="form-group">
                                         
                                         <label for="etudiant_id">binome:</label>
-                                            <select name="etudiant_id" id="etudiant_id" class="form-control">
-                                                <option>---choix binome ---</option>
+                                            <select name="etudiant_id"  id="etudiant_id" class="form-control">
+                                                <option value="0">---pas de binome ---</option>
                                                    
                                                 
                                                           
@@ -126,7 +126,7 @@
                                                         {{-- un seul etudiant connecté --}}
                                                         @foreach ($etudiants as $etudiant) 
                                                                
-                                                        <option value="{{$etudiant->id}}" {{ old('etudiant_id',$etudiant->id ) == $binome?->id ? 'selected' : '' }} > {{ $etudiant->user->nom }} {{ $etudiant->user->prenom }} {{$etudiant->id}} </option>
+                                                        <option value="{{$etudiant->id}}" {{ old('etudiant_id',$etudiant->id ) == $binome?->id ? 'selected' : '' }} > {{ $etudiant->user->nom }} {{ $etudiant->user->prenom }}  </option>
                                                         @endforeach
                                                   
                                                     

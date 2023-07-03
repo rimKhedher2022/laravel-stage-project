@@ -26,6 +26,7 @@ class UserStoreRequest extends FormRequest
             'prenom' => 'required',
             'email' => 'required',
             'role' =>'required',
+            
             'password' => 'required',
             
         ];

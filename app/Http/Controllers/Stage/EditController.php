@@ -14,6 +14,7 @@ class EditController extends Controller
    public function __invoke($id)
    {
     $stage = Stage::find($id);
+    $this->authorize('view', $stage );
     $id_auth = Etudiant::where('user_id',auth()->id())->first()->id; //2  
    //  $etudiants_list = Etudiant::where('user_id','<>',auth()->id())->get();
     $etudiants_stage = $stage->etudiants; // 2 et 3

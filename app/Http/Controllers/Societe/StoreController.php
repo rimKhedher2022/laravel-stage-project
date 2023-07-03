@@ -9,7 +9,14 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    public function __invoke(SocieteStoreRequest $request) {
+
+    public function show()
+    {
+        $societes = Societe::all();
+        return view('pages.add-societe',['societes' => $societes]);
+    }
+
+    public function store(SocieteStoreRequest $request) {
 
       
         $societe = Societe::create([
@@ -19,7 +26,7 @@ class StoreController extends Controller
         ]);
 
        
-        return   $societe  ;
+        return back()->with('succes', 'société ajouté ');
 
 
 

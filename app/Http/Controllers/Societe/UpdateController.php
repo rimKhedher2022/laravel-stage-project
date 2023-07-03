@@ -13,6 +13,7 @@ class UpdateController extends Controller
     public function __invoke(SocieteUpdateRequest $request , $id) {
 
         $societe = Societe::find($id);
+        $this->authorize('update', $societe );
         $societe->update(
         //     [
         //     'nom' => $request->nom ,
@@ -21,6 +22,6 @@ class UpdateController extends Controller
         // ]
         $request -> all()
     );
-        return   $societe  ;
+    return back()->with('succes', 'société mise à jour. ');
     }
 }

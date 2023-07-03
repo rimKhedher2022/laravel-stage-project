@@ -12,7 +12,6 @@ class DeleteController extends Controller
    {
     $societe= Societe::find($id);
     $societe->delete() ;
-    return 'ok';
-
+    return redirect('/societes');
    }
 }

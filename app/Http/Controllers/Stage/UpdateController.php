@@ -13,8 +13,9 @@ use Illuminate\Http\Request;
 class UpdateController extends Controller
 {
     public function __invoke(StageUpdateRequest $request  , $id) {
-
         $stage = Stage::find($id);
+        $this->authorize('update', $stage );
+
         $stage->update(
         //     [
         //     'type'=>$request->type,
@@ -49,15 +50,15 @@ $binome = $etudiants_stage->filter(function  ($value, $key) use($id_auth) {
             // $etudiants_stage->authors()->detach($authorId);
             $stage->etudiants()->detach($binome->id) ;// supprimer l'ancien binome
          }
-        EtudiantStage::create([  // 
-        'stage_id'=>$stage->id,
-        'etudiant_id'=> $request->etudiant_id, // le binome
-        ]);
+        if($request->etudiant_id !== '0'){
+            EtudiantStage::create([  // 
+                'stage_id'=>$stage->id,
+                'etudiant_id'=> $request->etudiant_id, // le binome
+                ]);
+        }
+        
     }
     return back()->with('succes', 'stage mis a jour . ');
-    
-
-
 }
 
 

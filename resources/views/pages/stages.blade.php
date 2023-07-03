@@ -73,14 +73,20 @@
                                         <div class="d-flex px-3 py-1 justify-content-center align-items-center">
 
                                             <a href='stages/{{$stage->id}}'>
-                                                <button  class="btn btn-primary btn-sm ms-auto">Modifier stage</button>
+                                                <button  class="btn btn-secondary btn-sm ms-auto">Modifier stage</button>
                                             </a>
                                              {{-- <p class="text-sm font-weight-bold mb-0">Edit</p> --}}
                                            
                                             {{-- <p class="text-sm font-weight-bold mb-0 ps-2">Delete</p> --}}
-                                            <a href ="">
+                                            {{-- <a href = "{{ route('stages.delete', $stage->id) }}">
                                                 <button  class="btn btn-secondary btn-sm ms-auto">Supprimer stage</button>
-                                            </a>
+                                            </a> --}}
+
+                                            <form method="post"  action="{{ route('stages.delete', $stage->id) }}" >
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
+                                            </form> 
                                         </div>
                                     </td>
                                 </tr>
