@@ -9,7 +9,15 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    public function __invoke(SessionDeDepotStoreRequest $request) {
+
+    public function show()
+    {
+
+     $sessions= SessionDeDepot::all();
+     return  view('pages.add-session',['sessions' => $sessions ]);
+    }
+
+    public function store(SessionDeDepotStoreRequest $request) {
 
 
         $session = SessionDeDepot::create([
@@ -21,7 +29,7 @@ class StoreController extends Controller
 
         
 
-        return $session ;
+        return back()->with('succes', 'session ajouté ');
 
 
 

@@ -12,7 +12,7 @@ class DeleteController extends Controller
     {
      $session= SessionDeDepot::find($id);
      $session->delete() ;
-     return 'ok';
+     return redirect('/sessions');
  
     }
 }

@@ -28,7 +28,7 @@ class StoreController extends Controller
             'date_debut'=>$request->date_debut,
             'date_fin'=>$request->date_fin,
             'societe_id'=>$request->societe_id,
-            'etat'=>$request->etat,
+            // 'etat'=>$request->etat,
             'date_soutenance'=>$request->date_soutenance,
             
         ]);

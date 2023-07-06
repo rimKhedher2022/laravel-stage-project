@@ -28,13 +28,10 @@ class RegisterController extends Controller
         ]);
         $user = User::create($attributes); // ??
       
+
         Etudiant::create([
         'user_id'=> $user->id,
             ]);
-   
-            
-
-       
         auth()->login($user);
 
         return redirect('/dashboard');

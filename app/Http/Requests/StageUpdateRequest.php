@@ -30,6 +30,7 @@ class StageUpdateRequest extends FormRequest
             'etat'=>'string',
             'date_soutenance'=>'date',
             'etudiant_id'=>'string',
+            'enseignant_id'=>'string',
             
         ];
     }

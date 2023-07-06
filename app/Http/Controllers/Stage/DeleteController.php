@@ -27,7 +27,9 @@ class DeleteController extends Controller
     //      $stage->etudiants()->detach($binome->id) ;// supprimer le binome aussi de la table etudiant_stage
     //   }
     $etudiants_ids = $stage->etudiants->pluck('id'); // les ids des etudiants qui ont réalisé le stage
-    $stage->etudiants()->detach($etudiants_ids) ;
+    $enseignants_ids = $stage->enseignants->pluck('id');
+    $stage->etudiants()->detach($etudiants_ids) ; // on supprime du table etudiant_stage
+    $stage->enseignants()->detach($enseignants_ids) ; // on supprime du table enseignant_stage
     $stage->delete() ; 
     return redirect('/stages');
  

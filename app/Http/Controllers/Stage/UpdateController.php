@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\Stage;
 
+use App\Enums\RoleType;
+use App\Enums\StageEtat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StageStoreRequest;
 use App\Http\Requests\StageUpdateRequest;
+use App\Models\EnseignantStage;
 use App\Models\Etudiant;
 use App\Models\EtudiantStage;
 use App\Models\Stage;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UpdateController extends Controller
 {
-    public function __invoke(StageUpdateRequest $request  , $id) {
+    public function update(StageUpdateRequest $request  , $id) {
         $stage = Stage::find($id);
-        $this->authorize('update', $stage );
+       
+        $this->authorize('update', $stage );  // admin aussi peut modifier lorsqu'il choisit l'enseignant
 
         $stage->update(
         //     [
@@ -43,7 +48,7 @@ $binome = $etudiants_stage->filter(function  ($value, $key) use($id_auth) {
 })->first(); 
 // dd ($request->etudiant_id); // ok
 
-    if ($binome?->id !== $request->etudiant_id ) 
+    if ($binome?->id !== $request->etudiant_id  && $request->etudiant_id !== null) 
     {
          if($binome){
            // $etudiants_stage->detach($binome->id) ; 
@@ -58,7 +63,47 @@ $binome = $etudiants_stage->filter(function  ($value, $key) use($id_auth) {
         }
         
     }
+
+ 
+  
+  
     return back()->with('succes', 'stage mis a jour . ');
+}
+
+public function affecter (Request $request  , $id) {
+
+    $stage = Stage::find($id);
+    $this->authorize('affecter', $stage );  // admin aussi peut modifier lorsqu'il choisit l'enseignant
+        $stage_enseignant_id =  $stage->enseignants->pluck('id')->toArray() ;
+        // dd(!empty($stage_enseignant_id));
+
+       
+
+         if($request->enseignant_id !== '0' ){
+            if(!empty($stage_enseignant_id)){ // l'ancien enseignant
+          
+                $stage->enseignants()->detach($stage_enseignant_id) ; // suprimer l'enseignant
+             }
+
+            EnseignantStage::create([  // 
+                 'stage_id'=>$stage->id,
+                 'enseignant_id'=> $request->enseignant_id, // l'enseignant
+                 'role'=> 'ok'
+                 ]);
+
+              $stage->update([
+                    'etat'=> StageEtat::AFFECTE
+              ]);
+         }
+         
+         else  { /// sup tous les enseignant --> 0
+
+            if(!empty($stage_enseignant_id)){
+          
+                $stage->enseignants()->detach($stage_enseignant_id) ; // suprimer l'enseignant
+             }
+         }
+        return back()->with('succes', 'enseignant affecté . ');
 }
 
 

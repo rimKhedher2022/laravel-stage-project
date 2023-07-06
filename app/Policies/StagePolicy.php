@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\RoleType;
 use App\Models\Stage;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -24,7 +25,7 @@ class StagePolicy
         $stage_etudiant_ids = $stage->etudiants->pluck('user_id')->toArray() ;  // array : user_id
         // dd(in_array($user->id,$stage_etudiant_ids));
 
-        return in_array($user->id,$stage_etudiant_ids) ;
+        return in_array($user->id,$stage_etudiant_ids) or (auth()->user()->role->value === 'administrateur') ;
         
     }
 
@@ -46,9 +47,19 @@ class StagePolicy
        $stage_etudiant_ids = $stage->etudiants->pluck('user_id')->toArray() ;  // array : user_id
         // dd(in_array($user->id,$stage_etudiant_ids));
 
-        return in_array($user->id,$stage_etudiant_ids) ;
+        return in_array($user->id,$stage_etudiant_ids )  ;
       
     }
+
+    public function affecter (User $user, Stage $stage): bool
+    {
+       
+        return  (auth()->user()->role->value === 'administrateur')  ;
+      
+    }
+
+
+   
 
   
     /**

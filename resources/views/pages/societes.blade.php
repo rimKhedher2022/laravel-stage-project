@@ -8,9 +8,9 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     
-                        <h6>Les sociétes contactées </h6>
+                        <h6>Les sociétés contactées </h6>
                         <a href='add-societe'>
-                            <button  class="btn btn-primary btn-sm ms-auto">Ajouter societe</button>
+                            <button  class="btn btn-primary btn-sm ms-auto">Ajouter société</button>
                         </a>
                 
                 </div>

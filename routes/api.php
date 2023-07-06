@@ -79,13 +79,13 @@ Route::prefix('administrateurs')->group(function () {
 });
 Route::middleware('auth')->group(function(){
     
-    Route::prefix('stages')->group(function () {
-        Route::get('/',StageIndexController::class);
-        Route::get('/{id}',StageShowController::class);
-       //Route::post('/',[StageStoreController::class,'store']);
-        Route::delete('/{id}',StageDeleteController::class);
-        Route::post('/{id}',StageUpdateController::class);
-    });
+    // Route::prefix('stages')->group(function () {
+    //     Route::get('/',StageIndexController::class);
+    //     Route::get('/{id}',StageShowController::class);
+    //    //Route::post('/',[StageStoreController::class,'store']);
+    //     Route::delete('/{id}',StageDeleteController::class);
+    //     Route::post('/{id}',StageUpdateController::class);
+    // });
 
 });
 
@@ -103,13 +103,14 @@ Route::prefix('rapports')->group(function () {
     Route::delete('/{id}',RapportDeleteController::class);
     Route::post('/{id}',RapportUpdateController::class);
 });
-Route::prefix('sessionsDeDepot')->group(function () {
-    Route::get('/',SessionDeDepotIndexController::class);
-    Route::get('/{id}',SessionDeDepotShowController::class);
-    Route::post('/',SessionDeDepotStoreController::class);
-    Route::delete('/{id}',SessionDeDepotDeleteController::class);
-    Route::post('/{id}',SessionDeDepotUpdateController::class);
-});
+
+// Route::prefix('sessionsDeDepot')->group(function () {
+//     Route::get('/',SessionDeDepotIndexController::class);
+//     Route::get('/{id}',SessionDeDepotShowController::class);
+//     Route::post('/',SessionDeDepotStoreController::class);
+//     Route::delete('/{id}',SessionDeDepotDeleteController::class);
+//     Route::post('/{id}',SessionDeDepotUpdateController::class);
+// });
 
 Route::prefix('messagesDeRappel')->group(function () {
     Route::get('/',MessageDeRappelIndexController::class);

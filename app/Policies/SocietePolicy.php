@@ -25,7 +25,7 @@ class SocietePolicy
         $etudiant = Etudiant::where('user_id',$user->id)->first(); // 4
         $stage_societe_ids =  $etudiant->stages->pluck('societe_id')->toArray() ;  // array : user_id
 
-       return in_array($societe->id , $stage_societe_ids);
+       return in_array($societe->id , $stage_societe_ids) or (auth()->user()->role->value === 'administrateur') ;
    
     }
 
@@ -45,7 +45,7 @@ class SocietePolicy
         $etudiant = Etudiant::where('user_id',$user->id)->first(); // 4
         $stage_societe_ids =  $etudiant->stages->pluck('societe_id')->toArray() ;  // array : user_id
 
-       return in_array($societe->id , $stage_societe_ids);
+       return in_array($societe->id , $stage_societe_ids)  or (auth()->user()->role->value === 'administrateur');
    
     }
 

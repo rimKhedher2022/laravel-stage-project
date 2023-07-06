@@ -6,6 +6,7 @@ use App\Enums\RoleType;
 use App\Http\Controllers\Controller;
 use App\Models\Etudiant;
 use App\Models\Societe;
+use App\Models\Stage;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -19,6 +20,8 @@ class IndexController extends Controller
     switch ($role) {
         case RoleType::Administrateur:
             $societes = Societe::all();
+            
+
             // liste des etudiants
             // liste des enseignants
             // liste des stages

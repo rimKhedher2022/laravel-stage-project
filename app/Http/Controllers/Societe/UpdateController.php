@@ -13,7 +13,7 @@ class UpdateController extends Controller
     public function __invoke(SocieteUpdateRequest $request , $id) {
 
         $societe = Societe::find($id);
-        $this->authorize('update', $societe );
+        $this->authorize('update', $societe ); // l'admin peut gérer les informations des societes
         $societe->update(
         //     [
         //     'nom' => $request->nom ,

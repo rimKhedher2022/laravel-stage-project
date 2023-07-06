@@ -10,7 +10,9 @@ class IndexController extends Controller
 {
     public function __invoke()  // une seul fonction
     {
-     return SessionDeDepot::all();
+     $sessions= SessionDeDepot::all();
+     return  view('pages.sessions',['sessions' => $sessions ]);
+
  
     }
 }

@@ -44,15 +44,31 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
-                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Stages</span>
-                </a>
-            </li>
+           
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
+                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="text-dark text-sm opacity-10"></i>
+                        </div>
+                        @if (auth()->user()->role->value === 'administrateur')
+                             <span class="nav-link-text ms-1">Stages à affecter</span>
+                        @else
+                             <span class="nav-link-text ms-1">Stages</span>
+                        @endif
+                    </a>
+                </li>
+                @if (auth()->user()->role->value === 'administrateur')
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes']) }}">
+                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Stages</span>
+                    </a>
+                </li>
+                @endif
+          
+           
             <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'societes') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'societes']) }}">
                     <div class="fa fa-building-o  border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -61,6 +77,27 @@
                     <span class="nav-link-text ms-1">Societes</span>
                 </a>
             </li>
+            @if (auth()->user()->role->value === 'administrateur')
+                    <li class="nav-item">
+                        <a class="nav-link {{ str_contains(request()->url(), 'enseignants') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'enseignants']) }}">
+                            <div class="fa fas fa-chalkboard-teacher  border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni  text-dark text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Enseignants</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ str_contains(request()->url(), 'sessions') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'sessions']) }}">
+                            <div class="fa fas fa-solid fa-book border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni  text-dark text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Sessions</span>
+                        </a>
+                    </li>
+            @endif
+                
+         
+           
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
             </li>

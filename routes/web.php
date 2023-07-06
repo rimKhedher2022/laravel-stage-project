@@ -17,6 +17,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\SessionDeDepot\DeleteController as SessionDeDepotDeleteController;
+use App\Http\Controllers\SessionDeDepot\EditController as SessionDeDepotEditController;
+use App\Http\Controllers\SessionDeDepot\IndexController as SessionDeDepotIndexController;
+use App\Http\Controllers\SessionDeDepot\StoreController as SessionDeDepotStoreController;
+use App\Http\Controllers\SessionDeDepot\UpdateController as SessionDeDepotUpdateController;
 use App\Http\Controllers\Societe\DeleteController as SocieteDeleteController;
 use App\Http\Controllers\Societe\EditController as SocieteEditController;
 use App\Http\Controllers\Societe\IndexController as SocieteIndexController;
@@ -25,6 +30,7 @@ use App\Http\Controllers\Societe\UpdateController as SocieteUpdateController;
 use App\Http\Controllers\Stage\DeleteController as StageDeleteController;
 use App\Http\Controllers\Stage\EditController;
 use App\Http\Controllers\Stage\IndexController as StageIndexController;
+use App\Http\Controllers\Stage\StageAffectationController;
 use App\Http\Controllers\Stage\StoreController as StageStoreController;
 use App\Http\Controllers\Stage\UpdateController;
 
@@ -69,8 +75,11 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('/add-stage',[StageStoreController::class,'show'])->name('add-stage');
 	Route::get('/stages/{id}',EditController::class)->name('edit-stage');
-	Route::post('/stages/{id}',UpdateController::class)->name('stages.update');
+	// Route::get('/stages/affecter/{id}',EditController::class)->name('edit-stage'); // admin
+	Route::post('/stages/{id}',[UpdateController::class, 'update'])->name('stages.update');
+	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
 	Route::get('/stages',StageIndexController::class)->name('stages');
+	Route::get('/stages-affectes',StageAffectationController::class)->name('stages-affectes');
 	Route::delete('/stages/{id}',StageDeleteController::class)->name('stages.delete');
 	Route::post('/',[StageStoreController::class,'store'])->name('stage.store');
 
@@ -80,6 +89,15 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/societes/{id}',SocieteDeleteController::class)->name('societes.delete');
 	Route::get('/societes/{id}',SocieteEditController::class)->name('edit-societe');
 	Route::post('/societes/{id}',SocieteUpdateController::class)->name('societes.update');
+
+	Route::get('/enseignants',IndexController::class)->name('enseignants');
+
+	Route::get('/add-session',[SessionDeDepotStoreController::class,'show'])->name('add-session');
+	Route::post('/okk',[SessionDeDepotStoreController::class,'store'])->name('session.store');
+	Route::get('/sessions',SessionDeDepotIndexController::class)->name('sessions');
+	Route::get('/sessions/{id}',SessionDeDepotEditController::class)->name('edit-session');
+	Route::post('/sessions/{id}',SessionDeDepotUpdateController::class)->name('sessions.update');
+	Route::delete('/sessions/{id}',SessionDeDepotDeleteController::class)->name('sessions.delete');
 
 	// Etudiant routes
 	// Route::prefix('etudiants')->group(function () {

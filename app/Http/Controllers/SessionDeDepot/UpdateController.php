@@ -21,6 +21,6 @@ class UpdateController extends Controller
         // ]
         $request->all()
     );
-        return $session ;
+    return back()->with('succes', 'stage mis a jour . ');
     }
 }
