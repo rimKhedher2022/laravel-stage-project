@@ -13,6 +13,7 @@ class UpdateController extends Controller
     public function __invoke(SessionDeDepotUpdateRequest  $request , $id) {
 
         $session = SessionDeDepot::find($id);
+        $this->authorize('update',$session );
         $session ->update(
         //     [
         //     'date_debut' => $request->date_debut,

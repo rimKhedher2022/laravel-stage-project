@@ -24,7 +24,7 @@ class RapportStoreRequest extends FormRequest
         return [
             'filePath'=>'required',
             'titre'=>'required',
-            'date_depot'=>'required',
+            // 'date_depot'=>'required',
             'stage_id'=>'required',
         ];
     }

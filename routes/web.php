@@ -17,6 +17,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\Rapport\DeleteController as RapportDeleteController;
+use App\Http\Controllers\Rapport\EditController as RapportEditController;
+use App\Http\Controllers\Rapport\IndexController as RapportIndexController;
+use App\Http\Controllers\Rapport\StoreController as RapportStoreController;
+use App\Http\Controllers\Rapport\UpdateController as RapportUpdateController;
 use App\Http\Controllers\SessionDeDepot\DeleteController as SessionDeDepotDeleteController;
 use App\Http\Controllers\SessionDeDepot\EditController as SessionDeDepotEditController;
 use App\Http\Controllers\SessionDeDepot\IndexController as SessionDeDepotIndexController;
@@ -33,6 +38,7 @@ use App\Http\Controllers\Stage\IndexController as StageIndexController;
 use App\Http\Controllers\Stage\StageAffectationController;
 use App\Http\Controllers\Stage\StoreController as StageStoreController;
 use App\Http\Controllers\Stage\UpdateController;
+use App\Http\Controllers\Utilisateur\IndexController as UtilisateurIndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +105,15 @@ Route::middleware('auth')->group(function () {
 	Route::post('/sessions/{id}',SessionDeDepotUpdateController::class)->name('sessions.update');
 	Route::delete('/sessions/{id}',SessionDeDepotDeleteController::class)->name('sessions.delete');
 
+	Route::get('/add-rapport',[RapportStoreController::class,'show'])->name('add-rapport');
+	Route::post('/okkk',[RapportStoreController::class,'store'])->name('rapport.store');
+	Route::get('/rapports',RapportIndexController::class)->name('rapports');
+	Route::get('/rapports/{id}',RapportEditController::class)->name('edit-rapport');
+	Route::post('/rapports/{id}',RapportUpdateController::class)->name('rapports.update');
+	Route::delete('/rapports/{id}',RapportDeleteController::class)->name('rapports.delete');
+
+	Route::get('/user-management',UtilisateurIndexController::class)->name('user-management');
+	
 	// Etudiant routes
 	// Route::prefix('etudiants')->group(function () {
 		

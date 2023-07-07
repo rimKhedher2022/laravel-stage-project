@@ -11,6 +11,7 @@ class DeleteController extends Controller
     public function __invoke($id)  // une seule fonction
     {
      $session= SessionDeDepot::find($id);
+     $this->authorize('delete',$session); 
      $session->delete() ;
      return redirect('/sessions');
  

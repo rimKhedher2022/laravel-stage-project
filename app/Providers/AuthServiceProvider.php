@@ -4,8 +4,10 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\SessionDeDepot;
 use App\Models\Societe;
 use App\Models\Stage;
+use App\Policies\SessionDeDepotPolicy;
 use App\Policies\SocietePolicy;
 use App\Policies\StagePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Stage::class => StagePolicy::class,
         Societe::class => SocietePolicy::class,
+        SessionDeDepot::class => SessionDeDepotPolicy ::class
     ];
 
     /**

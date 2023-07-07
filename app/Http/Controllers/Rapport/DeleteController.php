@@ -12,7 +12,7 @@ class DeleteController extends Controller
     {
      $rapport= Rapport::find($id);
      $rapport->delete() ;
-     return 'ok';
+     return redirect('/rapports');
  
     }
 }

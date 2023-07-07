@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Enseignant;
 use App\Enums\RoleType;
 use App\Http\Controllers\Controller;
 use App\Models\Enseignant;
-use App\Models\Etudiant;
+
 use App\Models\User;
-use Illuminate\Http\Request;
+
 
 class IndexController extends Controller
 {

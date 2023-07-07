@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un stage'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter une session'])
   
     <div id="alert">
         @include('components.alert')

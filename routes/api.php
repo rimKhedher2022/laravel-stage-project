@@ -96,13 +96,13 @@ Route::middleware('auth')->group(function(){
 //     Route::delete('/{id}',SocieteDeleteController::class);
 //     Route::post('/{id}',SocieteUpdateController::class);
 // });
-Route::prefix('rapports')->group(function () {
-    Route::get('/',RapportIndexController::class);
-    Route::get('/{id}',RapportShowController::class);
-    Route::post('/',RapportStoreController::class);
-    Route::delete('/{id}',RapportDeleteController::class);
-    Route::post('/{id}',RapportUpdateController::class);
-});
+// Route::prefix('rapports')->group(function () {
+//     Route::get('/',RapportIndexController::class);
+//     Route::get('/{id}',RapportShowController::class);
+//     Route::post('/',RapportStoreController::class);
+//     Route::delete('/{id}',RapportDeleteController::class);
+//     Route::post('/{id}',RapportUpdateController::class);
+// });
 
 // Route::prefix('sessionsDeDepot')->group(function () {
 //     Route::get('/',SessionDeDepotIndexController::class);

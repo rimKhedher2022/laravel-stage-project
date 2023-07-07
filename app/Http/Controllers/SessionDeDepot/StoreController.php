@@ -14,18 +14,21 @@ class StoreController extends Controller
     {
 
      $sessions= SessionDeDepot::all();
+     $this->authorize('create',SessionDeDepot::class);
      return  view('pages.add-session',['sessions' => $sessions ]);
     }
 
     public function store(SessionDeDepotStoreRequest $request) {
 
-
+        $this->authorize('create',SessionDeDepot::class);
         $session = SessionDeDepot::create([
   
             'date_debut' => $request->date_debut,
             'date_fin' =>$request->date_fin,
             'user_id' =>$request->user_id,
         ]);
+
+        // $this->authorize('restore',  $session );
 
         
 

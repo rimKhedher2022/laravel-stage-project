@@ -1,90 +1,62 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un stage'])
+  
+    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un rapport'])
   
     <div id="alert">
         @include('components.alert')
     </div>
-    {{-- les infos du stage --}}
+ 
+    {{-- les infos du rapport --}}
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action="{{ route('stage.store') }}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action={{ route('rapports.update' , $rapport->id) }} enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
+
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter un stage</p>
+                                    <p class="mb-0">Modifier une rapport</p>
+                                    {{-- {{$rapport}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
                                 </div>
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations de stage</p>
+                            <p class="text-uppercase text-sm">Les informations du rapport à modifier</p>
                             <div class="row">
+                              
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">type</label>
-                                        <input class="form-control" type="text" name="type" >
+                                        <label for="example-text-input" class="form-control-label">titre</label>
+                                        <input class="form-control" type="text" name="titre"  value="{{old('titre', $rapport->titre)}}">
                                     </div>
                                 </div>
+                             
+                               
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">sujet</label>
-                                        <input class="form-control" type="text" name="sujet" >
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date debut</label>
-                                        <input class="form-control" type="date" name="date_debut" >
+                                        <label for="example-text-input" class="form-control-label">filePath</label>
+                                        <input class="form-control" type="text" name="filePath"  value="{{old('filePath', $rapport->filePath)}}">
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date fin</label>
-                                        <input class="form-control" type="date" name="date_fin" >
-                                    </div>
-                                </div>
-                               
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                     
-                                        <label for="societe_id">societe:</label>
-                                            <select name="societe_id" id="societe_id" class="form-control">
-                                                <option value="">---choix societe ---</option>
-                                                @foreach ($societes as $societe)
-                                                     <option  value="{{$societe->id}}">{{ $societe->nom }}</option>
-                                                     dd($societe->id)
+                                        
+                                        <label for="stage_id">stage:</label>
+                                            <select name="stage_id" id="stage_id" class="form-control">
+                                                <option value="">---choix stage ---</option>
+                                                @foreach ($stages as $stage)
+                                                     <option  value="{{$stage->id}}" {{ old('stage_id',$stage->id) == $rapport->stage->id ? 'selected' : '' }} >{{ $stage->sujet }}</option>
+                                                    
                                                 @endforeach
                                             </select>
                                     </div>
                                 </div>
-                               
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">etat</label>
-                                        <input class="form-control" type="etat" name="etat">
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">nom binome</label>
-                                        <input class="form-control" type="etat" name="etat" >
-                                    </div>
-                                </div> --}}
-                               
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date soutenance</label>
-                                        <input class="form-control" type="date" name="date_soutenance">
-                                    </div>
-                                </div>
-                               
                                
                             </div>
                             {{-- <hr class="horizontal dark"> --}}
@@ -129,10 +101,12 @@
                             </div> --}}
                         </div>
                     </form>
+                
                 </div>
             </div>
           
         </div>
         {{-- @include('layouts.footers.auth.footer') --}}
     </div>
+    
 @endsection

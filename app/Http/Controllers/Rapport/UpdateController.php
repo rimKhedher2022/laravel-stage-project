@@ -21,6 +21,6 @@ class UpdateController extends Controller
         // ]
         $request->all()
     );
-        return $rapport ;
+    return back()->with('succes', 'rapport à déposer mis a jour . ');
     }
 }

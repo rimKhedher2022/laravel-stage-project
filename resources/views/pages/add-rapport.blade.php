@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un stage'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un rapport'])
   
     <div id="alert">
         @include('components.alert')
@@ -11,79 +11,54 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action="{{ route('stage.store') }}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action="{{ route('rapport.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter un stage</p>
+                                    <p class="mb-0">Ajouter un rapport</p>
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
                                 </div>
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations de stage</p>
+                            <p class="text-uppercase text-sm">Les informations du rapport</p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">type</label>
-                                        <input class="form-control" type="text" name="type" >
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">sujet</label>
-                                        <input class="form-control" type="text" name="sujet" >
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date debut</label>
-                                        <input class="form-control" type="date" name="date_debut" >
+                                        <label for="example-text-input" class="form-control-label">titre</label>
+                                        <input class="form-control" type="text" name="titre" >
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date fin</label>
-                                        <input class="form-control" type="date" name="date_fin" >
+                                        <label for="example-text-input" class="form-control-label">filePath</label>
+                                        <input class="form-control" type="text" name="filePath">
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
                                      
-                                        <label for="societe_id">societe:</label>
-                                            <select name="societe_id" id="societe_id" class="form-control">
-                                                <option value="">---choix societe ---</option>
-                                                @foreach ($societes as $societe)
-                                                     <option  value="{{$societe->id}}">{{ $societe->nom }}</option>
-                                                     dd($societe->id)
+                                        <label for="stage_id">stage:</label>
+                                            <select name="stage_id" id="stage_id" class="form-control">
+                                                <option value="">---choix stage ---</option>
+                                                @foreach ($stages as $stage)
+                                                     <option  value="{{$stage->id}}">{{ $stage->sujet }}</option>
+                                                     
                                                 @endforeach
                                             </select>
                                     </div>
                                 </div>
-                               
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">etat</label>
-                                        <input class="form-control" type="etat" name="etat">
-                                    </div>
-                                </div>
                                 {{-- <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">nom binome</label>
-                                        <input class="form-control" type="etat" name="etat" >
+                                        <label for="example-text-input" class="form-control-label">stage_id</label>
+                                        <input class="form-control" type="text" name="stage_id">
                                     </div>
                                 </div> --}}
-                               
+                              
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date soutenance</label>
-                                        <input class="form-control" type="date" name="date_soutenance">
-                                    </div>
-                                </div>
                                
                                
                             </div>

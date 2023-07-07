@@ -10,6 +10,8 @@ class IndexController extends Controller
 {
     public function __invoke()  // une seul fonction
     {
+  
+     $this->authorize('viewAny', SessionDeDepot::class); //ok
      $sessions= SessionDeDepot::all();
      return  view('pages.sessions',['sessions' => $sessions ]);
 
