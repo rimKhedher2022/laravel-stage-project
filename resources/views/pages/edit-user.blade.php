@@ -2,55 +2,100 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un rapport'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un user'])
   
     <div id="alert">
         @include('components.alert')
     </div>
  
-    {{-- les infos du rapport --}}
+    {{-- les infos du user --}}
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action={{ route('rapports.update' , $rapport->id) }} enctype="multipart/form-data">
+                    <form role="form" method="POST" action={{ route('users.update' , $user->id) }} enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Modifier une rapport</p>
-                                    {{-- {{$rapport}} --}}
+                                    <p class="mb-0">Modifier une user</p>
+                                    {{-- {{$user}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
                                 </div>
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations du rapport à modifier</p>
+                            <p class="text-uppercase text-sm">Les informations du user à modifier</p>
                             <div class="row">
-                              
+                            
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">titre</label>
-                                        <input class="form-control" type="text" name="titre"  value="{{old('titre', $rapport->titre)}}">
+                                        <label for="example-text-input" class="form-control-label">nom</label>
+                                        <input class="form-control" type="text" name="nom"  value="{{old('nom', $user->nom)}}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">prenom</label>
+                                        <input class="form-control" type="text" name="prenom"  value="{{old('prenom', $user->prenom)}}">
                                     </div>
                                 </div>
                              
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">filePath</label>
-                                        <input class="form-control" type="text" name="filePath"  value="{{old('filePath', $rapport->filePath)}}">
+                                        <label for="example-text-input" class="form-control-label">email</label>
+                                        <input class="form-control" type="text" name="email"  value="{{old('email', $user->email)}}">
                                     </div>
                                 </div>
-                               
+
+                              
+                                @if ($user->role->value === 'etudiant')
+
+                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">sujet</label>
-                                        <input class="form-control" type="text" disabled name="stage_id" value="{{$stage_a_deposer_rapport->sujet}}">
+                                        <label for="example-text-input" class="form-control-label">cin</label>
+                                        <input class="form-control" type="text" name="cin"  value="{{old('cin', $user->etudiant->cin)}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">niveau</label>
+                                        <input class="form-control" type="text" name="niveau"  value="{{old('niveau', $user->etudiant->niveau)}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">specialite</label>
+                                        <input class="form-control" type="text" name="specialite"  value="{{old('specialite', $user->etudiant->specialite)}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">numero_inscription</label>
+                                        <input class="form-control" type="text" name="numero_inscription"  value="{{old('numero_inscription', $user->etudiant->numero_inscription)}}">
                                     </div>
                                 </div>
                                
+
+                            @elseif ($user->role->value === 'enseignant')
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="form-control-label">matricule</label>
+                                            <input class="form-control" type="text" name="matricule"  value="{{old('matricule', $user->enseignant->matricule)}}">
+                                        </div>
+                                    </div>
+                           
+
+                            @endif
+                             
+
+                               
+                              
                             </div>
                             {{-- <hr class="horizontal dark"> --}}
                             {{-- <p class="text-uppercase text-sm">Contact Information</p> --}}

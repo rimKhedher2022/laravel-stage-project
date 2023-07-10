@@ -22,10 +22,10 @@ class RapportStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filePath'=>'required',
-            'titre'=>'required',
+            'filePath'=>'string',
+            'titre'=>'string',
             // 'date_depot'=>'required',
-            'stage_id'=>'required',
+            'stage_id'=>'string',
         ];
     }
 }

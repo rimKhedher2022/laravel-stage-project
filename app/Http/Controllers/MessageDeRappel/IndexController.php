@@ -10,7 +10,10 @@ class IndexController extends Controller
 {
     public function __invoke()  // une seul fonction
     {
-     return MessageDeRappel::all();
+        $messages= MessageDeRappel::where('user_id',auth()->id()) ; 
+        dd($messages) ; 
+       
+        return  view('pages.messages',['messages' => $messages ]);
  
     }
 }

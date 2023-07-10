@@ -15,63 +15,53 @@ class StoreController extends Controller
 {
 
 
-    public function show()
+    public function show($id)
     {
-
-     $rapports= Rapport::all();
+    $this->authorize('create',Rapport::class);
      $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
      $stages = $etudiant->stages; // (id == 2 )
+     
+     $stage_a_deposer_rapport = Stage::find($id) ; 
+    
+       
+  
    
-    //  $this->authorize('create'); 
-     return  view('pages.add-rapport',['rapports' =>  $rapports  , 'stages'=> $stages]);
+   
+     return  view('pages.add-rapport',[ 'stages'=> $stages , 'stage_a_deposer_rapport'=> $stage_a_deposer_rapport]);
     }
 
-    // public function store(SessionDeDepotStoreRequest $request) {
-    //     // $this->authorize('create');
+   
+
+
+    public function store(RapportStoreRequest $request ) {
+ 
+     
         
-    //     $session = SessionDeDepot::create([
-  
-    //         'date_debut' => $request->date_debut,
-    //         'date_fin' =>$request->date_fin,
-    //         'user_id' =>$request->user_id,
-    //     ]);
+        $this->authorize('create',Rapport::class);
+        $rapport_ancien = Rapport::where('stage_id' , 10 )->first() ;  // a vérifier
+     
+       if (empty($rapport_ancien))
 
-    //     // $this->authorize('restore',  $session );
+       {
 
-        
-
-    //     return back()->with('succes', 'session ajouté ');
-
-
-
-    // }
-
-
-
-
-
-    public function store(RapportStoreRequest $request) {
-
-
-    
         $rapport = Rapport::create([
           
             'filePath' => $request->filePath,
             'titre' =>$request->titre,
             'date_depot' => Carbon::now(),
-            'stage_id' =>$request->stage_id,
+            'stage_id' => 10 , // c faux
         ]);
        $stage = $rapport->stage;
        $stage->update([
         'etat'=> StageEtat::DEPOSE
-        ]);
+       ]);
 
+       return back()->with('succes', 'rapport déposé ');
+       }
 
-        
-
-        return back()->with('succes', 'rapport déposé ');
-
-
+       else {
+        return back()->with('error', 'vous avez déja fait le dépot');
+       }
 
     }
 }

@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action="{{ route('rapport.store') }}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action="{{ route('rapport.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
@@ -37,20 +37,15 @@
                                         <input class="form-control" type="text" name="filePath">
                                     </div>
                                 </div>
+                              
                                
-                                <div class="col-md-6">
+                               <div class="col-md-6">
                                     <div class="form-group">
-                                     
-                                        <label for="stage_id">stage:</label>
-                                            <select name="stage_id" id="stage_id" class="form-control">
-                                                <option value="">---choix stage ---</option>
-                                                @foreach ($stages as $stage)
-                                                     <option  value="{{$stage->id}}">{{ $stage->sujet }}</option>
-                                                     
-                                                @endforeach
-                                            </select>
+                                        <label for="example-text-input" class="form-control-label">sujet</label>
+                                        <input class="form-control" type="text" disabled name="stage_id" value="{{$stage_a_deposer_rapport->sujet}}">
                                     </div>
                                 </div>
+
                                 {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">stage_id</label>

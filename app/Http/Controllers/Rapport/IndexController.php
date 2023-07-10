@@ -2,20 +2,36 @@
 
 namespace App\Http\Controllers\Rapport;
 
+use App\Enums\StageEtat;
 use App\Http\Controllers\Controller;
 use App\Models\Etudiant;
 use App\Models\Rapport;
+use App\Models\SessionDeDepot;
+use App\Models\Stage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
     public function __invoke()  // une seul fonction
     {
-     $rapports = Rapport::all();  // que les rapports de l'etudiant connecté
+    $this->authorize('viewAny', Rapport::class); //ok
+     // que les rapports de l'etudiant connecté
      $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
-     $stages = $etudiant->stages; 
+     $session_actuel = SessionDeDepot::latest()->first();
+     $stages = $etudiant->stages->filter(function  ($value, $key){
+        return $value->etat !== 'validé';
+        
+    }); 
 
-     return  view('pages.rapports',['rapports' => $rapports ,'stages'=> $stages ]);
+    // dd ($stages) ;
+    //  $stages = Stage::whereNot('etat',StageEtat::VALIDE)->where('')->get() ;
+    
+
+     $aujourdui = Carbon::now()->format('Y-m-d');
+    //  dd($aujourdui) ;
+
+     return  view('pages.rapports',['stages'=> $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
  
     }
 }

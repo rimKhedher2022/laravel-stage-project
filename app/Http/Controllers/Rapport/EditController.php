@@ -13,9 +13,10 @@ class EditController extends Controller
     public function __invoke($id)
     {
         $rapport = Rapport::find($id);
+        $this->authorize('view', $rapport);
         $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
-        $stages = $etudiant->stages; // (id == 2 )
-        // $this->authorize('view', $session);
-        return  view('pages.edit-rapport',['rapport' => $rapport , 'stages'=>$stages]);
+      
+        $stage_a_deposer_rapport = $rapport->stage;
+        return  view('pages.edit-rapport',['rapport' => $rapport , 'stage_a_deposer_rapport' => $stage_a_deposer_rapport]);
     }
 }

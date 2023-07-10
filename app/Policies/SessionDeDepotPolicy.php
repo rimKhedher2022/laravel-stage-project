@@ -33,8 +33,8 @@ class SessionDeDepotPolicy
      */
     public function create(User $user): bool
     {
-        // return  (auth()->user()->role->value === 'administrateur')  ;
-        return true ;
+        return  (auth()->user()->role->value === 'administrateur')  ;
+       
     }
 
 

@@ -17,6 +17,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\MessageDeRappel\IndexController as MessageDeRappelIndexController;
 use App\Http\Controllers\Rapport\DeleteController as RapportDeleteController;
 use App\Http\Controllers\Rapport\EditController as RapportEditController;
 use App\Http\Controllers\Rapport\IndexController as RapportIndexController;
@@ -38,7 +39,10 @@ use App\Http\Controllers\Stage\IndexController as StageIndexController;
 use App\Http\Controllers\Stage\StageAffectationController;
 use App\Http\Controllers\Stage\StoreController as StageStoreController;
 use App\Http\Controllers\Stage\UpdateController;
+use App\Http\Controllers\Utilisateur\DeleteController as UtilisateurDeleteController;
+use App\Http\Controllers\Utilisateur\EditController as UtilisateurEditController;
 use App\Http\Controllers\Utilisateur\IndexController as UtilisateurIndexController;
+use App\Http\Controllers\Utilisateur\UpdateController as UtilisateurUpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,14 +109,20 @@ Route::middleware('auth')->group(function () {
 	Route::post('/sessions/{id}',SessionDeDepotUpdateController::class)->name('sessions.update');
 	Route::delete('/sessions/{id}',SessionDeDepotDeleteController::class)->name('sessions.delete');
 
-	Route::get('/add-rapport',[RapportStoreController::class,'show'])->name('add-rapport');
-	Route::post('/okkk',[RapportStoreController::class,'store'])->name('rapport.store');
+	Route::get('/add-rapport/{id}',[RapportStoreController::class,'show'])->name('add-rapport');
+	Route::post('/store',[RapportStoreController::class,'store'])->name('rapport.store');
 	Route::get('/rapports',RapportIndexController::class)->name('rapports');
 	Route::get('/rapports/{id}',RapportEditController::class)->name('edit-rapport');
 	Route::post('/rapports/{id}',RapportUpdateController::class)->name('rapports.update');
 	Route::delete('/rapports/{id}',RapportDeleteController::class)->name('rapports.delete');
 
-	Route::get('/user-management',UtilisateurIndexController::class)->name('user-management');
+	Route::get('/user-management',UtilisateurIndexController::class)->name('user-management'); // users
+	Route::get('/users/{id}',UtilisateurEditController::class)->name('edit-user');
+	Route::post('/users/{id}',UtilisateurUpdateController::class)->name('users.update');
+	Route::delete('/users/{id}',UtilisateurDeleteController::class)->name('users.delete');
+
+
+	Route::get('/messages',MessageDeRappelIndexController::class)->name('messages');
 	
 	// Etudiant routes
 	// Route::prefix('etudiants')->group(function () {

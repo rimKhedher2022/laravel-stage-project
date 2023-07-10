@@ -53,7 +53,7 @@
                                     <td class="align-middle text-end">
                                         <div class="d-flex px-3 py-1 justify-content-center align-items-center">
                                            
-                                                <a href=''>
+                                                <a href='users/{{$user->id}}'>
                                                     <button  class="btn btn-secondary btn-sm ms-auto">Modifier </button>
                                                 </a>
                                                 {{-- <p class="text-sm font-weight-bold mb-0">Edit</p> --}}
@@ -63,7 +63,7 @@
                                                     <button  class="btn btn-secondary btn-sm ms-auto">Supprimer stage</button>
                                                 </a> --}}
 
-                                                <form method="post"  action="" >
+                                                <form method="post"  action="{{ route('users.delete',$user->id) }}" >
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>

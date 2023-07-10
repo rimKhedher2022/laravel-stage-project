@@ -13,6 +13,7 @@ class IndexController extends Controller
 
     public function __invoke()  // une seul fonction
     {
+        $this->authorize('viewAny', User::class); //ok
         $users = User::all() ; 
         // dd($users);
         

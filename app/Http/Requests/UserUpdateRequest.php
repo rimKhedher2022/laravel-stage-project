@@ -24,8 +24,12 @@ class UserUpdateRequest extends FormRequest
         return [
             'nom' => 'string',
             'prenom' => 'string',
-            'email' => 'string | email ' ,
-            'password' => 'string',
+            'email' => 'string | email ',
+            // 'cin' => 'string ' ,
+            // 'niveau' => 'string' ,
+            // 'specialite' => 'string' ,
+            // 'numero_inscription' => 'string' ,
+          
         ];
     }
 }
