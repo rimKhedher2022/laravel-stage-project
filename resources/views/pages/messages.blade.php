@@ -8,21 +8,35 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     
-                        <h6>Messages</h6>
-                        <a href=''>
-                    
-                            <button  class="btn btn-primary btn-sm ms-auto">Ajouter message</button>
-                          
-                        </a>
+                        
+                        @if (auth()->user()->role->value === 'administrateur')
+                            <h6>Messages</h6>
+                            <a href='add-message'>
+                        
+                                <button  class="btn btn-primary btn-sm ms-auto">Ajouter message</button>
+                            
+                            </a>
+                        @elseif (auth()->user()->role->value === 'etudiant')
+
+                                <h6>Messages Reçus</h6>
+
+                        @endif
                   
                 </div>
+
+
+                @if (auth()->user()->role->value === 'administrateur')
+                    
+               
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">titre</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">description</th>
+                                   
+                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">description</th>
+                                  
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">etudiant_contacté </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action </th>
                               
@@ -47,21 +61,22 @@
                                     </td>
                                    
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">{{$message->etudiant_id}}</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{$message->etudiant->user->nom}} {{$message->etudiant->user->prenom}}</p>
                                     </td>
                                     <td >
                                         <div class="d-flex px-3 py-1 align-items-center">
-                                          
-                                                <a href=''>
+                                            
+                                            
+                                                <a href='messages/{{$message->id}}'>
                                                     <button  class="btn btn-secondary btn-sm ms-auto">Modifier message</button>
                                                 </a>
                                               
-                                                <form method="post"  action="" >
+                                                <form method="post"  action="{{ route('messages.delete', $message->id) }}" >
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
                                                 </form>
-                                            
+                                          
                                         </div>
                                     </td>
 
@@ -73,6 +88,38 @@
                         </table>
                     </div>
                 </div>
+                @endif
+
+
+                @if (auth()->user()->role->value === 'etudiant')
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            {{-- <thead>
+                                <tr>
+                                 
+                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Messages</th>
+                                    
+                                </tr>
+                               
+                            </thead> --}}
+                            <tbody>
+                              
+
+                                @foreach ($messages_all as $message )
+                                    @if ($message->etudiant->id === auth()->user()->etudiant->id)
+                                            <tr>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{$message->description}}</p>
+                                                </td>
+                                            </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

@@ -11,8 +11,9 @@ class DeleteController extends Controller
     public function __invoke($id)  // une seule fonction
    {
     $message = MessageDeRappel::find($id);
+    $this->authorize('delete',$message); 
     $message->delete() ;
-    return 'ok';
+    return redirect('/messages');
 
    }
 }

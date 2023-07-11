@@ -248,7 +248,7 @@
                                                         {{-- un seul etudiant connecté --}}
                                                         @foreach ($enseignants as $enseignant) 
                                                                
-                                                        <option value="{{$enseignant->id}}" {{ old('enseignant_id',$enseignant->id ) == $enseignant_responsable?->id ? 'selected' : '' }}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
+                                                             <option value="{{$enseignant->id}}" {{ old('enseignant_id',$enseignant->id ) == $enseignant_responsable?->id ? 'selected' : '' }}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
                                                         @endforeach
                                     
                                             </select>

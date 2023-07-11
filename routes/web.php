@@ -17,7 +17,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\MessageDeRappel\DeleteController as MessageDeRappelDeleteController;
+use App\Http\Controllers\MessageDeRappel\EditController as MessageDeRappelEditController;
 use App\Http\Controllers\MessageDeRappel\IndexController as MessageDeRappelIndexController;
+use App\Http\Controllers\MessageDeRappel\StoreController as MessageDeRappelStoreController;
+use App\Http\Controllers\MessageDeRappel\UpdateController as MessageDeRappelUpdateController;
 use App\Http\Controllers\Rapport\DeleteController as RapportDeleteController;
 use App\Http\Controllers\Rapport\EditController as RapportEditController;
 use App\Http\Controllers\Rapport\IndexController as RapportIndexController;
@@ -110,7 +114,7 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/sessions/{id}',SessionDeDepotDeleteController::class)->name('sessions.delete');
 
 	Route::get('/add-rapport/{id}',[RapportStoreController::class,'show'])->name('add-rapport');
-	Route::post('/store',[RapportStoreController::class,'store'])->name('rapport.store');
+	Route::post('/store/{stage_id}',[RapportStoreController::class,'store'])->name('rapport.store');
 	Route::get('/rapports',RapportIndexController::class)->name('rapports');
 	Route::get('/rapports/{id}',RapportEditController::class)->name('edit-rapport');
 	Route::post('/rapports/{id}',RapportUpdateController::class)->name('rapports.update');
@@ -122,6 +126,12 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/users/{id}',UtilisateurDeleteController::class)->name('users.delete');
 
 
+
+	Route::get('/add-message',[MessageDeRappelStoreController::class,'show'])->name('add-message');
+	Route::post('/store-message',[MessageDeRappelStoreController::class,'store'])->name('message.store');
+	Route::get('/messages/{id}',MessageDeRappelEditController::class)->name('edit-message');
+	Route::post('/messages/{id}',MessageDeRappelUpdateController::class)->name('messages.update');
+	Route::delete('/messages/{id}',MessageDeRappelDeleteController::class)->name('messages.delete');
 	Route::get('/messages',MessageDeRappelIndexController::class)->name('messages');
 	
 	// Etudiant routes

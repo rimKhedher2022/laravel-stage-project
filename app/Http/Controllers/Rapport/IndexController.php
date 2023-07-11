@@ -28,7 +28,7 @@ class IndexController extends Controller
     //  $stages = Stage::whereNot('etat',StageEtat::VALIDE)->where('')->get() ;
     
 
-     $aujourdui = Carbon::now()->format('Y-m-d');
+     $aujourdui = Carbon::now(); // ???  ???????????????? timeZone , configuration  / policy : Stage_id fil create more arguments 
     //  dd($aujourdui) ;
 
      return  view('pages.rapports',['stages'=> $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);

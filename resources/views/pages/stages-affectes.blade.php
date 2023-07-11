@@ -72,7 +72,7 @@
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                        
-                                                <p class="text-sm font-weight-bold mb-0">{{$stage?->enseignants[0]->user->nom}}</p>
+                                                <p class="text-sm font-weight-bold mb-0">{{$stage?->enseignants[0]->user->nom}} {{$stage?->enseignants[0]->user->prenom}}</p>
                                              
                                     </td>
 

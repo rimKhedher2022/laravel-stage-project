@@ -112,13 +112,13 @@ Route::middleware('auth')->group(function(){
 //     Route::post('/{id}',SessionDeDepotUpdateController::class);
 // });
 
-Route::prefix('messagesDeRappel')->group(function () {
-    Route::get('/',MessageDeRappelIndexController::class);
-    Route::get('/{id}',MessageDeRappelShowController::class);
-    Route::post('/',MessageDeRappelStoreController::class);
-    Route::delete('/{id}',MessageDeRappelDeleteController::class);
-    Route::post('/{id}',MessageDeRappelUpdateController::class);
-});
+// Route::prefix('messagesDeRappel')->group(function () {
+//     Route::get('/',MessageDeRappelIndexController::class);
+//     Route::get('/{id}',MessageDeRappelShowController::class);
+//     Route::post('/',MessageDeRappelStoreController::class);
+//     Route::delete('/{id}',MessageDeRappelDeleteController::class);
+//     Route::post('/{id}',MessageDeRappelUpdateController::class);
+// });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

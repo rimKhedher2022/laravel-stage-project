@@ -12,7 +12,11 @@ class UpdateController extends Controller
 {
     public function __invoke(MessageDeRappelUpdateRequest $request , $id) {
 
+
+
         $message = MessageDeRappel::find($id);
+        $this->authorize('update',$message);
+
         $message->update(
         //     [
         //     'titre'=> $request->titre ,
@@ -22,6 +26,6 @@ class UpdateController extends Controller
         // ]
         $request->all()
     );
-        return $message  ;
+    return back()->with('succes', 'message mis a jour.');
     }
 }

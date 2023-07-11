@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Etudiant;
 use App\Models\Rapport;
+use App\Models\Stage;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -31,10 +32,12 @@ class RapportPolicy
     public function create(User $user): bool
     {
 
-        // pas la peine de creer un deuxiéme rapport  pour le meme stage
+    
         
+        // pas la peine de creer un deuxiéme rapport  pour le meme stage
+    
 
-        return  (auth()->user()->role->value === 'etudiant')   ;
+        return  (auth()->user()->role->value === 'etudiant' )   ;
     }
 
     /**

@@ -33,14 +33,15 @@ class StoreController extends Controller
    
 
 
-    public function store(RapportStoreRequest $request ) {
+    public function store(RapportStoreRequest $request , $stage_id ) {
  
      
         
         $this->authorize('create',Rapport::class);
-        $rapport_ancien = Rapport::where('stage_id' , 10 )->first() ;  // a vérifier
+        
+        $rapport_ancien = Rapport::where('stage_id' , $stage_id)->first() ;  // a vérifier
      
-       if (empty($rapport_ancien))
+       if (empty($rapport_ancien)) // true
 
        {
 
@@ -49,14 +50,14 @@ class StoreController extends Controller
             'filePath' => $request->filePath,
             'titre' =>$request->titre,
             'date_depot' => Carbon::now(),
-            'stage_id' => 10 , // c faux
+            'stage_id' => $stage_id , // c faux
         ]);
        $stage = $rapport->stage;
        $stage->update([
         'etat'=> StageEtat::DEPOSE
        ]);
 
-       return back()->with('succes', 'rapport déposé ');
+       return redirect()->route("rapports")->with('succes', 'rapport déposé ');
        }
 
        else {

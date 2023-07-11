@@ -25,7 +25,8 @@ class MessageDeRappelStoreRequest extends FormRequest
             'titre'=>'required', 
             'description'=>'required',
             'etudiant_id'=>'required',
-            'user_id'=>'required', 
+            // 'user_id'=>'required',
+           
         ];
     }
 }

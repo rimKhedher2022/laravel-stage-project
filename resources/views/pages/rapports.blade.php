@@ -9,10 +9,13 @@
                 <div class="card-header pb-0">
                     
                         <h6>rapports</h6>
-                       
+                            aujourd'hui : {{$aujourdui}}
+                            début : {{$session_actuel->date_debut}}
+                            fin: {{$session_actuel->date_fin}}
                       
-                        @if ($aujourdui < $session_actuel->date_debut || $aujourdui > $session_actuel->date_fin )
+                        @if ($aujourdui < $session_actuel->date_debut || $aujourdui >= $session_actuel->date_fin )
                          {{-- condition de fermeture de la session --}}
+                           
                             <h6>La session est fermée</h6>
                            
                         @else
@@ -81,7 +84,7 @@
                                                {{-- 09/07/2023 appartient [09/07/2023 , 10/07/2023]   --> test ??    --}}
                                                   {{-- session ouverte --}} 
 
-                                          @if (($aujourdui > $session_actuel->date_debut &&  $aujourdui < $session_actuel->date_fin) || ($aujourdui === $session_actuel->date_debut) ||  ($aujourdui === $session_actuel->date_fin)  ) 
+                                          @if ($aujourdui >= $session_actuel->date_debut &&  $aujourdui < $session_actuel->date_fin) 
                                               
                                         
                                                   {{-- status de stage   --}}
@@ -112,21 +115,21 @@
 
                                     <td>
 
-                                                @if ($aujourdui < $session_actuel->date_debut) 
+                                                @if ($aujourdui < $session_actuel->date_debut)  
                                                     
                                                         
                                                             
                                                     
-                                                @if (empty($stage->rapport) )
-                                                
-    
-                                                
-                                                <p style="color:blue">pas de session ouverte</p>
-                                                    
-                                                @else
-                                                     <p style="color: green">rapport déposé</p>
+                                                            @if (empty($stage->rapport) )
                                                             
-                                                @endif
+                
+                                                            
+                                                                <p style="color:blue">pas de session ouverte</p>
+                                                                
+                                                            @else
+                                                                <p style="color: green">rapport déposé</p>
+                                                                        
+                                                            @endif
                                                             
                                  
 
@@ -135,7 +138,7 @@
                                         
                                               
                                             {{-- si la session a fini  ou bien   --}}
-                                                    @elseif ($aujourdui > $session_actuel->date_fin )   
+                                                @elseif ($aujourdui >= $session_actuel->date_fin )   
                                                             @if (empty($stage->rapport) )
                                                                 
                             
@@ -144,10 +147,10 @@
 
                                                             @else
 
-                                                        <p style="color: green">rapport déposé</p>
+                                                                  <p style="color: green">rapport déposé</p>
                                                     
                                                     
-                                                    @endif
+                                                            @endif
 
 
                                                 @endif

@@ -24,8 +24,8 @@ class MessageDeRappelUpdateRequest extends FormRequest
         return [
             'titre'=>'string', 
             'description'=>'string',
-            // 'etudiant_id'=>'string',
-            // 'user_id'=>'string', 
+            'etudiant_id'=>'string',
+            'user_id'=>'string', 
         ];
     }
 }

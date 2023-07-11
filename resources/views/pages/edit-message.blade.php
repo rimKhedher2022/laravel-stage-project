@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un rapport'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un message'])
   
     <div id="alert">
         @include('components.alert')
@@ -11,45 +11,55 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action="{{ route('rapport.store', $stage_a_deposer_rapport->id )}}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action="{{ route('messages.update' , $message->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter un rapport</p>
+                                    <p class="mb-0">Ajouter un message</p>
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
                                 </div>
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations du rapport</p>
+                            <p class="text-uppercase text-sm">Les informations du message</p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">titre</label>
-                                        <input class="form-control" type="text" name="titre" >
+                                        <input class="form-control" type="text" name="titre" value="{{old('titre', $message->titre)}}" >
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">filePath</label>
-                                        <input class="form-control" type="text" name="filePath">
+                                        <label for="example-text-input" class="form-control-label">description</label>
+                                        <input class="form-control" type="text" name="description" value="{{old('description', $message->description)}}">
                                     </div>
                                 </div>
-                              
                                
-                               <div class="col-md-6">
+
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">sujet</label>
-                                        <input class="form-control" type="text" disabled name="stage_id" value="{{$stage_a_deposer_rapport->sujet}}">
+                                        
+                                        <label for="etudiant_id">etudiant:</label>
+                                            <select name="etudiant_id"  id="etudiant_id" class="form-control">
+                                                <option >---choix etudiant à contacter ---</option>
+                                                   
+                                                        {{-- un seul etudiant connecté --}}
+                                                        @foreach ($etudiants as $etudiant) 
+                                                               
+                                                            <option value="{{$etudiant->id}}"  {{ old('etudiant_id',$etudiant->id ) == $message->etudiant->id ? 'selected' : '' }}> {{$etudiant->user->nom }} {{ $etudiant->user->prenom }}  </option>
+                                                        @endforeach
+                                    
+                                            </select>
                                     </div>
                                 </div>
-
-                                {{-- <div class="col-md-6">
+{{-- 
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">stage_id</label>
-                                        <input class="form-control" type="text" name="stage_id">
+                                        <label for="example-text-input" class="form-control-label">user : </label>
+                                        <input  disabled class="form-control" type="text" name="user_id" value="{{auth()->user()->id}}">
                                     </div>
                                 </div> --}}
                               
