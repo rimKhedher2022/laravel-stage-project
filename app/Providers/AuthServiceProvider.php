@@ -10,6 +10,7 @@ use App\Models\Stage;
 use App\Policies\SessionDeDepotPolicy;
 use App\Policies\SocietePolicy;
 use App\Policies\StagePolicy;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -28,8 +29,14 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any authentication / authorization services.
      */
-    public function boot(): void
+    public function boot(GateContract $gate): void
     {
-        //
+        $gate->define('add-rapport', function ($user, $stage) {
+            $etudiant = $user->etudiant;
+            $stage_etudiants_id = $stage->etudiants->pluck('id')->toArray() ;
+          //  dd(in_array($etudiant->id,$stage_etudiants_id));
+
+            return empty($stage->rapport) && in_array($etudiant->id,$stage_etudiants_id) ; // true
+        });
     }
 }

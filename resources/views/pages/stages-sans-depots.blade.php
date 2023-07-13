@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                 
-                        <h6>Stages affectées aux enseignants</h6> 
+                        <h6>Stages sans dépots du rapport</h6> 
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -35,7 +35,11 @@
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Enseignant 
+                                        Actions
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Messages
                                     </th>
                                     
                                    
@@ -43,8 +47,6 @@
                             </thead>
                             <tbody>
                                 @foreach ( $stages as $stage )
-                                    {{-- @if (count($stage->enseignants)) --}}
-                                    
                                
                                     
                                 <tr>
@@ -71,21 +73,31 @@
                                         <p class="text-sm font-weight-bold mb-0">{{$stage->societe_id}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm"> 
-                                        <a href='stages/{{$stage->id}}'>
 
-                                                {{-- @if  (!empty($stage->enseignants->pluck('id')->toArray())  ) --}}
-                                                    <button  class="btn btn-success btn-sm ms-auto">modifier enseignant</button>
-                                                {{-- @endif --}}
+                                        <form method="post"  action="{{ route('message.store', $stage->id) }}" >
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-success btn-sm ms-auto ">envoyer message</button>
+                                        </form>
 
-
-                                        </a>
+                                        {{-- <a href='add-message/{{$stage->id}}'>
+                                                    <button  class="btn btn-success btn-sm ms-auto">envoyer message</button>
+                                        </a> --}}
                                        
                                                 {{-- <p class="text-sm font-weight-bold mb-0">{{$stage?->enseignants[0]->user->nom}} {{$stage?->enseignants[0]->user->prenom}}</p> --}}
                                              
                                     </td>
 
+                                    <td class="align-middle text-center text-sm"> 
+                                        @if ($stage->messages)
+                                        {{-- ??????????????? --}}
+                                            <p> {{$stage->messages}}  message envoyé </p>  
+                                        @endif
+                                             
+                                    </td>
+
                                 </tr>
-                                {{-- @endif --}}
+                               
                                 @endforeach
                             </tbody>
                         </table>

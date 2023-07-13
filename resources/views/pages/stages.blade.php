@@ -92,16 +92,16 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
                                                 </form>
-                                            @else
-                                                <a href='stages/{{$stage->id}}'>
-                                                 @if  (empty($stage->enseignants->pluck('id')->toArray()))
-                                                    <button  class="btn btn-secondary btn-sm ms-auto">affecter enseignant</button>
-                                                 @else
+                                            @elseif ($role->value ==='administrateur')
+                                              
+                                                    <a href='stages/{{$stage->id}}'>
                                                   
-                                                    <button  class="btn btn-success btn-sm ms-auto">modifier enseignant</button>
-                                                  @endif 
-                                                </a>
-
+                                                        @if  (empty($stage->enseignants->pluck('id')->toArray())  )
+                                                            <button  class="btn btn-secondary btn-sm ms-auto">affecter enseignant</button>
+                                                        @endif
+                                                       
+                                                    </a>
+                                           
                                             @endif
                                         </div>
                                     </td>

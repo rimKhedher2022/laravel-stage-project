@@ -16,7 +16,7 @@ class MessageDeRappelSeeder extends Seeder
         MessageDeRappel::create([
             'titre'=>'rappel info3', 
             'description'=>'envoyez vos info2',
-            'etudiant_id'=>1,
+            'stage_id'=>1,
             'user_id'=>3, //admin
         ]);
     }

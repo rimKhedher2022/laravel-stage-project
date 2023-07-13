@@ -101,6 +101,9 @@ public function affecter (Request $request  , $id) {
             if(!empty($stage_enseignant_id)){
           
                 $stage->enseignants()->detach($stage_enseignant_id) ; // suprimer l'enseignant
+                $stage->update([
+                    'etat'=> StageEtat::DEPOSE
+              ]);
              }
          }
         return back()->with('succes', 'enseignant affecté . ');

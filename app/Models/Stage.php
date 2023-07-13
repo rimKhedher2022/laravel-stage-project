@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Stage extends Model
@@ -64,6 +65,11 @@ class Stage extends Model
         return $this->hasOne(Rapport::class);
     }
 
+ 
+    public function messages() : HasMany
+    {
+        return $this->hasMany(MessageDeRappel::class);
+    }
   
 
 }

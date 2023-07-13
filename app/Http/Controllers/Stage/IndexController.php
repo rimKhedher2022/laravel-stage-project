@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Stage;
 
 use App\Enums\RoleType;
+use App\Enums\StageEtat;
 use App\Http\Controllers\Controller;
 use App\Models\Etudiant;
 use App\Models\Stage;
@@ -19,7 +20,7 @@ class IndexController extends Controller
         // dd($role->value);
         switch ($role) {
           case RoleType::Administrateur:
-            $stages = Stage::all();
+            $stages = Stage::where('etat',StageEtat::DEPOSE)->get();
              
          
               break;

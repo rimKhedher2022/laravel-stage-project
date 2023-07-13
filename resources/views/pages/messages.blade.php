@@ -10,15 +10,15 @@
                     
                         
                         @if (auth()->user()->role->value === 'administrateur')
-                            <h6>Messages</h6>
-                            <a href='add-message'>
+                            <h6>Messages envoyés aux stagiaires</h6>
+                            {{-- <a href='add-message'>
                         
                                 <button  class="btn btn-primary btn-sm ms-auto">Ajouter message</button>
                             
-                            </a>
+                            </a> --}}
                         @elseif (auth()->user()->role->value === 'etudiant')
 
-                                <h6>Messages Reçus</h6>
+                                <h6>Messages de rappels reçus</h6>
 
                         @endif
                   
@@ -38,6 +38,7 @@
                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">description</th>
                                   
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">etudiant_contacté </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">sujet concerné du message </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action </th>
                               
                                 
@@ -61,7 +62,14 @@
                                     </td>
                                    
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">{{$message->etudiant->user->nom}} {{$message->etudiant->user->prenom}}</p>
+                                         @foreach ( $message->stage->etudiants as $etudiant )
+                                            <p class="text-sm font-weight-bold mb-0">{{$etudiant->user->nom}} {{$etudiant->user->prenom}}</p>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        
+                                            <p class="text-sm font-weight-bold mb-0">{{$message->stage->sujet}}</p>
+                                      
                                     </td>
                                     <td >
                                         <div class="d-flex px-3 py-1 align-items-center">
@@ -91,29 +99,41 @@
                 @endif
 
 
-                @if (auth()->user()->role->value === 'etudiant')
+             @if (auth()->user()->role->value === 'etudiant')
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
-                            {{-- <thead>
+                            <thead>
                                 <tr>
                                  
                                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Messages</th>
+                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Sujet Stage </th>
+                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date de resception </th>
                                     
                                 </tr>
+                                
+                                 
+                                    
+                                    
                                
-                            </thead> --}}
+                               
+                            </thead>
                             <tbody>
                               
 
-                                @foreach ($messages_all as $message )
-                                    @if ($message->etudiant->id === auth()->user()->etudiant->id)
+                                @foreach ($stages_etudiant as $stage )
+                                     
+                                    @foreach ($stage->messages as $message )
+                                        
+                                  
+                                    {{-- @if ($message->stage->etudiants[0]->id == auth()->user()->etudiant->id) --}}
                                             <tr>
-                                                <td>
-                                                    <p class="text-sm font-weight-bold mb-0">{{$message->description}}</p>
-                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0"> {{$message->description}}</td> 
+                                                <td class="text-sm font-weight-bold mb-0"> {{$message->stage->sujet}}</td> 
+                                                <td class="text-sm font-weight-bold mb-0">{{$message->created_at->format('Y-m-d')}}</td> 
                                             </tr>
-                                    @endif
+                                    {{-- @endif --}}
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

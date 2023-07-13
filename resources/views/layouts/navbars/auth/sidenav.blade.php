@@ -68,6 +68,14 @@
                         <span class="nav-link-text ms-1">Stages</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'stages-sans-depots') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-sans-depots']) }}">
+                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Stages sans dépot</span>
+                    </a>
+                </li>
                 @endif
           
            
@@ -94,8 +102,10 @@
                         <div class="fa fas fa-solid fa-envelope border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni  text-dark text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Messages</span>
+                        <span class="nav-link-text ms-1 badge-dark">Messages {{auth()->user()->messagesCount()}} </span>
+                        
                     </a>
+                   
                 </li>
             @endif
 
@@ -128,36 +138,10 @@
                 
          
            
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'tables') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'tables']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Tables</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{  str_contains(request()->url(), 'billing') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'billing']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Billing</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="{{ route('virtual-reality') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-app text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Virtual Reality</span>
-                </a>
-            </li>
+           
+           
+           
+           
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'rtl' ? 'active' : '' }}" href="{{ route('rtl') }}">
                     <div

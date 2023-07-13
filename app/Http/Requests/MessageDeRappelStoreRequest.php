@@ -22,9 +22,8 @@ class MessageDeRappelStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titre'=>'required', 
-            'description'=>'required',
-            'etudiant_id'=>'required',
+          
+            'stage_id'=>'string',
             // 'user_id'=>'required',
            
         ];

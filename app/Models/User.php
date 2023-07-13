@@ -84,6 +84,22 @@ class User extends Authenticatable
      {
          return $this->hasMany(MessageDeRappel::class);
      }
+
+     public function messagesCount()
+     {
+        if (auth()->user()->role->value === 'etudiant')
+        {
+            $count =0 ;
+            $etudiant_stages = auth()->user()->etudiant->stages;
+            foreach ($etudiant_stages as $stage)
+            {
+                $count+= count($stage->messages);
+            }
+
+            return $count ; 
+            
+        }
+     }
     
 
     /**

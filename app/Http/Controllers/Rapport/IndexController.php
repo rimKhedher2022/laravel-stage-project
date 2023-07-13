@@ -10,6 +10,7 @@ use App\Models\SessionDeDepot;
 use App\Models\Stage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -28,7 +29,7 @@ class IndexController extends Controller
     //  $stages = Stage::whereNot('etat',StageEtat::VALIDE)->where('')->get() ;
     
 
-     $aujourdui = Carbon::now(); // ???  ???????????????? timeZone , configuration  / policy : Stage_id fil create more arguments 
+     $aujourdui = Carbon::now('GMT-7'); // ???  ???????????????? timeZone , configuration  / policy : Stage_id fil create more arguments 
     //  dd($aujourdui) ;
 
      return  view('pages.rapports',['stages'=> $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);

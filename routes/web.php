@@ -41,6 +41,7 @@ use App\Http\Controllers\Stage\DeleteController as StageDeleteController;
 use App\Http\Controllers\Stage\EditController;
 use App\Http\Controllers\Stage\IndexController as StageIndexController;
 use App\Http\Controllers\Stage\StageAffectationController;
+use App\Http\Controllers\Stage\StageSansDepotController;
 use App\Http\Controllers\Stage\StoreController as StageStoreController;
 use App\Http\Controllers\Stage\UpdateController;
 use App\Http\Controllers\Utilisateur\DeleteController as UtilisateurDeleteController;
@@ -94,6 +95,7 @@ Route::middleware('auth')->group(function () {
 	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
 	Route::get('/stages',StageIndexController::class)->name('stages');
 	Route::get('/stages-affectes',StageAffectationController::class)->name('stages-affectes');
+	Route::get('/stages-sans-depots',StageSansDepotController::class)->name('stages-sans-depots');
 	Route::delete('/stages/{id}',StageDeleteController::class)->name('stages.delete');
 	Route::post('/',[StageStoreController::class,'store'])->name('stage.store');
 
@@ -127,8 +129,8 @@ Route::middleware('auth')->group(function () {
 
 
 
-	Route::get('/add-message',[MessageDeRappelStoreController::class,'show'])->name('add-message');
-	Route::post('/store-message',[MessageDeRappelStoreController::class,'store'])->name('message.store');
+	// Route::get('/add-message/{id}',[MessageDeRappelStoreController::class,'show'])->name('add-message');
+	Route::post('/store-message/{id}',[MessageDeRappelStoreController::class,'store'])->name('message.store');
 	Route::get('/messages/{id}',MessageDeRappelEditController::class)->name('edit-message');
 	Route::post('/messages/{id}',MessageDeRappelUpdateController::class)->name('messages.update');
 	Route::delete('/messages/{id}',MessageDeRappelDeleteController::class)->name('messages.delete');

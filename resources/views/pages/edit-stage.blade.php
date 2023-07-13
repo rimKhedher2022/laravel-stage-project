@@ -227,7 +227,7 @@
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations de stage à affecter</p>
+                            <p class="text-uppercase text-sm">Les informations de stage à modifier l'affectation</p>
                             <div class="row">
                             
                                 <div class="col-md-6">

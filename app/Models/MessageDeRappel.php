@@ -10,7 +10,7 @@ class MessageDeRappel extends Model
 {
     use HasFactory;
     protected $fillable = [
-      'titre', 'description','etudiant_id','user_id', 
+      'titre', 'description','stage_id','user_id', 
     ];
 
     /**
@@ -33,8 +33,8 @@ class MessageDeRappel extends Model
 
      
      // code ajouté - 17/06/2023
-    public function etudiant(): BelongsTo
+    public function stage(): BelongsTo
     {
-        return $this->belongsTo(Etudiant::class);
+        return $this->belongsTo(Stage::class);
     }
 }

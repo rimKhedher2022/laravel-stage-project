@@ -22,7 +22,7 @@
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations du message</p>
+                            <p class="text-uppercase text-sm">Les informations du message à modifier</p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -41,20 +41,12 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        
-                                        <label for="etudiant_id">etudiant:</label>
-                                            <select name="etudiant_id"  id="etudiant_id" class="form-control">
-                                                <option >---choix etudiant à contacter ---</option>
-                                                   
-                                                        {{-- un seul etudiant connecté --}}
-                                                        @foreach ($etudiants as $etudiant) 
-                                                               
-                                                            <option value="{{$etudiant->id}}"  {{ old('etudiant_id',$etudiant->id ) == $message->etudiant->id ? 'selected' : '' }}> {{$etudiant->user->nom }} {{ $etudiant->user->prenom }}  </option>
-                                                        @endforeach
-                                    
-                                            </select>
+                                        <label for="example-text-input" class="form-control-label">sujet</label>
+                                        <input class="form-control" type="text" disabled name="stage_id" value="{{$stage_relie_a_ce_message->sujet}}">
                                     </div>
                                 </div>
+
+                                
 {{-- 
                                 <div class="col-md-6">
                                     <div class="form-group">

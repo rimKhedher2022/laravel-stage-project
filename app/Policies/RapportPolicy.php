@@ -23,20 +23,19 @@ class RapportPolicy
      */
     public function view(User $user, Rapport $rapport): bool
     {
-        return  (auth()->user()->role->value === 'etudiant')  ;
+          
+
+        return  (auth()->user()->role->value === 'etudiant' )  ;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user ): bool
     {
 
-    
+      
         
-        // pas la peine de creer un deuxiéme rapport  pour le meme stage
-    
-
         return  (auth()->user()->role->value === 'etudiant' )   ;
     }
 

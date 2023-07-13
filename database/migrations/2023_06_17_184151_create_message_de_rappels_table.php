@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->string('description');
-            $table->foreignId('etudiant_id')->constrained('etudiants')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('stage_id')->constrained('stages')->onUpdate('cascade')->onDelete('cascade');  // on supprime le stage on sup le message ?
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

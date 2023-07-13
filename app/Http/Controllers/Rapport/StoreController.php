@@ -8,8 +8,11 @@ use App\Http\Requests\RapportStoreRequest;
 use App\Models\Etudiant;
 use App\Models\Rapport;
 use App\Models\Stage;
+use App\Models\User;
 use Carbon\Carbon;
+use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate as FacadesGate;
 
 class StoreController extends Controller
 {
@@ -17,17 +20,19 @@ class StoreController extends Controller
 
     public function show($id)
     {
-    $this->authorize('create',Rapport::class);
-     $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
-     $stages = $etudiant->stages; // (id == 2 )
-     
-     $stage_a_deposer_rapport = Stage::find($id) ; 
+
     
-       
+    $stage_a_deposer_rapport = Stage::find($id) ; 
+    
+    $stages_user  = auth()->user()->etudiant->stages ;
   
-   
-   
-     return  view('pages.add-rapport',[ 'stages'=> $stages , 'stage_a_deposer_rapport'=> $stage_a_deposer_rapport]);
+    $this->authorize('create',Rapport::class);
+       
+        if (FacadesGate::denies('add-rapport',$stage_a_deposer_rapport)) {
+            abort(403);
+        }
+
+     return  view('pages.add-rapport',[ 'stage_a_deposer_rapport'=> $stage_a_deposer_rapport]);
     }
 
    
@@ -36,8 +41,12 @@ class StoreController extends Controller
     public function store(RapportStoreRequest $request , $stage_id ) {
  
      
-        
+        $stage = Stage::find($stage_id) ; 
         $this->authorize('create',Rapport::class);
+
+        // if (FacadesGate::denies('add-rapport', $stage)) {
+        //     abort(403);
+        // }
         
         $rapport_ancien = Rapport::where('stage_id' , $stage_id)->first() ;  // a vérifier
      
