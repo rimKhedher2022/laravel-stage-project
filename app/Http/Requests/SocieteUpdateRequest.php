@@ -27,4 +27,12 @@ class SocieteUpdateRequest extends FormRequest
         'adresse'=>'string',
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'nom'=>'veuillez choisir le nom de la société',
+            'telephone'=>'veuillez choisir le telephone de la société',
+            'adresse'=>'veuillez choisir l adresse de la société',
+            ];
+    }
 }

@@ -4,10 +4,13 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Rapports'])
     <div class="row mt-4 mx-4">
         <div class="col-12">
+           
           
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    
+                    @if (session('message'))
+                      <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
+                    @endif
                         <h6>rapports</h6>
                             aujourd'hui : {{$aujourdui}}
                             début : {{$session_actuel->date_debut}}

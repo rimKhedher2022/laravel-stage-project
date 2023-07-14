@@ -10,6 +10,16 @@
  
     {{-- les infos du rapport --}}
     <div class="container-fluid py-4">
+        @if ($errors->any())
+            <div class="alert alert-secondary">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li style="color: rgba(247, 247, 247, 0.938)">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
@@ -19,7 +29,7 @@
 
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Modifier une rapport</p>
+                                    <p class="mb-0">Modifier le dépot du rapport</p>
                                     {{-- {{$rapport}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
                                 </div>
@@ -40,7 +50,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">filePath</label>
-                                        <input class="form-control" type="text" name="filePath"  value="{{old('filePath', $rapport->filePath)}}">
+                                        @if ($rapport->filePath)
+                                                <p style="size:1px">Current File Path: {{ $rapport->filePath }}</p>
+                                        @endif
+                                        <input class="form-control" type="file" name="filePath">
+                                        
                                     </div>
                                 </div>
                                

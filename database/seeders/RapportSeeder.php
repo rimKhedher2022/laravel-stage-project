@@ -15,7 +15,7 @@ class RapportSeeder extends Seeder
     public function run(): void
     {
         Rapport::create([
-        'filePath'=>'/jjdhd/kjdhd/d/f',
+        'filePath'=>'/seeder/exemple',
         'titre'=>'rapport pfe1',
         'date_depot'=>Carbon::now(),
         'stage_id'=>1,

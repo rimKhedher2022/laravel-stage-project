@@ -22,10 +22,22 @@ class RapportStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filePath'=>'string',
-            'titre'=>'string',
-            // 'date_depot'=>'required',
+            'filePath'=> 'required|mimes:pdf,docx|max:5120',
+            'titre'=>'required',
             'stage_id'=>'string',
         ];
+
+
     }
+
+
+    public function messages()
+    {
+        return [
+            'filePath'=> 'veuillez choisir votre document',
+            'titre'=> 'veuillez choisir le titre de votre document',
+        ];
+    }
+        
+   
 }

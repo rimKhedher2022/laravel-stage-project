@@ -86,7 +86,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">matricule</label>
-                                            <input class="form-control" type="text" name="matricule"  value="{{old('matricule', $user->enseignant->matricule)}}">
+                                            <input class="form-control" type="text" name="matricule"  value="{{old('matricule', $user->enseignant?->matricule)}}">
                                         </div>
                                     </div>
                            

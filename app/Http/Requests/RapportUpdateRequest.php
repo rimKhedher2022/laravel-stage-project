@@ -22,10 +22,19 @@ class RapportUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filePath'=>'string',
+            'filePath'=> 'required|mimes:pdf,docx|max:5120',
             'titre'=>'string',
             'date_depot'=>'date',
             // 'stage_id'=>'string',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'filePath'=> 'veuillez choisir votre document l ajouter au lieu de l ancien rapport',
+            'titre'=> 'veuillez choisir le titre de votre document',
+        ];
+    }
+        
 }

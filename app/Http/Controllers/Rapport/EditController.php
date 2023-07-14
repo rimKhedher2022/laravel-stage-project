@@ -13,6 +13,7 @@ class EditController extends Controller
     public function __invoke($id)
     {
         $rapport = Rapport::find($id);
+        // dd($rapport->filePath) ;
         $this->authorize('view', $rapport);
         $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
       

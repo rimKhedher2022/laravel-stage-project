@@ -1,9 +1,12 @@
 <?php
 
+
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -97,6 +100,7 @@ return [
     */
 
     'fallback_locale' => 'en',
+ 
 
     /*
     |--------------------------------------------------------------------------
@@ -181,8 +185,12 @@ return [
     |
     */
 
+
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
 ];
+
+
+ 

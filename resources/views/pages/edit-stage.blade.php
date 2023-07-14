@@ -227,7 +227,7 @@
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations de stage à modifier l'affectation</p>
+                            <p class="text-uppercase text-sm">Les informations du stage à saisir l'enseignant</p>
                             <div class="row">
                             
                                 <div class="col-md-6">
@@ -245,7 +245,7 @@
                                             <select name="enseignant_id"  id="enseignant_id" class="form-control">
                                                 <option value="0">---choix enseignant ---</option>
                                                    
-                                                        {{-- un seul etudiant connecté --}}
+                                                       
                                                         @foreach ($enseignants as $enseignant) 
                                                                
                                                              <option value="{{$enseignant->id}}" {{ old('enseignant_id',$enseignant->id ) == $enseignant_responsable?->id ? 'selected' : '' }}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>

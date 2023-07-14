@@ -27,8 +27,20 @@ class StageStoreRequest extends FormRequest
             'date_debut'=>'required',
             'date_fin'=>'required',
             'societe_id'=>'required',
-            'etat'=>'required',
+            // 'etat'=>'required',
             'date_soutenance'=>'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'type'=>'veuillez choisir le type de votre stage',
+            'sujet'=>'veuillez choisir le sujet de votre stage',
+            'date_debut'=>'veuillez choisir la date debut de votre stage',
+            'date_fin'=>'veuillez choisir la date fin de votre stage',
+            'societe_id'=>'veuillez choisir la societe de votre stage',
+            // 'etat'=>'required',
+            'date_soutenance'=>'veuillez choisir la date soutenance',
         ];
     }
 }

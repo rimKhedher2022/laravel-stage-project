@@ -86,6 +86,8 @@
                                         <input class="form-control" type="email" name="email" value="{{ old('email', auth()->user()->email) }}">
                                     </div>
                                 </div>
+
+                                {{-- if --}}
                                
                                
                             </div>

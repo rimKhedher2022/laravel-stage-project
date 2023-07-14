@@ -17,6 +17,8 @@
                     @elseif ($role->value ==='administrateur')
                         <h6>Stages à affecter aux enseignants</h6> 
                     {{-- @else     --}}
+                    @else
+                        <h6>Stages à valider</h6> 
                     @endif
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -102,6 +104,21 @@
                                                        
                                                     </a>
                                            
+                                            @else
+                                            {{-- // filepath --}}
+                                                <a href='rapports/{{$stage->rapport->id}}'>  
+                                                        <button  class="btn btn-secondary btn-sm ms-auto">Télécharger</button>
+                                                </a>
+                                                {{-- on passe a une étatpe de selection du date de soutenance --}}
+                                                 <a href=''>
+                                                        <button  class="btn btn-primary btn-sm ms-auto">valider rapport</button>
+                                                </a>
+                                                
+                                                <a href=''>
+                                                        <button  class="btn btn-primary btn-sm ms-auto">demander de correction</button>
+                                                </a> 
+                                               
+                                             
                                             @endif
                                         </div>
                                     </td>

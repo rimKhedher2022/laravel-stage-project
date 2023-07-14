@@ -81,9 +81,28 @@
                                 </p>
                             </div>
                         </div>
+
+                       
                         <div class="card-body">
                             <form method="POST" action="{{ route('register.perform') }}">
                                 @csrf
+
+                                <div class="flex flex-col mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="role" value="etudiant" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="etudiant">
+                                       Etudiant
+                                        </label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="role" value="enseignant" id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="enseignant">
+                                       Enseignant
+                                        </label>
+                                    </div>
+
+                                </div>  
+
                                 <div class="flex flex-col mb-3">
                                     <input type="text" name="nom" class="form-control" placeholder="nom" aria-label="Name" value="{{ old('nom') }}" >
                                     @error('nom') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
@@ -101,11 +120,7 @@
                                     <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password">
                                     @error('password') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
-                               
-                                <div class="flex flex-col mb-3">
-                                    <input type="text" name="cin" class="form-control" placeholder="Cin" aria-label="Cin">
-                                    @error('cin') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                </div>
+                            
                                
                                 <div class="text-center">
                                     <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>

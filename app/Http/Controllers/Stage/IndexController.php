@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Stage;
 use App\Enums\RoleType;
 use App\Enums\StageEtat;
 use App\Http\Controllers\Controller;
+use App\Models\Enseignant;
 use App\Models\Etudiant;
 use App\Models\Stage;
 use Illuminate\Http\Request;
@@ -31,7 +32,10 @@ class IndexController extends Controller
               break;
           
           default:
-              # code...
+          
+          $enseignant = Enseignant::where('user_id',auth()->id())->first(); // 4
+
+           $stages = $enseignant->stages;
               break;
       }
      return  view('pages.stages',['stages' => $stages , 'role' => $role ]);

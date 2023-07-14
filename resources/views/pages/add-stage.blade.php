@@ -7,10 +7,25 @@
         @include('components.alert')
     </div>
     {{-- les infos du stage --}}
+
+  
     <div class="container-fluid py-4">
+        @if ($errors->any())
+        <div class="alert alert-secondary">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li style="color: rgba(247, 247, 247, 0.938)">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
+
+
+
+                      
                     <form role="form" method="POST" action="{{ route('stage.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">

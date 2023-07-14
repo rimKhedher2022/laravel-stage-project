@@ -8,9 +8,20 @@
     </div>
     {{-- les infos du stage --}}
     <div class="container-fluid py-4">
+        @if ($errors->any())
+            <div class="alert alert-secondary">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li style="color: rgba(247, 247, 247, 0.938)">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
+                  
+
                     <form role="form" method="POST" action="{{ route('rapport.store', $stage_a_deposer_rapport->id )}}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
@@ -34,7 +45,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">filePath</label>
-                                        <input class="form-control" type="text" name="filePath">
+                                        <input class="form-control" type="file" name="filePath">
                                     </div>
                                 </div>
                               

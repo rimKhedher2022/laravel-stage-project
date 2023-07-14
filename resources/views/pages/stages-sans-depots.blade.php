@@ -72,13 +72,18 @@
                                     <td class="align-middle text-center text-sm">
                                         <p class="text-sm font-weight-bold mb-0">{{$stage->societe_id}}</p>
                                     </td>
-                                    <td class="align-middle text-center text-sm"> 
+                                    <td class="align-middle text-center text-sm">
+                                        {{-- si la session est ouverte , l'admin envoi les messages --}}
+                                        @if ($aujourdui >= $session_actuel->date_debut &&  $aujourdui < $session_actuel->date_fin)  
 
-                                        <form method="post"  action="{{ route('message.store', $stage->id) }}" >
-                                            @csrf
-                                            @method('POST')
-                                            <button type="submit" class="btn btn-success btn-sm ms-auto ">envoyer message</button>
-                                        </form>
+                                                <form method="post"  action="{{ route('message.store', $stage->id)}}" >
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="btn btn-success btn-sm ms-auto ">envoyer message</button>
+                                                </form>
+                                        @else
+                                                <p style="color:blue">pas de session ouverte</p>
+                                        @endif
 
                                         {{-- <a href='add-message/{{$stage->id}}'>
                                                     <button  class="btn btn-success btn-sm ms-auto">envoyer message</button>

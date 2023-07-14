@@ -11,6 +11,17 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
+
+                    @if ($errors->any())
+                    <div class="alert alert-secondary">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li style="color: rgba(247, 247, 247, 0.938)">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                   @endif
+
                     <form role="form" method="POST" action="{{ route('session.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
@@ -37,12 +48,7 @@
                                         <input class="form-control" type="date" name="date_fin">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">user id</label>
-                                        <input class="form-control" type="etat" name="user_id">
-                                    </div>
-                                </div>
+                               
                               
 
                                

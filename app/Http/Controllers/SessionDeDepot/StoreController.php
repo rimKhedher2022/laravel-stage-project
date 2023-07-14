@@ -25,7 +25,7 @@ class StoreController extends Controller
   
             'date_debut' => $request->date_debut,
             'date_fin' =>$request->date_fin,
-            'user_id' =>$request->user_id,
+            'user_id' =>auth()->user()->id ,
         ]);
 
         // $this->authorize('restore',  $session );

@@ -41,6 +41,7 @@ use App\Http\Controllers\Stage\DeleteController as StageDeleteController;
 use App\Http\Controllers\Stage\EditController;
 use App\Http\Controllers\Stage\IndexController as StageIndexController;
 use App\Http\Controllers\Stage\StageAffectationController;
+use App\Http\Controllers\Stage\StageAvaliderController;
 use App\Http\Controllers\Stage\StageSansDepotController;
 use App\Http\Controllers\Stage\StoreController as StageStoreController;
 use App\Http\Controllers\Stage\UpdateController;
@@ -135,6 +136,8 @@ Route::middleware('auth')->group(function () {
 	Route::post('/messages/{id}',MessageDeRappelUpdateController::class)->name('messages.update');
 	Route::delete('/messages/{id}',MessageDeRappelDeleteController::class)->name('messages.delete');
 	Route::get('/messages',MessageDeRappelIndexController::class)->name('messages');
+
+	// Route::get('/valider-stages',StageIndexController::class)->name('valider-stages');
 	
 	// Etudiant routes
 	// Route::prefix('etudiants')->group(function () {

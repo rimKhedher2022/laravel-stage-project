@@ -24,8 +24,14 @@ class MessageDeRappelUpdateRequest extends FormRequest
         return [
             'titre'=>'string', 
             'description'=>'string',
-            'etudiant_id'=>'string',
-            'user_id'=>'string', 
+          
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'titre'=>'veuillez écrire le titre du message du rappel', 
+            'description'=>'veuillez écrire la description du message du rappel',
         ];
     }
 }
