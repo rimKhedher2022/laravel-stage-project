@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">adresset</label>
+                                        <label for="example-text-input" class="form-control-label">adresse</label>
                                         <input class="form-control" type="text" name="adresse" >
                                     </div>
                                 </div>

@@ -7,23 +7,28 @@ use App\Http\Requests\RapportStoreRequest;
 use App\Http\Requests\RapportUpdateRequest;
 use App\Models\Rapport;
 use Carbon\Carbon;
+use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateController extends Controller
 {
     public function __invoke(RapportUpdateRequest $request , $id) {
         $rapport = Rapport::find($id);
         $this->authorize('update',$rapport);
+        // dd($rapport->filePath) ;
 
+    // supprimer de storage / affichage du document 
+      
         $filename='' ; 
        if ($request->hasFile('filePath'))
        {
-         $filename = $request->getSchemeAndHttpHost() . '/assets/storage/' . time() . '.' . $request->filePath->extension() ;
+         $filename =  time() . '.' . $request->filePath->extension() ;
          $request->filePath->move(public_path('/assets/storage/'),$filename) ;
        }
 
-      // supprimer de storage / affichage du document 
-
+       unlink(public_path('assets/storage/'.$rapport->filePath));
+       
         $rapport->update([
             'filePath' =>  $filename,
             'titre' =>$request->titre,

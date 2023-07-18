@@ -6,6 +6,7 @@ use App\Enums\StageEtat;
 use App\Http\Controllers\Controller;
 use App\Models\Rapport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DeleteController extends Controller
 {
@@ -22,6 +23,12 @@ class DeleteController extends Controller
      }
     
      $rapport->delete() ;
+     unlink(public_path('assets/storage/'.$rapport->filePath));
+   //   dd(Storage::exists($rapport->filePath));
+   //   if(Storage::exists($rapport->filePath)){
+   //    Storage::delete($rapport->filePath);
+  
+   //    }
      return redirect('/rapports');
  
     }

@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                 
-                        <h6>Stages affectées aux enseignants</h6> 
+                        <h6>Stages affectées aux enseignants (etat = affecté a un enseignant / rapport vérifié et corrigé / validé / non validé)</h6> 
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -65,23 +65,29 @@
                                         <p class="text-sm font-weight-bold mb-0">{{$stage->etat}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">{{$stage->date_soutenance}}</p>
+                                        <p class="text-sm font-weight-bold mb-0" style="color: rgb(107, 184, 100)">{{$stage->date_soutenance}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <p class="text-sm font-weight-bold mb-0">{{$stage->societe_id}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm"> 
-                                        <a href='stages/{{$stage->id}}'>
-
-                                                {{-- @if  (!empty($stage->enseignants->pluck('id')->toArray())  ) --}}
-                                                    <button  class="btn btn-success btn-sm ms-auto">modifier enseignant</button>
-                                                {{-- @endif --}}
-
-
-                                        </a>
+                                        @if ($stage->etat =='affecté à un enseignant')
+                                            
                                        
-                                                {{-- <p class="text-sm font-weight-bold mb-0">{{$stage?->enseignants[0]->user->nom}} {{$stage?->enseignants[0]->user->prenom}}</p> --}}
-                                             
+                                            <a href='stages/affecter/{{$stage->id}}'>
+
+                                                    {{-- @if  (!empty($stage->enseignants->pluck('id')->toArray())  ) --}}
+                                                        <button  class="btn btn-success btn-sm ms-auto">modifier enseignant</button>
+                                                    {{-- @endif --}}
+
+
+                                            </a>
+
+                                        @elseif ($stage->etat =='rapport vérifié et corrigé' ||  $stage->etat =='validé' || $stage->etat =='non validé' )
+                                       
+                                                <p class="text-sm font-weight-bold mb-0">{{$stage->enseignants[0]->user->nom}} {{$stage?->enseignants[0]->user->prenom}}</p>
+                                         
+                                        @endif    
                                     </td>
 
                                 </tr>

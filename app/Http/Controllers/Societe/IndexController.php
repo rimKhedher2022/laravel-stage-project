@@ -13,6 +13,9 @@ class IndexController extends Controller
 {
     public function __invoke()  // une seul fonction
    {
+
+    $this->authorize('viewAny', Societe::class); //ok
+    
     $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
     $role = auth()->user()->role;
     $societes = [] ;

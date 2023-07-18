@@ -13,6 +13,8 @@ class IndexController extends Controller
 {
     public function __invoke()  // une seul fonction
    {
+    
+    $this->authorize('viewAny', Enseignant::class); 
     $enseignants = Enseignant::all();
    
     // $enseignants = User::where('role',RoleType::Enseignant)->get(); 

@@ -28,7 +28,7 @@ class StageStoreRequest extends FormRequest
             'date_fin'=>'required',
             'societe_id'=>'required',
             // 'etat'=>'required',
-            'date_soutenance'=>'required',
+           
         ];
     }
     public function messages()
@@ -40,7 +40,7 @@ class StageStoreRequest extends FormRequest
             'date_fin'=>'veuillez choisir la date fin de votre stage',
             'societe_id'=>'veuillez choisir la societe de votre stage',
             // 'etat'=>'required',
-            'date_soutenance'=>'veuillez choisir la date soutenance',
+           
         ];
     }
 }

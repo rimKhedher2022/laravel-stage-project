@@ -1,101 +1,55 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un stage'])
+  
+    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un stage'])
   
     <div id="alert">
         @include('components.alert')
     </div>
-    {{-- les infos du stage --}}
-
+ 
+   
   
+
     <div class="container-fluid py-4">
-        @if ($errors->any())
-        <div class="alert alert-secondary">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li style="color: rgba(247, 247, 247, 0.938)">{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-
-
-
-                      
-                    <form role="form" method="POST" action="{{ route('stage.store') }}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action={{ route('stages.affecter' , $stage->id) }} enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
+
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter un stage</p>
+                                    <p class="mb-0">Affecter un stage</p>
+                                    {{-- {{$stage}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
                                 </div>
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations de stage</p>
+                            <p class="text-uppercase text-sm">Les informations du stage à saisir l'enseignant</p>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">type</label>
-                                        <input class="form-control" type="text" name="type" >
-                                    </div>
-                                </div>
+                            
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">sujet</label>
-                                        <input class="form-control" type="text" name="sujet" >
+                                        <input class="form-control" type="text" name="sujet" disabled value="{{old('sujet', $stage->sujet)}}">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date debut</label>
-                                        <input class="form-control" type="date" name="date_debut" >
-                                    </div>
-                                </div>
+                                
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date fin</label>
-                                        <input class="form-control" type="date" name="date_fin" >
-                                    </div>
-                                </div>
-                               
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                     
-                                        <label for="societe_id">societe:</label>
-                                            <select name="societe_id" id="societe_id" class="form-control">
-                                                <option value="">---choix societe ---</option>
-                                                @foreach ($societes as $societe)
-                                                     <option  value="{{$societe->id}}">{{ $societe->nom }}</option>
-                                                     dd($societe->id)
-                                                @endforeach
+                                        <label for="enseignant_id">Enseignant:</label>
+                                            <select name="enseignant_id"  id="enseignant_id" class="form-control">
+                                                <option value="0">---choix enseignant ---</option>
+                                                        @foreach ($enseignants as $enseignant) 
+                                                             <option value="{{$enseignant->id}}" {{ old('enseignant_id',$enseignant->id ) == $enseignant_responsable?->id ? 'selected' : '' }}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
+                                                        @endforeach
                                             </select>
                                     </div>
                                 </div>
-                               
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">etat</label>
-                                        <input class="form-control" type="etat" name="etat">
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">nom binome</label>
-                                        <input class="form-control" type="etat" name="etat" >
-                                    </div>
-                                </div> --}}
-                               
-
-                                
-                               
-                               
                             </div>
                             {{-- <hr class="horizontal dark"> --}}
                             {{-- <p class="text-uppercase text-sm">Contact Information</p> --}}
@@ -139,10 +93,31 @@
                             </div> --}}
                         </div>
                     </form>
+                   
+                    {{-- le binome  --}}
+                  {{-- @foreach ( $etudiants_stage as  $etudiant_stage)
+                  
+                
+                        @if ($id_auth !== $etudiant_stage->id )
+                        l' id de ton binome est  :  {{$etudiant_stage ->id}}
+                        <br/>
+                        le nom de ton binome est  : {{$etudiant_stage ->user->nom}} 
+
+                        @endif
+                  
+                  @endforeach --}}
+
+
+
+          
+          
+                
                 </div>
             </div>
           
         </div>
         {{-- @include('layouts.footers.auth.footer') --}}
     </div>
+    
+   
 @endsection

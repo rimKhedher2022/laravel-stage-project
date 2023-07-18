@@ -26,7 +26,7 @@
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations du user à modifier</p>
+                            <p class="text-uppercase text-sm">Les informations du l'utilisateur à modifier</p>
                             <div class="row">
                             
 

@@ -23,6 +23,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
+                   
                     <form role="form" method="POST" action={{ route('rapports.update' , $rapport->id) }} enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
@@ -31,7 +32,7 @@
                                 <div class="d-flex align-items-center">
                                     <p class="mb-0">Modifier le dépot du rapport</p>
                                     {{-- {{$rapport}} --}}
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Modifier</button>
                                 </div>
                                 
                         </div>
@@ -41,7 +42,7 @@
                               
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">titre</label>
+                                        <label for="example-text-input" class="form-control-label">Titre</label>
                                         <input class="form-control" type="text" name="titre"  value="{{old('titre', $rapport->titre)}}">
                                     </div>
                                 </div>
@@ -49,18 +50,29 @@
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">filePath</label>
-                                        @if ($rapport->filePath)
-                                                <p style="size:1px">Current File Path: {{ $rapport->filePath }}</p>
-                                        @endif
+                                        <label for="example-text-input" class="form-control-label">Fichier (Pdf/ Word)</label>
+                                       
+                                           
                                         <input class="form-control" type="file" name="filePath">
+
+                                                @if ($rapport->filePath)
+                                                    <div class="form-group">
+                                                        <p> Télécharger Le fichier actuel:</p> 
+                                                            <a href="/download/{{$rapport?->filePath}}"  >
+                                                                <button type="button" class="btn" style="background-color: rgb(230, 228, 215)"><i class="fa fa-download"></i></button>
+                                                            </a>
+
+                                                            
+
+                                                    </div>     
+                                                @endif
                                         
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">sujet</label>
+                                        <label for="example-text-input" class="form-control-label">Sujet</label>
                                         <input class="form-control" type="text" disabled name="stage_id" value="{{$stage_a_deposer_rapport->sujet}}">
                                     </div>
                                 </div>

@@ -20,6 +20,7 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MessageDeRappel\DeleteController as MessageDeRappelDeleteController;
 use App\Http\Controllers\MessageDeRappel\EditController as MessageDeRappelEditController;
 use App\Http\Controllers\MessageDeRappel\IndexController as MessageDeRappelIndexController;
+use App\Http\Controllers\MessageDeRappel\IndexMessagesEtudiantsController;
 use App\Http\Controllers\MessageDeRappel\StoreController as MessageDeRappelStoreController;
 use App\Http\Controllers\MessageDeRappel\UpdateController as MessageDeRappelUpdateController;
 use App\Http\Controllers\Rapport\DeleteController as RapportDeleteController;
@@ -90,11 +91,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 	Route::get('/add-stage',[StageStoreController::class,'show'])->name('add-stage');
-	Route::get('/stages/{id}',EditController::class)->name('edit-stage');
+	Route::get('/stages/{id}',[EditController::class, 'edit'])->name('edit-stage');
+	Route::get('/stages/affecter/{id}',[EditController::class, 'affecter'])->name('affecter-stage');
+	Route::get('/stages/soutenance/{id}',[EditController::class, 'choisirSoutenance'])->name('soutenance-stage'); //?????
 	// Route::get('/stages/affecter/{id}',EditController::class)->name('edit-stage'); // admin
 	Route::post('/stages/{id}',[UpdateController::class, 'update'])->name('stages.update');
 	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
+	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('stages.soutenance'); //?????
 	Route::get('/stages',StageIndexController::class)->name('stages');
+	Route::get('/stages-a-valider',StageAvaliderController::class)->name('stages-valider');
 	Route::get('/stages-affectes',StageAffectationController::class)->name('stages-affectes');
 	Route::get('/stages-sans-depots',StageSansDepotController::class)->name('stages-sans-depots');
 	Route::delete('/stages/{id}',StageDeleteController::class)->name('stages.delete');
@@ -122,6 +127,11 @@ Route::middleware('auth')->group(function () {
 	Route::get('/rapports/{id}',RapportEditController::class)->name('edit-rapport');
 	Route::post('/rapports/{id}',RapportUpdateController::class)->name('rapports.update');
 	Route::delete('/rapports/{id}',RapportDeleteController::class)->name('rapports.delete');
+    Route::get('/download/{file}',[RapportStoreController::class,'fordownload'])->name('down');
+	Route::post('/valider-rapport/{rapport_id}',[RapportStoreController::class,'valider'])->name('rapport.valider');  //  ???????
+	Route::post('/annuler-valider-rapport/{rapport_id}',[RapportStoreController::class,'annulerValidation'])->name('rapport.annulervalidation');  //  ???????
+	Route::post('/valider-stage/{id}',[UpdateController::class,'valider'])->name('stages.valider');  //  ???????
+	Route::post('/annuler-validation-stage/{id}',[UpdateController::class,'annulerValidation'])->name('stages.annulerValidation');  //  ???????
 
 	Route::get('/user-management',UtilisateurIndexController::class)->name('user-management'); // users
 	Route::get('/users/{id}',UtilisateurEditController::class)->name('edit-user');
@@ -132,10 +142,12 @@ Route::middleware('auth')->group(function () {
 
 	// Route::get('/add-message/{id}',[MessageDeRappelStoreController::class,'show'])->name('add-message');
 	Route::post('/store-message/{id}',[MessageDeRappelStoreController::class,'store'])->name('message.store');
+	
 	Route::get('/messages/{id}',MessageDeRappelEditController::class)->name('edit-message');
 	Route::post('/messages/{id}',MessageDeRappelUpdateController::class)->name('messages.update');
 	Route::delete('/messages/{id}',MessageDeRappelDeleteController::class)->name('messages.delete');
-	Route::get('/messages',MessageDeRappelIndexController::class)->name('messages');
+	Route::get('/messages',[MessageDeRappelIndexController::class,'messagesAdministrateur'])->name('messages');
+	Route::get('/messages-etudiants',[IndexMessagesEtudiantsController::class,'messagesEtudiant'])->name('messages-etudiants');
 
 	// Route::get('/valider-stages',StageIndexController::class)->name('valider-stages');
 	

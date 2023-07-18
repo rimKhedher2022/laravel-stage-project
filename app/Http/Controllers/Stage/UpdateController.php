@@ -110,4 +110,34 @@ public function affecter (Request $request  , $id) {
 }
 
 
+public function choisirSoutenance(Request $request  , $id){
+    $stage = Stage::find($id);
+
+    $stage->update([
+        'date_soutenance'=> $request->date_soutenance
+  ]);
+
+    return redirect('/stages')->with('message', 'date soutenance choisie avec succés. Veuillez valider le stage aprés la soutenanace du stagiaire ');
+}
+
+public function valider(Request $request  , $id){
+    $stage = Stage::find($id);
+
+    $stage->update([
+        'etat'=> StageEtat::VALIDE
+  ]);
+
+   return back()->with('message', 'stage validé avec succés ');
+}
+
+    public function annulerValidation(Request $request  , $id){
+        $stage = Stage::find($id);
+        $stage->update([
+            'etat'=> StageEtat::CORRIGE
+        ]);
+
+        return back()->with('message', 'annulation de validation');
+    }
+
+
 }

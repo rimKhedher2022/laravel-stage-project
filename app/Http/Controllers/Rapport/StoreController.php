@@ -11,8 +11,14 @@ use App\Models\Stage;
 use App\Models\User;
 use Carbon\Carbon;
 use Gate;
+use GuzzleHttp\Psr7\Response as Psr7Response;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate as FacadesGate;
+use Illuminate\Support\Facades\Response as FacadesResponse;
+use Illuminate\Support\Facades\Storage;
+use Spatie\FlareClient\Http\Response as HttpResponse;
 
 class StoreController extends Controller
 {
@@ -20,13 +26,13 @@ class StoreController extends Controller
 
     public function show($id)
     {
-
+        $this->authorize('create',Rapport::class);
     
     $stage_a_deposer_rapport = Stage::find($id) ; 
     
     $stages_user  = auth()->user()->etudiant->stages ;
   
-    $this->authorize('create',Rapport::class);
+    
        
         if (FacadesGate::denies('add-rapport',$stage_a_deposer_rapport)) {
             abort(403);
@@ -54,7 +60,7 @@ class StoreController extends Controller
        $filename='' ; 
        if ($request->hasFile('filePath'))
        {
-         $filename = $request->getSchemeAndHttpHost() . '/assets/storage/' . time() . '.' . $request->filePath->extension() ;
+         $filename = time() . '.' . $request->filePath->extension() ;
          $request->filePath->move(public_path('/assets/storage/'),$filename) ;
        }
 
@@ -78,4 +84,43 @@ class StoreController extends Controller
        }
 
     }
+
+
+    public function fordownload($file_path){
+
+        
+        $file_name = public_path('/assets/storage/'.$file_path);
+        
+        return response()->download($file_name);
+    }
+
+
+        public function valider ($rapport_id)
+    {
+        
+        $rapport =Rapport::find($rapport_id) ; 
+       
+        $stage = $rapport->stage;
+      
+        $stage->update([
+         'etat'=> StageEtat::CORRIGE
+        ]);
+        return back()->with('message', 'rapport validé (vérifié et corrigé) avec succés, le stagiaire est notifié que son rapport est validé ,Veuillez choisir la date de soutenance.');
+
+    }
+        public function annulervalidation ($rapport_id)
+    {
+        
+        $rapport =Rapport::find($rapport_id) ; 
+       
+        $stage = $rapport->stage;
+      
+        $stage->update([
+         'etat'=> StageEtat::AFFECTE,
+         'date_soutenance' => null
+        ]);
+        return back()->with('message', 'validationn du rapport annulée avec succés ,le stagiaire est notifié que son rapport est non-validé , Veuillez corriger le rapport de votre stagiaire et valider le rapport ensuite');
+
+    }
+
 }

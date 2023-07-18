@@ -33,9 +33,6 @@ class RapportPolicy
      */
     public function create(User $user ): bool
     {
-
-      
-        
         return  (auth()->user()->role->value === 'etudiant' )   ;
     }
 

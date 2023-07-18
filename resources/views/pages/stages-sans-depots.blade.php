@@ -6,9 +6,12 @@
         <div class="col-12">
           
             <div class="card mb-4">
+                   
                 <div class="card-header pb-0">
-                
-                        <h6>Stages sans dépots du rapport</h6> 
+                    @if (session('message'))
+                        <div class="alert alert-success" style="color: rgb(2, 0, 15)">{{ session('message') }}</div>
+                    @endif
+                        <h6>Stages sans dépots du rapport (etat = crée)</h6> 
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">

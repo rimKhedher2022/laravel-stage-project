@@ -14,7 +14,7 @@ class SocietePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+       return (auth()->user()->role->value === 'administrateur') or (auth()->user()->role->value === 'etudiant');
     }
 
     /**
@@ -22,11 +22,19 @@ class SocietePolicy
      */
     public function view(User $user, Societe $societe): bool
     {
+        if(auth()->user()->role->value === 'etudiant')
+        {
         $etudiant = Etudiant::where('user_id',$user->id)->first(); // 4
-        $stage_societe_ids =  $etudiant->stages->pluck('societe_id')->toArray() ;  // array : user_id
-
-       return in_array($societe->id , $stage_societe_ids) or (auth()->user()->role->value === 'administrateur') ;
-   
+        $stage_societe_ids =  $etudiant?->stages->pluck('societe_id')->toArray() ;  
+        return in_array($societe->id , $stage_societe_ids);
+        // array : user_id
+        }
+        elseif(auth()->user()->role->value === 'administrateur')
+        {
+            return true ;
+        }
+        return false;
+      
     }
 
     /**

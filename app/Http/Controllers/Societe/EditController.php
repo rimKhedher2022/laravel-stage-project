@@ -12,7 +12,7 @@ class EditController extends Controller
     public function __invoke($id)
     {
        $societe = Societe::find($id);
-       $this->authorize('view', $societe );
+       $this->authorize('view', $societe );  // que l'admin et etudiant peuvent consulter les sociétés
         return  view('pages.edit-societe',['societe'=> $societe]);
     }
 }

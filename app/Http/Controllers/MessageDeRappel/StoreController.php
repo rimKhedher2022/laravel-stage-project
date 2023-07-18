@@ -35,12 +35,12 @@ class StoreController extends Controller
                 // 'description'=> $request->description ,
                 // 'etudiant_id'=> $etudiant_a_envoyer_message->id,
                 'titre'=> 'rappel de dépot' ,
-                'description'=> 'veuillez déposer votre rapport avant la fermeture de session' ,
+                'description'=> 'veuillez déposer votre rapport avant la fermeture de session' , //la page 50 
                 'stage_id'=> $stage->id,
                 'user_id'=> auth()->user()->id ,
             ]);
 
-        return back()->with('succes', 'meessage envoyé ');
+        return back()->with('message', 'meessage envoyé avec succés ');
 
 
 

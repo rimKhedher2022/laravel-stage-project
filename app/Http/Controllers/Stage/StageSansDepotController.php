@@ -13,6 +13,8 @@ class StageSansDepotController extends Controller
 {
     public function __invoke()  // une seul fonction
     {
+
+        $this->authorize('stagesConsultesParAdministrateur', Stage::class);
         $stages= Stage::where('etat',StageEtat::CREE)->get();
         $session_actuel = SessionDeDepot::latest()->first();
         $aujourdui = Carbon::now('GMT-7');

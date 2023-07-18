@@ -7,6 +7,7 @@ use App\Models\Etudiant;
 use App\Models\Rapport;
 use App\Models\Stage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EditController extends Controller
 {
@@ -16,7 +17,6 @@ class EditController extends Controller
         // dd($rapport->filePath) ;
         $this->authorize('view', $rapport);
         $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
-      
         $stage_a_deposer_rapport = $rapport->stage;
         return  view('pages.edit-rapport',['rapport' => $rapport , 'stage_a_deposer_rapport' => $stage_a_deposer_rapport]);
     }

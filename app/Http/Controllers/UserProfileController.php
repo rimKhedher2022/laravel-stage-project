@@ -9,7 +9,8 @@ class UserProfileController extends Controller
 {
     public function show()
     {
-        return view('pages.user-profile');
+        $user = auth()->user();
+        return view('pages.user-profile',['user'=>$user]);
     }
 
     public function update(Request $request)
@@ -18,7 +19,7 @@ class UserProfileController extends Controller
             'nom' => ['required','max:255', 'min:2'],
             'prenom' => ['max:100'],
             'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
-        
+           
       
         ]);
 
@@ -28,6 +29,29 @@ class UserProfileController extends Controller
             'email' => $request->get('email') ,
      
         ]);
-        return back()->with('succes', 'Profile succesfully updated');
+
+        if (auth()->user()->role->value === 'etudiant')
+        {
+            auth()->user()->etudiant->update([
+                'cin' => $request->cin,
+                'niveau' =>$request->niveau,
+                'specialite' =>$request->specialite,
+                'numero_inscription' =>$request->numero_inscription,
+    
+            ]);
+    
+        }
+        if (auth()->user()->role->value === 'enseignant')
+        {
+            auth()->user()->enseignant->update([
+                'matricule' => $request->matricule,
+              
+    
+            ]);
+    
+        }
+    
+      
+        return back()->with('succes', 'Profile mis à jour avec succés');
     }
 }

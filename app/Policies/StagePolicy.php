@@ -14,7 +14,7 @@ class StagePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return (auth()->user()->role->value === 'etudiant') ;
     }
 
     /**
@@ -25,7 +25,7 @@ class StagePolicy
         $stage_etudiant_ids = $stage->etudiants->pluck('user_id')->toArray() ;  // array : user_id
         // dd(in_array($user->id,$stage_etudiant_ids));
 
-        return in_array($user->id,$stage_etudiant_ids) or (auth()->user()->role->value === 'administrateur') ;
+        return in_array($user->id,$stage_etudiant_ids)  ;
         
     }
 
@@ -47,7 +47,7 @@ class StagePolicy
        $stage_etudiant_ids = $stage->etudiants->pluck('user_id')->toArray() ;  // array : user_id
         // dd(in_array($user->id,$stage_etudiant_ids));
 
-        return in_array($user->id,$stage_etudiant_ids )  ;
+        return in_array($user->id,$stage_etudiant_ids)  ;
       
     }
 
@@ -55,6 +55,32 @@ class StagePolicy
     {
        
         return  (auth()->user()->role->value === 'administrateur')  ;
+      
+    }
+
+    public function stagesConsultesParAdministrateur (User $user): bool
+    {
+       
+        return  (auth()->user()->role->value === 'administrateur')  ;
+      
+    }
+
+    public function stageAvalider (User $user): bool
+    {
+       
+        return  (auth()->user()->role->value === 'enseignant')  ;
+      
+    }
+
+
+    public function choisirDateSoutenance(User $user, Stage $stage): bool
+    {
+        // dd($stage->etudiants());
+        // return $user->id === $stage->user_id;
+       $stage_enseignant_ids = $stage->enseignants->pluck('user_id')->toArray() ;  // array : user_id
+        // dd(in_array($user->id,$stage_etudiant_ids));
+
+        return in_array($user->id,$stage_enseignant_ids)  ;
       
     }
 

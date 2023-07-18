@@ -100,16 +100,37 @@
                                                 @endif
                                                    
                                                 {{-- le rapport existe déja --}}
+                                                
                                                 @if (!empty($stage->rapport))  
+                                                    @if ($stage->etat == 'rapport vérifié et corrigé'  || $stage->etat == 'validé')
+                                                      
+
+                                                            <a href="/download/{{$stage->rapport?->filePath}}"  >
+                                                                <button  class="btn" style="background-color: rgb(230, 228, 215)"><i class="fa fa-download"></i></button>
+                                                                    {{-- <button type="submit" class="btn btn-primary">telecharger</button> --}}
+                                                        
+                                                            </a>
+                                                    @else
                                                         <a href='rapports/{{$stage->rapport?->id}}'>
                                                             <button  class="btn btn-secondary btn-sm ms-auto">Modifier rapport</button>
                                                         </a>
-                                                    
-                                                        <form method="post"  action="{{ route('rapports.delete', $stage->rapport?->id) }}" >
+                                           
+                                                       <form method="post"  action="{{ route('rapports.delete', $stage->rapport?->id) }}" >
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
-                                                        </form>
+                                                        </form> 
+
+                                                       
+
+                                                        <a href="/download/{{$stage->rapport?->filePath}}"  >
+                                                            <button  class="btn" style="background-color: rgb(230, 228, 215)"><i class="fa fa-download"></i></button>
+                                                                {{-- <button type="submit" class="btn btn-primary">telecharger</button> --}}
+                                                    
+                                                        </a>
+
+                                                    @endif        
+                                                     
                                                 @endif
                                              @endif
                                         </div>
@@ -155,8 +176,17 @@
                                                     
                                                             @endif
 
-
                                                 @endif
+                                               
+                                                        @if ($stage->etat == 'rapport vérifié et corrigé')
+                                                            <p> rapport vérifié et corrigé </p>
+
+                                                        @endif
+                                                        @if ($stage->etat == 'validé')
+                                                            <p> stage validé </p>
+
+                                                        @endif
+                                                      
                                            
                                     </td>
                                 </tr>

@@ -29,8 +29,6 @@ class StageSeeder extends Seeder
             'date_debut'=>Carbon::now(),
             'date_fin'=>Carbon::now()->addMonth(),
             'societe_id'=>$societe->id,
-            'date_soutenance'=>Carbon::now()->addMonth(),
-
         ]);
     }
 }

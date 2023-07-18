@@ -36,6 +36,8 @@ class IndexController extends Controller
           $enseignant = Enseignant::where('user_id',auth()->id())->first(); // 4
 
            $stages = $enseignant->stages;
+            
+       
               break;
       }
      return  view('pages.stages',['stages' => $stages , 'role' => $role ]);

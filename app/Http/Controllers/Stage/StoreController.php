@@ -15,13 +15,14 @@ class StoreController extends Controller
 
     public function show()
     {
+        $this->authorize('viewAny',Stage::class);
         $societes = Societe::all();
         return view('pages.add-stage',['societes' => $societes]);
     }
 
     public function store(StageStoreRequest $request) {
 
-       
+        $this->authorize('viewAny',Stage::class);
         $stage = Stage::create([
             'type'=>$request->type,
             'sujet'=>$request->sujet,
@@ -29,7 +30,7 @@ class StoreController extends Controller
             'date_fin'=>$request->date_fin,
             'societe_id'=>$request->societe_id,
             // 'etat'=>$request->etat,
-            'date_soutenance'=>$request->date_soutenance,
+          
             
         ]);
         $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4

@@ -11,20 +11,19 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function __invoke()  // une seul fonction
+    public function messagesAdministrateur()  // une seul fonction
     {
-     
-        $this->authorize('viewAny', MessageDeRappel::class); //ok
-        $user = User::where('id',auth()->id()) -> first() ; 
+        $this->authorize('adminMessages', MessageDeRappel::class); // vu que par l'admin
         
+        $user = User::where('id',auth()->id()) -> first() ; 
         $messages = $user->messages; // messages envoyés  par l' admin connecté ---> pour les gérer 
-        $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
-        $stages_etudiant = $etudiant->stages;
-
-        $aujourdhui = 'ok';
-       
-        // $messages_all = MessageDeRappel::all() ; 
-        return  view('pages.messages',['messages' => $messages ,'stages_etudiant' =>  $etudiant->stages , 'aujourdhui'=>$aujourdhui ]);
+        // $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
+        // dd($etudiant);
+        // $stages_etudiant = $etudiant->stages;
+        return  view('pages.messages',['messages' => $messages]);
  
     }
+
+
+    
 }

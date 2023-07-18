@@ -16,6 +16,18 @@ class MessageDeRappelPolicy
         return  (auth()->user()->role->value === 'administrateur' || auth()->user()->role->value === 'etudiant' )  ;
     }
 
+    
+    public function adminMessages(User $user): bool
+    {
+        return  auth()->user()->role->value === 'administrateur'   ;
+    }
+
+
+    public function etudiantMessages(User $user): bool
+    {
+        return  auth()->user()->role->value === 'etudiant'   ;
+    }
+
     /**
      * Determine whether the user can view the model.
      */

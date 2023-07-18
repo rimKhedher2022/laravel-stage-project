@@ -20,10 +20,8 @@ class IndexController extends Controller
      // que les rapports de l'etudiant connecté
      $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
      $session_actuel = SessionDeDepot::latest()->first();
-     $stages = $etudiant->stages->filter(function  ($value, $key){
-        return $value->etat !== 'validé';
-        
-    }); 
+     $stages = $etudiant->stages;
+    
 
     // dd ($stages) ;
     //  $stages = Stage::whereNot('etat',StageEtat::VALIDE)->where('')->get() ;
