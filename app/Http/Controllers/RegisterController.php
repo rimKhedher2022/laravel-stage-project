@@ -9,6 +9,7 @@ use App\Http\Requests\UserStoreRequest;
 use App\Models\Enseignant;
 use App\Models\Etudiant;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -17,19 +18,37 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function store()
+    public function store(Request $request)
     {
        
-        $attributes = request()->validate([
+        
+        $attributes = $request->validate([
             'nom' => 'required|max:255|min:2',
             'role' => 'required', // name
+            'image' => 'required|image', // name
             'prenom' => 'required|max:255|min:2',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:5|max:255',
             // 'terms' => 'required'
         ]);
-            // dd($attributes);
-        $user = User::create($attributes); // ??
+
+        $imageName ='' ; 
+        if ($request->hasFile('image'))
+        {
+         $imageName = time().'_'.$request->image->getClientOriginalName();
+         $request->image->move(public_path('/img'),$imageName);
+        }
+
+        // $user = User::create($attributes); // ??
+        $user=User::create([
+            'nom' => $request->nom,
+            'role' => $request->role, // name
+            'image' => $imageName, // name
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'password' => $request->password,
+
+        ]);
       
      if($attributes["role"] == "etudiant")
      {

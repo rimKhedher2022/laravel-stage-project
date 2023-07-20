@@ -133,9 +133,9 @@
                                                             <button type="submit" class="btn btn-success btn-sm ms-auto ">valider rapport</button>
                                                         </form>
 
-                                                        <a href="/download/{{$stage->rapport?->filePath}}"  >
+                                                        <a href="/add-message/{{$stage->id}}"  >
                                                             <button  class="btn" style="background-color: rgb(230, 228, 215)">demander correction</button>
-                                                               
+   
                                                         </a>
                                               @endif
 
@@ -152,14 +152,14 @@
 
                                                     <a href='stages/soutenance/{{$stage->id}}'>
                                                 
-                                                            <button  class="btn btn-secondary btn-sm ms-auto">saisir date soutenance</button>
+                                                            <button  class="btn btn-secondary btn-sm ms-auto text-wrap" style="width: 10rem;">saisir date soutenance</button>
                                                     </a>
 
 
                                                     <form method="post"  action="{{ route('rapport.annulervalidation', $stage->rapport->id )}}" >
                                                         @csrf
                                                         @method('POST')
-                                                        <button type="submit" class="btn btn-success btn-sm  text-wrap" style="background-color: rgb(253, 255, 135) ; color:rgb(4, 1, 56) ; width: 11rem;">annuler validation rapport</button>
+                                                        <button type="submit" class="btn btn-success btn-sm  text-wrap" style="background-color: rgb(230, 228, 215) ; color:rgb(4, 1, 56) ; width: 10rem;">annuler validation rapport</button>
                                                     </form> 
 
                                                     @if ($stage->date_soutenance)
@@ -168,7 +168,7 @@
                                                         <form method="post"  action="{{ route('stages.valider', $stage->id )}}"  >
                                                             @csrf
                                                             @method('POST')
-                                                            <button type="submit" class="btn btn-sm ms-auto "  style="background-color: rgb(211, 219, 253)">valider stage</button>
+                                                            <button type="submit" class="btn btn-sm ms-auto "  style="background-color: rgb(157, 174, 250);color:rgb(2, 2, 36);">valider stage</button>
                                                         </form>
                                                     @endif
 
@@ -178,8 +178,13 @@
                                                         <form method="post"  action="{{ route('stages.annulerValidation', $stage->id )}}"  >
                                                             @csrf
                                                             @method('POST')
-                                                            <button type="submit" class="btn btn-sm ms-auto "  style="background-color: rgb(252, 87, 101) ; color:antiquewhite">annuler validation</button>
+                                                            <button type="submit" class="btn btn-sm ms-auto "  style="background-color: rgb(137, 252, 152) ; color:rgb(2, 2, 36) ; width: 10rem;">annuler validation</button>
                                                         </form>
+                                                        {{-- <form method="post"  action="{{ route('stages.annulerValidation', $stage->id )}}"  >
+                                                            @csrf
+                                                            @method('POST')
+                                                            <button type="submit" class="btn btn-sm ms-auto "  style="background-color: rgb(151, 240, 203) ; color:rgb(2, 2, 36) ; width: 10rem;">annuler validation</button>
+                                                        </form> --}}
                                                 @endif
                                                
                                                

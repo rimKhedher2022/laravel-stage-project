@@ -38,6 +38,7 @@ use App\Http\Controllers\Societe\EditController as SocieteEditController;
 use App\Http\Controllers\Societe\IndexController as SocieteIndexController;
 use App\Http\Controllers\Societe\StoreController as SocieteStoreController;
 use App\Http\Controllers\Societe\UpdateController as SocieteUpdateController;
+use App\Http\Controllers\Stage\DatesSoutenancesController;
 use App\Http\Controllers\Stage\DeleteController as StageDeleteController;
 use App\Http\Controllers\Stage\EditController;
 use App\Http\Controllers\Stage\IndexController as StageIndexController;
@@ -99,6 +100,7 @@ Route::middleware('auth')->group(function () {
 	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
 	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('stages.soutenance'); //?????
 	Route::get('/stages',StageIndexController::class)->name('stages');
+	Route::get('/soutenances',DatesSoutenancesController::class)->name('soutenances');
 	Route::get('/stages-a-valider',StageAvaliderController::class)->name('stages-valider');
 	Route::get('/stages-affectes',StageAffectationController::class)->name('stages-affectes');
 	Route::get('/stages-sans-depots',StageSansDepotController::class)->name('stages-sans-depots');
@@ -142,9 +144,13 @@ Route::middleware('auth')->group(function () {
 
 	// Route::get('/add-message/{id}',[MessageDeRappelStoreController::class,'show'])->name('add-message');
 	Route::post('/store-message/{id}',[MessageDeRappelStoreController::class,'store'])->name('message.store');
+	Route::post('/send-message/{id}',[MessageDeRappelStoreController::class,'send'])->name('message.send'); // enseignant
+	Route::get('/add-message/{id}',[MessageDeRappelStoreController::class,'show'])->name('add-message');
+	// Route::post('/add-message/{id}',[MessageDeRappelStoreController::class,'envoyer'])->name('message.envoyer');
 	
 	Route::get('/messages/{id}',MessageDeRappelEditController::class)->name('edit-message');
 	Route::post('/messages/{id}',MessageDeRappelUpdateController::class)->name('messages.update');
+	
 	Route::delete('/messages/{id}',MessageDeRappelDeleteController::class)->name('messages.delete');
 	Route::get('/messages',[MessageDeRappelIndexController::class,'messagesAdministrateur'])->name('messages');
 	Route::get('/messages-etudiants',[IndexMessagesEtudiantsController::class,'messagesEtudiant'])->name('messages-etudiants');
@@ -166,7 +172,7 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
-Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
+Route::get('/', function () {return redirect('/profile');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');

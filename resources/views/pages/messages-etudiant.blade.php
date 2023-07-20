@@ -13,7 +13,7 @@
                         
                         {{-- @elseif (auth()->user()->role->value === 'etudiant') --}}
 
-                                <h6>Messages de rappels reçus</h6>
+                                <h6>Messages reçus</h6>
 
                         {{-- @endif --}}
                   

@@ -20,10 +20,14 @@ class StageSansDepotController extends Controller
         $aujourdui = Carbon::now('GMT-7');
 
         // pour calculer le nb des message pour un stage
-
+       
       foreach($stages as $stage ){
-        $stage->setAttribute('messages',count($stage->messages));
+        
+        // $messages = $stage->messages->where('user_id', auth()->user()->id);
+        $stage->setAttribute('messages',count($stage->messages->where('user_id', auth()->user()->id)));
       }
+
+      
         //  dd($stages) ;   // affichage // gate
         return  view('pages.stages-sans-depots',['stages' => $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
     }

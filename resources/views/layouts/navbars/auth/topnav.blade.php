@@ -25,7 +25,7 @@
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="nav-link text-white font-weight-bold px-0">
                             <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Log out</span>
+                            <span class="d-sm-inline d-none">Déconnexion</span>
                         </a>
                     </form>
                 </li>
@@ -39,9 +39,15 @@
                     </a>
                 </li>
                 <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-white p-0">
-                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                    </a>
+                    {{-- <div class="sidenav-header" style="margin:2px"> --}}
+                        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                            aria-hidden="true" id="iconSidenav"></i>
+                        <a  href="{{ route('profile') }}"
+                            target="_blank">
+                            <img  src="{{asset("/img"."/".Auth::user()->image)}}" style="width:40px ; height:40px;  border-radius: 50%;" >
+                          
+                        </a>
+                    {{-- </div> --}}
                 </li>
                 <li class="nav-item dropdown pe-2 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"

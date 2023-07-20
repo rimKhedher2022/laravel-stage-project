@@ -82,7 +82,7 @@ class User extends Authenticatable
      // code ajouté - 17/06/2023
      public function messages(): HasMany
      {
-         return $this->hasMany(MessageDeRappel::class);
+         return $this->hasMany(MessageDeRappel::class)->orderBy('created_at', 'desc');
      }
 
      public function messagesCount()

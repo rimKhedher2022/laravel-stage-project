@@ -59,20 +59,20 @@
                                       
                                     </td>
                                     <td >
-                                        <div class="d-flex px-3 py-1 align-items-center">
+                                       
                                             
                                             
                                                 <a href='messages/{{$message->id}}'>
-                                                    <button  class="btn btn-secondary btn-sm ms-auto">Modifier message</button>
+                                                    <button  class="btn btn-secondary btn-sm ms-auto text-wrap" style="width: 9rem;">Modifier message</button>
                                                 </a>
-                                              
+                                             
                                                 <form method="post"  action="{{ route('messages.delete', $message->id) }}" >
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
                                                 </form>
                                           
-                                        </div>
+                                      
                                     </td>
 
                                   

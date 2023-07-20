@@ -4,7 +4,7 @@
     {{-- @include('layouts.navbars.guest.navbar') --}}
     <main class="main-content  mt-0">
         <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
-            style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg'); background-position: top;">
+            style="background-image: url('{{ asset('./img/good.jpg') }}'); background-position: center;">
             <span class="mask bg-gradient-dark opacity-6"></span>
             <div class="container">
                 <div class="row justify-content-center">
@@ -84,7 +84,7 @@
 
                        
                         <div class="card-body">
-                            <form method="POST" action="{{ route('register.perform') }}">
+                            <form method="POST" action="{{ route('register.perform') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="flex flex-col mb-3">
@@ -120,10 +120,14 @@
                                     <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password">
                                     @error('password') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
+                                <div class="flex flex-col mb-3">
+                                    <input type="file" name="image" class="form-control" placeholder="image" aria-label="Image">
+                                    @error('image') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                </div>
                             
                                
                                 <div class="text-center">
-                                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+                                    <button type="submit" class="btn btn-primary  my-4 mb-2">Sign up</button>
                                 </div>
                                 <p class="text-sm mt-3 mb-0">Already have an account? <a href="{{ route('login') }}"
                                         class="text-dark font-weight-bolder">Sign in</a></p>

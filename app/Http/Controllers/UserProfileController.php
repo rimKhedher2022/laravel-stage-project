@@ -10,7 +10,8 @@ class UserProfileController extends Controller
     public function show()
     {
         $user = auth()->user();
-        return view('pages.user-profile',['user'=>$user]);
+        $image = $user->image;
+        return view('pages.user-profile',['user'=>$user,'image'=>$image]);
     }
 
     public function update(Request $request)
@@ -19,14 +20,30 @@ class UserProfileController extends Controller
             'nom' => ['required','max:255', 'min:2'],
             'prenom' => ['max:100'],
             'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
+            'image' => 'required|image', // name
            
       
         ]);
+
+
+        $imageName ='' ; 
+        if ($request->hasFile('image'))
+        {
+         $imageName = time().'_'.$request->image->getClientOriginalName();
+         $request->image->move(public_path('/img'),$imageName);
+        }
+
+        if(auth()->user()->image)
+        {
+            unlink(public_path('img/'.auth()->user()->image));
+        }
+       
 
         auth()->user()->update([
             'nom' => $request->get('nom'),
             'prenom' => $request->get('prenom'),
             'email' => $request->get('email') ,
+            'image' => $imageName, // name
      
         ]);
 

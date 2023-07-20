@@ -19,7 +19,7 @@ class MessageDeRappelPolicy
     
     public function adminMessages(User $user): bool
     {
-        return  auth()->user()->role->value === 'administrateur'   ;
+        return  (auth()->user()->role->value === 'administrateur' || auth()->user()->role->value === 'enseignant')   ;
     }
 
 
@@ -33,7 +33,7 @@ class MessageDeRappelPolicy
      */
     public function view(User $user, MessageDeRappel $messageDeRappel): bool
     {
-        return  (auth()->user()->role->value === 'administrateur')  ;
+        return  (auth()->user()->role->value === 'administrateur' || auth()->user()->role->value === 'enseignant' )   ;
     }
 
     /**
@@ -49,7 +49,7 @@ class MessageDeRappelPolicy
      */
     public function update(User $user, MessageDeRappel $messageDeRappel): bool
     {
-        return  (auth()->user()->role->value === 'administrateur')  ;
+        return  (auth()->user()->role->value === 'administrateur' || auth()->user()->role->value === 'enseignant')  ;
     }
 
     /**
@@ -57,7 +57,7 @@ class MessageDeRappelPolicy
      */
     public function delete(User $user, MessageDeRappel $messageDeRappel): bool
     {
-        return  (auth()->user()->role->value === 'administrateur')  ;
+        return  (auth()->user()->role->value === 'administrateur' || auth()->user()->role->value === 'enseignant')  ;
     }
 
     /**

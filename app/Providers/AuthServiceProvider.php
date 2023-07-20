@@ -38,5 +38,9 @@ class AuthServiceProvider extends ServiceProvider
 
             return empty($stage->rapport) && in_array($etudiant->id,$stage_etudiants_id) ; // true
         });
+        
+        $gate->define('edit-message', function ($user, $message) {
+            return $message->user_id == auth()->user()->id ; // true
+        });
     }
 }

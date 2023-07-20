@@ -3,7 +3,7 @@
     <div class="sidenav-header" style="margin: 25px">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a  href="{{ route('home') }}"
+        <a  href="{{ route('profile') }}"
             target="_blank">
             <img  src="{{ asset('./img/logo.png') }}" style="width:60px " >
             <span class="ms-1 font-weight-bold">STAGE ++</span>
@@ -41,6 +41,34 @@
                         <span class="nav-link-text ms-1">Stages à valider</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'soutenances') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'soutenances']) }}">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Les soutenances</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'messages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'messages']) }}">
+                        <div class="fa fa-envolope icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            {{-- <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i> --}}
+                            <i class="fa fa-envelope" style="font-size: 15px;"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Messages{{auth()->user()->messagesCount()}} </span>
+                    </a>
+                </li>
+
+                {{-- <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'messages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'messages']) }}">
+                        <div class="fa fas fa-solid fa-envelope border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni  text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Messages{{auth()->user()->messagesCount()}} </span>
+                        
+                    </a>
+                </li> --}}
             @endif
 
             @if (auth()->user()->role->value === 'administrateur')
@@ -58,11 +86,7 @@
                     <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="text-dark text-sm opacity-10"></i>
                     </div>
-                 
                          <span class="nav-link-text ms-1">Stages à affecter</span>
-                 
-                   
-                 
                 </a>
             </li>
             @endif
@@ -117,7 +141,6 @@
                         <span class="nav-link-text ms-1 badge-dark">Messages {{auth()->user()->messagesCount()}} </span>
                         
                     </a>
-                   
                 </li>
 
                 <li class="nav-item">
