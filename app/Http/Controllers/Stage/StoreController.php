@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Stage;
 
+use App\Enums\RoleType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StageStoreRequest;
 use App\Models\Etudiant;
 use App\Models\EtudiantStage;
 use App\Models\Societe;
 use App\Models\Stage;
+use App\Models\User;
+use App\Notifications\NewStageCreeSansDepotNotification;
+use App\Notifications\StageCree;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+
 
 class StoreController extends Controller
 {
@@ -43,6 +49,14 @@ class StoreController extends Controller
         ]);
        
 
+
+
+        $admins = User::where('role',RoleType::Administrateur)->get() ; 
+        Notification::send($admins,new NewStageCreeSansDepotNotification($stage)) ; 
         return back()->with('succes', 'stage ajouté ');
     }
+
+
+   
+ 
 }

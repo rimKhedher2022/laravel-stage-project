@@ -12,6 +12,7 @@ class StoreController extends Controller
 
     public function show()
     {
+        $this->authorize('viewAny', Societe::class );
         $societes = Societe::all();
         return view('pages.add-societe',['societes' => $societes]);
     }

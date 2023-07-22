@@ -28,7 +28,7 @@ class StageUpdateRequest extends FormRequest
             'date_fin'=>'date',
             'societe_id'=>'string',
             // 'etat'=>'string',
-            'date_soutenance'=>'date',
+            // 'date_soutenance'=>'date',
             'etudiant_id'=>'string',
             'enseignant_id'=>'string',
             

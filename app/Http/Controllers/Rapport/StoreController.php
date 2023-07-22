@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Rapport;
 
+use App\Enums\RoleType;
 use App\Enums\StageEtat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RapportStoreRequest;
@@ -9,6 +10,8 @@ use App\Models\Etudiant;
 use App\Models\Rapport;
 use App\Models\Stage;
 use App\Models\User;
+use App\Notifications\NewStageAvecDepotNotification;
+use App\Notifications\RapportCorrigeeNotification;
 use Carbon\Carbon;
 use Gate;
 use GuzzleHttp\Psr7\Response as Psr7Response;
@@ -16,6 +19,7 @@ use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate as FacadesGate;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response as FacadesResponse;
 use Illuminate\Support\Facades\Storage;
 use Spatie\FlareClient\Http\Response as HttpResponse;
@@ -75,7 +79,10 @@ class StoreController extends Controller
        $stage->update([
         'etat'=> StageEtat::DEPOSE
        ]);
-
+        
+       $admins = User::where('role',RoleType::Administrateur)->get() ; 
+      
+       Notification::send($admins,new NewStageAvecDepotNotification($stage)) ; 
        return redirect()->route("rapports")->with('message', 'Rapport déposé avec succès ');
        }
 
@@ -105,6 +112,9 @@ class StoreController extends Controller
         $stage->update([
          'etat'=> StageEtat::CORRIGE
         ]);
+
+        $admins = User::where('role',RoleType::Administrateur)->get() ; 
+        Notification::send($admins,new RapportCorrigeeNotification($stage)) ; 
         return back()->with('message', 'rapport validé (vérifié et corrigé) avec succés, le stagiaire est notifié que son rapport est validé ,Veuillez choisir la date de soutenance.');
 
     }

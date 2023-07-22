@@ -82,9 +82,7 @@ use App\Http\Controllers\Utilisateur\UpdateController as UtilisateurUpdateContro
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -97,6 +95,9 @@ Route::middleware('auth')->group(function () {
 	Route::get('/stages/soutenance/{id}',[EditController::class, 'choisirSoutenance'])->name('soutenance-stage'); //?????
 	// Route::get('/stages/affecter/{id}',EditController::class)->name('edit-stage'); // admin
 	Route::post('/stages/{id}',[UpdateController::class, 'update'])->name('stages.update');
+
+	Route::post('stage-cree', [StageStoreController::class, 'sendStageCreeNotification'])->name('notify.stage.cree');
+   
 	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
 	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('stages.soutenance'); //?????
 	Route::get('/stages',StageIndexController::class)->name('stages');
@@ -173,6 +174,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 Route::get('/', function () {return redirect('/profile');})->middleware('auth');
+	Route::get('/notify', [HomeController::class, 'notify'])->name('notify');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
@@ -182,6 +184,7 @@ Route::get('/', function () {return redirect('/profile');})->middleware('auth');
 	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+	Route::post('/mark-as-read', [HomeController::class, 'markNotification'])->name('markNotification');
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');

@@ -41,10 +41,18 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">type</label>
-                                        <input class="form-control" type="text" name="type" >
+                                        
+                                        <label for="type">type:</label>
+                                            <select name="type" id="type" class="form-control">
+
+                                                <option value="ouvrier">ouvrier</option>
+                                                <option value="technicien">technicien</option>
+                                                {{-- <option value="pfe">pfe</option> --}}
+
+                                            </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">sujet</label>
@@ -79,12 +87,12 @@
                                     </div>
                                 </div>
                                
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">etat</label>
                                         <input class="form-control" type="etat" name="etat">
                                     </div>
-                                </div>
+                                </div> --}}
                                 {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">nom binome</label>
@@ -93,6 +101,7 @@
                                 </div> --}}
                                
 
+                                
                                 
                                
                                

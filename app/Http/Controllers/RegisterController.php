@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 // use App\Http\Requests\RegisterRequest;
 
+use App\Enums\RoleType;
 use App\Http\Requests\EtudiantStoreRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Models\Enseignant;
 use App\Models\Etudiant;
 use App\Models\User;
+use App\Events\Registered;
+use App\Notifications\NewUserNotification;
+use Illuminate\Auth\Events\Registered as EventsRegistered;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
+
+// use Illuminate\Support\Facades\Notification as FacadesNotification;
 
 class RegisterController extends Controller
 {
@@ -64,9 +72,16 @@ class RegisterController extends Controller
             'user_id'=> $user->id,
                 ]);
      }
-       
-
+    
      auth()->login($user);
-        return redirect('/profile');
-    }
+    //  event(new EventsRegistered($user) ) ;
+    $admins = User::where('role',RoleType::Administrateur)->get() ; 
+      
+    FacadesNotification::send($admins,new NewUserNotification($user)) ; 
+     return redirect('/profile');
+   
+ 
+ }
+       
+      
 }

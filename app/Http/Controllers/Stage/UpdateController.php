@@ -7,12 +7,15 @@ use App\Enums\StageEtat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StageStoreRequest;
 use App\Http\Requests\StageUpdateRequest;
+use App\Models\Enseignant;
 use App\Models\EnseignantStage;
 use App\Models\Etudiant;
 use App\Models\EtudiantStage;
 use App\Models\Stage;
 use App\Models\User;
+use App\Notifications\StageAffecteeNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class UpdateController extends Controller
 {
@@ -94,6 +97,27 @@ public function affecter (Request $request  , $id) {
               $stage->update([
                     'etat'=> StageEtat::AFFECTE
               ]);
+
+
+            //   $etudiant->stages->pluck('societe_id')->toArray() ;
+              $enseignant = Enseignant::where('id',$request->enseignant_id)->first() ; 
+              if ($enseignant)
+              {
+                $user_enseignant = User::where('id',$enseignant->user_id)->first()  ; // 4  // l'id_user du l'enseignant
+               
+
+              
+                Notification::send($user_enseignant,new StageAffecteeNotification($stage)) ; 
+                $les_etudiants = $stage->etudiants; 
+                foreach ( $les_etudiants as $etudiant)
+                {
+                    $user_etudiant = User::where('id',$etudiant->user_id)->first()  ;
+                    Notification::send($user_etudiant,new StageAffecteeNotification($stage)) ; 
+
+                }
+
+              }
+            
          }
          
          else  { /// sup tous les enseignant --> 0
