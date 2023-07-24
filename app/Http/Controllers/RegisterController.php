@@ -10,9 +10,9 @@ use App\Http\Requests\UserStoreRequest;
 use App\Models\Enseignant;
 use App\Models\Etudiant;
 use App\Models\User;
-use App\Events\Registered;
+
 use App\Notifications\NewUserNotification;
-use Illuminate\Auth\Events\Registered as EventsRegistered;
+use Illuminate\Auth\Events\Registered ;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
@@ -74,10 +74,8 @@ class RegisterController extends Controller
      }
     
      auth()->login($user);
-    //  event(new EventsRegistered($user) ) ;
-    $admins = User::where('role',RoleType::Administrateur)->get() ; 
-      
-    FacadesNotification::send($admins,new NewUserNotification($user)) ; 
+    //  event(new Registered($user = $this->create($request->all())) ) ;
+
      return redirect('/profile');
    
  

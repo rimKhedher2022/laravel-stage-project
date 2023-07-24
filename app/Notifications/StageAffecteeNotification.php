@@ -52,7 +52,7 @@ class StageAffecteeNotification extends Notification
            
             'sujet' => $this->stage->sujet,
             'type' => $this->stage->type,
-            'enseignantnom' => $this->stage->enseignants[0]->user->nom,
+            // 'enseignantnom' => $this->stage->enseignants[0]->user->nom,
         ];
     }
 }

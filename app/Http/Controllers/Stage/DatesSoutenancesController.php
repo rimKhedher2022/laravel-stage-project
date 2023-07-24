@@ -31,8 +31,10 @@ class DatesSoutenancesController extends Controller
 
     public function __invoke()
     {
+        $this->authorize('stageAvalider',Stage::class);
         $stages = array();
         $enseignant_stages = auth()->user()->enseignant->stages;
+
         foreach ($enseignant_stages as $stage)
         {
             

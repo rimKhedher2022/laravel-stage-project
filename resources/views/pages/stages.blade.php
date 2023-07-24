@@ -14,9 +14,7 @@
                     @if($role->value ==='etudiant')
                         <h6>Stages</h6>
                         <a href='add-stage'>
-                    
                             <button  class="btn btn-primary btn-sm ms-auto">Ajouter stage</button>
-                          
                         </a>
                     @elseif ($role->value ==='administrateur')
                         <h6>Stages à affecter aux enseignants ( etat = rapport déposé)</h6> 
@@ -38,7 +36,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">sujet </th>
                                    
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         etat</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -92,21 +90,21 @@
                                     <td class="align-middle text-center text-sm">
                                             {{-- <div class="d-flex px-3 py-1 justify-content-center align-items-center"> --}}
                                             @if($role->value ==='etudiant')
-                                                <a href='stages/{{$stage->id}}'>
-                                                    <button  class="btn btn-secondary btn-sm ms-auto">Modifier stage</button>
-                                                </a>
-                                                {{-- <p class="text-sm font-weight-bold mb-0">Edit</p> --}}
-                                            
-                                                {{-- <p class="text-sm font-weight-bold mb-0 ps-2">Delete</p> --}}
-                                                {{-- <a href = "{{ route('stages.delete', $stage->id) }}">
-                                                    <button  class="btn btn-secondary btn-sm ms-auto">Supprimer stage</button>
-                                                </a> --}}
+                                               @if ($stage->etat =='validé')
+                                                   
+                                               @else
+                                                        <a href='stages/{{$stage->id}}'>
+                                                            <button  class="btn btn-secondary btn-sm ms-auto">Modifier stage</button>
+                                                        </a>
+                                              
 
-                                                <form method="post"  action="{{ route('stages.delete', $stage->id) }}" >
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
-                                                </form>
+                                                        <form method="post"  action="{{ route('stages.delete', $stage->id) }}" >
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
+                                                        </form>
+
+                                                 @endif   
                                             @elseif ($role->value ==='administrateur')
                                               
                                                     <a href='stages/affecter/{{$stage->id}}'>

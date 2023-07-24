@@ -28,7 +28,7 @@
 
                                 <div class="d-flex align-items-center">
                                     <p class="mb-0">Ajouter un rapport</p>
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Ajouter</button>
                                 </div>
                                 
                         </div>

@@ -27,7 +27,7 @@
 
                                 <div class="d-flex align-items-center">
                                     <p class="mb-0">Ajouter une societe</p>
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Ajouter</button>
                                 </div>
                                 
                         </div>

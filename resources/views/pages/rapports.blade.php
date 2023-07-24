@@ -11,11 +11,8 @@
                     @if (session('message'))
                         <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
                     @endif
-                    <h6>rapports</h6>
-                    aujourd'hui : {{ $aujourdui }}
-                    début : {{ $session_actuel->date_debut }}
-                    fin: {{ $session_actuel->date_fin }}
-
+                    <h6>Rapports</h6>
+             
                     @if ($aujourdui < $session_actuel->date_debut || $aujourdui >= $session_actuel->date_fin)
                         {{-- condition de fermeture de la session --}}
 

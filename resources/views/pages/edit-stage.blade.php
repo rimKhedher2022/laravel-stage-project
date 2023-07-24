@@ -21,7 +21,7 @@
                                 <div class="d-flex align-items-center">
                                     <p class="mb-0">Modifier un stage</p>
                                     {{-- {{$stage}} --}}
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Modifier</button>
                                 </div>
                                 
                         </div>
@@ -44,7 +44,7 @@
 
                                                 <option value="ouvrier" {{ old('type',$stage->type) == 'ouvrier' ? 'selected' : '' }}>ouvrier</option>
                                                 <option value="technicien" {{ old('type',$stage->type) == 'technicien' ? 'selected' : '' }}>technicien</option>
-                                                <option value="pfe" {{ old('type',$stage->type) == 'pfe' ? 'selected' : '' }}>pfe</option>
+                                                {{-- <option value="pfe" {{ old('type',$stage->type) == 'pfe' ? 'selected' : '' }}>pfe</option> --}}
 
                                              
                                                     
@@ -88,21 +88,11 @@
                                     </div>
                                 </div>
                                
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">etat</label>
-                                        <input class="form-control" type="etat" name="etat"  value="{{old('etat', $stage->etat)}}">
-                                    </div>
-                                </div>
+                             
                                
                                
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date soutenance</label>
-                                        <input class="form-control" type="date" name="date_soutenance" value="{{old('date_soutenance', $stage->date_soutenance)}}">
-                                    </div>
-                                </div>
+                              
 
                                 <div class="col-md-6">
                                     <div class="form-group">

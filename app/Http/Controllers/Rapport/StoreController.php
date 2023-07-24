@@ -80,9 +80,12 @@ class StoreController extends Controller
         'etat'=> StageEtat::DEPOSE
        ]);
         
-       $admins = User::where('role',RoleType::Administrateur)->get() ; 
-      
-       Notification::send($admins,new NewStageAvecDepotNotification($stage)) ; 
+    //    $admins = User::where('role',RoleType::Administrateur)->get() ; 
+    //         if ($stage->etat == StageEtat::DEPOSE)
+    //         {
+    //             Notification::send($admins,new NewStageAvecDepotNotification($stage)) ; 
+    //         }
+       
        return redirect()->route("rapports")->with('message', 'Rapport déposé avec succès ');
        }
 
@@ -112,9 +115,12 @@ class StoreController extends Controller
         $stage->update([
          'etat'=> StageEtat::CORRIGE
         ]);
-
+        
         $admins = User::where('role',RoleType::Administrateur)->get() ; 
-        Notification::send($admins,new RapportCorrigeeNotification($stage)) ; 
+        if ($stage->etat == StageEtat::CORRIGE)
+        {
+            Notification::send($admins,new RapportCorrigeeNotification($stage)) ; 
+        }
         return back()->with('message', 'rapport validé (vérifié et corrigé) avec succés, le stagiaire est notifié que son rapport est validé ,Veuillez choisir la date de soutenance.');
 
     }

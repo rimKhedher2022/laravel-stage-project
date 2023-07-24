@@ -89,11 +89,11 @@
                          <span class="nav-link-text ms-1">Stages à affecter</span>
                 </a>
             </li>
-            @endif
+           
            
            
                
-                @if (auth()->user()->role->value === 'administrateur')
+              
                     <li class="nav-item">
                         <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes']) }}">
                             <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

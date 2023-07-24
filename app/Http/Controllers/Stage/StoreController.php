@@ -47,12 +47,8 @@ class StoreController extends Controller
             // 'etudiant_id'=> auth()->id(), //4 user_id
             'etudiant_id'=> $id, // 2  etudiant_id
         ]);
-       
-
-
-
-        $admins = User::where('role',RoleType::Administrateur)->get() ; 
-        Notification::send($admins,new NewStageCreeSansDepotNotification($stage)) ; 
+        // $admins = User::where('role',RoleType::Administrateur)->get() ; 
+        // Notification::send($admins,new NewStageCreeSansDepotNotification($stage)) ; 
         return back()->with('succes', 'stage ajouté ');
     }
 

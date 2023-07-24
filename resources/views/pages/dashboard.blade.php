@@ -115,7 +115,7 @@
                                     @if (auth()->user()->role->value === 'etudiant')
                                         @forelse($notifications as $notification)
                                       
-                                            @if ($notification->type = 'App\Notifications\StageAffecteeNotification' && isset($notification->data['type']) && isset($notification->data['sujet']) && isset($notification->data['enseignantnom']))
+                                            {{-- @if ($notification->type = 'App\Notifications\StageAffecteeNotification' && isset($notification->data['type']) && isset($notification->data['sujet']) && isset($notification->data['enseignantnom']))
                                                 <div class="alert alert-success" role="alert">
                                                   votre stage : sujet <strong>({{ $notification->data['sujet'] }})</strong> est affecté à l'enseignant {{ $notification->data['enseignantnom'] }}
                                                   
@@ -124,7 +124,7 @@
                                                         Mark as read
                                                     </a>
                                                 </div>
-                                            @endif  
+                                            @endif   --}}
                                          
                                            
                                            

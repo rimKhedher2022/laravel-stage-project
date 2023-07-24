@@ -23,7 +23,7 @@
                                 <div class="d-flex align-items-center">
                                     <p class="mb-0">Affecter un stage</p>
                                     {{-- {{$stage}} --}}
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Affecter</button>
                                 </div>
                                 
                         </div>

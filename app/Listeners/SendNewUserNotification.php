@@ -3,12 +3,13 @@
 namespace App\Listeners;
 
 use App\Enums\RoleType;
+use App\Events\NewUserRegistered;
 use App\Models\User;
 use App\Notifications\NewUserNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\Notification;
 use Illuminate\Queue\InteractsWithQueue;
-
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 
 class SendNewUserNotification
 {
@@ -23,11 +24,10 @@ class SendNewUserNotification
     /**
      * Handle the event.
      */
-    public function handle(object $event): void
+    public function handle(NewUserRegistered $event): void
     {
-        // $admins = User::whereHas('role',RoleType::Administrateur)->get() ; 
+        $admins = User::whereHas('role',RoleType::Administrateur)->get() ; 
       
-        // Notification::send($admins,new NewUserNotification($event->user)) ; 
-
+        FacadesNotification::send($admins,new NewUserNotification($event->user)) ;
     }
 }
