@@ -26,7 +26,7 @@
                                                     </a>
                                                 </div>
                                             @endif  
-                                            @if ($notification->type = 'App\Notifications\NewStageCreeSansDepotNotification' && isset($notification->data['type']) && isset($notification->data['sujet'])) 
+                                            @if ($notification->type = 'App\Notifications\NouveauStageNotification' && isset($notification->data['type']) && isset($notification->data['sujet'])) 
                                             {{-- chatGPT   isset --}}
                                                 <div class="alert alert-success" role="alert">
                                                 Un nouveau stage {{ $notification->data['type'] }} est crée mais sans un rapport déposé
@@ -37,8 +37,8 @@
                                                     </a>
                                                 </div>
                                             @endif
-                                            @if ($notification->type = 'App\Notifications\NewStageAvecDepotNotification' && isset($notification->data['type']) && isset($notification->data['sujet'])) 
-                                            {{-- chatGPT   isset --}}
+                                            {{-- @if ($notification->type = 'App\Notifications\NouveauRapportStageNotification' && isset($notification->data['type']) && isset($notification->data['sujet'])) 
+                                         
                                                 <div class="alert alert-success" role="alert">
                                                 rapport déposé pour le stage {{ $notification->data['type'] }} 
                                                     sujet <strong>({{ $notification->data['sujet'] }}) </strong>
@@ -48,19 +48,9 @@
                                                     </a>
                                                 </div>
                                             @endif
-                                            @if ($notification->type = 'App\Notifications\RapportCorrigeeNotification' && isset($notification->data['type']) && isset($notification->data['sujet'])) 
-                                            {{-- chatGPT   isset --}}
-                                                <div class="alert alert-success" role="alert">
-                                                rapport concernant le sujet <strong>({{ $notification->data['sujet'] }}) </strong> vérifié et corrigé par l'enseignant 
-                                                    
-                                                    <a href="#" class="float-right mark-as-read"
-                                                        data-id="{{ $notification->id }}">
-                                                        Mark as read
-                                                    </a>
-                                                </div>
-                                            @endif
-                                            @if ($notification->type = 'App\Notifications\StageValideNotification' && isset($notification->data['type']) && isset($notification->data['sujet'])) 
-                                            {{-- chatGPT   isset --}}
+                                            --}}
+                                            {{-- @if ($notification->type == 'App\Notifications\StageValideNotification' && isset($notification->data['type']) && isset($notification->data['sujet'])) 
+                                    
                                                 <div class="alert alert-success" role="alert">
                                                 stage validé pour le sujet <strong>({{ $notification->data['sujet'] }}) </strong> 
                                                     
@@ -69,7 +59,7 @@
                                                         Mark as read
                                                     </a>
                                                 </div>
-                                            @endif
+                                            @endif --}}
 
                                                 @if ($loop->last)
                                                     <a href="#" id="mark-all">

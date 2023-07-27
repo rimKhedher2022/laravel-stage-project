@@ -72,9 +72,9 @@ class RegisterController extends Controller
             'user_id'=> $user->id,
                 ]);
      }
-    
+     event(new Registered($user)) ;
      auth()->login($user);
-    //  event(new Registered($user = $this->create($request->all())) ) ;
+    
 
      return redirect('/profile');
    

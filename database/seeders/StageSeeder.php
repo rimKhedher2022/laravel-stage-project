@@ -18,9 +18,10 @@ class StageSeeder extends Seeder
     {
 
         $societe = Societe::create([
-            'nom'=>'societe1',
+            'nom'=>'iset',
             'telephone'=>'25252525',
-            'adresse'=>'sousse',
+            'adresse'=>'iset@gmail.com',
+            'ville'=>'sousse',
         ]);
       
         $stage = Stage::create([

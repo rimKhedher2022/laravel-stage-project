@@ -28,6 +28,69 @@
                                 
                         </div>
                         <div class="card-body">
+                        
+                            @if ($stage->type ='pfe' || $stage->type ='sfe' )
+                           
+                                    <p class="text-uppercase text-sm">Les informations du stage PFE à saisir des enseignants </p>
+                                    <div class="row">
+                                    
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">sujet</label>
+                                                <input class="form-control" type="text" name="sujet" disabled value="{{old('sujet', $stage->sujet)}}">
+                                            </div>
+                                        </div>
+                                        
+                                    
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="encadrant_id">Enseignant-Encadrant du Stage</label>
+                                                    <select name="encadrant_id"  id="encadrant_id" class="form-control">
+                                                        <option value="0">---choix enseignant ---</option>
+                                                                @foreach ($enseignants as $enseignant) 
+                                                                <option value="{{$enseignant->id}}" {{(old('enseignant_id', $enseignant->id) == $encadrant?->id) ? 'selected' : ''}}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
+                                                                @endforeach
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="examinateur_id">Enseignant-Examinateur</label>
+                                                    <select name="examinateur_id"  id="examinateur_id" class="form-control">
+                                                        <option value="0">---choix enseignant ---</option>
+                                                                @foreach ($enseignants as $enseignant) 
+                                                                <option value="{{$enseignant->id}}" {{(old('enseignant_id', $enseignant->id) == $examinateur?->id) ? 'selected' : ''}}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
+                                                                @endforeach
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="rapporteur_id">Enseignant-Rapporteur du Jury</label>
+                                                    <select name="rapporteur_id"  id="rapporteur_id" class="form-control">
+                                                        <option value="0">---choix enseignant ---</option>
+                                                                @foreach ($enseignants as $enseignant) 
+                                                                <option value="{{$enseignant->id}}" {{(old('enseignant_id', $enseignant->id) == $rapporteur?->id) ? 'selected' : ''}}  > {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
+                                                                @endforeach
+                                                    </select>
+                                            </div>
+                                        </div>
+                                       
+                                      
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="invite_id">Enseignant-Invité</label>
+                                                    <select name="invite_id"  id="invite_id" class="form-control">
+                                                        <option value="0">---choix enseignant ---</option>
+                                                                @foreach ($enseignants as $enseignant) 
+                                                                    <option value="{{$enseignant->id}}" {{(old('enseignant_id', $enseignant->id) == $invite?->id) ? 'selected' : ''}}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
+                                                                @endforeach          
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                            @else
                             <p class="text-uppercase text-sm">Les informations du stage à saisir l'enseignant</p>
                             <div class="row">
                             
@@ -51,6 +114,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             {{-- <hr class="horizontal dark"> --}}
                             {{-- <p class="text-uppercase text-sm">Contact Information</p> --}}
                             {{-- <div class="row">
@@ -121,3 +185,37 @@
     
    
 @endsection
+
+{{-- Lorsqu'un étudiant réalise un stage PFE (Projet de Fin d'Études), différents enseignants peuvent être 
+impliqués dans le processus de validation du stage. Les grades des enseignants varient généralement en fonction du 
+niveau d'implication dans la supervision et l'évaluation du stage. Voici les grades courants des enseignants qui 
+pourraient être impliqués dans la validation d'un stage PFE :
+
+1. **Enseignant-Encadrant du Stage (Maître de Stage) :**
+   Cet enseignant est responsable de superviser directement le déroulement du stage de l'étudiant.
+    Il est généralement affilié à l'établissement d'enseignement où l'étudiant réalise son stage. 
+    Le rôle de l'enseignant-encadrant est d'aider l'étudiant dans la réalisation du projet, 
+    de lui fournir des conseils techniques et méthodologiques, et de suivre régulièrement l'avancement du travail.
+
+2. **Enseignant-Responsable de la Formation :**
+   Il s'agit d'un enseignant ou d'un responsable pédagogique qui est chargé de coordonner les activités
+    liées aux stages au sein de l'établissement d'enseignement. Cet enseignant peut être impliqué dans 
+    l'approbation préalable du sujet de stage, de la convention de stage, et il peut jouer un rôle de suivi global 
+    pour s'assurer que le stage respecte les exigences académiques.
+
+3. **Enseignant-Examinateur :**
+   Cet enseignant peut être impliqué dans l'évaluation finale du rapport de stage et/ou 
+   de la présentation orale. Son rôle est d'évaluer la qualité du travail réalisé par l'étudiant et 
+   de déterminer si les objectifs du stage ont été atteints.
+
+4. **Enseignant-Rapporteur du Jury :**
+   Dans certaines universités ou établissements, un enseignant-rapporteur
+    est désigné pour présider le jury de soutenance du stage. Il a pour mission de
+     présider la séance de soutenance, de coordonner les délibérations du jury et de rédiger un rapport de soutenance.
+
+5. **Enseignant-Invité :**
+   Selon le sujet ou la spécificité du stage, des enseignants
+    extérieurs à l'établissement peuvent être invités à participer au jury de soutenance. 
+    Ils apportent un regard externe et une expertise particulière dans le domaine du projet.
+
+Il est important de noter que les grades et les titres des enseignants peuvent varier en fonction des établissements et des pays. Les rôles exacts de chaque enseignant peuvent également différer en fonction des pratiques spécifiques de chaque université ou école. Dans tous les cas, l'objectif principal est d'assurer une évaluation équitable et impartiale du travail de l'étudiant tout au long du processus de stage PFE. --}}

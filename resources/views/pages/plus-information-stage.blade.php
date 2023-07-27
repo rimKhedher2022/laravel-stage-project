@@ -1,116 +1,108 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un stage'])
+  
+    @include('layouts.navbars.auth.topnav', ['title' => 'Informations concernant le stage'])
   
     <div id="alert">
         @include('components.alert')
     </div>
+    {{-- @if(auth()->user()->role->value === 'etudiant') --}}
     {{-- les infos du stage --}}
-
-  
     <div class="container-fluid py-4">
-        @if ($errors->any())
-        <div class="alert alert-secondary">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li style="color: rgba(247, 247, 247, 0.938)">{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-
-
-
-                      
-                    <form role="form" method="POST" action="{{ route('stage.store') }}" enctype="multipart/form-data">
+                    {{-- <form role="form" method="POST" enctype="multipart/form-data"> --}}
                         @csrf
                         <div class="card-header pb-0">
 
-                                <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter un stage</p>
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Enregistrer</button>
-                                </div>
+
+                               
                                 
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">Les informations du stage</p>
+                            <p class="text-uppercase text-sm">Les informations du stage </p>
                             <div class="row">
+                                {{-- <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label" >type</label>
+                                        <input class="form-control" type="text" name="type" value="{{old('type', $stage->type)}}">
+                                    </div>
+                                </div> --}}
+                    
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         
-                                        <label for="type">type:</label>
-                                            <select name="type" id="type" class="form-control">
-
-                                                <option value="ouvrier">ouvrier</option>
-                                                <option value="technicien">technicien</option>
-                                                <option value="pfe">PFE</option>
-                                                <option value="pfe">SFE</option>
-
-                                            </select>
+                                        <label for="type">Type:</label>
+                                        <p>{{$stage->type}}</p>
+                                          
                                     </div>
                                 </div>
 
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">sujet</label>
-                                        <input class="form-control" type="text" name="sujet" >
+                                        <label for="example-text-input" class="form-control-label">Sujet</label>
+                                        <p>{{$stage->sujet}}</p>
+                                        {{-- <input class="form-control" type="text" name="sujet"  value="{{old('sujet', $stage->sujet)}}"> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date debut</label>
-                                        <input class="form-control" type="date" name="date_debut" >
+                                        <label for="example-text-input" class="form-control-label">Date debut:</label>
+                                        <p>{{$stage->date_debut}}</p>
+                                        {{-- <input class="form-control" type="date" name="date_debut"  value="{{old('date_debut', $stage->date_debut)}}"> --}}
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date fin</label>
-                                        <input class="form-control" type="date" name="date_fin" >
+                                        <label for="example-text-input" class="form-control-label">Date fin</label>
+                                        <p>{{$stage->date_fin}}</p>
+                                        {{-- <input class="form-control" type="date" name="date_fin"  value="{{old('date_fin', $stage->date_fin)}}" > --}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Etat</label>
+                                        <p>{{$stage->etat}}</p>
+                                        {{-- <input class="form-control" type="date" name="date_fin"  value="{{old('date_fin', $stage->date_fin)}}" > --}}
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                     
+                                        
                                         <label for="societe_id">societe:</label>
-                                        <a href='add-societe'>
-                                            <button  type="button" class="btn btn-primary btn-sm ms-auto">proposer société</button>
-                                        </a>
-                                
-
-                                            <select name="societe_id" id="societe_id" class="form-control">
-                                                <option value="">---choix societe ---</option>
-                                                @foreach ($societes as $societe)
-                                                     <option  value="{{$societe->id}}">{{ $societe->nom }} </option>
-                                                
-                                                @endforeach
-                                                
-                                            </select>
+                                          
                                             
+                                             
+                                                     <p >{{ $stage->societe->nom }}</p>
+                                                    
+                                             
+                                           
                                     </div>
                                 </div>
                                
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">etat</label>
-                                        <input class="form-control" type="etat" name="etat">
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">nom binome</label>
-                                        <input class="form-control" type="etat" name="etat" >
-                                    </div>
-                                </div> --}}
+                             
+                               
                                
 
-                                
-                                
+                              
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        
+                                        <label for="etudiant_id">Etudiant(s):</label>
+                                        @foreach ($stage->etudiants as $etudiant )
+                                        {{$etudiant->user->nom}}  {{$etudiant->user->prenom}}
+                                            
+                                        @endforeach
+                                           
+                                    </div>
+                                </div>
                                
                                
                             </div>
@@ -155,11 +147,35 @@
                                 </div>
                             </div> --}}
                         </div>
-                    </form>
+                    {{-- </form> --}}
+                   
+                    {{-- le binome  --}}
+                  {{-- @foreach ( $etudiants_stage as  $etudiant_stage)
+                  
+                
+                        @if ($id_auth !== $etudiant_stage->id )
+                        l' id de ton binome est  :  {{$etudiant_stage ->id}}
+                        <br/>
+                        le nom de ton binome est  : {{$etudiant_stage ->user->nom}} 
+
+                        @endif
+                  
+                  @endforeach --}}
+
+
+
+          
+          
+                
                 </div>
             </div>
           
         </div>
         {{-- @include('layouts.footers.auth.footer') --}}
     </div>
+  
+
+   
+    
+   
 @endsection

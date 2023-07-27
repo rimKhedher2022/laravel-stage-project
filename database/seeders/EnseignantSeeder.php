@@ -33,6 +33,7 @@ class EnseignantSeeder extends Seeder
             'prenom' => 'ghanoun',
             'email' => 'mariem@example.com',
             'role' => RoleType::Enseignant,
+            
             'password' => bcrypt('secret')
         ]);
 

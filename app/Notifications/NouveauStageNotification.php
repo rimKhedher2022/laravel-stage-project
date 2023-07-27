@@ -7,19 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewStageAvecDepotNotification extends Notification
+class NouveauStageNotification extends Notification
 {
     use Queueable;
     public $stage;
+
     /**
      * Create a new notification instance.
      */
     public function __construct($stage)
     {
-        $this->stage = $stage;
+        $this->stage = $stage ;
     }
 
-    // notification done
     /**
      * Get the notification's delivery channels.
      *

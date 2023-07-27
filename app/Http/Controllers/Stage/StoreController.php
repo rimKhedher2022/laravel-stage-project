@@ -12,6 +12,7 @@ use App\Models\Stage;
 use App\Models\User;
 use App\Notifications\NewStageCreeSansDepotNotification;
 use App\Notifications\StageCree;
+use Illuminate\Auth\Events\Registered ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
@@ -24,6 +25,14 @@ class StoreController extends Controller
         $this->authorize('viewAny',Stage::class);
         $societes = Societe::all();
         return view('pages.add-stage',['societes' => $societes]);
+    }
+
+
+    public function plusInfo($id)
+    {
+       
+        $stage = Stage::find($id);
+        return view('pages.plus-information-stage' , ['stage' => $stage]);
     }
 
     public function store(StageStoreRequest $request) {
@@ -39,6 +48,7 @@ class StoreController extends Controller
           
             
         ]);
+    
         $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
         EtudiantStage::create([
             
@@ -47,6 +57,7 @@ class StoreController extends Controller
             // 'etudiant_id'=> auth()->id(), //4 user_id
             'etudiant_id'=> $id, // 2  etudiant_id
         ]);
+        event(new Registered($stage)) ;
         // $admins = User::where('role',RoleType::Administrateur)->get() ; 
         // Notification::send($admins,new NewStageCreeSansDepotNotification($stage)) ; 
         return back()->with('succes', 'stage ajouté ');

@@ -35,7 +35,7 @@ class Enseignant extends Model
   */
  public function stages(): BelongsToMany
  {
-     return $this->belongsToMany(Stage::class); // stage_id
+     return $this->belongsToMany(Stage::class)->withPivot('role'); // stage_id
  }
    
 }

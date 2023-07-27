@@ -15,6 +15,7 @@ class Societe extends Model
         'nom',
         'telephone',
         'adresse',
+        'ville',
         ];
 
 

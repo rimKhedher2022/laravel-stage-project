@@ -17,6 +17,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\MessageDeRappel\DeleteController as MessageDeRappelDeleteController;
 use App\Http\Controllers\MessageDeRappel\EditController as MessageDeRappelEditController;
 use App\Http\Controllers\MessageDeRappel\IndexController as MessageDeRappelIndexController;
@@ -91,7 +92,11 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('/add-stage',[StageStoreController::class,'show'])->name('add-stage');
 	Route::get('/stages/{id}',[EditController::class, 'edit'])->name('edit-stage');
+	Route::get('/plusinfo/stages/{id}',[StageStoreController::class, 'plusInfo'])->name('plusinfo-stage');
+
 	Route::get('/stages/affecter/{id}',[EditController::class, 'affecter'])->name('affecter-stage');
+	Route::get('/exporter',[DataController::class, 'show'])->name('exporter-data');
+	Route::post('/exporter-to-csv',[DataController::class, 'exportToCSV'])->name('data.export');
 	Route::get('/stages/soutenance/{id}',[EditController::class, 'choisirSoutenance'])->name('soutenance-stage'); //?????
 	// Route::get('/stages/affecter/{id}',EditController::class)->name('edit-stage'); // admin
 	Route::post('/stages/{id}',[UpdateController::class, 'update'])->name('stages.update');

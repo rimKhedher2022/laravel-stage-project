@@ -4,14 +4,12 @@ namespace App\Listeners;
 
 use App\Enums\RoleType;
 use App\Models\User;
-use App\Notifications\NewStageCreeSansDepotNotification;
-use App\Notifications\NewUserNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NouveauRapportStageNotification;
 
-
-class SendNouveauStageCreeNotification
+class SendNouveauRapportStageNotification
 {
     /**
      * Create the event listener.
@@ -26,9 +24,7 @@ class SendNouveauStageCreeNotification
      */
     public function handle(object $event): void
     {
-        $admins = User::whereHas('role',RoleType::Administrateur)->get() ; 
-      
-        Notification::send($admins,new NewStageCreeSansDepotNotification($event->user)) ; 
-
+        $admins = User::where('role',RoleType::Administrateur)->get() ; 
+        Notification::send($admins,new NouveauRapportStageNotification ($event->user)) ; 
     }
 }

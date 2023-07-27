@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('stages', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['ouvrier', 'technicien', 'pfe'])->default('ouvrier');
+            $table->enum('type', ['ouvrier', 'technicien', 'pfe','sfe'])->default('ouvrier');
             $table->date('date_debut');
             $table->date('date_fin');
             $table->string('sujet');

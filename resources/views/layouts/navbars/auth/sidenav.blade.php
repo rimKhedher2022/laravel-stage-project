@@ -81,27 +81,42 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
-                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="text-dark text-sm opacity-10"></i>
-                    </div>
-                         <span class="nav-link-text ms-1">Stages à affecter</span>
-                </a>
-            </li>
+
+
+
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="toggleSubMenu()">
+                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Stages</span>
+                    </a>
+                    <ul class="sub-nav" id="subMenu">        
+        {{-- ok for Stages à affecter --}}
+                    <li class="nav-item">
+                        <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
+                            <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="text-dark text-sm opacity-10"></i>
+                            </div>
+                                <span class="nav-link-text ms-1">Stages à affecter</span>
+                        </a>
+                    </li>
            
            
            
                
-              
+               {{-- ok for etats --}}
                     <li class="nav-item">
                         <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes']) }}">
                             <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="text-dark text-sm opacity-10"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Stages</span>
+                            <span class="nav-link-text ms-1">Stages affectés (Etats)</span>
                         </a>
                     </li>
+
+                     {{-- ok for Stages sans dépot --}}
                     <li class="nav-item">
                         <a class="nav-link {{ str_contains(request()->url(), 'stages-sans-depots') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-sans-depots']) }}">
                             <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -110,6 +125,10 @@
                             <span class="nav-link-text ms-1">Stages sans dépot</span>
                         </a>
                     </li>
+
+                    </ul>
+                </li>
+            </ul>
                 @endif
           
            
@@ -164,6 +183,18 @@
                             <span class="nav-link-text ms-1">Enseignants</span>
                         </a>
                     </li>
+                    {{-- ?? --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Option 1</a>
+                          <a class="dropdown-item" href="#">Option 2</a>
+                          <!-- Add more dropdown items as needed -->
+                        </div>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link {{ str_contains(request()->url(), 'sessions') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'sessions']) }}">
                             <div class="fa fas fa-solid fa-book border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -189,15 +220,23 @@
                             <span class="nav-link-text ms-1">Societes</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ str_contains(request()->url(), 'exporter-data') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'exporter']) }}">
+                            <div class="fa fa-building-o  border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni  text-dark text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">CSV files</span>
+                        </a>
+                    </li>
             @endif
                 
          
            
+{{--            
            
            
            
-           
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'rtl' ? 'active' : '' }}" href="{{ route('rtl') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -205,11 +244,11 @@
                     </div>
                     <span class="nav-link-text ms-1">RTL</span>
                 </a>
-            </li> --}}
-            {{-- <li class="nav-item mt-3">
+            </li> 
+             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
-            </li> --}}
-            {{-- <li class="nav-item">
+            </li> 
+           <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'profile-static' ? 'active' : '' }}" href="{{ route('profile-static') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -217,8 +256,8 @@
                     </div>
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
-            </li> --}}
-            {{-- <li class="nav-item">
+            </li>
+          <li class="nav-item">
                 <a class="nav-link " href="{{ route('sign-in-static') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -226,8 +265,8 @@
                     </div>
                     <span class="nav-link-text ms-1">Sign In</span>
                 </a>
-            </li> --}}
-            {{-- <li class="nav-item">
+            </li> 
+            <li class="nav-item">
                 <a class="nav-link " href="{{ route('sign-up-static') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -240,3 +279,9 @@
     </div>
     
 </aside>
+{{-- <script>
+    function toggleSubMenu() {
+        const subMenu = document.getElementById('subMenu');
+        subMenu.style.display = subMenu.style.display === 'none' ? 'block' : 'none';
+    }
+</script> --}}

@@ -24,10 +24,11 @@ class StoreController extends Controller
             'nom' => $request->nom ,
             'telephone' =>$request->telephone  ,
             'adresse' =>$request->adresse  ,
+            'ville' =>$request->ville  ,
         ]);
 
        
-        return back()->with('succes', 'société ajouté ');
+        return back()->with('succes', 'société ajouté,l\'admin va valider la société proposé ');
 
 
 

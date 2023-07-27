@@ -53,22 +53,45 @@ class EditController extends Controller
    {
         $stage = Stage::find($id);
         $enseignants = Enseignant::all();
-   
-  //  $enseignants = User::where('role',RoleType::Enseignant)->get(); // 4
     $this->authorize('affecter', $stage );  // que l'admin peut voir la page d'affectation
-  //   $id_auth = Etudiant::where('user_id',auth()->id())->first()->id; //2  
-  //  //  $etudiants_list = Etudiant::where('user_id','<>',auth()->id())->get();
-  //   $etudiants_stage = $stage->etudiants; // 2 et 3
-  
-  //   $etudiants = Etudiant::where('user_id', '!=', auth()->id())->get()  ;  // que les etudiants <> du l'etudiant connecté
-
-  //   $binome = $etudiants_stage->filter(function  ($value, $key) use($id_auth) {
-  //     return $value->id != $id_auth;
-      
-  // })->first();
-      $enseignants_stage = $stage->enseignants() ; // les enseignants responsable d'un stage
+ 
+      $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
       $enseignant_responsable = $enseignants_stage->first(); 
+          $invite = null;
+          $examinateur = null;
+          $rapporteur = null;
+          $encadrant = null;
+      foreach ($enseignants_stage as $enseignant)
 
+      {
+
+        if ($enseignant->pivot->role == 'invite')
+        {
+              $invite = $enseignant ; 
+        }
+
+    elseif ($enseignant->pivot->role == 'examinateur')   
+    
+          {
+            $examinateur = $enseignant ; 
+          }
+    elseif ($enseignant->pivot->role == 'rapporteur')   
+    
+          {
+            $rapporteur = $enseignant ; 
+          }
+    elseif ($enseignant->pivot->role == 'encadrant')   
+    
+          {
+            $encadrant = $enseignant ; 
+          }
+
+      }
+       
+       
+
+
+      
   // dd ($stage->enseignants) ;
 
 
@@ -76,7 +99,13 @@ class EditController extends Controller
       return  view('pages.affecter-stage',['stage' => $stage,
   
             'enseignant_responsable' => $enseignant_responsable,
-            'enseignants' => $enseignants
+            'enseignants' => $enseignants,
+            'enseignants_stage' => $enseignants_stage , 
+            'invite' => $invite , 
+            'examinateur'  => $examinateur  ,
+            'rapporteur'=>$rapporteur,
+            'encadrant'=>$encadrant
+
    ]);
    }
 

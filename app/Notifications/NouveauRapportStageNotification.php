@@ -7,18 +7,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RapportCorrigeeNotification extends Notification
+class NouveauRapportStageNotification extends Notification
 {
     use Queueable;
     public $stage;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct($stage)
     {
-        $this->stage = $stage;
+        $this->stage = $stage ;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -40,7 +38,7 @@ class RapportCorrigeeNotification extends Notification
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
- // notification done
+
     /**
      * Get the array representation of the notification.
      *

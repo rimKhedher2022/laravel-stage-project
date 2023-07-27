@@ -39,8 +39,10 @@ class Stage extends Model
  //ok
    public function enseignants(): BelongsToMany
    {
-       return $this->belongsToMany(Enseignant::class);
+       return $this->belongsToMany(Enseignant::class)->withPivot('role');
    }
+
+//    return $this->belongsToMany(Role::class)->withPivot('active', 'created_by');
 
     /**
      * Get the societe that owns the Stage

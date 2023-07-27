@@ -63,26 +63,118 @@ $binome = $etudiants_stage->filter(function  ($value, $key) use($id_auth) {
                 'stage_id'=>$stage->id,
                 'etudiant_id'=> $request->etudiant_id, // le binome
                 ]);
-        }
-        
+        }   
     }
-
- 
-  
-  
     return back()->with('succes', 'stage mis a jour . ');
 }
 
 public function affecter (Request $request  , $id) {
 
     $stage = Stage::find($id);
+    // dd($stage->enseignants);
     $this->authorize('affecter', $stage );  // admin aussi peut modifier lorsqu'il choisit l'enseignant
-        $stage_enseignant_id =  $stage->enseignants->pluck('id')->toArray() ;
-        // dd(!empty($stage_enseignant_id));
+    if ($stage->type=='pfe' || $stage->type=='sfe')
+    {   
 
        
+        
+        // $stage_enseignant_id =  $stage->enseignants->pluck('id')->toArray() ; // roles ????????????? wherePivot
+       
 
-         if($request->enseignant_id !== '0' ){
+        if ($request->invite_id !== '0' && $request->rapporteur_id !== '0')
+        {
+            $role = 'invite';
+            $teachersWithRole = $stage->enseignants->filter(function ($enseignant) use ($role) {
+                return $enseignant->pivot->role === $role;
+            })->pluck('id')->toArray();
+
+            if($teachersWithRole)
+            {
+                $stage->enseignants()->detach($teachersWithRole) ; // suprimer l'enseignant
+            }
+            EnseignantStage::create([  // 
+                'stage_id'=>$stage->id,
+                'enseignant_id'=> $request->invite_id, // l'enseignant
+                'role'=> 'invite'
+                ]);
+
+
+
+
+
+                $roleR = 'rapporteur';
+                $teachersWithRoleR = $stage->enseignants->filter(function ($enseignant) use ($roleR) {
+                    return $enseignant->pivot->role === $roleR;
+                })->pluck('id')->toArray();
+    
+                if($teachersWithRoleR)
+                {
+                    $stage->enseignants()->detach($teachersWithRole) ; // suprimer l'enseignant
+                }
+                EnseignantStage::create([  // 
+                    'stage_id'=>$stage->id,
+                    'enseignant_id'=> $request->rapporteur_id, // l'enseignant
+                    'role'=> 'rapporteur'
+                    ]);
+                   
+           
+        }
+       
+        if ($request->examinateur_id !== '0')
+        {
+            $role = 'examinateur';
+            $teachersWithRole = $stage->enseignants->filter(function ($enseignant) use ($role) {
+                return $enseignant->pivot->role === $role;
+            })->pluck('id')->toArray();
+
+            if($teachersWithRole)
+            {
+                $stage->enseignants()->detach($teachersWithRole) ; // suprimer l'enseignant
+            }
+            EnseignantStage::create([  // 
+                'stage_id'=>$stage->id,
+                'enseignant_id'=> $request->examinateur_id, // l'enseignant
+                'role'=> 'examinateur'
+                ]);
+           
+        }
+        if ($request->encadrant_id !== '0')
+        {
+            $role = 'encadrant';
+            $teachersWithRole = $stage->enseignants->filter(function ($enseignant) use ($role) {
+                return $enseignant->pivot->role === $role;
+            })->pluck('id')->toArray();
+
+            if($teachersWithRole)
+            {
+                $stage->enseignants()->detach($teachersWithRole) ; // suprimer l'enseignant
+            }
+            EnseignantStage::create([  // 
+                'stage_id'=>$stage->id,
+                'enseignant_id'=> $request->encadrant_id, // l'enseignant
+                'role'=> 'encadrant'
+                ]);
+           
+        }
+
+        $stage->update([
+            'etat'=> StageEtat::AFFECTE
+      ]);
+      
+      $enseignants_responsables = $stage->enseignants ; 
+      
+
+
+        return back()->with('succes', 'les enseignants choisis avec succes');
+    } else{
+
+   
+        $stage_enseignant_id =  $stage->enseignants->pluck('id')->toArray() ; // roles
+        // dd(!empty($stage_enseignant_id));
+
+       // 4 opérations kol role enseigant wa7dou $stage->enseignants->pluck('id')->toArray() ; 7sb el role : les ids_enseignant_encadrant ....
+
+         if($request->enseignant_id !== '0' ){ 
             if(!empty($stage_enseignant_id)){ // l'ancien enseignant
           
                 $stage->enseignants()->detach($stage_enseignant_id) ; // suprimer l'enseignant
@@ -107,14 +199,14 @@ public function affecter (Request $request  , $id) {
                
 
               
-                Notification::send($user_enseignant,new StageAffecteeNotification($stage)) ; 
+                // Notification::send($user_enseignant,new StageAffecteeNotification($stage)) ; 
                 $les_etudiants = $stage->etudiants; 
-                foreach ( $les_etudiants as $etudiant)
-                {
-                    $user_etudiant = User::where('id',$etudiant->user_id)->first()  ;
-                    Notification::send($user_etudiant,new StageAffecteeNotification($stage)) ; 
+                // foreach ( $les_etudiants as $etudiant)
+                // {
+                //     $user_etudiant = User::where('id',$etudiant->user_id)->first()  ;
+                //     Notification::send($user_etudiant,new StageAffecteeNotification($stage)) ; 
 
-                }
+                // }
 
               }
             
@@ -130,7 +222,12 @@ public function affecter (Request $request  , $id) {
               ]);
              }
          }
+
+         
         return back()->with('succes', 'enseignant affecté . ');
+
+    }
+        
 }
 
 

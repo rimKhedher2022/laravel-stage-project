@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('nom');/* */
             $table->string('prenom');/* */
+          
             $table->string('email')->unique();/* */
             $table->string('password');/* */
-            $table->enum('role', ['administrateur', 'etudiant','enseignant'])->default('etudiant');            $table->string('image')->nullable();/* */
+            $table->enum('role', ['administrateur', 'etudiant','enseignant'])->default('etudiant');     
+            $table->string('image')->nullable();/* */
+            $table->string('annee-scolaire')->nullable();/* */
             $table->timestamps();
         });
     }
