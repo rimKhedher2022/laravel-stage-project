@@ -184,16 +184,7 @@
                         </a>
                     </li>
                     {{-- ?? --}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="#">Option 1</a>
-                          <a class="dropdown-item" href="#">Option 2</a>
-                          <!-- Add more dropdown items as needed -->
-                        </div>
-                    </li>
+                  
 
                     <li class="nav-item">
                         <a class="nav-link {{ str_contains(request()->url(), 'sessions') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'sessions']) }}">

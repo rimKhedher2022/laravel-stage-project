@@ -14,6 +14,7 @@ class StoreController extends Controller
     {
         $this->authorize('viewAny', Societe::class );
         $societes = Societe::all();
+        
         return view('pages.add-societe',['societes' => $societes]);
     }
 
@@ -26,11 +27,26 @@ class StoreController extends Controller
             'adresse' =>$request->adresse  ,
             'ville' =>$request->ville  ,
         ]);
+      
+       
 
        
-        return back()->with('succes', 'société ajouté,l\'admin va valider la société proposé ');
+        return back()->with('succes', 'société à proposer est envoyée ,l\'admin va valider la société proposé ');
 
 
 
     }
+
+
+    public function approve($societeId)
+{
+   
+    $societe = Societe::find($societeId);
+    
+    
+    // Update the validation state
+    $societe->update(['validation_state' => 'approved by admin']);
+    return back()->with('message', 'société validé avec succés ');
+
+}
 }

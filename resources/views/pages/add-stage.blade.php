@@ -36,6 +36,7 @@
                                 </div>
                                 
                         </div>
+                      
                         <div class="card-body">
                             <p class="text-uppercase text-sm">Les informations du stage</p>
                             <div class="row">
@@ -78,6 +79,7 @@
                                     <div class="form-group">
                                      
                                         <label for="societe_id">societe:</label>
+                                        {{-- {{ dd($societes) }} --}}
                                         <a href='add-societe'>
                                             <button  type="button" class="btn btn-primary btn-sm ms-auto">proposer société</button>
                                         </a>
@@ -86,8 +88,9 @@
                                             <select name="societe_id" id="societe_id" class="form-control">
                                                 <option value="">---choix societe ---</option>
                                                 @foreach ($societes as $societe)
+                                              
                                                      <option  value="{{$societe->id}}">{{ $societe->nom }} </option>
-                                                
+                                                   
                                                 @endforeach
                                                 
                                             </select>

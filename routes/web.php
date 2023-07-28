@@ -115,6 +115,7 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('/add-societe',[SocieteStoreController::class,'show'])->name('add-societe');
 	Route::post('/ok',[SocieteStoreController::class,'store'])->name('societe.store');
+	Route::post('/societes/valider/{societeId}',[SocieteStoreController::class,'approve'])->name('societes.validation');
 	Route::get('/societes',SocieteIndexController::class)->name('societes');
 	Route::delete('/societes/{id}',SocieteDeleteController::class)->name('societes.delete');
 	Route::get('/societes/{id}',SocieteEditController::class)->name('edit-societe');

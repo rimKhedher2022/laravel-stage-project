@@ -65,6 +65,12 @@
                                         <input class="form-control" type="text" name="adresse"  value="{{old('adresse', $societe->adresse)}}" >
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">ville</label>
+                                        <input class="form-control" type="text" name="ville"  value="{{old('adresse', $societe->ville)}}" >
+                                    </div>
+                                </div>
                                
                               
 

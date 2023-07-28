@@ -25,6 +25,7 @@ class SocieteUpdateRequest extends FormRequest
         'nom'=>'string',
         'telephone'=>'string|max:8',
         'adresse'=>'string',
+        'ville'=>'string',
         ];
     }
     public function messages(): array
@@ -33,6 +34,7 @@ class SocieteUpdateRequest extends FormRequest
             'nom'=>'veuillez choisir le nom de la société',
             'telephone'=>'veuillez choisir le telephone de la société',
             'adresse'=>'veuillez choisir l adresse de la société',
+            'ville'=>'veuillez choisir la ville de la société',
             ];
     }
 }

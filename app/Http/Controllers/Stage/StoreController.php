@@ -23,7 +23,7 @@ class StoreController extends Controller
     public function show()
     {
         $this->authorize('viewAny',Stage::class);
-        $societes = Societe::all();
+        $societes = Societe::where('validation_state','approved by admin')->get() ;       
         return view('pages.add-stage',['societes' => $societes]);
     }
 
@@ -32,6 +32,7 @@ class StoreController extends Controller
     {
        
         $stage = Stage::find($id);
+
         return view('pages.plus-information-stage' , ['stage' => $stage]);
     }
 
