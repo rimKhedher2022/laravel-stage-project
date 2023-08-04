@@ -49,7 +49,7 @@
                                                 <option value="ouvrier">ouvrier</option>
                                                 <option value="technicien">technicien</option>
                                                 <option value="pfe">PFE</option>
-                                                <option value="pfe">SFE</option>
+                                                <option value="sfe">SFE</option>
 
                                             </select>
                                     </div>
@@ -89,7 +89,7 @@
                                                 <option value="">---choix societe ---</option>
                                                 @foreach ($societes as $societe)
                                               
-                                                     <option  value="{{$societe->id}}">{{ $societe->nom }} </option>
+                                                     <option  value="{{$societe->id}}">{{ $societe->nom }} - {{ $societe->ville }} </option>
                                                    
                                                 @endforeach
                                                 

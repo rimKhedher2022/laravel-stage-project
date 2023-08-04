@@ -17,7 +17,7 @@
                             <button class="btn btn-primary btn-sm ms-auto">Ajouter stage</button>
                         </a>
                     @elseif ($role->value === 'administrateur')
-                        <h6>Stages à affecter aux enseignants ( etat = rapport déposé)</h6>
+                        <h6>Stages à affecter aux enseignants  , rapports déposés</h6>
                         {{-- @else     --}}
                     @else
                         <h6>Stages à lire / corriger / valider rapport</h6>
@@ -63,41 +63,84 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                   
                                     @foreach ($stages as $stage)
+                                           
+                                   
+                                    
                                         <tr>
+                                            @if ($role->value === 'administrateur' && ($stage->type ==='ouvrier' || $stage->type ==='technicien') )
+                                                  
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->type }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_debut }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_fin }}</p>
+                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->sujet }}</p>
+                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if ($stage->etat == 'validé')
+                                                        <p class="text-sm font-weight-bold mb-0"
+                                                            style="color: rgb(107, 184, 100)">{{ $stage->etat }}</p>
+                                                    @else
+                                                        <p class="text-sm font-weight-bold mb-0">{{ $stage->etat }}</p>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if ($stage->etat == 'validé')
+                                                        <p class="text-sm font-weight-bold mb-0" style="color: rgb(51, 54, 50)">
+                                                            {{ $stage->date_soutenance }}</p>
+                                                    @else
+                                                        <p class="text-sm font-weight-bold mb-0">{{ $stage->date_soutenance }}
+                                                        </p>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe_id }}</p>
+                                                </td>
+                                            @endif
+                                            @if ($role->value === 'etudiant')
+                                                   
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->type }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_debut }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_fin }}</p>
+                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->sujet }}</p>
+                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if ($stage->etat == 'validé')
+                                                        <p class="text-sm font-weight-bold mb-0"
+                                                            style="color: rgb(107, 184, 100)">{{ $stage->etat }}</p>
+                                                    @else
+                                                        <p class="text-sm font-weight-bold mb-0">{{ $stage->etat }}</p>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if ($stage->etat == 'validé')
+                                                        <p class="text-sm font-weight-bold mb-0" style="color: rgb(51, 54, 50)">
+                                                            {{ $stage->date_soutenance }}</p>
+                                                    @else
+                                                        <p class="text-sm font-weight-bold mb-0">{{ $stage->date_soutenance }}
+                                                        </p>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe_id }}</p>
+                                                </td>
+                                            @endif
 
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">{{ $stage->type }}</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">{{ $stage->date_debut }}</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">{{ $stage->date_fin }}</p>
-                                            </td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                <p class="text-sm font-weight-bold mb-0">{{ $stage->sujet }}</p>
-                                            </td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @if ($stage->etat == 'validé')
-                                                    <p class="text-sm font-weight-bold mb-0"
-                                                        style="color: rgb(107, 184, 100)">{{ $stage->etat }}</p>
-                                                @else
-                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->etat }}</p>
-                                                @endif
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                @if ($stage->etat == 'validé')
-                                                    <p class="text-sm font-weight-bold mb-0" style="color: rgb(51, 54, 50)">
-                                                        {{ $stage->date_soutenance }}</p>
-                                                @else
-                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_soutenance }}
-                                                    </p>
-                                                @endif
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <p class="text-sm font-weight-bold mb-0">{{ $stage->societe_id }}</p>
-                                            </td>
+
                                             <td class="align-middle text-center text-sm">
                                                 {{-- <div class="d-flex px-3 py-1 justify-content-center align-items-center"> --}}
                                                 @if ($role->value === 'etudiant')
@@ -117,7 +160,7 @@
                                                                 class="btn btn-danger btn-sm ms-auto ">supprimer</button>
                                                         </form>
                                                     @endif
-                                                @elseif ($role->value === 'administrateur')
+                                                @elseif ($role->value === 'administrateur' && ($stage->type ==='ouvrier' || $stage->type ==='technicien') )
                                                     <a href='stages/affecter/{{ $stage->id }}'>
 
                                                         @if (empty($stage->enseignants->pluck('id')->toArray()))

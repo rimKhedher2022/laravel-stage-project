@@ -19,9 +19,9 @@
 
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Modifier une user</p>
+                                    <p class="mb-0">Modifier un utilisateur</p>
                                     {{-- {{$user}} --}}
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Enregistrer</button>
                                 </div>
                                 
                         </div>

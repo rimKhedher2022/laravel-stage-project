@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class StageSansDepotController extends Controller
 {
-    public function __invoke()  // une seul fonction
+    public function stageEte()  // une seul fonction
     {
 
         $this->authorize('stagesConsultesParAdministrateur', Stage::class);
@@ -29,6 +29,26 @@ class StageSansDepotController extends Controller
 
       
         //  dd($stages) ;   // affichage // gate
-        return  view('pages.stages-sans-depots',['stages' => $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
+        return  view('pages.stages-sans-depots-ete',['stages' => $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
+    }
+    public function stagePFEsFE()  // une seul fonction
+    {
+
+        $this->authorize('stagesConsultesParAdministrateur', Stage::class);
+        $stages= Stage::where('etat',StageEtat::CREE)->get();
+        $session_actuel = SessionDeDepot::latest()->first();
+        $aujourdui = Carbon::now('GMT-7');
+
+        // pour calculer le nb des message pour un stage
+       
+      foreach($stages as $stage ){
+        
+        // $messages = $stage->messages->where('user_id', auth()->user()->id);
+        $stage->setAttribute('messages',count($stage->messages->where('user_id', auth()->user()->id)));
+      }
+
+      
+        //  dd($stages) ;   // affichage // gate
+        return  view('pages.stages-pfe-sans-depot',['stages' => $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
     }
 }

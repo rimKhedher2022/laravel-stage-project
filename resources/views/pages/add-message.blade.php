@@ -3,7 +3,7 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un stage'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'ajouter message'])
   
     <div id="alert">
         @include('components.alert')

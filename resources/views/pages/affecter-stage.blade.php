@@ -2,7 +2,7 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un stage'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'affecter stage'])
   
     <div id="alert">
         @include('components.alert')
@@ -29,7 +29,9 @@
                         </div>
                         <div class="card-body">
                         
-                            @if ($stage->type ='pfe' || $stage->type ='sfe' )
+                            @if ($stage->type =='pfe' || $stage->type =='sfe' )  
+                              {{-- // attention --}}
+
                            
                                     <p class="text-uppercase text-sm">Les informations du stage PFE à saisir des enseignants </p>
                                     <div class="row">

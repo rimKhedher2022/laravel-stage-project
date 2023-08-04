@@ -2,7 +2,7 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un stage'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'exporter fichier'])
   
     <div id="alert">
         @include('components.alert')
@@ -24,9 +24,9 @@
                                 <div class="d-flex align-items-center">
                                     <p class="mb-0">choix année scolaire</p>
                                     {{-- {{$stage}} --}}
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Exporter CSV</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Importer CSV</button>
                                 </div>
-                                
+                            
                         </div>
                         <div class="card-body">
                             {{-- <p class="text-uppercase text-sm">Les informations du stage à saisir date soutenance</p> --}}

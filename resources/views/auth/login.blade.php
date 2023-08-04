@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
-                                <img  src="{{ asset('./img/logo.png') }}" style="width:100px ;margin-left:150px; " >
+                                <img  src="{{ asset('./img/logo.png') }}" style="width:100px ;margin-left:120px; " >
                                 <div class="card-header pb-0 ">
                                     <h4 class="font-weight-bolder"  style="margin-left:140px; " >Sign In</h4>
                                     <p class="mb-0">Enterz votre email et votre mot de pass </p>
@@ -52,8 +52,10 @@
                                     <p class="mb-4 text-sm mx-auto">
                                         Don't have an account?
                                         <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                                      
                                     </p>
                                 </div>
+                                <img  src="{{ asset('./img/issat.png') }}" style="width:100px ;margin-left:120px; margin-top:-30px" >
                             </div>
                         </div>
                         <div

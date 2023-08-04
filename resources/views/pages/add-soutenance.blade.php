@@ -2,7 +2,7 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un stage'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter dates soutenances'])
   
     <div id="alert">
         @include('components.alert')

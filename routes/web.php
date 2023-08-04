@@ -105,11 +105,14 @@ Route::middleware('auth')->group(function () {
    
 	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
 	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('stages.soutenance'); //?????
-	Route::get('/stages',StageIndexController::class)->name('stages');
+	Route::get('/stages',[StageIndexController::class,'ete'])->name('stages');
+	Route::get('/stages-pfe-sfe',[StageIndexController::class,'pfeSfe'])->name('stages'); //
 	Route::get('/soutenances',DatesSoutenancesController::class)->name('soutenances');
 	Route::get('/stages-a-valider',StageAvaliderController::class)->name('stages-valider');
-	Route::get('/stages-affectes',StageAffectationController::class)->name('stages-affectes');
-	Route::get('/stages-sans-depots',StageSansDepotController::class)->name('stages-sans-depots');
+	Route::get('/stages-affectes-ete',[StageAffectationController::class,'stageEte'])->name('stages-affectes-ete');
+	Route::get('/stages-affectes-pfe-sfe',[StageAffectationController::class,'stagePFESFE'])->name('stages-affectes-pfe-sfe');
+	Route::get('/stages-sans-depots-ete',[StageSansDepotController::class,'stageEte'])->name('stages-sans-depots-ete');
+	Route::get('/stages-sans-depots-pfe-sfe',[StageSansDepotController::class,'stagePFEsFE'])->name('stages-sans-depots-pfe-sfe');
 	Route::delete('/stages/{id}',StageDeleteController::class)->name('stages.delete');
 	Route::post('/',[StageStoreController::class,'store'])->name('stage.store');
 

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
-    public function __invoke()  // une seul fonction
+    public function ete()  // une seul fonction
     {
 
        
@@ -41,6 +41,37 @@ class IndexController extends Controller
               break;
       }
      return  view('pages.stages',['stages' => $stages , 'role' => $role ]);
+ 
+    }
+
+    public function pfeSfe()  // une seul fonction
+    {
+
+       
+        $role = auth()->user()->role;
+        // dd($role->value);
+        switch ($role) {
+          case RoleType::Administrateur:
+            $stages = Stage::where('etat',StageEtat::DEPOSE)->get();
+             
+         
+              break;
+          case RoleType::Etudiant:
+            $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
+            $stages = $etudiant->stages; // (id == 2 )
+             
+              break;
+          
+          default:
+          
+          $enseignant = Enseignant::where('user_id',auth()->id())->first(); // 4
+
+           $stages = $enseignant->stages;
+            
+       
+              break;
+      }
+     return  view('pages.stages-pfe-a-affecter',['stages' => $stages , 'role' => $role ]);
  
     }
 }

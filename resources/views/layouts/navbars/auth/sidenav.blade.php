@@ -6,7 +6,7 @@
         <a  href="{{ route('profile') }}"
             target="_blank">
             <img  src="{{ asset('./img/logo.png') }}" style="width:60px " >
-            <span class="ms-1 font-weight-bold">STAGE ++</span>
+            <span class="ms-1 font-weight-bold">InternPro</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -28,7 +28,7 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Profile</span>
+                    <span class="nav-link-text ms-1">Profil</span>
                 </a>
             </li>
 
@@ -90,45 +90,88 @@
                         <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="text-dark text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Stages</span>
+                        <span class="nav-link-text ms-1">Stages d'été</span>
                     </a>
-                    <ul class="sub-nav" id="subMenu">        
-        {{-- ok for Stages à affecter --}}
-                    <li class="nav-item">
-                        <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
-                            <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="text-dark text-sm opacity-10"></i>
-                            </div>
-                                <span class="nav-link-text ms-1">Stages à affecter</span>
-                        </a>
-                    </li>
+                      <ul class="sub-nav" id="subMenu">        
+                {{-- ok for Stages à affecter --}}
+                            <li class="nav-item">
+                                <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
+                                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="text-dark text-sm opacity-10"></i>
+                                    </div>
+                                        <span class="nav-link-text ms-1">Stages à affecter</span>
+                                </a>
+                            </li>
            
            
            
                
-               {{-- ok for etats --}}
-                    <li class="nav-item">
-                        <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes']) }}">
-                            <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="text-dark text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Stages affectés (Etats)</span>
-                        </a>
-                    </li>
+                    {{-- ok for etats --}}
+                            <li class="nav-item">
+                                <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes-ete']) }}">
+                                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="text-dark text-sm opacity-10"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Stages affectés </span>
+                                </a>
+                            </li>
 
-                     {{-- ok for Stages sans dépot --}}
-                    <li class="nav-item">
-                        <a class="nav-link {{ str_contains(request()->url(), 'stages-sans-depots') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-sans-depots']) }}">
-                            <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="text-dark text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Stages sans dépot</span>
-                        </a>
-                    </li>
+                                {{-- ok for Stages sans dépot --}}
+                                <li class="nav-item">
+                                    <a class="nav-link {{ str_contains(request()->url(), 'stages-sans-depots-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-sans-depots-ete']) }}">
+                                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                            <i class="text-dark text-sm opacity-10"></i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Stages sans dépot</span>
+                                    </a>
+                                </li>
 
-                    </ul>
-                </li>
             </ul>
+          {{-- stages PFE / SFE --}}
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="toggleSubMenu()">
+                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Stages PFE / SFE</span>
+                    </a>
+                      <ul class="sub-nav" id="subMenu">        
+                {{-- ok for Stages à affecter --}}
+                            <li class="nav-item">
+                                <a class="nav-link {{ str_contains(request()->url(), 'stages-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-pfe-sfe']) }}">
+                                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="text-dark text-sm opacity-10"></i>
+                                    </div>
+                                        <span class="nav-link-text ms-1">Stages à affecter</span>
+                                </a>
+                            </li>
+           
+           
+           
+               
+                    {{-- ok for etats --}}
+                            <li class="nav-item">
+                                <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes-pfe-sfe']) }}">
+                                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="text-dark text-sm opacity-10"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Stages affectés </span>
+                                </a>
+                            </li>
+
+                                {{-- ok for Stages sans dépot --}}
+                                <li class="nav-item">
+                                    <a class="nav-link {{ str_contains(request()->url(), 'stages-sans-depots-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-sans-depots-pfe-sfe']) }}">
+                                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                            <i class="text-dark text-sm opacity-10"></i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Stages sans dépot</span>
+                                    </a>
+                                </li>
+
+            </ul>  
+          
                 @endif
           
            

@@ -44,7 +44,8 @@
 
                                                 <option value="ouvrier" {{ old('type',$stage->type) == 'ouvrier' ? 'selected' : '' }}>ouvrier</option>
                                                 <option value="technicien" {{ old('type',$stage->type) == 'technicien' ? 'selected' : '' }}>technicien</option>
-                                                {{-- <option value="pfe" {{ old('type',$stage->type) == 'pfe' ? 'selected' : '' }}>pfe</option> --}}
+                                                <option value="pfe" {{ old('type',$stage->type) == 'pfe' ? 'selected' : '' }}>pfe</option>
+                                                <option value="sfe" {{ old('type',$stage->type) == 'sfe' ? 'selected' : '' }}>sfe</option>
 
                                              
                                                     
@@ -81,7 +82,7 @@
                                             <select name="societe_id" id="societe_id" class="form-control">
                                                 <option value="">---choix societe ---</option>
                                                 @foreach ($societes as $societe)
-                                                     <option  value="{{$societe->id}}" {{ old('societe_id',$stage->societe_id) == $societe->id ? 'selected' : '' }} >{{ $societe->nom }}</option>
+                                                     <option  value="{{$societe->id}}" {{ old('societe_id',$stage->societe_id) == $societe->id ? 'selected' : '' }} >{{ $societe->nom }} - {{ $societe->ville }}</option>
                                                     
                                                 @endforeach
                                             </select>
