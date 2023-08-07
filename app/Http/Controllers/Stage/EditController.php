@@ -49,65 +49,117 @@ class EditController extends Controller
    ]);
    }
 
-   public function affecter($id)
+   public function affecterEnseignant($id)
    {
-        $stage = Stage::find($id);
-        $enseignants = Enseignant::all();
-    $this->authorize('affecter', $stage );  // que l'admin peut voir la page d'affectation
+              $stage = Stage::find($id);
+              $enseignants = Enseignant::all();
+          $this->authorize('affecter', $stage );  // que l'admin peut voir la page d'affectation
  
-      $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
-      $enseignant_responsable = $enseignants_stage->first(); 
-          $invite = null;
-          $examinateur = null;
-          $rapporteur = null;
-          $encadrant = null;
-      foreach ($enseignants_stage as $enseignant)
-
-      {
-
-        if ($enseignant->pivot->role == 'invite')
-        {
-              $invite = $enseignant ; 
-        }
-
-    elseif ($enseignant->pivot->role == 'examinateur')   
-    
-          {
-            $examinateur = $enseignant ; 
-          }
-    elseif ($enseignant->pivot->role == 'rapporteur')   
-    
-          {
-            $rapporteur = $enseignant ; 
-          }
-    elseif ($enseignant->pivot->role == 'encadrant')   
-    
-          {
-            $encadrant = $enseignant ; 
-          }
-
-      }
-       
-       
-
-
-      
-  // dd ($stage->enseignants) ;
-
-
-  
-      return  view('pages.affecter-stage',['stage' => $stage,
-  
-            'enseignant_responsable' => $enseignant_responsable,
-            'enseignants' => $enseignants,
-            'enseignants_stage' => $enseignants_stage , 
-            'invite' => $invite , 
-            'examinateur'  => $examinateur  ,
-            'rapporteur'=>$rapporteur,
-            'encadrant'=>$encadrant
-
-   ]);
+                        $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
+                        $enseignant_responsable = $enseignants_stage->first();    
+                        return  view('pages.affecter-enseigant-stage-ete',['stage' => $stage,
+                    
+                              'enseignant_responsable' => $enseignant_responsable,
+                              'enseignants' => $enseignants,
+                              'enseignants_stage' => $enseignants_stage , 
+                    ]);
    }
+   public function affecterEncadrant($id)
+   {
+              $stage = Stage::find($id);
+              $enseignants = Enseignant::all();
+               $this->authorize('affecter', $stage );  // que l'admin peut voir la page d'affectation
+ 
+                        $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
+             
+                        $encadrant_responsable = null;
+                        $co_encadrant_responsable = null;
+
+                            foreach ($enseignants_stage as $enseignant)
+
+                        {
+
+                            if ($enseignant->pivot->role == 'encadrant')
+                            {
+                                $encadrant_responsable = $enseignant ; 
+                            }
+
+                              elseif ($enseignant->pivot->role == 'co-encadrant')   
+                            {
+                              $co_encadrant_responsable = $enseignant ; 
+                            }
+                    
+                     
+
+                        }
+
+                        return  view('pages.affecter-encadrant-stage-pfe-sfe',['stage' => $stage,
+                    
+                              'encadrant_responsable' => $encadrant_responsable,
+                              'co_encadrant_responsable'=> $co_encadrant_responsable,
+                              'enseignants' => $enseignants,
+                              'enseignants_stage' => $enseignants_stage , 
+                    ]);
+   }
+   public function affecterJuri($id)
+   {
+              $stage = Stage::find($id);
+              $enseignants = Enseignant::all();
+               $this->authorize('affecter', $stage );  // que l'admin peut voir la page d'affectation
+ 
+                        $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
+                        $enseignant_responsable = $enseignants_stage->first(); 
+                            $rapporteur = null;
+                            $president = null;
+                            $encadrant_responsable = null;
+                            $co_encadrant_responsable = null;
+                           
+                        foreach ($enseignants_stage as $enseignant)
+
+                        {
+
+                            if ($enseignant->pivot->role == 'rapporteur')
+                            {
+                                $rapporteur = $enseignant ; 
+                            }
+
+                             if ($enseignant->pivot->role == 'president')   
+                              {
+                                $president = $enseignant ; 
+                              }
+                              
+                              if ($enseignant->pivot->role == 'encadrant')
+                            {
+                                $encadrant_responsable = $enseignant ; 
+                            }
+
+                          if ($enseignant->pivot->role == 'co-encadrant')   
+                            {
+                              $co_encadrant_responsable = $enseignant ; 
+                            }
+                     
+
+                        }
+                        return  view('pages.affecter-juri',['stage' => $stage,
+                    
+                              'enseignant_responsable' => $enseignant_responsable,
+                              'enseignants' => $enseignants,
+                              'enseignants_stage' => $enseignants_stage , 
+                              'rapporteur' => $rapporteur,
+                              'president' => $president,
+                              'encadrant_responsable' => $encadrant_responsable,
+                              'co_encadrant_responsable' => $co_encadrant_responsable,
+                            
+                            
+                            
+                            
+
+                    ]);
+   }
+
+
+
+
 
    public function choisirSoutenance($id)
    {

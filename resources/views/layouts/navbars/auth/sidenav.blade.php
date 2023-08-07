@@ -1,5 +1,5 @@
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
-    id="sidenav-main">
+<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0  fixed-start ms-4 "
+    id="sidenav-main" style="width:300px">
     <div class="sidenav-header" style="margin: 25px">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
@@ -84,89 +84,133 @@
 
 
 
-            <ul class="nav">
+            <ul class="nav" >
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="toggleSubMenu()">
                         <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="text-dark text-sm opacity-10"></i>
+                           
                         </div>
                         <span class="nav-link-text ms-1">Stages d'été</span>
                     </a>
-                      <ul class="sub-nav" id="subMenu">        
-                {{-- ok for Stages à affecter --}}
-                            <li class="nav-item">
+                      <ul style="list-style: none;
+                      padding-left: 0;">        
+           
+                            <li>
                                 <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
-                                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="text-dark text-sm opacity-10"></i>
-                                    </div>
-                                        <span class="nav-link-text ms-1">Stages à affecter</span>
+                                    <div class="item-style {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}">
+                                        <span class="small-circle-icon">
+                                            <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                            <i class="fas fa-circle"></i>
+                                        </span>
+                                        <span class="nav-link-text ms-1">à affecter aux enseignants</span>
+                                    </div>    
                                 </a>
                             </li>
            
            
            
                
-                    {{-- ok for etats --}}
-                            <li class="nav-item">
-                                <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes-ete']) }}">
-                                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="text-dark text-sm opacity-10"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Stages affectés </span>
-                                </a>
-                            </li>
-
-                                {{-- ok for Stages sans dépot --}}
-                                <li class="nav-item">
-                                    <a class="nav-link {{ str_contains(request()->url(), 'stages-sans-depots-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-sans-depots-ete']) }}">
-                                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                            <i class="text-dark text-sm opacity-10"></i>
-                                        </div>
-                                        <span class="nav-link-text ms-1">Stages sans dépot</span>
+                  
+                                <li>
+                                    <a class="nav-link {{ str_contains(request()->url(),'affectes-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'affectes-ete']) }}">
+                                        <div class="item-style">
+                                            <span class="small-circle-icon">
+                                                <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                                <i class="fas fa-circle"></i>
+                                            </span>
+                                            <span class="nav-link-text ms-1">affectés aux enseignants </span>
+                                        </div>    
                                     </a>
                                 </li>
 
-            </ul>
+                                {{-- ok for Stages sans dépot --}}
+                                    <li>
+                                        <a class="nav-link {{ str_contains(request()->url(), 'sans-depots-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'sans-depots-ete']) }}">
+                                            <div class="item-style">
+                                                    <span class="small-circle-icon">
+                                                        <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                                        <i class="fas fa-circle"></i>
+                                                    </span>
+                                                    <span class="nav-link-text ms-1">sans dépot</span>
+                                            </div>        
+                                        </a>
+                                    </li>
+
+                        </ul>
           {{-- stages PFE / SFE --}}
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="toggleSubMenu()">
                         <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="text-dark text-sm opacity-10"></i>
+                           
                         </div>
                         <span class="nav-link-text ms-1">Stages PFE / SFE</span>
                     </a>
-                      <ul class="sub-nav" id="subMenu">        
-                {{-- ok for Stages à affecter --}}
-                            <li class="nav-item">
-                                <a class="nav-link {{ str_contains(request()->url(), 'stages-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-pfe-sfe']) }}">
-                                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="text-dark text-sm opacity-10"></i>
-                                    </div>
-                                        <span class="nav-link-text ms-1">Stages à affecter</span>
+                      <ul style="list-style: none;
+                      padding-left: 0; ">        
+             
+                            <li >
+                                <a class="nav-link {{ str_contains(request()->url(), 'encadrant-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'encadrant-pfe-sfe']) }}">
+                                    <div class="item-style">
+                                        <span class="small-circle-icon">
+                                            <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                            <i class="fas fa-circle"></i>
+                                        </span>
+                                            <span class="nav-link-text ms-1">à affecter aux encadrants</span>
+                                    </div>        
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="nav-link {{ str_contains(request()->url(), 'encadrants-affectation-pfesfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'encadrants-affectation-pfesfe']) }}">
+                                    <div class="item-style">    
+                                            <span class="small-circle-icon">
+                                                <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                                <i class="fas fa-circle"></i>
+                                            </span>
+                                            <span class="nav-link-text ms-1">affectés aux encadrants </span>
+                                    </div>        
+                                </a>
+                            </li>
+                            <li >
+                                <a class="nav-link {{ str_contains(request()->url(), 'juris-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'juris-pfe-sfe']) }}">
+                                    <div class="item-style">    
+                                        <span class="small-circle-icon">
+                                                <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                                <i class="fas fa-circle"></i>
+                                            </span>
+                                                <span class="nav-link-text ms-1">à affecter aux juri</span>
+                                    </div>            
                                 </a>
                             </li>
            
            
            
                
-                    {{-- ok for etats --}}
-                            <li class="nav-item">
+                 
+                           
+                            <li>
                                 <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes-pfe-sfe']) }}">
-                                    <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="text-dark text-sm opacity-10"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Stages affectés </span>
+                                    <div class="item-style">
+                                        <span class="small-circle-icon">
+                                            <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                            <i class="fas fa-circle"></i>
+                                        </span>
+                                        <span class="nav-link-text ms-1">affectés aux juris </span>
+                                    </div>    
                                 </a>
                             </li>
 
-                                {{-- ok for Stages sans dépot --}}
-                                <li class="nav-item">
+                               
+                                <li >
                                     <a class="nav-link {{ str_contains(request()->url(), 'stages-sans-depots-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-sans-depots-pfe-sfe']) }}">
-                                        <div class="fa fa-school border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                            <i class="text-dark text-sm opacity-10"></i>
-                                        </div>
-                                        <span class="nav-link-text ms-1">Stages sans dépot</span>
+                                        <div class="item-style">    
+                                            <span class="small-circle-icon">
+                                                    <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                                    <i class="fas fa-circle"></i>
+                                                </span>
+                                                <span class="nav-link-text ms-1">sans dépot</span>
+                                        </div>        
                                     </a>
                                 </li>
 

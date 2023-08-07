@@ -8,6 +8,8 @@ use App\Models\Etudiant;
 use App\Models\MessageDeRappel;
 use App\Models\Stage;
 use Illuminate\Http\Request;
+use App\Mail\MessageDeRappelMail;
+use Illuminate\Support\Facades\Mail ;
 
 class StoreController extends Controller
 {
@@ -37,6 +39,16 @@ class StoreController extends Controller
                 'stage_id'=> $stage->id,
                 'user_id'=> auth()->user()->id ,
             ]);
+
+            $etudiants_a_envoyer_message = $stage->etudiants ;
+           foreach ( $etudiants_a_envoyer_message as $etudiant)
+           {
+           
+            Mail::to($etudiant->user->email)->send(new MessageDeRappelMail($message));
+            
+            dd("Email is sent successfully.");
+           }
+            
 
         return back()->with('message', 'meessage envoyé avec succés ');
 

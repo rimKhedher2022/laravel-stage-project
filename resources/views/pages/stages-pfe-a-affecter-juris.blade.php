@@ -15,7 +15,7 @@
                        
                        
                  
-                        <h6>Stages PFE/SFE à affecter aux encadrants </h6>
+                        <h6>Stages PFE/SFE à affecter aux juris </h6>
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -102,19 +102,16 @@
                                            
 
                                             <td class="align-middle text-center text-sm">
-                                                {{-- <div class="d-flex px-3 py-1 justify-content-center align-items-center"> --}}
-                                                
-                                                    @if ($role->value === 'administrateur' && ($stage->type ==='pfe' || $stage->type ==='sfe') )
-                                                    <a href='stages/encadrant/affecter/{{ $stage->id }}'>
+                                            
+                                                    <a href='stages/juri/affecter/{{ $stage->id }}'>
 
-                                                        {{-- @if (empty($stage->enseignants->pluck('id')->toArray())) --}}
-                                                            <button class="btn btn-secondary btn-sm ms-auto">affecter
-                                                                encadrant</button>
+                                                        {{-- @if (!empty($stage->enseignants->pluck('id')->toArray())) --}}
+                                                            <button class="btn btn-secondary btn-sm ms-auto">affecter juri</button>
+                                                                
                                                         {{-- @endif --}}
 
                                                     </a>
-                                                   @endif
-                                                {{-- </div> --}}
+                                              
                                             </td>
                                         </tr>
                                     @endforeach

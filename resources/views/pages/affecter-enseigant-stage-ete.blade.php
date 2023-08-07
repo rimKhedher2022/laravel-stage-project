@@ -21,7 +21,7 @@
 
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Affecter un stage</p>
+                                    <p class="mb-0">Affecter un stage avec un rapport déposé</p>
                                     {{-- {{$stage}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Affecter</button>
                                 </div>
@@ -29,70 +29,11 @@
                         </div>
                         <div class="card-body">
                         
-                            @if ($stage->type =='pfe' || $stage->type =='sfe' )  
-                              {{-- // attention --}}
-
                            
-                                    <p class="text-uppercase text-sm">Les informations du stage PFE à saisir des enseignants </p>
-                                    <div class="row">
-                                    
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label">sujet</label>
-                                                <input class="form-control" type="text" name="sujet" disabled value="{{old('sujet', $stage->sujet)}}">
-                                            </div>
-                                        </div>
-                                        
-                                    
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="encadrant_id">Enseignant-Encadrant du Stage</label>
-                                                    <select name="encadrant_id"  id="encadrant_id" class="form-control">
-                                                        <option value="0">---choix enseignant ---</option>
-                                                                @foreach ($enseignants as $enseignant) 
-                                                                <option value="{{$enseignant->id}}" {{(old('enseignant_id', $enseignant->id) == $encadrant?->id) ? 'selected' : ''}}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
-                                                                @endforeach
-                                                    </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="examinateur_id">Enseignant-Examinateur</label>
-                                                    <select name="examinateur_id"  id="examinateur_id" class="form-control">
-                                                        <option value="0">---choix enseignant ---</option>
-                                                                @foreach ($enseignants as $enseignant) 
-                                                                <option value="{{$enseignant->id}}" {{(old('enseignant_id', $enseignant->id) == $examinateur?->id) ? 'selected' : ''}}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
-                                                                @endforeach
-                                                    </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="rapporteur_id">Enseignant-Rapporteur du Jury</label>
-                                                    <select name="rapporteur_id"  id="rapporteur_id" class="form-control">
-                                                        <option value="0">---choix enseignant ---</option>
-                                                                @foreach ($enseignants as $enseignant) 
-                                                                <option value="{{$enseignant->id}}" {{(old('enseignant_id', $enseignant->id) == $rapporteur?->id) ? 'selected' : ''}}  > {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
-                                                                @endforeach
-                                                    </select>
-                                            </div>
-                                        </div>
+                              
                                        
-                                      
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="invite_id">Enseignant-Invité</label>
-                                                    <select name="invite_id"  id="invite_id" class="form-control">
-                                                        <option value="0">---choix enseignant ---</option>
-                                                                @foreach ($enseignants as $enseignant) 
-                                                                    <option value="{{$enseignant->id}}" {{(old('enseignant_id', $enseignant->id) == $invite?->id) ? 'selected' : ''}}> {{$enseignant->user->nom }} {{ $enseignant->user->prenom }}  </option>
-                                                                @endforeach          
-                                                    </select>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                            @else
+                                   
+                            
                             <p class="text-uppercase text-sm">Les informations du stage à saisir l'enseignant</p>
                             <div class="row">
                             
@@ -116,7 +57,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
+                          
                             {{-- <hr class="horizontal dark"> --}}
                             {{-- <p class="text-uppercase text-sm">Contact Information</p> --}}
                             {{-- <div class="row">

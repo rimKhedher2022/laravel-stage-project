@@ -14,13 +14,45 @@ class DeleteController extends Controller
     {
      $rapport= Rapport::find($id);
      $enseignants_ids =  $rapport->stage->enseignants->pluck('id');
-     $rapport->stage->update([
-        'etat'=> StageEtat::CREE
-     ]) ;
-     // vérifier avec 
-     if($enseignants_ids){
-        $rapport->stage->enseignants()->detach($enseignants_ids) ;
+     // lorsque l'etudiant supprime le rapport , il reste affecté à des encadrants
+     if ($rapport->stage->type=='ouvrier' || $rapport->stage->type=='technicien')
+     {
+      $rapport->stage->update([
+         'etat'=> StageEtat::CREE
+      ]) ;
+
+      // vérifier avec 
+      // si on a un stage d'été
+         if($enseignants_ids){
+            $rapport->stage->enseignants()->detach($enseignants_ids) ;
+         }
      }
+   // si le stage est pfe et sfe , les juris seront supprimé
+     elseif ($rapport->stage->type == 'pfe' || $rapport->stage->type=='sfe') { 
+
+      $role = 'president';
+   
+      $teachersWithRole1 = $rapport->stage->enseignants->filter(function ($enseignant) use ($role) {
+          return $enseignant->pivot->role === $role;
+      })->pluck('id')->toArray();
+      // dd( $teachersWithRole1 );
+      $rapport->stage->enseignants()->detach($teachersWithRole1) ;
+      $role = 'rapporteur';
+      $teachersWithRole2 = $rapport->stage->enseignants->filter(function ($enseignant) use ($role) {
+          return $enseignant->pivot->role === $role;
+      })->pluck('id')->toArray();
+      $rapport->stage->enseignants()->detach($teachersWithRole2) ;
+
+
+      $rapport->stage->update([
+         'etat'=> StageEtat::AFFECTE_ENCADRANT
+      ]) ;
+
+
+     }
+
+    
+     
     
      $rapport->delete() ;
      unlink(public_path('assets/storage/'.$rapport->filePath));

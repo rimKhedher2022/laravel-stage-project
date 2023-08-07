@@ -29,7 +29,7 @@ class StageSansDepotController extends Controller
 
       
         //  dd($stages) ;   // affichage // gate
-        return  view('pages.stages-sans-depots-ete',['stages' => $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
+        return  view('pages.sans-depots-ete',['stages' => $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
     }
     public function stagePFEsFE()  // une seul fonction
     {

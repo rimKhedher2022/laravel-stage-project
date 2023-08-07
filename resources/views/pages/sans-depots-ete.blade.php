@@ -11,7 +11,7 @@
                     @if (session('message'))
                         <div class="alert alert-success" style="color: rgb(2, 0, 15)">{{ session('message') }}</div>
                     @endif
-                        <h6>Stages sans dépots du rapport </h6> 
+                        <h6>Les stages d'été sans dépots du rapport </h6> 
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">

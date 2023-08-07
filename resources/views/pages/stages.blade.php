@@ -17,7 +17,7 @@
                             <button class="btn btn-primary btn-sm ms-auto">Ajouter stage</button>
                         </a>
                     @elseif ($role->value === 'administrateur')
-                        <h6>Stages à affecter aux enseignants  , rapports déposés</h6>
+                        <h6>Les stages d'été à affecter aux enseignants  , rapports déposés</h6>
                         {{-- @else     --}}
                     @else
                         <h6>Stages à lire / corriger / valider rapport</h6>
@@ -161,7 +161,7 @@
                                                         </form>
                                                     @endif
                                                 @elseif ($role->value === 'administrateur' && ($stage->type ==='ouvrier' || $stage->type ==='technicien') )
-                                                    <a href='stages/affecter/{{ $stage->id }}'>
+                                                    <a href='stages/enseignant/affecter/{{ $stage->id }}'>
 
                                                         @if (empty($stage->enseignants->pluck('id')->toArray()))
                                                             <button class="btn btn-secondary btn-sm ms-auto">affecter

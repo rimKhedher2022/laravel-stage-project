@@ -20890,6 +20890,25 @@ hr.horizontal.gray-light {
   transform: translate(0, -50%);
 }
 
+.small-circle-icon {
+    display: inline-block;
+    width: 10px; /* Adjust the width as desired */
+    height: 10px; /* Adjust the height as desired */
+    line-height: 12px; /* Center the icon vertically */
+    text-align: center; /* Center the icon horizontally */
+    border-radius: 50%; /* Make it a circle by setting border-radius to half of width/height */
+    /* Black background color */
+    /* White icon color */
+    font-size: 5px; /* Adjust the font size to make the circle smaller */
+  }
+  .item-style{
+    margin-left:10px;
+  }
+   .item-style.active {
+    font-weight: bold;
+    font-size: 14px; /* Adjust the font size as desired for the selected item */
+  }
+
 @media (min-width: 992px) {
   .virtual-reality .sidenav {
     margin-top: 1.5rem;
@@ -20903,6 +20922,8 @@ hr.horizontal.gray-light {
     background: #fff;
     left: 18% !important;
     position: absolute;
+   
+
   }
 }
 .separator {
@@ -21786,10 +21807,12 @@ hr.horizontal.gray-light {
 .main-content,
 .sidenav {
   transition: all 0.2s ease-in-out;
+  
 }
 
 .sidenav {
   z-index: 999;
+ 
 }
 .sidenav .navbar-brand,
 .sidenav .navbar-heading {

@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                 
-                        <h6>Stages affectées aux enseignants (etat = affecté a un enseignant / rapport vérifié et corrigé / validé / non validé)</h6> 
+                        <h6>Les stages d'été affectés aux enseignants </h6> 
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -74,7 +74,7 @@
                                             @if ($stage->etat =='affecté à un enseignant')
                                                 
                                         
-                                                <a href='stages/affecter/{{$stage->id}}'>
+                                                <a href='stages/enseignant/affecter/{{$stage->id}}'>
 
                                                         {{-- @if  (!empty($stage->enseignants->pluck('id')->toArray())  ) --}}
                                                             <button  class="btn btn-success btn-sm ms-auto">modifier enseignant</button>
