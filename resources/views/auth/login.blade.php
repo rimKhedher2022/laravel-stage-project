@@ -18,7 +18,7 @@
                                 <img  src="{{ asset('./img/logo.png') }}" style="width:100px ;margin-left:120px; " >
                                 <div class="card-header pb-0 ">
                                     <h4 class="font-weight-bolder"  style="margin-left:140px; " >Sign In</h4>
-                                    <p class="mb-0">Enterz votre email et votre mot de pass </p>
+                                    <p class="mb-0">Enterz votre email et votre mot de passe </p>
                                 </div>
                              
                                 <div class="card-body">
@@ -26,11 +26,11 @@
                                         @csrf
                                         @method('post')
                                         <div class="flex flex-col mb-3">
-                                            <input type="email" name="email" class="form-control form-control-lg" value="{{ old('email') ?? '' }}" aria-label="Email">
+                                            <input type="email" name="email" class="form-control form-control-lg" value="{{ old('email') ?? '' }}" aria-label="Email" placeholder="Email">
                                             @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="flex flex-col mb-3">
-                                            <input type="password" name="password" class="form-control form-control-lg" aria-label="Password" value="" >
+                                            <input type="password" name="password" class="form-control form-control-lg" aria-label="Password" value="" placeholder="Mot de passe" >
                                             @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         {{-- <div class="form-check form-switch">
@@ -39,6 +39,13 @@
                                         </div> --}}
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-lg btn-primary btn-lg  mt-3 mb-0">Sign in</button>
+                                            
+                                        </div>
+                                        <div class="text-center pt-0 px-lg-2 px-1" style="margin-top: 20px">
+                                            <p style="color: rgb(26, 26, 7)">
+                                            <a href="{{ route('reset.perform') }}">Mot de passe oublié?</a>
+                                            </p>
+                                            
                                         </div>
                                     </form>
                                 </div>

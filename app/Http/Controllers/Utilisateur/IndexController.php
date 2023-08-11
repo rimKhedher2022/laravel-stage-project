@@ -14,7 +14,7 @@ class IndexController extends Controller
     public function __invoke()  // une seul fonction
     {
         $this->authorize('viewAny', User::class); //ok
-        $users = User::all() ; 
+        $users = User::paginate(30); 
         // dd($users);
         
     return  view('pages.user-management',['users' => $users ]);

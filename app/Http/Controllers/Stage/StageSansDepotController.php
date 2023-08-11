@@ -35,7 +35,7 @@ class StageSansDepotController extends Controller
     {
 
         $this->authorize('stagesConsultesParAdministrateur', Stage::class);
-        $stages= Stage::where('etat',StageEtat::CREE)->get();
+        $stages= Stage::where('etat',StageEtat::AFFECTE_ENCADRANT)->get();
         $session_actuel = SessionDeDepot::latest()->first();
         $aujourdui = Carbon::now('GMT-7');
 

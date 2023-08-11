@@ -13,6 +13,7 @@ class Enseignant extends Model
     use HasFactory;
     protected $fillable = [
         'matricule',
+        'grad',
         'user_id',
     ];
 

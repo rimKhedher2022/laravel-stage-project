@@ -103,19 +103,6 @@
                                                 <option value="0">---pas de binome ---</option>
                                                    
                                                 
-                                                          
-                                                        {{-- @foreach ($etudiants_stage as $etudiant_stage)  
-
-                                                        @if ($id_auth !== $etudiant_stage->id ) 
-                                                            @foreach ($etudiants as $etudiant) 
-                                                            <option value="{{$etudiant->id}}" {{ old('etudiant_id',$etudiant->id ) == $etudiant_stage->id ? 'selected' : '' }} > {{ $etudiant->user->nom }} {{ $etudiant->user->prenom }} </option>
-                                                            @endforeach
-
-                                                        @endif
-                                                           
-                                                        @endforeach  --}}
-
-                                                
                                                         {{-- un seul etudiant connecté --}}
                                                         @foreach ($etudiants as $etudiant) 
                                                                

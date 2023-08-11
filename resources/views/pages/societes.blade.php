@@ -2,8 +2,19 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Sociétés'])
+
+    <div id="alert">
+        @include('components.alert')
+    </div> 
+   
+
     <div class="row mt-4 mx-4">
         <div class="col-12">
+
+            @if (session('message'))
+                <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
+            @endif
+
             @if   (auth()->user()->role->value === 'etudiant')
                 <div class="card mb-4">
                 
@@ -111,9 +122,15 @@
                 <div class="card-header pb-0">
                     
                         <h6>Les sociétés proposées </h6>
-                    
+                        <form role="form" method="POST"  action="{{ route('data.societes.import') }}" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="csv_file_societe" accept=".csv">
+                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Remplir avec CSV</button>
+                        </form>
                 
                 </div>
+
+              
         
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">

@@ -33,13 +33,14 @@ class EnseignantSeeder extends Seeder
             'prenom' => 'ghanoun',
             'email' => 'mariem@example.com',
             'role' => RoleType::Enseignant,
-            
+            'annee-scolaire' => '2022-2023',
             'password' => bcrypt('secret')
         ]);
 
 
         Enseignant::create([ // ????
             'matricule'=>'525187',
+            'grad'=>'exemple',
             'user_id'=> $user->id
         ]);
     }

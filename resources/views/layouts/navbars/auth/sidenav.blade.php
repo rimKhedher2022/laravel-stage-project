@@ -190,7 +190,7 @@
                  
                            
                             <li>
-                                <a class="nav-link {{ str_contains(request()->url(), 'stages-affectes-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages-affectes-pfe-sfe']) }}">
+                                <a class="nav-link {{ str_contains(request()->url(), 'juris-affectation-pfesfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'juris-affectation-pfesfe']) }}">
                                     <div class="item-style">
                                         <span class="small-circle-icon">
                                             <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
@@ -299,7 +299,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ str_contains(request()->url(), 'exporter-data') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'exporter']) }}">
+                            <a class="nav-link {{ str_contains(request()->url(), 'import') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'import']) }}">
                             <div class="fa fa-building-o  border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni  text-dark text-sm opacity-10"></i>
                             </div>

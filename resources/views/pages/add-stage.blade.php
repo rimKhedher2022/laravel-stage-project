@@ -44,14 +44,30 @@
                                     <div class="form-group">
                                         
                                         <label for="type">type:</label>
-                                            <select name="type" id="type" class="form-control">
+
+                                        
+                                        {{-- les autres etudiants--}}
+
+                                        @if ($niveau=='3' && $specialite == 'informatique')
+                                            <input class="form-control" type="text" name="type" value="pfe" >
+                                        @endif
+
+                                        @if ($niveau =='2' && $specialite == 'informatique')
+                                            <input class="form-control" type="text" name="type" value="technicien" >
+                                        @endif
+
+                                        @if ($niveau =='1' && $specialite == 'informatique')
+                                            <input class="form-control" type="text" name="type" value="ouvrier" >
+                                        @endif
+                                        
+                                            {{-- <select name="type" id="type" class="form-control">
 
                                                 <option value="ouvrier">ouvrier</option>
                                                 <option value="technicien">technicien</option>
                                                 <option value="pfe">PFE</option>
                                                 <option value="sfe">SFE</option>
 
-                                            </select>
+                                            </select> --}}
                                     </div>
                                 </div>
 
@@ -95,6 +111,29 @@
                                                 
                                             </select>
                                             
+                                    </div>
+                                </div>
+                               
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        
+                                        <label for="etudiant_id">binome:</label>
+                                            <select name="etudiant_id"  id="etudiant_id" class="form-control">
+                                                <option value="0">---pas de binome ---</option>
+                                                   
+                                                
+                                                        {{-- un seul etudiant connecté --}}
+                                                        @foreach ($etudiants as $etudiant) 
+                                                               
+                                                        <option value="{{$etudiant->id}}"> {{ $etudiant->user->nom }} {{ $etudiant->user->prenom }}  </option>
+                                                        @endforeach
+                                                  
+                                                    
+                                                        {{-- <option value="{{$etudiant->id}}" {{ old('etudiant_id',$etudiant->id ) == '?' ? 'selected' : '' }} > {{ $etudiant->user->nom }} {{ $etudiant->user->prenom }} </option> --}}
+                                              
+                                                {{-- @endif --}}
+                                            </select>
                                     </div>
                                 </div>
                                

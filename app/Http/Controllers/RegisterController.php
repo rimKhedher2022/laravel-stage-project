@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'prenom' => $request->prenom,
             'email' => $request->email,
             'password' => $request->password,
+            'annee-scolaire' => $request->annee_scolaire,
 
         ]);
       

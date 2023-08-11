@@ -4,7 +4,7 @@
     <title>Rappel de dépôt</title>
 </head>
 <body>
-            <h2>{{$titre}}</h2>
-            <p>{{$description}}</p>
+                <h2>{{$Mymessage->titre}}</h2>
+                <p>{{$Mymessage->description}}</p>
 </body>
 </html>

@@ -38,6 +38,7 @@ class EtudiantSeeder extends Seeder
             'email' => 'bien@example.com',
             'role' => RoleType::Etudiant,
           
+            'annee-scolaire' => '2022-2023',
             'password' => bcrypt('secret')
         ]);
 

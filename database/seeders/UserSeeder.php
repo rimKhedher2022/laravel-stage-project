@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'prenom' => 'ben ali',
             'role' => RoleType::Administrateur,
             'email' => 'moh@example.com',
-          
+            'annee-scolaire' => '2022-2023',
             'password' => bcrypt('secret')
         ]);
     }

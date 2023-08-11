@@ -23,8 +23,16 @@ class StoreController extends Controller
     public function show()
     {
         $this->authorize('viewAny',Stage::class);
+        $loggedInStudent = Etudiant::where('user_id', auth()->id())->first();
+        $niveau = $loggedInStudent->niveau ; 
+        $specialite = $loggedInStudent->specialite ; 
+      
         $societes = Societe::where('validation_state','approved by admin')->get() ;       
-        return view('pages.add-stage',['societes' => $societes]);
+        $etudiants = Etudiant::where('user_id', '!=', auth()->id())
+        ->where('niveau', $loggedInStudent->niveau)
+        ->where('specialite', $loggedInStudent->specialite)
+        ->get() ;  // pour le binome
+        return view('pages.add-stage',['societes' => $societes , 'etudiants' => $etudiants , 'niveau'=>$niveau , 'specialite'=>$specialite]);
     }
 
 
@@ -51,6 +59,7 @@ class StoreController extends Controller
         ]);
     
         $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
+
         EtudiantStage::create([
             
              $id = $etudiant->id,// 2
@@ -58,9 +67,15 @@ class StoreController extends Controller
             // 'etudiant_id'=> auth()->id(), //4 user_id
             'etudiant_id'=> $id, // 2  etudiant_id
         ]);
-        event(new Registered($stage)) ;
-        // $admins = User::where('role',RoleType::Administrateur)->get() ; 
-        // Notification::send($admins,new NewStageCreeSansDepotNotification($stage)) ; 
+
+        if( $request->etudiant_id){
+            EtudiantStage::create([
+               'stage_id'=>$stage->id,
+               'etudiant_id'=> $request->etudiant_id, // 2  etudiant_id
+           ]);
+   
+        }
+   
         return back()->with('succes', 'stage ajouté ');
     }
 

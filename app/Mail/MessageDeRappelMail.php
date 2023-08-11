@@ -12,14 +12,14 @@ use App\Models\MessageDeRappel;
 class MessageDeRappelMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $message;
+    public $Mymessage;
 
     /**
      * Create a new message instance.
      */
     public function __construct(MessageDeRappel $message)
     {
-        $this->message = $message;
+        $this->Mymessage = $message;
         //  dd($this->message->titre, $this->message->description);
     }
 
@@ -54,8 +54,8 @@ class MessageDeRappelMail extends Mailable
         return new Content(
             view: 'emails.message_de_rappel',
             with: [
-                'titre' => $this->message->titre,
-                'description' => $this->message->description,
+                'titre' => $this->Mymessage->titre,
+                'description' => $this->Mymessage->description,
             ],
            
         )

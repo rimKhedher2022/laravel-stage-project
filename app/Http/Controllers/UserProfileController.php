@@ -27,16 +27,38 @@ class UserProfileController extends Controller
 
 
         $imageName ='' ; 
-        if ($request->hasFile('image'))
+        if ($request->hasFile('image') && auth()->user()->image != 'null' )
         {
+           
+            unlink(public_path('img/'.auth()->user()->image));
          $imageName = time().'_'.$request->image->getClientOriginalName();
          $request->image->move(public_path('/img'),$imageName);
+
+           
+        }
+        elseif(auth()->user()->image == 'null')
+        {
+            // dd(auth()->user()->image) ;
+            if ($request->hasFile('image'))
+            {
+            $imageName = time().'_'.$request->image->getClientOriginalName();
+            $request->image->move(public_path('/img'),$imageName);
+            }
+           
         }
 
-        if(auth()->user()->image)
-        {
-            unlink(public_path('img/'.auth()->user()->image));
-        }
+       
+
+        // if(auth()->user()->image != null)
+        // {
+        //     // dd(auth()->user()->image) ;
+        //     unlink(public_path('img/'.auth()->user()->image));
+        // }
+
+
+
+        
+        
        
 
         auth()->user()->update([

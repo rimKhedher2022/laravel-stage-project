@@ -149,27 +149,34 @@ public function affecter (Request $request  , $id) {
                 })->pluck('id')->toArray();
         
                 // dd(in_array($request->president_id, $teachersWithRole2));
-        
-                if($teachersWithRole3 && !(in_array($request->encadrant_id, $teachersWithRole3)))
-                {
-                    $stage->enseignants()->detach($teachersWithRole3) ; // suprimer l'enseignant
-                    EnseignantStage::create([  // 
-                        'stage_id'=>$stage->id,
-                        'enseignant_id'=> $request->encadrant_id, // l'enseignant
-                        'role'=> 'encadrant'
-                        ]);
-                }
-        
-                if(!$teachersWithRole3){
-                    EnseignantStage::create([  // 
-                        'stage_id'=>$stage->id,
-                        'enseignant_id'=> $request->encadrant_id, // l'enseignant
-                        'role'=> 'encadrant'
-                        ]);
-                }
+                     // x : encadrant and y : co-encadrant , 
+                     // x : co-encadrant and y : encadrant  , 
+                    if($teachersWithRole3 && !(in_array($request->encadrant_id, $teachersWithRole3)))
+                    {
+                        $stage->enseignants()->wherePivot('role',$role)->detach($teachersWithRole3) ; // suprimer l'enseignant
+                        EnseignantStage::create([  // 
+                            'stage_id'=>$stage->id,
+                            'enseignant_id'=> $request->encadrant_id, // l'enseignant
+                            'role'=> 'encadrant'
+                            
+                            ]);
+                            // dd('create encadrant');
+                            // dd($test);
+
+                    }
+            
+                    $test=null;
+                    if(!$teachersWithRole3){
+                            EnseignantStage::create([  // 
+                            'stage_id'=>$stage->id,
+                            'enseignant_id'=> $request->encadrant_id, // l'enseignant
+                            'role'=> 'encadrant'
+                            ]);
+                            // dd($test);
+                    }
                
                
-               
+                   
                   
             }
         
@@ -187,8 +194,11 @@ public function affecter (Request $request  , $id) {
         
             }
         
+
+           
             if ($request->co_encadrant_id !== '0')
             {
+
                 $role = 'co-encadrant';
                 $teachersWithRole4 = $stage->enseignants->filter(function ($enseignant) use ($role) {
                     return $enseignant->pivot->role === $role;
@@ -198,12 +208,15 @@ public function affecter (Request $request  , $id) {
         
                 if($teachersWithRole4 && !(in_array($request->co_encadrant_id, $teachersWithRole4)))
                 {
-                    $stage->enseignants()->detach($teachersWithRole4) ; // suprimer l'enseignant
-                    EnseignantStage::create([  // 
+                    // dd($teachersWithRole4); // id 
+                    $stage->enseignants()->wherePivot('role',$role)->detach($teachersWithRole4) ; // suprimer l'enseignant
+                        EnseignantStage::create([  // 
                         'stage_id'=>$stage->id,
                         'enseignant_id'=> $request->co_encadrant_id, // l'enseignant
                         'role'=> 'co-encadrant'
+
                         ]);
+                        // dd($test);
                 }
         
                 if(!$teachersWithRole4){

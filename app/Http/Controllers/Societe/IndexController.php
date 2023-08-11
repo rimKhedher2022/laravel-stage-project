@@ -22,7 +22,7 @@ class IndexController extends Controller
   //  dd($role);
     switch ($role) {
         case RoleType::Administrateur:
-            $societes = Societe::all();
+            $societes = Societe::latest()->get();
             
 
             // liste des etudiants

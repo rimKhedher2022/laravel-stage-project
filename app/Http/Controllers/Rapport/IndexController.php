@@ -20,6 +20,8 @@ class IndexController extends Controller
      // que les rapports de l'etudiant connecté
      $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
      $session_actuel = SessionDeDepot::latest()->first();
+
+    //  dd($session_actuel);
      $stages = $etudiant->stages;
     
 

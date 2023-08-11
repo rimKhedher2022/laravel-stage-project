@@ -21,7 +21,7 @@
 
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Affecter un stage aux juri</p>
+                                    <p class="mb-0">Affecter un stage aux juris</p>
                                     {{-- {{$stage}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Affecter</button>
                                 </div>
@@ -54,14 +54,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="encadrant_id">Encadrant:</label>
-                                        <input class="form-control" type="text" name="encadrant" disabled value="{{ $encadrant_responsable?->user->nom }}">
+                                        <input class="form-control" type="text" name="encadrant" disabled value="{{ $encadrant_responsable?->user->nom }} {{ $encadrant_responsable?->user->prenom }}">
                                             
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="co_encadrant_id">Encadrant:</label>
-                                        <input class="form-control" type="text" name="co_encadrant" disabled value="{{ $co_encadrant_responsable?->user->nom }} ">
+                                        <input class="form-control" type="text" name="co_encadrant" disabled value="{{ $co_encadrant_responsable?->user->nom }} {{ $encadrant_responsable?->user->prenom }} ">
                                             
                                     </div>
                                 </div>

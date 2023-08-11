@@ -97,8 +97,9 @@ Route::middleware('auth')->group(function () {
 	Route::get('/stages/enseignant/affecter/{id}',[EditController::class, 'affecterEnseignant'])->name('affecter-enseignant-stage');
 	Route::get('/stages/encadrant/affecter/{id}',[EditController::class, 'affecterEncadrant'])->name('affecter-encadrant-stage-pfe-sfe');
 	Route::get('/stages/juri/affecter/{id}',[EditController::class, 'affecterJuri'])->name('affecter-juri-stage-pfe-sfe');
-	Route::get('/exporter',[DataController::class, 'show'])->name('exporter-data');
-	Route::post('/exporter-to-csv',[DataController::class, 'exportToCSV'])->name('data.export');
+	Route::get('/import',[DataController::class, 'show'])->name('import');
+	Route::post('/import-from-csv',[DataController::class, 'importCSV'])->name('data.import');
+	Route::post('/import-from-csv-societes',[DataController::class, 'importSocieteCSV'])->name('data.societes.import');
 	Route::get('/stages/soutenance/{id}',[EditController::class, 'choisirSoutenance'])->name('soutenance-stage'); //?????
 	// Route::get('/stages/affecter/{id}',EditController::class)->name('edit-stage'); // admin
 	Route::post('/stages/{id}',[UpdateController::class, 'update'])->name('stages.update');
@@ -114,8 +115,11 @@ Route::middleware('auth')->group(function () {
 	Route::get('/juris-pfe-sfe',[StageIndexController::class,'stagesPfeSfeJuri'])->name('stages-juris-pfe-sfe'); //
 	Route::get('/soutenances',DatesSoutenancesController::class)->name('soutenances');
 	Route::get('/stages-a-valider',StageAvaliderController::class)->name('stages-valider');
-	Route::get('/affectes-ete',[StageAffectationController::class,'stageEte'])->name('affectes-ete');
-	Route::get('/encadrants-affectation-pfesfe',[StageAffectationController::class,'stagePFESFE'])->name('encadrants-affectation-pfesfe');
+
+	Route::get('/affectes-ete',[StageAffectationController::class,'stageEte'])->name('affectes-ete'); // Les stages d'été affectés
+	Route::get('/juris-affectation-pfesfe',[StageAffectationController::class,'juriPFESFE'])->name('juris-affectation-pfesfe'); // Les stages pfe sfe affectés aux juris
+
+	Route::get('/encadrants-affectation-pfesfe',[StageAffectationController::class,'stagePFESFE'])->name('encadrants-affectation-pfesfe'); // Les stages pfe sfe affectés aux encadrants
 	Route::get('/sans-depots-ete',[StageSansDepotController::class,'stageEte'])->name('sans-depots-ete');
 	Route::get('/stages-sans-depots-pfe-sfe',[StageSansDepotController::class,'stagePFEsFE'])->name('stages-sans-depots-pfe-sfe');
 	Route::delete('/stages/{id}',StageDeleteController::class)->name('stages.delete');
@@ -194,8 +198,8 @@ Route::get('/', function () {return redirect('/profile');})->middleware('auth');
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
 	Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
 	Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
-	Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
-	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
+	Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');///////////
+	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password'); ///////////
 	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 	Route::post('/mark-as-read', [HomeController::class, 'markNotification'])->name('markNotification');

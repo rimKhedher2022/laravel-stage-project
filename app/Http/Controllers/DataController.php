@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enseignant;
+use App\Models\Etudiant;
+use App\Models\Societe;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 class DataController extends Controller
@@ -16,76 +19,120 @@ class DataController extends Controller
      { 
         $users = User::all() ;
         $annees = $users->pluck('annee-scolaire')->unique(); 
-        return  view('pages.exporter-fichier-csv',['annees'=> $annees]) ; 
+        return  view('pages.importer-fichier-csv',['annees'=> $annees]) ; 
      }
 
 
-    public function exportToCSV(Request $request)
+    public function importCSV(Request $request)
     {
-        // Fetch data from the database
-       if($request->user == 'etudiant')
-       {
+        $file = $request->file('csv_file');
+        $request->validate([
+            'csv_file' => 'required',
+            'annee' => 'required', 
+        ]);
         
-     
-        // $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
-        $data = User::where('annee-scolaire',$request->annee)->where('role','etudiant')->get(); // Replace TableName with your model name if using one
-      
+        if ($request->file('csv_file'))
 
-        // Define CSV file name and headers
-        $filename = 'data.csv';
-        $headers = [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
-        ];
+        {
+           
+            Enseignant::query()->delete();
+            Etudiant::query()->delete();
+            User::query()->delete();
+                $anneeScolaire = $request->input('annee');
+                $csvData = array_map('str_getcsv', file($file));
+        
+            foreach ($csvData as $row) {
+                if (count($row) === 11) {
 
-        // Create a CSV file using Laravel's built-in CSV response
-        $callback = function () use ($data) {
-            $file = fopen('php://output', 'w');
-            // Add headers to the CSV file
-            fputcsv($file, array_keys($data[0]->toArray()));
+                        if($anneeScolaire == $row[6] )
+                        {
+    
+                           
+                                $user = User::create([
+                                
+                                    'nom' => $row[0], // Replace with the appropriate column index
+                                    'prenom' => $row[1], // Replace with the appropriate column index
+                                    'email' => $row[2], // Replace with the appropriate column index
+                                    'password' => $row[3], // Replace with the appropriate column index
+                                    'role' => $row[4], // Replace with the appropriate column index
+                                    'image' => $row[5], // Replace with the appropriate column index
+                                    'annee-scolaire' => $row[6], // Replace with the appropriate column index
+                                ]);
+                                if ($row[4] == 'etudiant')
+                                {
+        
+        
+                                    Etudiant::create([
+                                        'cin' => $row[7], // Replace with the appropriate column index
+                                        'niveau' => $row[8], // Replace with the appropriate column index
+                                        'specialite' => $row[9], // Replace with the appropriate column index
+                                        'numero_inscription' => $row[10], // Replace with the appropriate column index
+                                        'user_id' => $user->id, // Replace with the appropriate column index
+                                    ]);
+                                }
+                                if ($row[4] == 'enseignant')
+                                {
+                                
+                                    Enseignant::create([
+                                        'matricule' => $row[7], 
+                                        'grad' => $row[8],
+                                        'user_id' => $user->id, 
+                                    ]);
+                                }
 
-            // Add data to the CSV file
-            foreach ($data as $row) {
-                fputcsv($file, $row->toArray());
+                           
+                        }     
+                        
+                    } else{
+                        return redirect()->back()->with('error', 'Le fichier CSV n\'est pas structuré correctement.');
+
+
+                    }     
             }
-
-            fclose($file);
-        };
-
-        // Return the CSV file as a response
-        return Response::stream($callback, 200, $headers);
+         
+        }     
+      else {
+        return redirect()->back()->with('error', 'Veuillez saisir un fichier csv.');
+      }
+     
+        return redirect()->back()->with('message', 'doonées importés avec succes');
+   
     }
-    else
+
+
+
+    public function importSocieteCSV (Request $request)
     {
 
-        $data = User::where('annee-scolaire',$request->annee)->where('role','enseignant')->get(); // Replace TableName with your model name if using one
-      
+        $fileSociete = $request->file('csv_file_societe');
+        if ($request->file('csv_file_societe'))
+        {
+            Societe::query()->delete();
+            if ($fileSociete) {
+                    $csvDataSociete = array_map('str_getcsv', file($fileSociete));
+    
+                        foreach ($csvDataSociete as $row) {
+                            if (count($row) === 5) {
+                                    Societe::create([
+                                        'nom' => $row[0], 
+                                        'ville' => $row[1], 
+                                        'telephone' => $row[2], 
+                                        'adresse' => $row[3], 
+                                        'validation_state' => $row[4], 
+                                        
+                                    ]);
 
-        // Define CSV file name and headers
-        $filename = 'data.csv';
-        $headers = [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
-        ];
-
-        // Create a CSV file using Laravel's built-in CSV response
-        $callback = function () use ($data) {
-            $file = fopen('php://output', 'w');
-            // Add headers to the CSV file
-            fputcsv($file, array_keys($data[0]->toArray()));
-
-            // Add data to the CSV file
-            foreach ($data as $row) {
-                fputcsv($file, $row->toArray());
+                                } else {    
+                                    return redirect()->back()->with('error', 'Le fichier CSV n\'est pas structuré correctement.');
+                                }     
+                        }
             }
-
-            fclose($file);
-        };
-
-        // Return the CSV file as a response
-        return Response::stream($callback, 200, $headers);
-
-
-    }
+        } 
+        else {
+            return redirect()->back()->with('error', 'Veuillez saisir un fichier csv.');
+        }
+        
+        return redirect()->back()->with('message', 'Données importés.');
+       
     }
 }

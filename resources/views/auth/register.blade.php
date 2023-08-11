@@ -124,7 +124,10 @@
                                     <input type="file" name="image" class="form-control" placeholder="image" aria-label="Image">
                                     @error('image') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
-                            
+                                <div class="flex flex-col mb-3">
+                                    <input type="text" name="annee_scolaire" class="form-control" placeholder="annee scolaire" aria-label="Année scolaire" value="{{ old('prenom') }}" >
+                                    @error('annee-scolaire') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                </div>
                                
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary  my-4 mb-2">Sign up</button>

@@ -4,35 +4,32 @@
   
     @include('layouts.navbars.auth.topnav', ['title' => 'exporter fichier'])
   
-    <div id="alert">
+   <div id="alert">
         @include('components.alert')
-    </div>
- 
+    </div> 
    
-  
 
     <div class="container-fluid py-4">
+        @if (session('message'))
+        <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
+        @endif
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
                     
-                    <form role="form" method="POST"  action="{{ route('data.export') }}" enctype="multipart/form-data">
+                    <form role="form" method="POST"  action="{{ route('data.import') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
 
-                                <div class="d-flex align-items-center">
-                                    <p class="mb-0">choix année scolaire</p>
-                                    {{-- {{$stage}} --}}
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Importer CSV</button>
-                                </div>
-                            
+
                         </div>
                         <div class="card-body">
+
                             {{-- <p class="text-uppercase text-sm">Les informations du stage à saisir date soutenance</p> --}}
                             <div class="row">
-                            
-                                <div class="col-md-6">
+
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Etudiants / Enseignants</label>
                                         <select name="user" id="user" class="form-control">
@@ -41,20 +38,23 @@
                                         </select>
                                     </div>
                                 </div>
-                                
-                               
+                                 --}}
+                                 <label for="example-text-input" class="form-control-label">Remplir la base de données de l'année scolaire: </label>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">année scolaire</label>
-                                        <select name="annee" id="annee" class="form-control">
-                                            <option value="">---choix année scolaire ---</option>
-                                            @foreach ($annees as $annee)
-                                                 <option  value="{{ $annee }}" >{{ $annee }} </option>
-                                            
-                                            @endforeach
-                                        </select>
                                        
+                                        <input class="form-control" type="text" name="annee" placeholder="exemple:2022-2023" required>
                                     </div>
+                                </div>
+
+                                
+                                <div class="d-flex align-items-center">
+                                    {{-- <p class="mb-0">choix année scolaire</p> --}}
+                                    <input type="file" name="csv_file" accept=".csv">
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Remplir avec CSV</button>
+
+                                    {{-- {{$stage}} --}}
                                 </div>
                                
                                

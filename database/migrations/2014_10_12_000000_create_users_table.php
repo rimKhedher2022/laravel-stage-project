@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password');/* */
             $table->enum('role', ['administrateur', 'etudiant','enseignant'])->default('etudiant');     
             $table->string('image')->nullable();/* */
-            $table->string('annee-scolaire')->nullable();/* */
+            $table->string('annee-scolaire');/* */
             $table->timestamps();
         });
     }

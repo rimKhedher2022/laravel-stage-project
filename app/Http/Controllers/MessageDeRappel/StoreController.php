@@ -40,13 +40,14 @@ class StoreController extends Controller
                 'user_id'=> auth()->user()->id ,
             ]);
 
-            $etudiants_a_envoyer_message = $stage->etudiants ;
+            $etudiants_a_envoyer_message = $stage->etudiants;
+            // dd($etudiants_a_envoyer_message) ;
            foreach ( $etudiants_a_envoyer_message as $etudiant)
            {
            
-            Mail::to($etudiant->user->email)->send(new MessageDeRappelMail($message));
+                Mail::to($etudiant->user->email)->send(new MessageDeRappelMail($message));
             
-            dd("Email is sent successfully.");
+                dd("Email is sent successfully.");
            }
             
 
