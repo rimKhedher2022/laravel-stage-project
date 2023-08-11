@@ -13,6 +13,7 @@ class MessageDeRappelMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $Mymessage;
+    public  $userEmail;
 
     /**
      * Create a new message instance.
@@ -20,24 +21,15 @@ class MessageDeRappelMail extends Mailable
     public function __construct(MessageDeRappel $message)
     {
         $this->Mymessage = $message;
-        //  dd($this->message->titre, $this->message->description);
+        $userEmail = auth()->user()->email;
+        $userName = auth()->user()->name;
+        
+        $this->from($userEmail, $userName);
+       
     }
 
 
-    // public function build()
-    // {
-
-    //     // dd($this->message->titre, $this->message->description);
-    //     return $this->view('emails.message_de_rappel')
-    //                 ->subject('Rappel de dépôt')
-    //                 ->with([
-    //                     'titre' => $this->message->titre,
-    //                     'description' => $this->message->description,
-    //                 ]);
-    // }
-    /**
-     * Get the message envelope.
-     */
+   
     public function envelope(): Envelope
     {
         return new Envelope(

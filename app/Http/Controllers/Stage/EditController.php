@@ -101,7 +101,7 @@ class EditController extends Controller
                               'enseignants_stage' => $enseignants_stage , 
                     ]);
    }
-   public function affecterJuri($id)
+   public function affecterJury($id)
    {
               $stage = Stage::find($id);
               $enseignants = Enseignant::all();
@@ -140,7 +140,7 @@ class EditController extends Controller
                      
 
                         }
-                        return  view('pages.affecter-juri',['stage' => $stage,
+                        return  view('pages.affecter-jury',['stage' => $stage,
                     
                               'enseignant_responsable' => $enseignant_responsable,
                               'enseignants' => $enseignants,

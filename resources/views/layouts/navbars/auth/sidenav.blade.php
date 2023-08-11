@@ -173,13 +173,13 @@
                                 </a>
                             </li>
                             <li >
-                                <a class="nav-link {{ str_contains(request()->url(), 'juris-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'juris-pfe-sfe']) }}">
+                                <a class="nav-link {{ str_contains(request()->url(), 'jurys-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'jurys-pfe-sfe']) }}">
                                     <div class="item-style">    
                                         <span class="small-circle-icon">
                                                 <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
                                                 <i class="fas fa-circle"></i>
                                             </span>
-                                                <span class="nav-link-text ms-1">à affecter aux juri</span>
+                                                <span class="nav-link-text ms-1">à affecter aux jury</span>
                                     </div>            
                                 </a>
                             </li>
@@ -190,13 +190,13 @@
                  
                            
                             <li>
-                                <a class="nav-link {{ str_contains(request()->url(), 'juris-affectation-pfesfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'juris-affectation-pfesfe']) }}">
+                                <a class="nav-link {{ str_contains(request()->url(), 'jurys-affectation-pfesfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'jurys-affectation-pfesfe']) }}">
                                     <div class="item-style">
                                         <span class="small-circle-icon">
                                             <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
                                             <i class="fas fa-circle"></i>
                                         </span>
-                                        <span class="nav-link-text ms-1">affectés aux juris </span>
+                                        <span class="nav-link-text ms-1">affectés aux jurys </span>
                                     </div>    
                                 </a>
                             </li>

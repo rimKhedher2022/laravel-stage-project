@@ -64,7 +64,7 @@ class IndexController extends Controller
             
        
       }
-    public function stagesPfeSfeJuri()  // une seul fonction
+    public function stagesPfeSfeJury()  // une seul fonction
     {
 
        
@@ -81,7 +81,7 @@ class IndexController extends Controller
          
             
              
-            return  view('pages.stages-pfe-a-affecter-juris',['stages' => $stages , 'role' => $role ]);
+            return  view('pages.stages-pfe-a-affecter-jurys',['stages' => $stages , 'role' => $role ]);
             
        
       }

@@ -15,13 +15,13 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action={{ route('stages.affecterJuri' , $stage->id) }} enctype="multipart/form-data">
+                    <form role="form" method="POST" action={{ route('stages.affecterJury' , $stage->id) }} enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Affecter un stage aux juris</p>
+                                    <p class="mb-0">Affecter un stage aux jurys</p>
                                     {{-- {{$stage}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Affecter</button>
                                 </div>
@@ -40,7 +40,7 @@
                                   
                             
                           
-                            <p class="text-uppercase text-sm">Les informations du stage à saisir juri</p>
+                            <p class="text-uppercase text-sm">Les informations du stage à saisir jury</p>
                             <div class="row">
                             
                                 <div class="col-md-6">
@@ -61,7 +61,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="co_encadrant_id">Encadrant:</label>
-                                        <input class="form-control" type="text" name="co_encadrant" disabled value="{{ $co_encadrant_responsable?->user->nom }} {{ $encadrant_responsable?->user->prenom }} ">
+                                        <input class="form-control" type="text" name="co_encadrant" disabled value="{{ $co_encadrant_responsable?->user->nom }} {{ $co_encadrant_responsable?->user->prenom }} ">
                                             
                                     </div>
                                 </div>

@@ -35,7 +35,7 @@ class StageAffectationController extends Controller
         return  view('pages.stages-pfe-affectes',['stages' => $stages ,'enseignants' => $enseignants ]);
     }
 
-    public function juriPFESFE()  // une seul fonction
+    public function juryPFESFE()  // une seul fonction
     {
         // $stages= Stage::where('etat',StageEtat::AFFECTE)->get();
         $this->authorize('stagesConsultesParAdministrateur', Stage::class);
@@ -43,7 +43,7 @@ class StageAffectationController extends Controller
         $stages= Stage::where('etat',StageEtat::AFFECTE_J)
                     ->whereIn('type', [StageType::PFE, StageType::SFE])->get(); 
 
-        return  view('pages.juri-pfe-affectes',['stages' => $stages ,'enseignants' => $enseignants ]);
+        return  view('pages.jury-pfe-affectes',['stages' => $stages ,'enseignants' => $enseignants ]);
     }
 
 

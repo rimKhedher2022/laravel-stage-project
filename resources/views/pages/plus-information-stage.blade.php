@@ -75,11 +75,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         
-                                        <label for="societe_id">societe:</label>
+                                        <label for="societe_id">Societe:</label>
                                           
                                             
                                              
-                                                     <p >{{ $stage->societe->nom }}</p>
+                                                     <p >{{ $stage->societe->nom }} {{ $stage->societe->ville }}</p>
                                                     
                                              
                                            

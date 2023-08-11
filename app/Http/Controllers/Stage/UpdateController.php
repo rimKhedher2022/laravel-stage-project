@@ -188,7 +188,7 @@ public function affecter (Request $request  , $id) {
         
                 if($teachersWithRole3)
                 {
-                    $stage->enseignants()->detach($teachersWithRole3) ; // suprimer l'enseignant
+                    $stage->enseignants()->wherePivot('role',$role)->detach($teachersWithRole3) ; // suprimer l'enseignant
                 }
                
         
@@ -258,7 +258,7 @@ public function affecter (Request $request  , $id) {
 
 
 
-public function affecterJuri (Request $request  , $id)
+public function affecterJury (Request $request  , $id)
  {
     $stage = Stage::find($id);
    
@@ -282,7 +282,7 @@ public function affecterJuri (Request $request  , $id)
 
         if($teachersWithRole1 && !(in_array($request->president_id, $teachersWithRole1)))
         {
-            $stage->enseignants()->detach($teachersWithRole1) ; // suprimer l'enseignant
+            $stage->enseignants()->wherePivot('role',$role)->detach($teachersWithRole1) ; // suprimer l'enseignant
             EnseignantStage::create([  // 
                 'stage_id'=>$stage->id,
                 'enseignant_id'=> $request->president_id, // l'enseignant
@@ -328,7 +328,7 @@ public function affecterJuri (Request $request  , $id)
 
         if($teachersWithRole2 && !(in_array($request->rapporteur_id, $teachersWithRole2)))
         {
-            $stage->enseignants()->detach($teachersWithRole2) ; // suprimer l'enseignant
+            $stage->enseignants()->wherePivot('role',$role)->detach($teachersWithRole2) ; // suprimer l'enseignant
             EnseignantStage::create([  // 
                 'stage_id'=>$stage->id,
                 'enseignant_id'=> $request->rapporteur_id, // l'enseignant

@@ -96,7 +96,7 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('/stages/enseignant/affecter/{id}',[EditController::class, 'affecterEnseignant'])->name('affecter-enseignant-stage');
 	Route::get('/stages/encadrant/affecter/{id}',[EditController::class, 'affecterEncadrant'])->name('affecter-encadrant-stage-pfe-sfe');
-	Route::get('/stages/juri/affecter/{id}',[EditController::class, 'affecterJuri'])->name('affecter-juri-stage-pfe-sfe');
+	Route::get('/stages/jury/affecter/{id}',[EditController::class, 'affecterJury'])->name('affecter-jury-stage-pfe-sfe');
 	Route::get('/import',[DataController::class, 'show'])->name('import');
 	Route::post('/import-from-csv',[DataController::class, 'importCSV'])->name('data.import');
 	Route::post('/import-from-csv-societes',[DataController::class, 'importSocieteCSV'])->name('data.societes.import');
@@ -108,16 +108,16 @@ Route::middleware('auth')->group(function () {
    
 	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
 	Route::post('/stages/encadrant/affecter/{id}',[UpdateController::class, 'affecterEncadrant'])->name('stages.affecterEncadrant'); // admin
-	Route::post('/stages/juri/affecter/{id}',[UpdateController::class, 'affecterJuri'])->name('stages.affecterJuri'); // admin
+	Route::post('/stages/jury/affecter/{id}',[UpdateController::class, 'affecterJury'])->name('stages.affecterJury'); // admin
 	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('stages.soutenance'); //?????
 	Route::get('/stages',[StageIndexController::class,'ete'])->name('stages');
 	Route::get('/encadrant-pfe-sfe',[StageIndexController::class,'stagesPfeSfeEncadrant'])->name('stages-pfe-sfe'); //
-	Route::get('/juris-pfe-sfe',[StageIndexController::class,'stagesPfeSfeJuri'])->name('stages-juris-pfe-sfe'); //
+	Route::get('/jurys-pfe-sfe',[StageIndexController::class,'stagesPfeSfeJury'])->name('stages-jurys-pfe-sfe'); //
 	Route::get('/soutenances',DatesSoutenancesController::class)->name('soutenances');
 	Route::get('/stages-a-valider',StageAvaliderController::class)->name('stages-valider');
 
 	Route::get('/affectes-ete',[StageAffectationController::class,'stageEte'])->name('affectes-ete'); // Les stages d'été affectés
-	Route::get('/juris-affectation-pfesfe',[StageAffectationController::class,'juriPFESFE'])->name('juris-affectation-pfesfe'); // Les stages pfe sfe affectés aux juris
+	Route::get('/jurys-affectation-pfesfe',[StageAffectationController::class,'juryPFESFE'])->name('jurys-affectation-pfesfe'); // Les stages pfe sfe affectés aux juris
 
 	Route::get('/encadrants-affectation-pfesfe',[StageAffectationController::class,'stagePFESFE'])->name('encadrants-affectation-pfesfe'); // Les stages pfe sfe affectés aux encadrants
 	Route::get('/sans-depots-ete',[StageSansDepotController::class,'stageEte'])->name('sans-depots-ete');

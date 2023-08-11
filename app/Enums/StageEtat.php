@@ -8,7 +8,7 @@ enum StageEtat:string {
     case DEPOSE = 'rapport déposé';
     case AFFECTE = 'affecté à un enseignant'; // admin
     case AFFECTE_ENCADRANT = 'affecté à un encadrant'; // admin
-    case AFFECTE_J = 'affecté à des juris'; // admin
+    case AFFECTE_J = 'affecté à des jurys'; // admin
     case CORRIGE = 'rapport vérifié et corrigé'; // admin
     case VALIDE = 'validé'; // admin
     case NON_VALIDE = 'non validé'; // admin

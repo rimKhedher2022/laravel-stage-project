@@ -15,7 +15,7 @@
                        
                        
                  
-                        <h6>Stages PFE/SFE à affecter aux juris </h6>
+                        <h6>Stages PFE/SFE à affecter aux jurys </h6>
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -103,10 +103,10 @@
 
                                             <td class="align-middle text-center text-sm">
                                             
-                                                    <a href='stages/juri/affecter/{{ $stage->id }}'>
+                                                    <a href='stages/jury/affecter/{{ $stage->id }}'>
 
                                                         {{-- @if (!empty($stage->enseignants->pluck('id')->toArray())) --}}
-                                                            <button class="btn btn-secondary btn-sm ms-auto">affecter juri</button>
+                                                            <button class="btn btn-secondary btn-sm ms-auto">affecter jurys</button>
                                                                 
                                                         {{-- @endif --}}
 
