@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Enseignant;
 use App\Models\Etudiant;
+use App\Models\MessageDeRappel;
+use App\Models\SessionDeDepot;
 use App\Models\Societe;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,6 +19,7 @@ class DataController extends Controller
 
      public function show ()
      { 
+        $this->authorize('viewAny', SessionDeDepot::class); // vu que par l'admin
         $users = User::all() ;
         $annees = $users->pluck('annee-scolaire')->unique(); 
         return  view('pages.importer-fichier-csv',['annees'=> $annees]) ; 
@@ -35,53 +38,111 @@ class DataController extends Controller
 
         {
            
-            Enseignant::query()->delete();
-            Etudiant::query()->delete();
-            User::query()->delete();
+            // Enseignant::query()->delete();
+            // Etudiant::query()->delete();
+            // User::query()->delete();
+            //list des users fil base qui sont pas parmis le nouveau fichier csv / whereNotin
+            // DB::statement('ALTER TABLE users AUTO_INCREMENT = 1');
+            // DB::statement('ALTER TABLE etudiants AUTO_INCREMENT = 1');
+            // DB::statement('ALTER TABLE enseignants AUTO_INCREMENT = 1');
                 $anneeScolaire = $request->input('annee');
-                $csvData = array_map('str_getcsv', file($file));
-        
-            foreach ($csvData as $row) {
-                if (count($row) === 11) {
+                // dd($anneeScolaire);
+                $csvData = array_map('str_getcsv', file($file)); 
+                $emails = array_column($csvData, '3');
+                $old_users = User::whereNotIn('email',$emails)->get();
+                foreach ($old_users as $userToDelete) {
+                    $userToDelete->delete();
+                }
 
-                        if($anneeScolaire == $row[6] )
+          
+
+                // delete the list
+                // dd($old_users) ;
+            
+            foreach ($csvData as $row) {
+               
+                if (count($row) === 12) {
+                  
+                        if($anneeScolaire == $row[7] )
                         {
     
-                           
-                                $user = User::create([
-                                
-                                    'nom' => $row[0], // Replace with the appropriate column index
-                                    'prenom' => $row[1], // Replace with the appropriate column index
-                                    'email' => $row[2], // Replace with the appropriate column index
-                                    'password' => $row[3], // Replace with the appropriate column index
-                                    'role' => $row[4], // Replace with the appropriate column index
-                                    'image' => $row[5], // Replace with the appropriate column index
-                                    'annee-scolaire' => $row[6], // Replace with the appropriate column index
-                                ]);
-                                if ($row[4] == 'etudiant')
+                           $user = User::where('email', $row[3])->first(); // unique
+                        //    dd($user); 
+                           if ($user)
+                           {
+                            $user->update([
+                                'nom' => $row[1], // Replace with the appropriate column index
+                                'prenom' => $row[2], // Replace with the appropriate column index
+                                'password' => $row[4], // Replace with the appropriate column index
+                                'role' => $row[5], // Replace with the appropriate column index
+                                'image' => $row[6], // Replace with the appropriate column index
+                                'annee-scolaire' => $row[7], // Replace with the appropriate column index
+                            ]);
+
+                          
+                              
+                                if ($row[5] == 'etudiant')
                                 {
-        
-        
-                                    Etudiant::create([
-                                        'cin' => $row[7], // Replace with the appropriate column index
-                                        'niveau' => $row[8], // Replace with the appropriate column index
-                                        'specialite' => $row[9], // Replace with the appropriate column index
-                                        'numero_inscription' => $row[10], // Replace with the appropriate column index
+                                    // dd($user->etudiant);
+                                    $user->etudiant->update([
+                                        'cin' => $row[8], // Replace with the appropriate column index
+                                        'niveau' => $row[9], // Replace with the appropriate column index
+                                        'specialite' => $row[10], // Replace with the appropriate column index
+                                        'numero_inscription' => $row[11], // Replace with the appropriate column index
                                         'user_id' => $user->id, // Replace with the appropriate column index
                                     ]);
                                 }
-                                if ($row[4] == 'enseignant')
+                                else if ($row[5] == 'enseignant') // role
                                 {
-                                
-                                    Enseignant::create([
-                                        'matricule' => $row[7], 
-                                        'grad' => $row[8],
+                                    $user->enseignant->update([
+                                        'matricule' => $row[8], 
+                                        'grad' => $row[9],
                                         'user_id' => $user->id, 
                                     ]);
                                 }
 
-                           
-                        }     
+                            }   // fin if user
+
+                            else{  // nouveau user
+
+                                $user = User::create([
+                                    'nom' => $row[1], 
+                                    'prenom' => $row[2], 
+                                    'email' => $row[3], 
+                                    'password' => $row[4], 
+                                    'role' => $row[5], 
+                                    'image' => $row[6], 
+                                    'annee-scolaire' => $row[7], 
+                                ]);
+
+    
+                              
+                               
+                                    if ($row[5] == 'etudiant')
+                                    {
+                                        Etudiant::create([
+                                            'cin' => $row[8], // Replace with the appropriate column index
+                                            'niveau' => $row[9], // Replace with the appropriate column index
+                                            'specialite' => $row[10], // Replace with the appropriate column index
+                                            'numero_inscription' => $row[11], // Replace with the appropriate column index
+                                            'user_id' => $user->id, // Replace with the appropriate column index
+                                        ]);
+                                    }
+                                    else if ($row[5] == 'enseignant') // role
+                                    {
+                                        Enseignant::create([
+                                            'matricule' => $row[8], 
+                                            'grad' => $row[9],
+                                            'user_id' => $user->id, 
+                                        ]);
+                                    }
+    
+
+                            }
+                          
+                        } 
+                        
+              
                         
                     } else{
                         return redirect()->back()->with('error', 'Le fichier CSV n\'est pas structuré correctement.');

@@ -301,7 +301,8 @@
                                           
                                             
                                             <td class="align-middle text-center text-sm">
-                                                @if ($stage->type == 'ouvrier' || $stage->type=='technicien')
+
+                                                {{-- @if ($stage->type == 'ouvrier' || $stage->type=='technicien') --}}
                                                     
                                                
                                                     @if ($stage->etat == 'affecté à un enseignant')
@@ -376,22 +377,11 @@
                                                         
                                                     @endif
                                              
-                                                @else
-                                                            @if ($stage->etat == 'affecté à un encadrant')
-                                                                   
-
-                                                                   
-
-                                                                    
-                                                                   
-                                                                    <a href="/plusinfo/stages/{{ $stage->id }}">
-                                                                        <button class="btn"  style="background-color: rgb(157, 252, 144)">plus d'info</button>
-                                                                    </a>
-                                                            @endif
+                                                
+                                                           
 
 
-
-                                                @endif
+                                                {{-- @endif --}}
                                             </td>
                                         </tr>
                                     @endforeach

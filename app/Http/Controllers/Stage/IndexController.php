@@ -36,13 +36,35 @@ class IndexController extends Controller
           
           $enseignant = Enseignant::where('user_id',auth()->id())->first(); // 4
 
-           $stages = $enseignant->stages;
-            
+           $stages = $enseignant->stages()->where(function ($query) {
+            $query->where('type', 'ouvrier')
+                  ->orWhere('type', 'technicien');
+        })->get();
+                  
        
               break;
       }
      return  view('pages.stages',['stages' => $stages , 'role' => $role ]);
  
+    }
+
+
+    public function enseiPFESFE()
+    {
+
+      $enseignant = Enseignant::where('user_id',auth()->id())->first(); // 4
+
+      $stages = $enseignant->stages()->where(function ($query) {
+        $query->where('type', 'pfe')
+              ->orWhere('type', 'sfe');
+    })->get();
+
+    
+  
+  
+
+
+      return  view('pages.interface-enseigants-encadrants-pfe-sfe',['stages' => $stages ]);
     }
 
     public function stagesPfeSfeEncadrant()  // une seul fonction
@@ -60,7 +82,7 @@ class IndexController extends Controller
          
             
              
-            return  view('pages.stages-pfe-a-affecter',['stages' => $stages , 'role' => $role ]);
+            return  view('pages.stages-pfe-a-affecter',['stages' => $stages , 'role' => $role ]); // admin consulte cette page 
             
        
       }

@@ -85,7 +85,7 @@
 
                                             @elseif ($stage->etat =='rapport vérifié et corrigé' ||  $stage->etat =='validé' || $stage->etat =='non validé' )
                                         
-                                                    <p class="text-sm font-weight-bold mb-0">{{$stage->enseignants[0]->user->nom}} {{$stage?->enseignants[0]->user->prenom}}</p>
+                                                    <p class="text-sm font-weight-bold mb-0">{{$stage?->enseignants[0]->user->nom}} {{$stage?->enseignants[0]->user->prenom}}</p>
                                             
                                             @endif    
                                         </td>

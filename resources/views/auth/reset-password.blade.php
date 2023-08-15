@@ -3,13 +3,20 @@
 @section('content')
  
     <main class="main-content  mt-0">
+      
         <section>
             <div class="page-header min-vh-100">
                 <div class="container">
+                    @if (session('success'))
+                        <div style="color: rgb(106, 168, 114)">{{ session('success') }}</div>
+                    @endif
+
+         
                     <div class="row">
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
                                 <div class="card-header pb-0 text-start">
+                                   
                                     <h4 class="font-weight-bolder">Réinitialiser votre mot de passe</h4>
                                     <p class="mb-0">Entrez votre email et attendez quelques secondes</p>
                                 </div>
@@ -28,9 +35,11 @@
                                         </div>
                                     </form>
                                 </div>
+
                                 <div id="alert">
                                     @include('components.alert')
                                 </div>
+                                
                             </div>
                         </div>
                         <div

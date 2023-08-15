@@ -33,12 +33,22 @@
             </li>
 
             @if (auth()->user()->role->value === 'enseignant')
+
+          
                 <li class="nav-item">
                     <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Stages à valider</span>
+                        <span class="nav-link-text ms-1">Stages d'été</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ str_contains(request()->url(), 'enseignants-pfe-sfe') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'enseignants-pfe-sfe']) }}">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Stages PFE/SFE</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -92,52 +102,52 @@
                         </div>
                         <span class="nav-link-text ms-1">Stages d'été</span>
                     </a>
-                      <ul style="list-style: none;
-                      padding-left: 0;">        
+                      <ul style="list-style: none;  padding-left: 0;">   
+                                
            
-                            <li>
-                                <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
-                                    <div class="item-style {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}">
-                                        <span class="small-circle-icon">
-                                            <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
-                                            <i class="fas fa-circle"></i>
-                                        </span>
-                                        <span class="nav-link-text ms-1">à affecter aux enseignants</span>
-                                    </div>    
-                                </a>
-                            </li>
+                                <li>
+                                    <a class="nav-link {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'stages']) }}">
+                                        <div class="item-style {{ str_contains(request()->url(), 'stages') == true ? 'active' : '' }}">
+                                            <span class="small-circle-icon">
+                                                <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                                <i class="fas fa-circle"></i>
+                                            </span>
+                                            <span class="nav-link-text ms-1">à affecter aux enseignants</span>
+                                        </div>    
+                                    </a>
+                                </li>
            
            
            
                
                   
-                                <li>
-                                    <a class="nav-link {{ str_contains(request()->url(),'affectes-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'affectes-ete']) }}">
-                                        <div class="item-style">
-                                            <span class="small-circle-icon">
-                                                <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
-                                                <i class="fas fa-circle"></i>
-                                            </span>
-                                            <span class="nav-link-text ms-1">affectés aux enseignants </span>
-                                        </div>    
-                                    </a>
-                                </li>
-
-                                {{-- ok for Stages sans dépot --}}
-                                    <li>
-                                        <a class="nav-link {{ str_contains(request()->url(), 'sans-depots-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'sans-depots-ete']) }}">
-                                            <div class="item-style">
+                                        <li>
+                                            <a class="nav-link {{ str_contains(request()->url(),'affectes-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'affectes-ete']) }}">
+                                                <div class="item-style">
                                                     <span class="small-circle-icon">
                                                         <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
                                                         <i class="fas fa-circle"></i>
                                                     </span>
-                                                    <span class="nav-link-text ms-1">sans dépot</span>
-                                            </div>        
-                                        </a>
-                                    </li>
+                                                    <span class="nav-link-text ms-1">affectés aux enseignants </span>
+                                                </div>    
+                                            </a>
+                                        </li>
 
-                        </ul>
-          {{-- stages PFE / SFE --}}
+                                             {{-- ok for Stages sans dépot --}}
+                                            <li>
+                                                <a class="nav-link {{ str_contains(request()->url(), 'sans-depots-ete') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'sans-depots-ete']) }}">
+                                                    <div class="item-style">
+                                                            <span class="small-circle-icon">
+                                                                <!-- Replace "fas fa-user" with your desired Font Awesome icon class -->
+                                                                <i class="fas fa-circle"></i>
+                                                            </span>
+                                                            <span class="nav-link-text ms-1">sans dépot</span>
+                                                    </div>        
+                                                </a>
+                                            </li>
+
+            </ul>
+                                 {{-- stages PFE / SFE --}}
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="toggleSubMenu()">
@@ -299,7 +309,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link {{ str_contains(request()->url(), 'import') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'import']) }}">
+                            <a class="nav-link {{ str_contains(request()->url(), 'remplir') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'remplir']) }}">
                             <div class="fa fa-building-o  border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni  text-dark text-sm opacity-10"></i>
                             </div>

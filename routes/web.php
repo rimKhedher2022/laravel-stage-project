@@ -97,7 +97,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('/stages/enseignant/affecter/{id}',[EditController::class, 'affecterEnseignant'])->name('affecter-enseignant-stage');
 	Route::get('/stages/encadrant/affecter/{id}',[EditController::class, 'affecterEncadrant'])->name('affecter-encadrant-stage-pfe-sfe');
 	Route::get('/stages/jury/affecter/{id}',[EditController::class, 'affecterJury'])->name('affecter-jury-stage-pfe-sfe');
-	Route::get('/import',[DataController::class, 'show'])->name('import');
+	Route::get('/remplir',[DataController::class, 'show'])->name('remplir');
 	Route::post('/import-from-csv',[DataController::class, 'importCSV'])->name('data.import');
 	Route::post('/import-from-csv-societes',[DataController::class, 'importSocieteCSV'])->name('data.societes.import');
 	Route::get('/stages/soutenance/{id}',[EditController::class, 'choisirSoutenance'])->name('soutenance-stage'); //?????
@@ -111,6 +111,9 @@ Route::middleware('auth')->group(function () {
 	Route::post('/stages/jury/affecter/{id}',[UpdateController::class, 'affecterJury'])->name('stages.affecterJury'); // admin
 	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('stages.soutenance'); //?????
 	Route::get('/stages',[StageIndexController::class,'ete'])->name('stages');
+
+	Route::get('/enseignants-pfe-sfe',[StageIndexController::class,'enseiPFESFE'])->name('enseignants-pfe-sfe');  // interface ou l'enseignant  ou il découvre les stages à encadrer
+
 	Route::get('/encadrant-pfe-sfe',[StageIndexController::class,'stagesPfeSfeEncadrant'])->name('stages-pfe-sfe'); //
 	Route::get('/jurys-pfe-sfe',[StageIndexController::class,'stagesPfeSfeJury'])->name('stages-jurys-pfe-sfe'); //
 	Route::get('/soutenances',DatesSoutenancesController::class)->name('soutenances');
