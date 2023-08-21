@@ -26,7 +26,6 @@ class StoreController extends Controller
         $loggedInStudent = Etudiant::where('user_id', auth()->id())->first();
         $niveau = $loggedInStudent->niveau ; 
         $specialite = $loggedInStudent->specialite ; 
-      
         $societes = Societe::where('validation_state','approved by admin')->get() ;       
         $etudiants = Etudiant::where('user_id', '!=', auth()->id())
         ->where('niveau', $loggedInStudent->niveau)
@@ -39,8 +38,10 @@ class StoreController extends Controller
     public function plusInfo($id)
     {
        
-        $stage = Stage::find($id);
 
+       
+        $this->authorize('stagesConsultesParEnseignant',Stage::class);
+        $stage = Stage::find($id);
         return view('pages.plus-information-stage' , ['stage' => $stage]);
     }
 

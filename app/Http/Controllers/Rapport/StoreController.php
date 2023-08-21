@@ -95,7 +95,8 @@ class StoreController extends Controller
 
     public function fordownload($file_path){
 
-        
+    
+        $this->authorize('download',Rapport::class);
         $file_name = public_path('/assets/storage/'.$file_path);
         
         return response()->download($file_name);

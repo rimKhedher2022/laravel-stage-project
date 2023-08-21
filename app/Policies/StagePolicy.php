@@ -64,6 +64,12 @@ class StagePolicy
         return  (auth()->user()->role->value === 'administrateur')  ;
       
     }
+    public function stagesConsultesParEnseignant (User $user): bool
+    {
+       
+        return  (auth()->user()->role->value === 'enseignant')  ;
+      
+    }
 
     public function stageAvalider (User $user): bool
     {

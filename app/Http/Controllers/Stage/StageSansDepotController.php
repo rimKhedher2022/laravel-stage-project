@@ -31,9 +31,11 @@ class StageSansDepotController extends Controller
         //  dd($stages) ;   // affichage // gate
         return  view('pages.sans-depots-ete',['stages' => $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
     }
+    
     public function stagePFEsFE()  // une seul fonction
     {
 
+      
         $this->authorize('stagesConsultesParAdministrateur', Stage::class);
         $stages= Stage::where('etat',StageEtat::AFFECTE_ENCADRANT)->get();
         $session_actuel = SessionDeDepot::latest()->first();

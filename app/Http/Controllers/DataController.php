@@ -67,17 +67,17 @@ class DataController extends Controller
                         {
     
                            $user = User::where('email', $row[3])->first(); // unique
-                        //    dd($user); 
+                            //    dd($user); 
                            if ($user)
                            {
-                            $user->update([
-                                'nom' => $row[1], // Replace with the appropriate column index
-                                'prenom' => $row[2], // Replace with the appropriate column index
-                                'password' => $row[4], // Replace with the appropriate column index
-                                'role' => $row[5], // Replace with the appropriate column index
-                                'image' => $row[6], // Replace with the appropriate column index
-                                'annee-scolaire' => $row[7], // Replace with the appropriate column index
-                            ]);
+                                $user->update([
+                                    'nom' => $row[1], // Replace with the appropriate column index
+                                    'prenom' => $row[2], // Replace with the appropriate column index
+                                    'password' => $row[4], // Replace with the appropriate column index
+                                    'role' => $row[5], // Replace with the appropriate column index
+                                    'image' => $row[6], // Replace with the appropriate column index
+                                    'annee-scolaire' => $row[7], // Replace with the appropriate column index
+                                ]);
 
                           
                               

@@ -66,9 +66,11 @@ class EditController extends Controller
    }
    public function affecterEncadrant($id)
    {
+ 
               $stage = Stage::find($id);
+              $this->authorize('affecter', $stage ); // que l'admin peut voir la page d'affectation
               $enseignants = Enseignant::all();
-               $this->authorize('affecter', $stage );  // que l'admin peut voir la page d'affectation
+               
  
                         $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
              

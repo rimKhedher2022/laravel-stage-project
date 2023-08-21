@@ -14,6 +14,7 @@ class UpdateController extends Controller
 
 
 
+        $this->authorize('adminMessages', MessageDeRappel::class); // vu que par l'admin
         $message = MessageDeRappel::find($id);
         $this->authorize('update',$message);
 

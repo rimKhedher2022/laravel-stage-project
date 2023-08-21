@@ -11,16 +11,24 @@ use Illuminate\Http\Request;
 use App\Mail\MessageDeRappelMail;
 use App\Models\SessionDeDepot;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail ;
 
 class StoreController extends Controller
 {
 
 
+    public function showNotFound()
+    {
+        return response()->view('pages.notfound', [], Response::HTTP_NOT_FOUND);
+    }
+
+
     public function show($id)
     {
     
         // $this->authorize('create',MessageDeRappel::class);
+    $this->authorize('adminMessages',MessageDeRappel::class);
     $stage_a_envoyer_message = Stage::where('id',$id)->first()  ;
      return  view('pages.add-message' ,['stage_a_envoyer_message'=> $stage_a_envoyer_message]) ;
     }

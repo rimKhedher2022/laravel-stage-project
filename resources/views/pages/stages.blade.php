@@ -20,7 +20,7 @@
                         <h6>Les stages d'été à affecter aux enseignants  , rapports déposés</h6>
                         {{-- @else     --}}
                     @else
-                        <h6>Stages à lire / corriger / valider rapport</h6>
+                        <h6>Stages d'été à valider </h6>
                     @endif
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">

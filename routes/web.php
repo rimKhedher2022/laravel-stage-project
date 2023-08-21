@@ -108,7 +108,7 @@ Route::middleware('auth')->group(function () {
    
 	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
 	Route::post('/stages/encadrant/affecter/{id}',[UpdateController::class, 'affecterEncadrant'])->name('stages.affecterEncadrant'); // admin
-	Route::post('/stages/jury/affecter/{id}',[UpdateController::class, 'affecterJury'])->name('stages.affecterJury'); // admin
+	Route::post('/stages/jury/affecter/{id}',[StageAffectationControllerUpdateController::class, 'affecterJury'])->name('stages.affecterJury'); // admin
 	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('stages.soutenance'); //?????
 	Route::get('/stages',[StageIndexController::class,'ete'])->name('stages');
 
@@ -168,6 +168,7 @@ Route::middleware('auth')->group(function () {
 	Route::post('/store-message/{id}',[MessageDeRappelStoreController::class,'store'])->name('message.store');
 	Route::post('/send-message/{id}',[MessageDeRappelStoreController::class,'send'])->name('message.send'); // enseignant
 	Route::get('/add-message/{id}',[MessageDeRappelStoreController::class,'show'])->name('add-message');
+	Route::get('/add-message', [MessageDeRappelStoreController::class, 'showNotFound']);
 	// Route::post('/add-message/{id}',[MessageDeRappelStoreController::class,'envoyer'])->name('message.envoyer');
 	
 	Route::get('/messages/{id}',MessageDeRappelEditController::class)->name('edit-message');
@@ -177,6 +178,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('/messages',[MessageDeRappelIndexController::class,'messagesAdministrateur'])->name('messages');
 	Route::get('/messages-etudiants',[IndexMessagesEtudiantsController::class,'messagesEtudiant'])->name('messages-etudiants');
 
+	Route::fallback([MessageDeRappelStoreController::class, 'showNotFound']);
 	// Route::get('/valider-stages',StageIndexController::class)->name('valider-stages');
 	
 	// Etudiant routes

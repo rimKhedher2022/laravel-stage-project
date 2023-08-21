@@ -13,6 +13,7 @@ class EditController extends Controller
 {
     public function __invoke($id)
     {
+        
         $message = MessageDeRappel::find($id);
         // $this->authorize('view',$message);
      

@@ -13,7 +13,7 @@
                         @endif
                   
                   
-                        <h6>Stages PFE / SFE à encadrer</h6>
+                        <h6>Stages PFE / SFE</h6>
                               
                                    
                        

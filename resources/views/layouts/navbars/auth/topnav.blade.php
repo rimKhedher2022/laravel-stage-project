@@ -49,86 +49,13 @@
                         </a>
                     {{-- </div> --}}
                 </li>
-                <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                {{-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell cursor-pointer"></i>
                     </a>
-                    <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
-                        aria-labelledby="dropdownMenuButton">
-                        <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-
-
-                                    @if (auth()->user()->role->value === 'administrateur')
-                                        @forelse(auth()->user()->notifications as $notification)
-                                   
-                                           @if ($notification->type = 'App\Notifications\NewStageCreeSansDepotNotification')
-                                           {{-- {{ dd($notification->data["sujet"])}} --}}
-                                                    <li>
-                                                        <div class="d-flex flex-column justify-content-center" role="alert">
-                                                            <h6 class="text-sm font-weight-normal mb-1">
-                                                                <span class="font-weight-bold">New Notification</span> 
-                                                            </h6>
-                                                            {{-- Un nouveau stage  ({{ $notification->data["type"] }})  est crée : {{ $notification->data['sujet'] }}  --}}
-                                                           
-                                                            <a href="#" class="float-right mark-as-read"
-                                                                data-id="{{ $notification->id }}">
-                                                                Mark as read
-                                                            </a>
-                                                        </div>
-
-                                                        @if ($loop->last)
-                                                            <a href="#" id="mark-all">
-                                                                Mark all as read
-                                                            </a>
-                                                        @endif
-                                                </li>  
-                                           @endif
-                                           {{-- @if ($notification->type = 'App\Notifications\NewUserNotification')
-                                                <li>
-                                                        <div class="d-flex flex-column justify-content-center" role="alert">
-                                                            <h6 class="text-sm font-weight-normal mb-1">
-                                                                <span class="font-weight-bold">New Notification</span> 
-                                                            </h6>
-                                                            User {{ $notification->data['nom'] }} 
-                                                            ({{ $notification->data['email'] }}) has just registered.
-                                                            <a href="#" class="float-right mark-as-read"
-                                                                data-id="{{ $notification->id }}">
-                                                                Mark as read
-                                                            </a>
-                                                        </div>
-
-                                                        @if ($loop->last)
-                                                            <a href="#" id="mark-all">
-                                                                Mark all as read
-                                                            </a>
-                                                        @endif
-                                                </li>  
-                                             @endif    --}}
-                                        @empty
-                                            There are no new notifications
-                                        @endforelse
-                                   
-                                    @endif
-                                   
-                                    {{-- <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">New message</span> from Laur
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1"></i>
-                                            13 minutes ago
-                                        </p>
-                                    </div> --}}
-                                </div>
-                            </a>
-                        </li>
-                        
-                       
-                    </ul>
-                </li>
+                   
+                </li> --}}
             </ul>
         </div>
     </div>

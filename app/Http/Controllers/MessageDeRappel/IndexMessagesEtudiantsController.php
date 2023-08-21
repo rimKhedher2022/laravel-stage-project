@@ -13,7 +13,7 @@ class IndexMessagesEtudiantsController extends Controller
         $this->authorize('etudiantMessages', MessageDeRappel::class); // messages envoyés a un etudiant ? fermer 
         $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
         $stages_etudiant = $etudiant->stages;
-        return  view('pages.messages-etudiant',['stages_etudiant' =>  $stages_etudiant  ]);
+        return  view('pages.messages-de-etudiant',['stages_etudiant' =>  $stages_etudiant  ]);
  
     }
 }

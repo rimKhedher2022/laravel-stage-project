@@ -52,6 +52,8 @@ class IndexController extends Controller
     public function enseiPFESFE()
     {
 
+      
+      $this->authorize('stagesConsultesParEnseignant', Stage::class);
       $enseignant = Enseignant::where('user_id',auth()->id())->first(); // 4
 
       $stages = $enseignant->stages()->where(function ($query) {
@@ -71,6 +73,7 @@ class IndexController extends Controller
     {
 
        
+       $this->authorize('stagesConsultesParAdministrateur', Stage::class);
         $role = auth()->user()->role;
         // dd($role->value);
       
@@ -89,7 +92,7 @@ class IndexController extends Controller
     public function stagesPfeSfeJury()  // une seul fonction
     {
 
-       
+        $this->authorize('stagesConsultesParAdministrateur', Stage::class);
         $role = auth()->user()->role;
         // dd($role->value);
       
