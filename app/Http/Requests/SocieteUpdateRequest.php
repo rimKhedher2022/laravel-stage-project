@@ -26,6 +26,9 @@ class SocieteUpdateRequest extends FormRequest
         'telephone'=>'string|max:8',
         'adresse'=>'string',
         'ville'=>'string',
+        'pays'=>'string',
+        'fax'=>'string',
+        'email'=>'string',
         ];
     }
     public function messages(): array

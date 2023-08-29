@@ -22,7 +22,7 @@ class StageStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type'=>'required',
+           
             'sujet'=>'required',
             'date_debut'=>'required',
             'date_fin'=>'required',
@@ -34,7 +34,7 @@ class StageStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'type'=>'veuillez choisir le type de votre stage',
+           
             'sujet'=>'veuillez choisir le sujet de votre stage',
             'date_debut'=>'veuillez choisir la date debut de votre stage',
             'date_fin'=>'veuillez choisir la date fin de votre stage',

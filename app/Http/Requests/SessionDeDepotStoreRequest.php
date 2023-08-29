@@ -24,6 +24,7 @@ class SessionDeDepotStoreRequest extends FormRequest
         return [
             'date_debut'=>'required',
              'date_fin'=>'required', 
+             'type_stage'=>'required', 
             //  'user_id'=>'required',
         ];
     }
@@ -32,6 +33,7 @@ class SessionDeDepotStoreRequest extends FormRequest
         return [
             'date_debut'=>'veuillez choisir la date de début',
              'date_fin'=>'veuillez choisir la date de fin', 
+             'type_stage'=>'veuillez choisir le type', 
         ];
     }
 }

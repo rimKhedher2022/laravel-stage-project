@@ -19,8 +19,12 @@ class IndexController extends Controller
     $this->authorize('viewAny', Rapport::class); //ok
      // que les rapports de l'etudiant connecté
      $etudiant = Etudiant::where('user_id',auth()->id())->first(); // 4
-     $session_actuel = SessionDeDepot::latest()->first();
+    
+     $session_actuel_pfe = SessionDeDepot::where('type_stage','PFE')->latest()->first();
+     $session_actuel_ete = SessionDeDepot::where('type_stage','Été')->latest()->first();
+     $session_actuel_sfe = SessionDeDepot::where('type_stage','SFE')->latest()->first();
 
+   
     //  dd($session_actuel);
      $stages = $etudiant->stages;
     
@@ -32,7 +36,7 @@ class IndexController extends Controller
      $aujourdui = Carbon::now('GMT-7'); // ???  ???????????????? timeZone , configuration  / policy : Stage_id fil create more arguments 
     //  dd($aujourdui) ;
 
-     return  view('pages.rapports',['stages'=> $stages , 'session_actuel'=> $session_actuel , 'aujourdui' => $aujourdui]);
+     return  view('pages.rapports',['stages'=> $stages , 'session_actuel_pfe'=>$session_actuel_pfe ,'session_actuel_ete' => $session_actuel_ete , 'session_actuel_sfe'=> $session_actuel_sfe , 'aujourdui' => $aujourdui]);
  
     }
 }

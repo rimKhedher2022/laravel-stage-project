@@ -21,9 +21,11 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Administateur</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom administateur</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> date debut </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">date_fin </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">date fin </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">État </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action </th>
                               
                                 
@@ -39,11 +41,21 @@
                                         <p class="text-sm font-weight-bold mb-0">{{$session->user->nom}}</p>
                                     </td>
                                     <td>
+                                        <p class="text-sm font-weight-bold mb-0">{{$session->type_stage}}</p>
+                                    </td>
+                                    <td>
                                         <p class="text-sm font-weight-bold mb-0">{{$session->date_debut}}</p>
                                     </td>
                                    
                                     <td>
                                         <p class="text-sm font-weight-bold mb-0">{{$session->date_fin}}</p>
+                                    </td>
+                                    <td>
+                                        @if (($aujourdui < $session->date_debut) || ($aujourdui >= $session->date_fin ))
+                                            <p class="text-sm font-weight-bold mb-0" style="color:rgb(248, 48, 48)">Fermée</p>
+                                        @else
+                                           <p class="text-sm font-weight-bold mb-0" style="color:rgb(32, 105, 56)">Ouverte</p>
+                                        @endif
                                     </td>
                                     <td >
                                         <div class="d-flex px-3 py-1 align-items-center">

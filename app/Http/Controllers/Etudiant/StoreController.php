@@ -27,6 +27,7 @@ class StoreController extends Controller
                 'niveau'=>$request->niveau ,
                 'specialite'=>$request->specialite ,
                 'numero_inscription'=>$request->numero_inscription ,
+                'diplôme'=>$request->diplôme ,
                 'user_id'=> $user->id,
         ]);
 

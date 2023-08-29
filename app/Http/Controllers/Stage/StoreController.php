@@ -25,13 +25,16 @@ class StoreController extends Controller
         $this->authorize('viewAny',Stage::class);
         $loggedInStudent = Etudiant::where('user_id', auth()->id())->first();
         $niveau = $loggedInStudent->niveau ; 
-        $specialite = $loggedInStudent->specialite ; 
-        $societes = Societe::where('validation_state','approved by admin')->get() ;       
+        $diplôme = $loggedInStudent->diplôme ; 
+        $societes = Societe::where('validation_state','approved by admin')->get() ; 
+
         $etudiants = Etudiant::where('user_id', '!=', auth()->id())
         ->where('niveau', $loggedInStudent->niveau)
+        ->where('diplôme', $loggedInStudent->diplôme)
         ->where('specialite', $loggedInStudent->specialite)
         ->get() ;  // pour le binome
-        return view('pages.add-stage',['societes' => $societes , 'etudiants' => $etudiants , 'niveau'=>$niveau , 'specialite'=>$specialite]);
+
+        return view('pages.add-stage',['societes' => $societes , 'etudiants' => $etudiants , 'niveau'=>$niveau ,'diplôme'=>$diplôme]);
     }
 
 

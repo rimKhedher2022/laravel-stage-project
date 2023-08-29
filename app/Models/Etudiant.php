@@ -18,6 +18,7 @@ class Etudiant extends Model
         'niveau',
         'specialite',
         'numero_inscription',
+        'diplôme',
         'user_id',
         ];
 

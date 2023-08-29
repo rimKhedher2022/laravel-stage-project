@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('niveau')->nullable();//à modifier
             $table->string('specialite')->nullable();//à modifier
             $table->string('numero_inscription')->nullable();//à modifier
+            $table->enum('diplôme', ['Licence','Ingénieur'])->default('Licence');
+          
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

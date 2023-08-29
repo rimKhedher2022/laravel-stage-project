@@ -12,7 +12,16 @@
                         <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
                     @endif
                     <h6>Rapports</h6>
-                    @if ($session_actuel)
+                   
+
+                    
+                 
+
+
+                  
+
+                   
+                    {{-- @if ($session_actuel)
 
                    
                                 @if (($aujourdui < $session_actuel->date_debut) || ($aujourdui >= $session_actuel->date_fin ))
@@ -23,9 +32,9 @@
                             @endif
 
                   
-                   @else
-                    <p>La session est fermée</p>
-                   @endif
+                   @else --}}
+                    {{-- <p>La session est fermée</p>
+                   @endif --}}
                    
                     {{-- condition de fermeture de la session --}}
 
@@ -83,20 +92,11 @@
 
                                             {{-- pas de session ouverte / déposez le rapport / modifier /supprimer - rapport déposé // ancien stages   --}}
 
-
-
-
-
-
-
-
-                                            {{-- 09/07/2023 appartient ]09/07/2023 , 10/07/2023[   --> test ok    --}}
-                                            {{-- 09/07/2023 appartient [09/07/2023 , 10/07/2023]   --> test ??    --}}
                                             {{-- session ouverte --}}
-
-                                            @if ($session_actuel)
-                                                    @if ($aujourdui >= $session_actuel->date_debut && $aujourdui < $session_actuel->date_fin)
-                                                        {{-- status de stage   --}}
+                                            @if($stage->type == 'ouvrier' || $stage->type == 'technicien')
+                                                @if ($session_actuel_ete)
+                                                    @if ($aujourdui >= $session_actuel_ete->date_debut && $aujourdui < $session_actuel_ete->date_fin)
+                                                      
                                                             @if (empty($stage->rapport))
                                                                 <a href='add-rapport/{{ $stage->id }}'>
 
@@ -106,7 +106,7 @@
                                                                 </a>
                                                             @endif
 
-                                                        {{-- le rapport existe déja --}}
+                                                     
 
                                                         @if (!empty($stage->rapport))
                                                             @if ($stage->etat == 'rapport vérifié et corrigé' || $stage->etat == 'validé')
@@ -114,7 +114,7 @@
                                                                     <button class="btn"
                                                                         style="background-color: rgb(230, 228, 215)"><i
                                                                             class="fa fa-download"></i></button>
-                                                                    {{-- <button type="submit" class="btn btn-primary">telecharger</button> --}}
+                                                                   
 
                                                                 </a>
                                                             @else
@@ -137,45 +137,275 @@
                                                                     <button class="btn"
                                                                         style="background-color: rgb(230, 228, 215)"><i
                                                                             class="fa fa-download"></i></button>
-                                                                    {{-- <button type="submit" class="btn btn-primary">telecharger</button> --}}
+                                                                  
 
                                                                 </a>
                                                             @endif
                                                         @endif
                                                     @endif
+                                               @endif 
+
+                                            @elseif($stage->type == 'pfe')
+                                                            @if ($session_actuel_pfe)
+                                                            @if ($aujourdui >= $session_actuel_pfe->date_debut && $aujourdui < $session_actuel_pfe->date_fin)
+                                                            
+                                                                    @if (empty($stage->rapport))
+                                                                        <a href='add-rapport/{{ $stage->id }}'>
+
+                                                                            <button class="btn btn-primary btn-sm ms-auto">Déposer
+                                                                                rapport</button>
+
+                                                                        </a>
+                                                                    @endif
+
+                                                            
+
+                                                                @if (!empty($stage->rapport))
+                                                                    @if ($stage->etat == 'rapport vérifié et corrigé' || $stage->etat == 'validé')
+                                                                        <a href="/download/{{ $stage->rapport?->filePath }}">
+                                                                            <button class="btn"
+                                                                                style="background-color: rgb(230, 228, 215)"><i
+                                                                                    class="fa fa-download"></i></button>
+                                                                            
+
+                                                                        </a>
+                                                                    @else
+                                                                        <a href='rapports/{{ $stage->rapport?->id }}'>
+                                                                            <button class="btn btn-secondary btn-sm ms-auto">Modifier
+                                                                                rapport</button>
+                                                                        </a>
+
+                                                                        <form method="post"
+                                                                            action="{{ route('rapports.delete', $stage->rapport?->id) }}">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger btn-sm ms-auto ">supprimer</button>
+                                                                        </form>
+
+
+
+                                                                        <a href="/download/{{ $stage->rapport?->filePath }}">
+                                                                            <button class="btn"
+                                                                                style="background-color: rgb(230, 228, 215)"><i
+                                                                                    class="fa fa-download"></i></button>
+                                                                        
+
+                                                                        </a>
+                                                                    @endif
+                                                                @endif
+                                                           
+                                                            @endif
+                                                        @endif 
+
+
+
+                                              @elseif($stage->type == 'sfe') 
+
+                                                                @if ($session_actuel_sfe)
+                                                                @if ($aujourdui >= $session_actuel_sfe->date_debut && $aujourdui < $session_actuel_sfe->date_fin)
+                                                                    
+                                                                        @if (empty($stage->rapport))
+                                                                            <a href='add-rapport/{{ $stage->id }}'>
+
+                                                                                <button class="btn btn-primary btn-sm ms-auto">Déposer
+                                                                                    rapport</button>
+
+                                                                            </a>
+                                                                        @endif
+
+                                                                
+
+                                                                    @if (!empty($stage->rapport))
+                                                                        @if ($stage->etat == 'rapport vérifié et corrigé' || $stage->etat == 'validé')
+                                                                            <a href="/download/{{ $stage->rapport?->filePath }}">
+                                                                                <button class="btn"
+                                                                                    style="background-color: rgb(230, 228, 215)"><i
+                                                                                        class="fa fa-download"></i></button>
+                                                                                
+
+                                                                            </a>
+                                                                        @else
+                                                                            <a href='rapports/{{ $stage->rapport?->id }}'>
+                                                                                <button class="btn btn-secondary btn-sm ms-auto">Modifier
+                                                                                    rapport</button>
+                                                                            </a>
+
+                                                                            <form method="post"
+                                                                                action="{{ route('rapports.delete', $stage->rapport?->id) }}">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="submit"
+                                                                                    class="btn btn-danger btn-sm ms-auto ">supprimer</button>
+                                                                            </form>
+
+
+
+                                                                            <a href="/download/{{ $stage->rapport?->filePath }}">
+                                                                                <button class="btn"
+                                                                                    style="background-color: rgb(230, 228, 215)"><i
+                                                                                        class="fa fa-download"></i></button>
+                                                                                
+
+                                                                            </a>
+                                                                        @endif
+                                                                    @endif
+                                                                @endif
+                                                            @endif 
+
+
+
                                             @endif
                     </div>
                     </td>
 
 
                     <td>
-                        @if ($session_actuel)
+                        {{-- ete --}}
+                        @if($stage->type == 'ouvrier' || $stage->type == 'technicien')
+                                @if ($session_actuel_ete)
+                                    @if ($aujourdui < $session_actuel_ete->date_debut || $aujourdui > $session_actuel_ete->date_fin)
+                                            @if (empty($stage->rapport))
+                                                <p style="color:blue">pas de session ouverte</p>
+                                            
+
+                                            @elseif ($stage->etat == 'rapport vérifié et corrigé')
+                                                <p> rapport vérifié et corrigé </p>
+                                        
+                                            @elseif ($stage->etat == 'rapport déposé')
+                                                <p> rapport déposé </p>
+                                        
+                                            @elseif ($stage->etat == 'validé')
+                                                <p style="color:rgb(65, 134, 82)"> Validé </p>
+
+                                            @elseif ($stage->etat == 'affecté à un enseignant')
+                                                <p> affecté à un enseignant </p>
+                                            @endif
+                                    @endif
+                                @else
+                                            @if (empty($stage->rapport))
+                                            <p style="color:blue">pas de session ouverte</p>
+                                        
+
+                                        @elseif ($stage->etat == 'rapport vérifié et corrigé')
+                                            <p> rapport vérifié et corrigé </p>
+                                    
+                                        @elseif ($stage->etat == 'rapport déposé')
+                                            <p> rapport déposé </p>
+                                    
+                                        @elseif ($stage->etat == 'validé')
+                                            <p style="color:rgb(65, 134, 82)"> Validé </p>
+
+                                        @elseif ($stage->etat == 'affecté à un enseignant')
+                                            <p> affecté à un enseignant </p>
+                                        @endif
+                                @endif    
+                        @endif
+
+
+                        {{-- pfe --}}
+
+
+                        @if($stage->type == 'pfe')
+                        @if ($session_actuel_pfe)
+                            @if ($aujourdui < $session_actuel_pfe->date_debut || $aujourdui > $session_actuel_pfe->date_fin)
+                                    @if (empty($stage->rapport))
+                                        <p style="color:blue">pas de session ouverte</p>
+                                    
+
+                                    @elseif ($stage->etat == 'rapport vérifié et corrigé')
+                                        <p> rapport vérifié et corrigé </p>
+                                
+                                    @elseif ($stage->etat == 'rapport déposé')
+                                        <p> rapport déposé </p>
+                                
+                                    @elseif ($stage->etat == 'validé')
+                                        <p style="color:rgb(65, 134, 82)"> Validé </p>
+
+                                    @elseif ($stage->etat == 'affecté à un encdarant')
+                                        <p> affecté à un encdarant </p>
+                                    @endif
+                            @endif
+                        @else
+                                    @if (empty($stage->rapport))
+                                    <p style="color:blue">pas de session ouverte</p>
+                                
+
+                                @elseif ($stage->etat == 'rapport vérifié et corrigé')
+                                    <p> rapport vérifié et corrigé </p>
+                            
+                                @elseif ($stage->etat == 'rapport déposé')
+                                    <p> rapport déposé </p>
+                            
+                                @elseif ($stage->etat == 'validé')
+                                    <p style="color:rgb(65, 134, 82)"> Validé </p>
+
+                                @elseif ($stage->etat == 'affecté à un encadrant')
+                                    <p> affecté à un encadrant </p>
+                                @endif
+                        @endif    
+                @endif
+
+
+                        {{-- sfe --}}
+
+
+                        @if($stage->type == 'sfe')
+                        @if ($session_actuel_sfe)
+                            @if ($aujourdui < $session_actuel_sfe->date_debut || $aujourdui > $session_actuel_sfe->date_fin)
+                                    @if (empty($stage->rapport))
+                                        <p style="color:blue">pas de session ouverte</p>
+                                    
+
+                                    @elseif ($stage->etat == 'rapport vérifié et corrigé')
+                                        <p> rapport vérifié et corrigé </p>
+                                
+                                    @elseif ($stage->etat == 'rapport déposé')
+                                        <p> rapport déposé </p>
+                                
+                                    @elseif ($stage->etat == 'validé')
+                                        <p style="color:rgb(65, 134, 82)"> Validé </p>
+
+                                    @elseif ($stage->etat == 'affecté à un encdarant')
+                                        <p> affecté à un encdarant</p>
+                                    @endif
+                            @endif
+                        @else
+                                    @if (empty($stage->rapport))
+                                    <p style="color:blue">pas de session ouverte</p>
+                                
+
+                                @elseif ($stage->etat == 'rapport vérifié et corrigé')
+                                    <p> rapport vérifié et corrigé </p>
+                            
+                                @elseif ($stage->etat == 'rapport déposé')
+                                    <p> rapport déposé </p>
+                            
+                                @elseif ($stage->etat == 'validé')
+                                    <p style="color:rgb(65, 134, 82)"> Validé </p>
+
+                                @elseif ($stage->etat == 'affecté à un encdarant')
+                                    <p> affecté à un encdarant </p>
+                                @endif
+                        @endif    
+                @endif
+
+                          
+                        {{-- @if ($session_actuel)
                             
                        
                                 @if ($aujourdui < $session_actuel->date_debut)
-                                    @if (empty($stage->rapport))
-                                        <p style="color:blue">pas de session ouverte</p>
-                                    @endif
+                                    
 
 
-                                    @if ($stage->etat == 'rapport vérifié et corrigé')
-                                        <p> rapport vérifié et corrigé </p>
-                                    @endif
-                                    @if ($stage->etat == 'rapport déposé')
-                                        <p> rapport déposé </p>
-                                    @endif
-                                    @if ($stage->etat == 'validé')
-                                        <p style="color:rgb(65, 134, 82)"> stage validé </p>
-                                    @elseif ($stage->etat == 'affecté à un enseignant')
-                                        <p> affecté à un enseignant </p>
-                                    @endif
+                                    
+                                   
 
 
 
 
 
-
-                                    {{-- si la session a fini  ou bien   --}}
+                                   
                                 @elseif ($aujourdui >= $session_actuel->date_fin)
                                     @if (empty($stage->rapport))
                                         <p style="color:blue">pas de session ouverte</p>
@@ -194,7 +424,7 @@
                                         <p> affecté à un enseignant </p>
                                     @endif
                                 @else 
-                                {{-- si la session est ouverte --}}
+                              
                                     @if ($stage->etat == 'rapport vérifié et corrigé')
                                         <p> rapport vérifié et corrigé </p>
                                     @endif
@@ -207,7 +437,7 @@
                                         <p> affecté à un enseignant </p>
                                     @endif
                                 @endif
-                        @endif
+                        @endif --}}
 
 
 

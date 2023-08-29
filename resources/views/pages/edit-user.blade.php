@@ -80,6 +80,12 @@
                                         <input class="form-control" type="text" name="numero_inscription"  value="{{old('numero_inscription', $user->etudiant->numero_inscription)}}">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">diplôme</label>
+                                        <input class="form-control" type="text" name="diplôme"  value="{{old('diplôme', $user->etudiant->diplôme)}}">
+                                    </div>
+                                </div>
                                
 
                             @elseif ($user->role->value === 'enseignant')

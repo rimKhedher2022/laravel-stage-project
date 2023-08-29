@@ -16,6 +16,9 @@ class Societe extends Model
         'telephone',
         'adresse',
         'ville',
+        'pays',
+        'fax',
+        'email',
         'validation_state',
         ];
 

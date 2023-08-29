@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('session_de_depots', function (Blueprint $table) {
             $table->id();
             $table->date('date_debut');
-            $table->date('date_fin');
+            $table->date('date_fin');  
+            $table->enum('type_stage', ['Été', 'PFE', 'SFE'])->default('Été');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

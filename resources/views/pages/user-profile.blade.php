@@ -48,20 +48,23 @@
                         <div class="card-body">
                             <p class="text-uppercase text-sm">Vos Informations</p>
                             <div class="row">
+                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">nom</label>
+                                        <label for="example-text-input" class="form-control-label">Nom</label>
                                         <input class="form-control" type="text" name="nom"
                                             value="{{ old('nom', auth()->user()->nom) }}">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">prenom</label>
+                                        <label for="example-text-input" class="form-control-label">Prénom</label>
                                         <input class="form-control" type="text" name="prenom"
                                             value="{{ old('prenom', auth()->user()->prenom) }}">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Email </label>
@@ -69,6 +72,7 @@
                                             value="{{ old('email', auth()->user()->email) }}">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Photo de profile </label>
@@ -78,39 +82,47 @@
 
 
                                 @if ($user->role->value === 'etudiant')
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">cin</label>
-                                            <input class="form-control" type="text" name="cin"
-                                                value="{{ old('cin', $user->etudiant->cin) }}">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Cin</label>
+                                                <input class="form-control" type="text" name="cin"
+                                                    value="{{ old('cin', $user->etudiant->cin) }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">niveau</label>
-                                            <input class="form-control" type="text" name="niveau"
-                                                value="{{ old('niveau', $user->etudiant->niveau) }}">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Niveau</label>
+                                                <input class="form-control" type="text" name="niveau"
+                                                    value="{{ old('niveau', $user->etudiant->niveau) }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">specialite</label>
-                                            <input class="form-control" type="text" name="specialite"
-                                                value="{{ old('specialite', $user->etudiant->specialite) }}">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input" class="form-control-label">Spécialité</label>
+                                                <input class="form-control" type="text" name="specialite"
+                                                    value="{{ old('specialite', $user->etudiant->specialite) }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="example-text-input"
-                                                class="form-control-label">numero_inscription</label>
-                                            <input class="form-control" type="text" name="numero_inscription"
-                                                value="{{ old('numero_inscription', $user->etudiant->numero_inscription) }}">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input"
+                                                    class="form-control-label">Numero d'inscription</label>
+                                                <input class="form-control" type="text" name="numero_inscription"
+                                                    value="{{ old('numero_inscription', $user->etudiant->numero_inscription) }}">
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="example-text-input"
+                                                    class="form-control-label">Diplôme</label>
+                                                <input class="form-control" type="text" name="diplôme"
+                                                    value="{{ old('diplôme', $user->etudiant->diplôme) }}">
+                                            </div>
+                                        </div>
                                 @elseif ($user->role->value === 'enseignant')
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">matricule</label>
+                                            <label for="example-text-input" class="form-control-label">Matricule</label>
                                             <input class="form-control" type="text" name="matricule"
                                                 value="{{ old('matricule', $user->enseignant?->matricule) }}">
                                         </div>

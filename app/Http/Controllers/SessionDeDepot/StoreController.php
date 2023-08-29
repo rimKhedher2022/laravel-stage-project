@@ -25,6 +25,7 @@ class StoreController extends Controller
   
             'date_debut' => $request->date_debut,
             'date_fin' =>$request->date_fin,
+            'type_stage' =>$request->type_stage,
             'user_id' =>auth()->user()->id ,
         ]);
 

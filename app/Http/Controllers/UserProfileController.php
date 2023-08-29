@@ -76,6 +76,7 @@ class UserProfileController extends Controller
                 'niveau' =>$request->niveau,
                 'specialite' =>$request->specialite,
                 'numero_inscription' =>$request->numero_inscription,
+                'diplôme' =>$request->diplôme,
     
             ]);
     

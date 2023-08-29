@@ -10,7 +10,7 @@ class SessionDeDepot extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'date_debut', 'date_fin', 'user_id',
+        'date_debut', 'date_fin','type_stage', 'user_id',
     ];
 
     /**

@@ -37,18 +37,31 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date début</label>
+                                        <label for="example-text-input" class="form-control-label">Date début :</label>
                                         <input class="form-control" type="date" name="date_debut" >
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">date fin</label>
+                                        <label for="example-text-input" class="form-control-label">Date fin :</label>
                                         <input class="form-control" type="date" name="date_fin">
                                     </div>
                                 </div>
                                
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Type stage:</label>
+                                        <select class="form-control" name="type_stage">
+                                            <option value="0">---Choisir type de stage----</option>
+                                            <option value="pfe">PFE</option>
+                                            
+                                            <option value="sfe">SFE</option>
+                                            <option value="été">Été</option>
+                                        </select>
+                                    </div>
+                                </div>
                               
 
                                

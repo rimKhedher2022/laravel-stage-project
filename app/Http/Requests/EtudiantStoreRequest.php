@@ -32,6 +32,7 @@ class EtudiantStoreRequest extends FormRequest
             'niveau'=>'required',
             'specialite'=>'required',
             'numero_inscription'=>'required',
+            'diplôme'=>'required',
             
         ];
     }

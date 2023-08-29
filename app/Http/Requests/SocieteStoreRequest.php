@@ -26,6 +26,9 @@ class SocieteStoreRequest extends FormRequest
         'telephone'=>'required',
         'adresse'=>'required',
         'ville'=>'required',
+        'pays'=>'required',
+        'fax'=>'required',
+        'email'=>'required',
         ];
     }
     public function messages(): array
@@ -35,6 +38,9 @@ class SocieteStoreRequest extends FormRequest
         'telephone'=>'veuillez choisir le telephone de société',
         'adresse'=>'veuillez choisir l adresse de société',
         'ville'=>'veuillez choisir la ville de société',
+        'pays'=>'veuillez choisir la pays de société',
+        'fax'=>'veuillez choisir la fax de société',
+        'email'=>'veuillez choisir la email de société',
         ];
     }
 }

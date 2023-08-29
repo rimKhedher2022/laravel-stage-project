@@ -24,6 +24,7 @@ class SessionDeDepotUpdateRequest extends FormRequest
         return [
             'date_debut'=>'date',
             'date_fin'=>'date', 
+            'type_stage'=>'string', 
             // 'user_id'=>'string',
         ];
     }

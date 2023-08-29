@@ -30,6 +30,7 @@ class EtudiantUpdateRequest extends FormRequest
             'niveau'=>'string',
             'specialite'=>'string',
             'numero_inscription'=>'string',
+            'diplôme'=>'string',
         ];
     }
 }

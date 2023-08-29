@@ -41,6 +41,20 @@
                                         <input class="form-control" type="date" name="date_fin"  value="{{old('date_fin', $session->date_fin)}}">
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Type stage:</label>
+                                        <select class="form-control" name="type_stage">
+
+                                        
+                                                <option value="été" {{ old('type_stage',$session->type_stage) == 'Été' ? 'selected' : '' }}>Été</option>
+                                                <option value="pfe" {{ old('type',$session->type_stage) == 'PFE' ? 'selected' : '' }}>PFE</option>
+                                                <option value="sfe" {{ old('type',$session->type_stage) == 'SFE' ? 'selected' : '' }}>SFE</option>
+
+                                        </select>
+                                    </div>
+                                </div>
                                
                                 
                                

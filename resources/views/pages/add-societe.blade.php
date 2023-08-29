@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action="{{route('societe.store') }}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action="{{route('societe.store') }}" enctype="multipart/form-data" id="societe-form">
                         @csrf
                         <div class="card-header pb-0">
 
@@ -58,48 +58,30 @@
                                         <input class="form-control" type="text" name="ville" >
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Pays</label>
+                                        <select class="form-control" name="pays" id="pays">
+                                            <option value="0">--- choisir pays ---</option>
+                                            <!-- Les options de pays seront ajoutées ici par JavaScript -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Fax</label>
+                                        <input class="form-control" type="text" name="fax" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Email</label>
+                                        <input class="form-control" type="text" name="email" >
+                                    </div>
+                                </div>
 
                             </div>
-                            {{-- <hr class="horizontal dark"> --}}
-                            {{-- <p class="text-uppercase text-sm">Contact Information</p> --}}
-                            {{-- <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Address</label>
-                                        <input class="form-control" type="text" name="address"
-                                            value="{{ old('address', auth()->user()->address) }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">City</label>
-                                        <input class="form-control" type="text" name="city" value="{{ old('city', auth()->user()->city) }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Country</label>
-                                        <input class="form-control" type="text" name="country" value="{{ old('country', auth()->user()->country) }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Postal code</label>
-                                        <input class="form-control" type="text" name="postal" value="{{ old('postal', auth()->user()->postal) }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="horizontal dark">
-                            <p class="text-uppercase text-sm">About me</p>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">About me</label>
-                                        <input class="form-control" type="text" name="about"
-                                            value="{{ old('about', auth()->user()->about) }}">
-                                    </div>
-                                </div>
-                            </div> --}}
+                           
                         </div>
                     </form>
                 </div>
@@ -108,4 +90,32 @@
         </div>
         {{-- @include('layouts.footers.auth.footer') --}}
     </div>
+
+    <script>
+        const selectElement = document.getElementById("pays");
+                    fetch("https://restcountries.com/v3.1/all")
+                        .then(response => response.json())
+                        .then(data => {
+                            const countryMapping = {};
+                            data.forEach(country => {
+                            countryMapping[country.cca3] = country.translations.fra.common;
+                        });
+                            // Create options for each country in the filtered data
+                            for (const countryCode in countryMapping) {
+                                const option = document.createElement("option");
+                                option.value = countryCode;
+                                option.textContent = countryMapping[countryCode];
+                                selectElement.appendChild(option);
+                            }
+                        })
+                        .catch(error => console.error("Error fetching countries:", error));
+
+                        const formElement = document.getElementById("societe-form");
+                        formElement.addEventListener("submit", function(event) {
+                        const selectedCountryCode = selectElement.value;
+                    if (selectedCountryCode !== "0") {
+                        selectElement.value = countryMapping[selectedCountryCode];
+                    }
+                });
+    </script>
 @endsection

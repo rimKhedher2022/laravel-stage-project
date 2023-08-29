@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action={{ route('societes.update' , $societe->id) }} enctype="multipart/form-data">
+                    <form role="form" method="POST" action={{ route('societes.update' , $societe->id) }} id="societe-form" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
 
@@ -48,92 +48,59 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">nom</label>
+                                        <label for="example-text-input" class="form-control-label">Nom</label>
                                         <input class="form-control" type="text" name="nom"  value="{{old('nom', $societe->nom)}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">telephone</label>
+                                        <label for="example-text-input" class="form-control-label">Telephone</label>
                                         <input class="form-control" type="text" name="telephone"  value="{{old('telephone', $societe->telephone)}}">
                                     </div>
                                 </div>
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">adresse</label>
+                                        <label for="example-text-input" class="form-control-label">Adresse</label>
                                         <input class="form-control" type="text" name="adresse"  value="{{old('adresse', $societe->adresse)}}" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">ville</label>
-                                        <input class="form-control" type="text" name="ville"  value="{{old('adresse', $societe->ville)}}" >
+                                        <label for="example-text-input" class="form-control-label">Ville</label>
+                                        <input class="form-control" type="text" name="ville"  value="{{old('ville', $societe->ville)}}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Pays</label>
+                                     
+                                        <select class="form-control" name="pays" id="pays" value="{{old('pays', $societe->pays)}}">
+                                           
+                                            <!-- Les options de pays seront ajoutées ici par JavaScript -->
+                                        </select>
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Fax</label>
+                                        <input class="form-control" type="text" name="fax"  value="{{old('fax', $societe->fax)}}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Email</label>
+                                        <input class="form-control" type="text" name="email"  value="{{old('email', $societe->email)}}" >
                                     </div>
                                 </div>
                                
-                              
-
-                             
-
-                               
                             </div>
-                            {{-- <hr class="horizontal dark"> --}}
-                            {{-- <p class="text-uppercase text-sm">Contact Information</p> --}}
-                            {{-- <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Address</label>
-                                        <input class="form-control" type="text" name="address"
-                                            value="{{ old('address', auth()->user()->address) }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">City</label>
-                                        <input class="form-control" type="text" name="city" value="{{ old('city', auth()->user()->city) }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Country</label>
-                                        <input class="form-control" type="text" name="country" value="{{ old('country', auth()->user()->country) }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Postal code</label>
-                                        <input class="form-control" type="text" name="postal" value="{{ old('postal', auth()->user()->postal) }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="horizontal dark">
-                            <p class="text-uppercase text-sm">About me</p>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">About me</label>
-                                        <input class="form-control" type="text" name="about"
-                                            value="{{ old('about', auth()->user()->about) }}">
-                                    </div>
-                                </div>
-                            </div> --}}
+                            
                         </div>
                     </form>
                    
-                    {{-- le binome  --}}
-                  {{-- @foreach ( $etudiants_stage as  $etudiant_stage)
                   
-                
-                        @if ($id_auth !== $etudiant_stage->id )
-                        l' id de ton binome est  :  {{$etudiant_stage ->id}}
-                        <br/>
-                        le nom de ton binome est  : {{$etudiant_stage ->user->nom}} 
-
-                        @endif
-                  
-                  @endforeach --}}
-
 
 
           
@@ -143,6 +110,42 @@
             </div>
           
         </div>
-        {{-- @include('layouts.footers.auth.footer') --}}
+       
     </div>
+
+
+    <script>
+
+                            const selectElement = document.getElementById("pays");
+                            const countryMapping = {};
+                                fetch("https://restcountries.com/v3.1/all")
+                                    .then(response => response.json())
+                                    .then(data => {
+                                       
+                                        data.forEach(country => {
+                                        countryMapping[country.cca3] = country.translations.fra.common;
+                                    });
+                                        // Create options for each country in the filtered data
+                                        for (const countryCode in countryMapping) {
+                                            const option = document.createElement("option");
+                                            option.value = countryCode;
+                                            option.textContent = countryMapping[countryCode];
+                                            selectElement.appendChild(option);
+                                        }
+                                    })
+                                    .catch(error => console.error("Error fetching countries:", error));
+
+                const formElement = document.querySelector("form");
+                formElement.addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+
+                const selectedCountryCode = selectElement.value;
+                if (selectedCountryCode !== "0") {
+                    selectElement.value = countryMapping[selectedCountryCode];
+                }
+
+            formElement.submit();
+});
+</script>
+    
 @endsection

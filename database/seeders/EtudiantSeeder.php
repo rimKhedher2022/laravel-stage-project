@@ -47,6 +47,7 @@ class EtudiantSeeder extends Seeder
                 'niveau'=>'3',
                 'specialite'=>'informatique',
                 'numero_inscription'=>'4549995',
+                'diplôme'=>'Licence',
                 'user_id'=> $user->id,
         ]);
     }

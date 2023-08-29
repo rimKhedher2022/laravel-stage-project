@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('ville');
             $table->string('telephone');
             $table->string('adresse');
-            $table->string('validation_state')->default('not yet validated by the admin');
-
+            $table->string('pays');
+            $table->string('fax');
+            $table->string('email');
+            $table->string('validation_state')->default('proposée');
             $table->timestamps();
         });
     }

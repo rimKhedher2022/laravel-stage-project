@@ -48,17 +48,36 @@
                                         
                                         {{-- les autres etudiants--}}
 
-                                        @if ($niveau=='3' && $specialite == 'informatique')
-                                            <input class="form-control" type="text" name="type" value="pfe" >
+                                        @if ($niveau=='3' && $diplôme == 'Licence')
+                                            <input class="form-control"  type="text" name="type" value="sfe" >
+                                       
+
+                                            @elseif ($niveau =='2' && $diplôme == 'Licence')
+                                                <input class="form-control"  type="text" name="type" value="technicien" >
+                                       
+
+                                            @elseif ($niveau =='1' && $diplôme == 'Licence')
+                                                <input class="form-control"  type="text" name="type" value="ouvrier" >
+
                                         @endif
 
-                                        @if ($niveau =='2' && $specialite == 'informatique')
-                                            <input class="form-control" type="text" name="type" value="technicien" >
+                                        @if ($niveau=='3' && $diplôme == 'Ingénieur')
+                                            <input class="form-control"  type="text" name="type" value="pfe" >
+                                       
+
+                                            @elseif ($niveau =='2' && $diplôme == 'Ingénieur')
+                                                <input class="form-control"  type="text" name="type" value="technicien" >
+                                       
+
+                                            @elseif ($niveau =='1' && $diplôme == 'Ingénieur')
+                                                <input class="form-control"  type="text" name="type" value="ouvrier" >
+
                                         @endif
 
-                                        @if ($niveau =='1' && $specialite == 'informatique')
-                                            <input class="form-control" type="text" name="type" value="ouvrier" >
-                                        @endif
+
+
+
+
                                         
                                             {{-- <select name="type" id="type" class="form-control">
 
