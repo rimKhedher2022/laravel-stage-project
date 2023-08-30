@@ -114,12 +114,17 @@ class StoreController extends Controller
          'etat'=> StageEtat::CORRIGE
         ]);
         
-        $admins = User::where('role',RoleType::Administrateur)->get() ; 
-        // if ($stage->etat == StageEtat::CORRIGE)
-        // {
-        //     Notification::send($admins,new RapportCorrigeeNotification($stage)) ; 
-        // }
-        return back()->with('message', 'rapport validé (vérifié et corrigé) avec succés, le stagiaire est notifié que son rapport est validé ,Veuillez choisir la date de soutenance.');
+        if ($stage->type == 'technicien' || $stage->type == 'ouvrier')
+        {
+            return back()->with('message', 'Rapport validé (vérifié et corrigé) avec succés, veuillez choisir la date de soutenance.');
+
+        }
+
+        elseif($stage->type == 'pfe' || $stage->type == 'sfe')
+        {
+            return back()->with('message', 'Rapport validé (vérifié et corrigé) avec succés.');
+
+        }
 
     }
         public function annulervalidation ($rapport_id)

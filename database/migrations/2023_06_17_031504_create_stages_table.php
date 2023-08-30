@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->date('date_debut');
             $table->date('date_fin');
             $table->string('sujet');
-            $table->enum('etat', ['crée', 'rapport déposé', 'affecté à un enseignant','affecté à un encadrant','affecté à des jurys' ,'rapport vérifié et corrigé','validé' , 'non validé'])->default('crée');
+            $table->enum('etat', ['crée', 'rapport déposé', 'affecté à un enseignant','affecté à un encadrant','affecté aux encadrants','affecté aux jurys' ,'rapport vérifié et corrigé','validé' , 'non validé'])->default('crée');
             $table->date('date_soutenance')->nullable();
             $table
                 ->foreignId('societe_id')

@@ -20,32 +20,6 @@ class StoreController extends Controller
 
     public function store(SocieteStoreRequest $request) {
 
-    if(auth()->user()->role->value === 'etudiant') 
-    {
-
-     
-        
-      
-        $societe = Societe::create([
-         
-          
-            'nom' => $request->nom ,
-            'telephone' =>$request->telephone  ,
-            'adresse' =>$request->adresse  ,
-            'ville' => $request->ville,
-           
-            'fax' => $request->fax ,
-            'email' =>$request->email,
-        ]);
-        return back()->with('succes', 'société à proposer est envoyée ,l\'admin va valider la société proposé ');
-    }
-
-    elseif (auth()->user()->role->value === 'administrateur') 
-
-    {
-
-
-
         $countryData = file_get_contents('https://restcountries.com/v3.1/all');
         $countries = json_decode($countryData, true);
     
@@ -77,9 +51,15 @@ class StoreController extends Controller
             'email' =>$request->email,
          
         ]);
-        $societe->update(['validation_state' => 'approved by admin']);
+        if (auth()->user()->role->value === 'administrateur') {
 
-        return back()->with('succes', 'société ajouté');
+            $societe->update(['validation_state' => 'approved by admin']);
+            return back()->with('succes', 'société ajouté');
+        }
+        else {
+            return back()->with('succes', 'Société à proposer est envoyée ,l\'administrateur va valider la société proposée.');
+        }
+       
 
 
 
@@ -97,8 +77,6 @@ class StoreController extends Controller
 
 
 
-    }
-
 
     public function approve($societeId)
 {
@@ -108,7 +86,7 @@ class StoreController extends Controller
     
     // Update the validation state
     $societe->update(['validation_state' => 'approved by admin']);
-    return back()->with('message', 'société validé avec succés ');
+    return back()->with('message', 'Société validée avec succès.');
 
 }
 }

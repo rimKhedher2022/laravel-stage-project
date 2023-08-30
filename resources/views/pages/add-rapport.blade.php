@@ -27,8 +27,8 @@
                         <div class="card-header pb-0">
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter un rapport</p>
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Ajouter</button>
+                                    <p class="mb-0">Déposer un rapport</p>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Déposer</button>
                                 </div>
                                 
                         </div>

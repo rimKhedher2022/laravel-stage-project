@@ -43,10 +43,27 @@ class DeleteController extends Controller
       })->pluck('id')->toArray();
       $rapport->stage->enseignants()->detach($teachersWithRole2) ;
 
+      // dd($rapport->stage->enseignants==null);
 
-      $rapport->stage->update([
-         'etat'=> StageEtat::AFFECTE_ENCADRANT
+      if (count($rapport->stage->enseignants)==0)
+      {
+          $rapport->stage->update([
+            'etat'=> StageEtat::CREE
+        ]) ;
+      }
+      elseif(count($rapport->stage->enseignants)==1){
+        $rapport->stage->update([
+          'etat'=> StageEtat::AFFECTE_ENCADRANT
       ]) ;
+
+      }
+      elseif(count($rapport->stage->enseignants)==2){
+        $rapport->stage->update([
+          'etat'=> StageEtat::AFFECTE_ENCADRANTS
+      ]) ;
+
+      }
+      
 
 
      }

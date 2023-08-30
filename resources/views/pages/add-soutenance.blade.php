@@ -15,13 +15,22 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
+                    @if ($stage->type == 'ouvrier' || $stage->type == 'technicien' )
+                        
+                    
                     <form role="form" method="POST" action={{ route('stages.soutenance' , $stage->id) }} enctype="multipart/form-data">
+
+                        @elseif ($stage->type == 'pfe' || $stage->type == 'sfe' )
+
+                    <form role="form" method="POST" action={{ route('stages.soutenance.pfe' , $stage->id) }} enctype="multipart/form-data">
+
+                        @endif
                         @csrf
                         <div class="card-header pb-0">
 
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">choix date soutenance</p>
+                                    <p class="mb-0">Choix date soutenance</p>
                                     {{-- {{$stage}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Enregistrer</button>
                                 </div>

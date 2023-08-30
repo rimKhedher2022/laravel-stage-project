@@ -86,8 +86,16 @@ class StagePolicy
        $stage_enseignant_ids = $stage->enseignants->pluck('user_id')->toArray() ;  // array : user_id
         // dd(in_array($user->id,$stage_etudiant_ids));
 
-        return in_array($user->id,$stage_enseignant_ids)  ;
+        return in_array($user->id,$stage_enseignant_ids)  && ($stage->type=='ouvrier' || $stage->type=='technicien' )  ;
       
+    }
+
+    
+    public function choisirDateSoutenancePfeSfe(User $user, Stage $stage): bool
+    {
+       
+
+        return (auth()->user()->role->value === 'administrateur')  ;
     }
 
 

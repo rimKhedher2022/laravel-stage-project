@@ -33,7 +33,7 @@ class StoreController extends Controller
 
         
 
-        return back()->with('succes', 'session ajouté ');
+        return back()->with('succes', 'Session ajoutée avec succès.');
 
 
 

@@ -171,6 +171,14 @@ class EditController extends Controller
   
       return  view('pages.add-soutenance',['stage' => $stage]);
    }
+   public function choisirSoutenancepfe($id)
+   {
+        $stage = Stage::find($id);
+        $this->authorize('choisirDateSoutenancePfeSfe',$stage );  // admin saisie date soutenance pour les pfe et sfe
+        
+  
+      return  view('pages.add-soutenance',['stage' => $stage]);
+   }
 
 
 

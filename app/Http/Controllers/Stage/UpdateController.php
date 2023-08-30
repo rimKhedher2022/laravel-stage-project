@@ -129,7 +129,7 @@ public function affecter (Request $request  , $id) {
          }
 
          
-        return back()->with('succes', 'enseignant affecté . ');
+        return back()->with('succes', 'Enseignant choisi. ');
 
     }
         
@@ -246,11 +246,52 @@ public function affecter (Request $request  , $id) {
         
             }
         
-            $stage->update([
-                'etat'=> StageEtat::AFFECTE_ENCADRANT
-          ]);
 
-            return back()->with('succes', 'encadrant(s) affecté(s) avec succés . ');
+
+
+                $role = 'co-encadrant';
+                $coencadrant = $stage->enseignants->filter(function ($enseignant) use ($role) {
+                    return $enseignant->pivot->role === $role;
+                })->pluck('id')->toArray();
+
+                $role = 'encadrant';
+                $encadrant = $stage->enseignants->filter(function ($enseignant) use ($role) {
+                    return $enseignant->pivot->role === $role;
+                })->pluck('id')->toArray();
+        
+
+            if($request->co_encadrant_id !== '0' && $request->encadrant_id !== '0')
+            {
+                $stage->update([
+                    'etat'=> StageEtat::AFFECTE_ENCADRANTS
+              ]);
+
+              return back()->with('succes', 'Encadrants choisis avec succés. ');
+            }
+
+
+
+            elseif($request->co_encadrant_id == '0' && $request->encadrant_id != '0')
+            {
+                $stage->update([
+                    'etat'=> StageEtat::AFFECTE_ENCADRANT
+              ]);
+
+              return back()->with('succes', 'Encadrant choisi avec succés. ');
+            }
+
+
+
+            elseif($request->co_encadrant_id == '0' && $request->encadrant_id == '0')
+            {
+              
+
+              return back()->with('error', 'Veuillez remplir les champs Encadrant et Co-encadrant.');
+            }
+
+           
+
+          
 
 
         }
@@ -372,7 +413,7 @@ public function affecterJury (Request $request  , $id)
   
 
 
-    return back()->with('succes', 'les enseignants choisis avec succes.');
+    return back()->with('succes', 'Jurys choisis avec succès.');
 
  }
         
@@ -386,8 +427,24 @@ public function choisirSoutenance(Request $request  , $id){
         'date_soutenance'=> $request->date_soutenance
   ]);
 
-    return redirect('/stages')->with('message', 'date soutenance choisie avec succés. Veuillez valider le stage aprés la soutenanace du stagiaire ');
+    return redirect('/stages')->with('message', 'Date soutenance choisie avec succés. Veuillez valider le stage aprés la soutenanace du stagiaire ');
 }
+
+
+public function Soutenancepfe(Request $request  , $id){
+    $stage = Stage::find($id);
+
+    $stage->update([
+        'date_soutenance'=> $request->date_soutenance
+  ]);
+
+    return redirect('/jurys-affectation-pfesfe')->with('message', 'Date soutenance choisie avec succés.');
+}
+
+
+
+
+
 
 public function valider(Request $request  , $id){
     $stage = Stage::find($id);
@@ -396,7 +453,7 @@ public function valider(Request $request  , $id){
         'etat'=> StageEtat::VALIDE
   ]);
 
-   return back()->with('message', 'stage validé avec succés ');
+   return back()->with('message', 'Stage validé avec succés ');
 }
 
     public function annulerValidation(Request $request  , $id){

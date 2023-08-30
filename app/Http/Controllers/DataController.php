@@ -153,7 +153,7 @@ class DataController extends Controller
         return redirect()->back()->with('error', 'Veuillez saisir un fichier csv.');
       }
      
-        return redirect()->back()->with('message', 'doonées importés avec succes');
+        return redirect()->back()->with('message', 'Doonées importés avec succès');
    
     }
 

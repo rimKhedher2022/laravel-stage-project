@@ -97,7 +97,7 @@ class IndexController extends Controller
         // dd($role->value);
       
         
-            $stages = Stage::where('etat',StageEtat::DEPOSE)
+            $stages = Stage::where('etat',StageEtat::CORRIGE)
                       ->whereIn('type', [StageType::PFE, StageType::SFE])
                       ->get();
                                 

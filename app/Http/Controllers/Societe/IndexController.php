@@ -23,12 +23,7 @@ class IndexController extends Controller
     switch ($role) {
         case RoleType::Administrateur:
             $societes = Societe::latest()->get();
-            
 
-            // liste des etudiants
-            // liste des enseignants
-            // liste des stages
-            // affecter enseignant a un stage
 
             break;
         case RoleType::Etudiant:

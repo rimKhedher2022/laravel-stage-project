@@ -41,7 +41,7 @@
                         @csrf
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
-                                <p class="mb-0">Modifier le profile</p>
+                                <p class="mb-0">Modifier le profil</p>
                                 <button type="submit" class="btn btn-primary btn-sm ms-auto">Modifier</button>
                             </div>
                         </div>

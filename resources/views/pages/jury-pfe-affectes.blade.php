@@ -7,6 +7,12 @@
           
             <div class="card mb-4">
                 <div class="card-header pb-0">
+
+                    
+
+                    @if (session('message'))
+                        <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
+                    @endif
                 
                         <h6>Stages affectées aux jurys </h6> 
                   
@@ -76,10 +82,17 @@
                                                 <a href='stages/jury/affecter/{{$stage->id}}'>
 
                                                         {{-- @if  (!empty($stage->enseignants->pluck('id')->toArray())  ) --}}
-                                                            <button  class="btn btn-success btn-sm ms-auto">modifier jury</button>
+                                                            <button  class="btn btn-success btn-sm ms-auto">Modifier jurys</button>
                                                         {{-- @endif --}}
 
 
+                                                </a>
+
+                                                <br>
+                                                <a href='stages/soutenance/pfesfe/{{ $stage->id }}'>
+
+                                                    <button class="btn btn-secondary btn-sm ms-auto text-wrap"
+                                                        style="width: 10rem;">saisir date soutenance</button>
                                                 </a>
 
                                              

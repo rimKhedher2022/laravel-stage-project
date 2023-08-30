@@ -80,7 +80,7 @@ class StoreController extends Controller
    
         }
    
-        return back()->with('succes', 'stage ajouté ');
+        return back()->with('succes', 'Stage ajouté ');
     }
 
 

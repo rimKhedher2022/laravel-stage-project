@@ -87,13 +87,31 @@
                                                       
                                                      
 
-                                                       
+                                                    @if ($stage->etat=='affecté à un encadrant' || $stage->etat=='affecté aux encadrants' ||  $stage->etat=='rapport déposé' || $stage->etat=='rapport vérifié et corrigé' || $stage->etat=='affecté aux jurys'  || $stage->etat=='validé' )
                                                     
-                                                        <a href="/plusinfo/stages/{{ $stage->id }}">
-                                                            <button class="btn"  style="background-color: rgb(157, 252, 144)">plus d'info</button>
-                                                        </a>
-                                                  
+                                                            <a href="/plusinfo/stages/{{ $stage->id }}">
+                                                                <button class="btn"  style="background-color: rgb(157, 252, 144)">Plus d'info</button>
+                                                            </a>
+                                                    @endif
 
+                                                    @if ($stage->etat=='rapport déposé')
+                                                 
+                                                            <form method="post"
+                                                                action="{{ route('rapport.valider', $stage->rapport->id) }}">
+                                                                @csrf
+                                                                @method('POST')
+                                                                <button type="submit"
+                                                                    class="btn btn-success btn-sm ms-auto ">Valider rapport</button>
+                                                                
+                                                            </form>
+
+                                                            <a href="/add-message/{{ $stage->id }}">
+                                                                <button class="btn"
+                                                                    style="background-color: rgb(230, 228, 215)">Demander correction</button>
+                                                                    
+
+                                                            </a>
+                                                    @endif            
                                                  
 
 

@@ -40,7 +40,7 @@
                                   
                             
                           
-                            <p class="text-uppercase text-sm">Les informations du stage à saisir l'encadrant</p>
+                            {{-- <p class="text-uppercase text-sm">Les informations du stage à saisir l'encadrant</p> --}}
                             <div class="row">
                             
                                 <div class="col-md-6">

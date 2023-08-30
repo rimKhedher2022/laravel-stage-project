@@ -51,7 +51,7 @@
                                             date_soutenance</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            societe_id
+                                            societe
                                         </th>
 
 
@@ -101,7 +101,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
-                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe_id }}</p>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe->nom }}</p>
                                                 </td>
                                             @endif
                                             @if ($role->value === 'etudiant')
@@ -136,7 +136,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
-                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe_id }}</p>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe->nom }}</p>
                                                 </td>
                                             @endif
 
@@ -329,6 +329,7 @@
 
                                                         </a>
                                                         <br>
+
                                                         <a href="/plusinfo/stages/{{ $stage->id }}">
                                                             <button class="btn"  style="background-color: rgb(157, 252, 144)">plus d'info</button>
                                                         </a>
@@ -352,6 +353,13 @@
                                                         </a>
 
 
+
+                                                        <br>
+
+                                                        <a href="/plusinfo/stages/{{ $stage->id }}">
+                                                            <button class="btn"  style="background-color: rgb(157, 252, 144)">plus d'info</button>
+                                                        </a>
+
                                                         @if ($stage->date_soutenance)
                                                             <form method="post"
                                                                 action="{{ route('stages.valider', $stage->id) }}">
@@ -361,6 +369,9 @@
                                                                     style="background-color: rgb(157, 174, 250);color:rgb(2, 2, 36);">valider
                                                                     stage</button>
                                                             </form>
+
+
+                                                           
                                                         @endif
                                                     @endif
 
@@ -373,6 +384,10 @@
                                                                 style="background-color: rgb(137, 252, 152) ; color:rgb(2, 2, 36) ; width: 10rem;">annuler
                                                                 validation</button>
                                                         </form>
+
+                                                        <a href="/plusinfo/stages/{{ $stage->id }}">
+                                                            <button class="btn"  style="background-color: rgb(157, 252, 144)">plus d'info</button>
+                                                        </a>
                                                        
                                                         
                                                     @endif

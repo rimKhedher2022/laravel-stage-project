@@ -34,7 +34,7 @@
                                        
                                    
                             
-                            <p class="text-uppercase text-sm">Les informations du stage à saisir l'enseignant</p>
+                            {{-- <p class="text-uppercase text-sm">Les informations du stage à saisir l'enseignant</p> --}}
                             <div class="row">
                             
                                 <div class="col-md-6">

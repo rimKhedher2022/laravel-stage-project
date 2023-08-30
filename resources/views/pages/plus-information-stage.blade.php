@@ -44,14 +44,14 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Sujet</label>
+                                        <label for="example-text-input" class="form-control-label">Sujet : </label>
                                         <p>{{$stage->sujet}}</p>
                                         {{-- <input class="form-control" type="text" name="sujet"  value="{{old('sujet', $stage->sujet)}}"> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Date debut:</label>
+                                        <label for="example-text-input" class="form-control-label">Date debut :</label>
                                         <p>{{$stage->date_debut}}</p>
                                         {{-- <input class="form-control" type="date" name="date_debut"  value="{{old('date_debut', $stage->date_debut)}}"> --}}
                                     </div>
@@ -59,14 +59,14 @@
                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Date fin</label>
+                                        <label for="example-text-input" class="form-control-label">Date fin :</label>
                                         <p>{{$stage->date_fin}}</p>
                                         {{-- <input class="form-control" type="date" name="date_fin"  value="{{old('date_fin', $stage->date_fin)}}" > --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Etat</label>
+                                        <label for="example-text-input" class="form-control-label">État : </label>
                                         <p>{{$stage->etat}}</p>
                                         {{-- <input class="form-control" type="date" name="date_fin"  value="{{old('date_fin', $stage->date_fin)}}" > --}}
                                     </div>
@@ -75,7 +75,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         
-                                        <label for="societe_id">Societe:</label>
+                                        <label for="societe_id">Société :</label>
                                           
                                             
                                              
@@ -96,14 +96,25 @@
                                     <div class="form-group">
                                         
                                         <label for="etudiant_id">Etudiant(s):</label>
-                                        @foreach ($stage->etudiants as $etudiant )
-                                        {{$etudiant->user->nom}}  {{$etudiant->user->prenom}}
-                                            
-                                        @endforeach
+                                        <p>
+                                            @foreach ($stage->etudiants as $etudiant )
+                                            {{$etudiant->user->nom}}  {{$etudiant->user->prenom}}  
+                                            @endforeach
+
+                                        </p>
+                                       
                                            
                                     </div>
                                 </div>
                                
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Date de soutenance : </label>
+                                        <p style="color: rgb(3, 104, 65); ">{{$stage->date_soutenance}}</p>
+                                        {{-- <input class="form-control" type="date" name="date_fin"  value="{{old('date_fin', $stage->date_fin)}}" > --}}
+                                    </div>
+                                </div>
                                
                             </div>
                             {{-- <hr class="horizontal dark"> --}}

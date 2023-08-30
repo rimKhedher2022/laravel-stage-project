@@ -23,7 +23,7 @@
                                 <h6>Les sociétés contactées </h6>
                                 
                                         <a href='add-societe'>
-                                            <button  class="btn btn-primary btn-sm ms-auto">Ajouter société</button>
+                                            <button  class="btn btn-primary btn-sm ms-auto">Proposer société</button>
                                         </a>
                             
                         
@@ -195,7 +195,7 @@
                                     <div class="d-flex px-3 py-1 justify-content-center align-items-center">
 
 
-                                        @if ($societe->validation_state == 'not yet validated by the admin')
+                                        @if ($societe->validation_state == 'proposée')
 
 
                                                 <form method="post" action="{{ route('societes.validation', $societe->id) }}">

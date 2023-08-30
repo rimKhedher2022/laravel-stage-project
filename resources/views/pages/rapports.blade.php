@@ -142,9 +142,22 @@
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                    @endif
-                                               @endif 
+                                                    @else 
 
+                                                            @if (!empty($stage->rapport))
+                                                                    @if ($stage->etat == 'rapport vérifié et corrigé' || $stage->etat == 'validé')
+                                                                        <a href="/download/{{ $stage->rapport?->filePath }}">
+                                                                            <button class="btn"
+                                                                                style="background-color: rgb(230, 228, 215)"><i
+                                                                                    class="fa fa-download"></i></button>
+                                                                        
+
+                                                                        </a>
+                                                                    @endif
+                                                                
+                                                            @endif
+                                                   @endif
+                                                  @endif                      
                                             @elseif($stage->type == 'pfe')
                                                             @if ($session_actuel_pfe)
                                                             @if ($aujourdui >= $session_actuel_pfe->date_debut && $aujourdui < $session_actuel_pfe->date_fin)
@@ -161,7 +174,7 @@
                                                             
 
                                                                 @if (!empty($stage->rapport))
-                                                                    @if ($stage->etat == 'rapport vérifié et corrigé' || $stage->etat == 'validé')
+                                                                    @if ($stage->etat == 'rapport vérifié et corrigé' || $stage->etat == 'validé' || $stage->etat == 'affecté aux jurys'  )
                                                                         <a href="/download/{{ $stage->rapport?->filePath }}">
                                                                             <button class="btn"
                                                                                 style="background-color: rgb(230, 228, 215)"><i
@@ -281,7 +294,24 @@
                                             @elseif ($stage->etat == 'affecté à un enseignant')
                                                 <p> affecté à un enseignant </p>
                                             @endif
+                                    @else
+
+                                              
+
+                                            @if ($stage->etat == 'rapport vérifié et corrigé')
+                                                <p> rapport vérifié et corrigé </p>
+                                                
+                                                    @elseif ($stage->etat == 'rapport déposé')
+                                                        <p> rapport déposé </p>
+                                                
+                                                    @elseif ($stage->etat == 'validé')
+                                                        <p style="color:rgb(65, 134, 82)"> Validé </p>
+
+                                                    @elseif ($stage->etat == 'affecté à un enseignant')
+                                                        <p> affecté à un enseignant </p>
+                                            @endif
                                     @endif
+
                                 @else
                                             @if (empty($stage->rapport))
                                             <p style="color:blue">pas de session ouverte</p>
@@ -325,6 +355,21 @@
                                     @elseif ($stage->etat == 'affecté à un encdarant')
                                         <p> affecté à un encdarant </p>
                                     @endif
+                           
+
+                            @elseif ($stage->etat == 'rapport vérifié et corrigé')
+                                        <p> rapport vérifié et corrigé </p>
+                                
+                                    @elseif ($stage->etat == 'rapport déposé')
+                                        <p> rapport déposé </p>
+                                
+                                    @elseif ($stage->etat == 'validé')
+                                        <p style="color:rgb(65, 134, 82)"> Validé </p>
+
+                                    @elseif ($stage->etat == 'affecté à un encdarant')
+                                        <p> affecté à un encdarant </p>
+                                  
+
                             @endif
                         @else
                                     @if (empty($stage->rapport))
