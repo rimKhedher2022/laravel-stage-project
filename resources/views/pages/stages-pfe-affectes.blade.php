@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                 
-                        <h6>Stages affectées aux encadrants </h6> 
+                        <h6>Les stages affectés aux encadrants </h6> 
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -25,13 +25,13 @@
                                    
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        etat</th>
+                                        État</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        date_soutenance</th>
+                                        Date soutenance</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        societe_id 
+                                        Société
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -68,20 +68,20 @@
                                             <p class="text-sm font-weight-bold mb-0" style="color: rgb(107, 184, 100)">{{$stage->date_soutenance}}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{$stage->societe_id}}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{$stage->societe->nom}}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm"> 
                                           
                                         
+                                            @if ($stage->etat!='validé')
                                                 <a href='stages/encadrant/affecter/{{$stage->id}}'>
-
-                                                        {{-- @if  (!empty($stage->enseignants->pluck('id')->toArray())  ) --}}
                                                             <button  class="btn btn-success btn-sm ms-auto">modifier encadrant</button>
-                                                        {{-- @endif --}}
-
-
                                                 </a>
-
+                                            @elseif ($stage->etat=='validé')    
+                                                <a href="/plusinfo/admin/stages/{{ $stage->id }}">
+                                                    <button class="btn"  style="background-color: rgb(157, 252, 144)">Plus d'info</button>
+                                                </a>
+                                            @endif
                                              
                                         </td>
                                   

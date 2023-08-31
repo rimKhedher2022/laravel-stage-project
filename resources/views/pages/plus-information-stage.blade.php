@@ -79,7 +79,7 @@
                                           
                                             
                                              
-                                                     <p >{{ $stage->societe->nom }} {{ $stage->societe->ville }}</p>
+                                                     <p >{{ $stage->societe->nom }}-{{ $stage->societe->ville }}</p>
                                                     
                                              
                                            
@@ -115,6 +115,54 @@
                                         {{-- <input class="form-control" type="date" name="date_fin"  value="{{old('date_fin', $stage->date_fin)}}" > --}}
                                     </div>
                                 </div>
+
+
+                                @if ($stage->type=='pfe' || $stage->type=='sfe' )
+    
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="encadrant_id">Encadrant:</label>
+                                        <input class="form-control" type="text" name="encadrant" disabled value="{{ $encadrant_responsable?->user->nom }} {{ $encadrant_responsable?->user->prenom }}">
+                                            
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="co_encadrant_id">Co-Encadrant:</label>
+                                        <input class="form-control" type="text" name="co_encadrant" disabled value="{{ $co_encadrant_responsable?->user->nom }} {{ $co_encadrant_responsable?->user->prenom }} ">
+                                            
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="co_encadrant_id">Président:</label>
+                                        <input class="form-control" type="text" name="president" disabled value="{{ $president_responsable?->user->nom }} {{ $president_responsable?->user->prenom }} ">
+                                            
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="co_encadrant_id">Rapporteur:</label>
+                                        <input class="form-control" type="text" name="rapporteur" disabled value="{{ $rapporteur_responsable?->user->nom }} {{ $rapporteur_responsable?->user->prenom }} ">
+                                            
+                                    </div>
+                                </div>
+
+
+                        @elseif ($stage->type=='ouvrier' || $stage->type=='technicien' )     
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="co_encadrant_id">Enseignant:</label>
+                                <input class="form-control" type="text" name="enseignant" disabled value="{{ $enseignant_responsable?->user->nom }} {{ $enseignant_responsable?->user->prenom }} ">
+                                    
+                            </div>
+                        </div>
+
+                        
+                        @endif
                                
                             </div>
                             {{-- <hr class="horizontal dark"> --}}

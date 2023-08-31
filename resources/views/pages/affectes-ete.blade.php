@@ -19,7 +19,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> date debut </th>
                                    
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">date_fin </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">date fin </th>
                                    
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">sujet </th>
                                    
@@ -28,14 +28,14 @@
                                         etat</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        date_soutenance</th>
+                                        date soutenance</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        societe_id 
+                                        societe 
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Enseignant 
+                                        Action 
                                     </th>
                                     
                                    
@@ -68,7 +68,7 @@
                                             <p class="text-sm font-weight-bold mb-0" style="color: rgb(107, 184, 100)">{{$stage->date_soutenance}}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{$stage->societe_id}}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{$stage->societe->nom}}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm"> 
                                             @if ($stage->etat =='affecté à un enseignant')
@@ -84,8 +84,15 @@
                                                 </a>
 
                                             @elseif ($stage->etat =='rapport vérifié et corrigé' ||  $stage->etat =='validé' || $stage->etat =='non validé' )
-                                        
-                                                    <p class="text-sm font-weight-bold mb-0">{{$stage?->enseignants[0]->user->nom}} {{$stage?->enseignants[0]->user->prenom}}</p>
+
+                                                    <a href="/plusinfo/admin/stages/{{ $stage->id }}">
+                                                        <button class="btn"  style="background-color: rgb(157, 252, 144)">Plus d'info</button>
+                                                    </a>
+
+                                            {{-- ce code est ancien --}}
+                                                    {{-- <p class="text-sm font-weight-bold mb-0">{{$stage?->enseignants[0]->user->nom}} {{$stage?->enseignants[0]->user->prenom}}</p> --}}
+                                           {{-- ce code est ancien --}}
+
                                             
                                             @endif    
                                         </td>

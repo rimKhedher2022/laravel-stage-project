@@ -40,12 +40,173 @@ class StoreController extends Controller
 
     public function plusInfo($id)
     {
-       
-
-       
-        $this->authorize('stagesConsultesParEnseignant',Stage::class);
         $stage = Stage::find($id);
-        return view('pages.plus-information-stage' , ['stage' => $stage]);
+        $this->authorize('enseignantQuiConsulte', $stage);
+
+        $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
+             
+        $encadrant_responsable = null;
+        $enseignant_responsable = null;
+        $co_encadrant_responsable = null;
+        $president_responsable = null;
+        $rapporteur_responsable = null;
+
+            foreach ($enseignants_stage as $enseignant)
+
+        {
+
+            if ($enseignant->pivot->role == 'encadrant')
+            {
+                $encadrant_responsable = $enseignant ; 
+            }
+
+              elseif ($enseignant->pivot->role == 'co-encadrant')   
+            {
+              $co_encadrant_responsable = $enseignant ; 
+            }
+              elseif ($enseignant->pivot->role == 'enseignant')   
+            {
+                $enseignant_responsable  = $enseignant ; 
+            }
+
+              elseif ($enseignant->pivot->role == 'president')   
+            {
+                $president_responsable  = $enseignant ; 
+            }
+
+              elseif ($enseignant->pivot->role == 'rapporteur')   
+            {
+                $rapporteur_responsable  = $enseignant ; 
+            }
+    
+     
+
+        }
+
+
+
+        return view('pages.plus-information-stage' , 
+        ['stage' => $stage,
+        'encadrant_responsable'=> $encadrant_responsable ,
+        'co_encadrant_responsable'=>$co_encadrant_responsable,
+        'enseignant_responsable' => $enseignant_responsable,
+        'president_responsable' => $president_responsable,
+        'rapporteur_responsable' => $rapporteur_responsable
+    ]);
+    }
+
+
+
+
+    public function plusInfoEtudiant($id)
+    {
+    
+ 
+        $stage = Stage::find($id);
+        $this->authorize('stagesConsultesParEtudiant', $stage ); 
+        $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
+             
+                        $encadrant_responsable = null;
+                        $enseignant_responsable = null;
+                        $co_encadrant_responsable = null;
+                        $president_responsable = null;
+                        $rapporteur_responsable = null;
+
+                            foreach ($enseignants_stage as $enseignant)
+
+                        {
+
+                            if ($enseignant->pivot->role == 'encadrant')
+                            {
+                                $encadrant_responsable = $enseignant ; 
+                            }
+
+                              elseif ($enseignant->pivot->role == 'co-encadrant')   
+                            {
+                              $co_encadrant_responsable = $enseignant ; 
+                            }
+                              elseif ($enseignant->pivot->role == 'enseignant')   
+                            {
+                                $enseignant_responsable  = $enseignant ; 
+                            }
+
+                              elseif ($enseignant->pivot->role == 'president')   
+                            {
+                                $president_responsable  = $enseignant ; 
+                            }
+
+                              elseif ($enseignant->pivot->role == 'rapporteur')   
+                            {
+                                $rapporteur_responsable  = $enseignant ; 
+                            }
+                    
+                     
+
+                        }
+
+        return view('pages.plus-information-stage-etudiant' ,
+         ['stage' => $stage,
+         'encadrant_responsable'=> $encadrant_responsable ,
+         'co_encadrant_responsable'=>$co_encadrant_responsable,
+         'enseignant_responsable' => $enseignant_responsable,
+         'president_responsable' => $president_responsable,
+         'rapporteur_responsable' => $rapporteur_responsable,
+        ]);
+    }
+    public function plusInfoAdmin($id)
+    {
+    
+ 
+        $stage = Stage::find($id);
+        $this->authorize('stagesConsultesParAdmin', $stage ); 
+        $enseignants_stage = $stage->enseignants; // les enseignants responsable d'un stage
+             
+                        $encadrant_responsable = null;
+                        $enseignant_responsable = null;
+                        $co_encadrant_responsable = null;
+                        $president_responsable = null;
+                        $rapporteur_responsable = null;
+
+                            foreach ($enseignants_stage as $enseignant)
+
+                        {
+
+                            if ($enseignant->pivot->role == 'encadrant')
+                            {
+                                $encadrant_responsable = $enseignant ; 
+                            }
+
+                              elseif ($enseignant->pivot->role == 'co-encadrant')   
+                            {
+                              $co_encadrant_responsable = $enseignant ; 
+                            }
+                              elseif ($enseignant->pivot->role == 'enseignant')   
+                            {
+                                $enseignant_responsable  = $enseignant ; 
+                            }
+
+                              elseif ($enseignant->pivot->role == 'president')   
+                            {
+                                $president_responsable  = $enseignant ; 
+                            }
+
+                              elseif ($enseignant->pivot->role == 'rapporteur')   
+                            {
+                                $rapporteur_responsable  = $enseignant ; 
+                            }
+                    
+                     
+
+                        }
+
+        return view('pages.plus-information-stage-admin' ,
+         ['stage' => $stage,
+         'encadrant_responsable'=> $encadrant_responsable ,
+         'co_encadrant_responsable'=>$co_encadrant_responsable,
+         'enseignant_responsable' => $enseignant_responsable,
+         'president_responsable' => $president_responsable,
+         'rapporteur_responsable' => $rapporteur_responsable,
+        ]);
     }
 
     public function store(StageStoreRequest $request) {

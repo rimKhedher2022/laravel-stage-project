@@ -92,7 +92,9 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('/add-stage',[StageStoreController::class,'show'])->name('add-stage');
 	Route::get('/stages/{id}',[EditController::class, 'edit'])->name('edit-stage');
-	Route::get('/plusinfo/stages/{id}',[StageStoreController::class, 'plusInfo'])->name('plusinfo-stage');
+	Route::get('/plusinfo/stages/{id}',[StageStoreController::class, 'plusInfo'])->name('plusinfo-stage'); // pour enseignant
+	Route::get('/plusinfo/etudiant/stages/{id}',[StageStoreController::class, 'plusInfoEtudiant'])->name('plusinfo-stage-etudiant'); // pour etudiant
+	Route::get('/plusinfo/admin/stages/{id}',[StageStoreController::class, 'plusInfoAdmin'])->name('plusinfo-stage-admin'); // pour admin
 
 	Route::get('/stages/enseignant/affecter/{id}',[EditController::class, 'affecterEnseignant'])->name('affecter-enseignant-stage');
 	Route::get('/stages/encadrant/affecter/{id}',[EditController::class, 'affecterEncadrant'])->name('affecter-encadrant-stage-pfe-sfe');

@@ -54,6 +54,7 @@ class IndexController extends Controller
 
       
       $this->authorize('stagesConsultesParEnseignant', Stage::class);
+
       $enseignant = Enseignant::where('user_id',auth()->id())->first(); // 4
 
       $stages = $enseignant->stages()->where(function ($query) {

@@ -29,7 +29,7 @@ class StageAffectationController extends Controller
         // $stages= Stage::where('etat',StageEtat::AFFECTE)->get();
         $this->authorize('stagesConsultesParAdministrateur', Stage::class);
         $enseignants = Enseignant::all() ;
-        $stages= Stage::whereIn('etat',[StageEtat::AFFECTE_ENCADRANT,StageEtat::AFFECTE_ENCADRANTS, StageEtat::AFFECTE_J , StageEtat::DEPOSE, StageEtat::CORRIGE])
+        $stages= Stage::whereIn('etat',[StageEtat::AFFECTE_ENCADRANT,StageEtat::AFFECTE_ENCADRANTS, StageEtat::AFFECTE_J , StageEtat::DEPOSE, StageEtat::CORRIGE , StageEtat::VALIDE])
                     ->whereIn('type', [StageType::PFE, StageType::SFE])->get(); 
 
         return  view('pages.stages-pfe-affectes',['stages' => $stages ,'enseignants' => $enseignants ]);
@@ -37,12 +37,10 @@ class StageAffectationController extends Controller
 
     public function juryPFESFE()  // une seul fonction
     {
-        // $stages= Stage::where('etat',StageEtat::AFFECTE)->get();
         $this->authorize('stagesConsultesParAdministrateur', Stage::class);
         $enseignants = Enseignant::all() ;
-        $stages= Stage::where('etat',StageEtat::AFFECTE_J)
+        $stages= Stage::whereIn('etat',[StageEtat::AFFECTE_J,StageEtat::VALIDE])
                     ->whereIn('type', [StageType::PFE, StageType::SFE])->get(); 
-
         return  view('pages.jury-pfe-affectes',['stages' => $stages ,'enseignants' => $enseignants ]);
     }
 

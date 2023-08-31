@@ -87,10 +87,19 @@
                                                       
                                                      
 
-                                                    @if ($stage->etat=='affecté à un encadrant' || $stage->etat=='affecté aux encadrants' ||  $stage->etat=='rapport déposé' || $stage->etat=='rapport vérifié et corrigé' || $stage->etat=='affecté aux jurys'  || $stage->etat=='validé' )
+                                                    @if ($stage->etat=='affecté à un encadrant' || $stage->etat=='affecté aux encadrants' || $stage->etat=='rapport vérifié et corrigé' || $stage->etat=='affecté aux jurys'  || $stage->etat=='validé' )
                                                     
                                                             <a href="/plusinfo/stages/{{ $stage->id }}">
                                                                 <button class="btn"  style="background-color: rgb(157, 252, 144)">Plus d'info</button>
+                                                            </a>
+
+                                                            <br>
+                                                            <a href="/download/{{ $stage->rapport?->filePath }}">
+                                                                <button class="btn"
+                                                                    style="background-color: rgb(230, 228, 215)"><i
+                                                                        class="fa fa-download"></i></button>
+                                                               
+
                                                             </a>
                                                     @endif
 
@@ -109,6 +118,14 @@
                                                                 <button class="btn"
                                                                     style="background-color: rgb(230, 228, 215)">Demander correction</button>
                                                                     
+
+                                                            </a>
+
+                                                            <a href="/download/{{ $stage->rapport?->filePath }}">
+                                                                <button class="btn"
+                                                                    style="background-color: rgb(230, 228, 215)"><i
+                                                                        class="fa fa-download"></i></button>
+                                                               
 
                                                             </a>
                                                     @endif            

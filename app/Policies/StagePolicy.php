@@ -64,11 +64,33 @@ class StagePolicy
         return  (auth()->user()->role->value === 'administrateur')  ;
       
     }
+
     public function stagesConsultesParEnseignant (User $user): bool
     {
        
         return  (auth()->user()->role->value === 'enseignant')  ;
       
+    }
+
+    public function enseignantQuiConsulte (User $user, Stage $stage): bool
+    {
+        $stage_enseignant_ids = $stage->enseignants->pluck('user_id')->toArray() ;  
+        return in_array($user->id,$stage_enseignant_ids)  && (auth()->user()->role->value === 'enseignant')  ;
+      
+    }
+   
+
+    public function stagesConsultesParEtudiant (User $user , Stage $stage): bool
+    {
+       
+        $stage_etudiant_ids = $stage->etudiants->pluck('user_id')->toArray() ;  
+        return in_array($user->id,$stage_etudiant_ids)  && (auth()->user()->role->value === 'etudiant') ;
+      
+      
+    }
+    public function stagesConsultesParAdmin (User $user , Stage $stage): bool
+    { 
+        return auth()->user()->role->value === 'administrateur' ;
     }
 
     public function stageAvalider (User $user): bool

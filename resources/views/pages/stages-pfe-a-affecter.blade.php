@@ -15,7 +15,7 @@
                        
                        
                  
-                        <h6>Stages PFE/SFE à affecter aux encadrants </h6>
+                        <h6>Les stages PFE/SFE à affecter aux encadrants </h6>
                   
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -32,27 +32,28 @@
 
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            date_fin </th>
+                                            date fin </th>
 
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            sujet </th>
+                                            Sujet </th>
 
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            etat</th>
+                                            État</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            date_soutenance</th>
+                                            Date soutenance</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            societe_id
+                                            Société
                                         </th>
 
 
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-50">
-                                            Action </th>
+                                            Action 
+                                        </th>
 
 
                                     </tr>
@@ -96,7 +97,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
-                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe_id }}</p>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe->nom }}</p>
                                                 </td>
                                           
                                            

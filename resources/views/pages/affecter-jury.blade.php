@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="co_encadrant_id">Encadrant:</label>
+                                        <label for="co_encadrant_id">Co-Encadrant:</label>
                                         <input class="form-control" type="text" name="co_encadrant" disabled value="{{ $co_encadrant_responsable?->user->nom }} {{ $co_encadrant_responsable?->user->prenom }} ">
                                             
                                     </div>

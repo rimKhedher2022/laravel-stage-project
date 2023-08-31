@@ -40,13 +40,13 @@
 
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            etat</th>
+                                            État</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            date_soutenance</th>
+                                            Date soutenance</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            societe_id
+                                            Société
                                         </th>
 
 
@@ -96,7 +96,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
-                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe_id }}</p>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->societe->nom }}</p>
                                                 </td>
                                           
                                            

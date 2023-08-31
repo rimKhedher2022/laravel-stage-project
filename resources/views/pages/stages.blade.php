@@ -17,7 +17,7 @@
                             <button class="btn btn-primary btn-sm ms-auto">Ajouter stage</button>
                         </a>
                     @elseif ($role->value === 'administrateur')
-                        <h6>Les stages d'été à affecter aux enseignants  , rapports déposés</h6>
+                        <h6>Les stages d'été à affecter aux enseignants </h6>
                         {{-- @else     --}}
                     @else
                         <h6>Stages d'été à valider </h6>
@@ -146,6 +146,10 @@
                                                 @if ($role->value === 'etudiant')
                                                     @if ($stage->etat == 'validé')
 
+                                                    <a href="/plusinfo/etudiant/stages/{{ $stage->id }}">
+                                                        <button class="btn"  style="background-color: rgb(157, 252, 144)">plus d'info</button>
+                                                    </a>
+
                                                     @else
                                                         <a href='stages/{{ $stage->id }}'>
                                                             <button class="btn btn-secondary btn-sm ms-auto">Modifier
@@ -160,6 +164,11 @@
                                                             <button type="submit"
                                                                 class="btn btn-danger btn-sm ms-auto ">supprimer</button>
                                                         </form>
+
+
+                                                        <a href="/plusinfo/etudiant/stages/{{ $stage->id }}">
+                                                            <button class="btn"  style="background-color: rgb(157, 252, 144)">plus d'info</button>
+                                                        </a>
                                                     @endif
                                                 @elseif ($role->value === 'administrateur' && ($stage->type ==='ouvrier' || $stage->type ==='technicien') )
                                                     <a href='stages/enseignant/affecter/{{ $stage->id }}'>
@@ -263,6 +272,9 @@
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             date soutenance</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Etat</th>
 
 
 
@@ -297,6 +309,9 @@
                                             </td>
                                             <td class="text-sm font-weight-bold mb-0">
                                                 <p class="text-sm font-weight-bold mb-0">{{ $stage->date_soutenance }}</p>
+                                            </td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $stage->etat }}</p>
                                             </td>
                                           
                                             
@@ -368,10 +383,7 @@
                                                                 <button type="submit" class="btn btn-sm ms-auto "
                                                                     style="background-color: rgb(157, 174, 250);color:rgb(2, 2, 36);">valider
                                                                     stage</button>
-                                                            </form>
-
-
-                                                           
+                                                            </form> 
                                                         @endif
                                                     @endif
 

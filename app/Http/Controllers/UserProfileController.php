@@ -92,6 +92,6 @@ class UserProfileController extends Controller
         }
     
       
-        return back()->with('succes', 'Profile mis à jour avec succés');
+        return back()->with('succes', 'Profil mis à jour avec succès');
     }
 }
