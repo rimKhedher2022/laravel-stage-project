@@ -92,7 +92,7 @@
                                                 <a href='stages/soutenance/pfesfe/{{ $stage->id }}'>
 
                                                     <button class="btn btn-secondary btn-sm ms-auto text-wrap"
-                                                        style="width: 10rem;">saisir date soutenance</button>
+                                                        style="width: 10rem;">Saisir date soutenance</button>
                                                 </a>
 
 

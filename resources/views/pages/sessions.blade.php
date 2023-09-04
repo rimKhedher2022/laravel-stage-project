@@ -61,13 +61,13 @@
                                         <div class="d-flex px-3 py-1 align-items-center">
                                           
                                                 <a href='sessions/{{$session->id}}'>
-                                                    <button  class="btn btn-secondary btn-sm ms-auto">Modifier session</button>
+                                                    <button  class="btn btn-secondary btn-sm ms-auto">Modifier</button>
                                                 </a>
                                               
                                                 <form method="post"  action="{{ route('sessions.delete', $session->id) }}" >
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm ms-auto ">Supprimer</button>
                                                 </form>
                                             
                                         </div>

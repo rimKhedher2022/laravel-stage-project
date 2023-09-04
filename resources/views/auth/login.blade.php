@@ -17,7 +17,7 @@
                             <div class="card card-plain">
                                 <img  src="{{ asset('./img/logo.png') }}" style="width:100px ;margin-left:120px; " >
                                 <div class="card-header pb-0 ">
-                                    <h4 class="font-weight-bolder"  style="margin-left:140px; " >Sign In</h4>
+                                    <h4 class="font-weight-bolder"  style="margin-left:95px; " >Connexion</h4>
                                     <p class="mb-0">Enterz votre email et votre mot de passe </p>
                                 </div>
                              
@@ -38,7 +38,7 @@
                                             <label class="form-check-label" for="rememberMe">Remember me</label>
                                         </div> --}}
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-lg btn-primary btn-lg  mt-3 mb-0">Sign in</button>
+                                            <button type="submit" class="btn btn-lg btn-primary btn-lg  mt-3 mb-0">Connexion</button>
                                             
                                         </div>
                                         <div class="text-center pt-0 px-lg-2 px-1" style="margin-top: 20px">
@@ -56,11 +56,11 @@
                                     </p>
                                 </div> --}}
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-4 text-sm mx-auto">
-                                        Don't have an account?
-                                        <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                                    {{-- <p class="mb-4 text-sm mx-auto"> --}}
+                                        {{-- Don't have an account? --}}
+                                        {{-- <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a> --}}
                                       
-                                    </p>
+                                    {{-- </p> --}}
                                 </div>
                                 <img  src="{{ asset('./img/issat.png') }}" style="width:100px ;margin-left:120px; margin-top:-30px" >
                             </div>

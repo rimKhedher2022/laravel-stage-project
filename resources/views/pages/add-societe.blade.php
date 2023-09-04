@@ -1,8 +1,11 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
+@if (auth()->user()->role->value === 'etudiant')
+    @include('layouts.navbars.auth.topnav', ['title' => 'Proposer une société'])
+@elseif(auth()->user()->role->value === 'administrateur')
     @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter une societe'])
-  
+@endif    
     <div id="alert">
         @include('components.alert')
     </div>
@@ -26,8 +29,14 @@
                         <div class="card-header pb-0">
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter une societe</p>
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Ajouter</button>
+                                    @if (auth()->user()->role->value === 'etudiant')
+                                            <p class="mb-0">Proposer une société</p>
+                                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Proposer</button>
+                                    @elseif(auth()->user()->role->value === 'administrateur')
+
+                                            <p class="mb-0">Ajouter une societe</p>
+                                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Ajouter</button>
+                                    @endif
                                 </div>
                                 
                         </div>

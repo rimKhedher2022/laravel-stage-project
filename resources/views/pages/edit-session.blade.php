@@ -21,7 +21,7 @@
                                 <div class="d-flex align-items-center">
                                     <p class="mb-0">Modifier une session</p>
                                     {{-- {{$session}} --}}
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Enregistrer</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Modifier</button>
                                 </div>
                                 
                         </div>
