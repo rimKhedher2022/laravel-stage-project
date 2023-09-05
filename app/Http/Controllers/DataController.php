@@ -48,11 +48,32 @@ class DataController extends Controller
                 $anneeScolaire = $request->input('annee');
                 // dd($anneeScolaire);
                 $csvData = array_map('str_getcsv', file($file)); 
-                $emails = array_column($csvData, '3');
-                $old_users = User::whereNotIn('email',$emails)->get();
-                foreach ($old_users as $userToDelete) {
-                    $userToDelete->delete();
-                }
+                foreach ($csvData as $row) {
+                    $test=false;
+                    if($anneeScolaire === $row[7] && (count($row) === 13 || count($row) === 9 || count($row) === 11  ) )
+                    {
+                        $test = true; 
+                    }
+
+                }    
+
+                // dd($test) ;
+                
+
+                    if($test)
+                    {
+                        $emails = array_column($csvData, '3');
+                        $old_users = User::whereNotIn('email',$emails)->get();
+                        foreach ($old_users as $userToDelete) {
+                            $userToDelete->delete();
+                        }
+                    }
+
+                    else{
+                        return redirect()->back()->with('error', 'Le fichier CSV n\'est pas structuré correctement.');
+
+                    }
+                           
 
           
 
@@ -62,44 +83,44 @@ class DataController extends Controller
             foreach ($csvData as $row) {
                
                 if (count($row) === 13) {
-                                if($anneeScolaire == $row[7] )
-                                {
-            
-                                $user = User::where('email', $row[3])->first(); // unique
+                                    if($anneeScolaire === $row[7] )
+                            {
+                
+                                    $user = User::where('email', $row[3])->first(); // unique
                                     //    dd($user); 
                                 if ($user)
-                                {
-                                        $user->update([
-                                            'nom' => $row[1], // Replace with the appropriate column index
-                                            'prenom' => $row[2], // Replace with the appropriate column index
-                                            'password' => $row[4], // Replace with the appropriate column index
-                                            'role' => $row[5], // Replace with the appropriate column index
-                                            'image' => $row[6], // Replace with the appropriate column index
-                                            'annee-scolaire' => $row[7], // Replace with the appropriate column index
-                                        ]);
+                                    {
+                                                        $user->update([
+                                                            'nom' => $row[1], // Replace with the appropriate column index
+                                                            'prenom' => $row[2], // Replace with the appropriate column index
+                                                            'password' => $row[4], // Replace with the appropriate column index
+                                                            'role' => $row[5], // Replace with the appropriate column index
+                                                            'image' => $row[6], // Replace with the appropriate column index
+                                                            'annee-scolaire' => $row[7], // Replace with the appropriate column index
+                                                        ]);
 
                                 
-                                    
-                                        if ($row[5] == 'etudiant')
-                                        {
-                                            // dd($user->etudiant);
-                                            $user->etudiant->update([
-                                                'cin' => $row[8], // Replace with the appropriate column index
-                                                'niveau' => $row[9], // Replace with the appropriate column index
-                                                'specialite' => $row[10], // Replace with the appropriate column index
-                                                'numero_inscription' => $row[11], // Replace with the appropriate column index
-                                                'diplôme' => $row[12], // Replace with the appropriate column index
-                                                'user_id' => $user->id, // Replace with the appropriate column index
-                                            ]);
-                                        }
-                                        else if ($row[5] == 'enseignant') // role
-                                        {
-                                            $user->enseignant->update([
-                                                'matricule' => $row[8], 
-                                                'grad' => $row[9],
-                                                'user_id' => $user->id, 
-                                            ]);
-                                        }
+                                            
+                                                if ($row[5] == 'etudiant')
+                                                {
+                                                    // dd($user->etudiant);
+                                                    $user->etudiant->update([
+                                                        'cin' => $row[8], // Replace with the appropriate column index
+                                                        'niveau' => $row[9], // Replace with the appropriate column index
+                                                        'specialite' => $row[10], // Replace with the appropriate column index
+                                                        'numero_inscription' => $row[11], // Replace with the appropriate column index
+                                                        'diplôme' => $row[12], // Replace with the appropriate column index
+                                                        'user_id' => $user->id, // Replace with the appropriate column index
+                                                    ]);
+                                                }
+                                                else if ($row[5] == 'enseignant') // role
+                                                {
+                                                    $user->enseignant->update([
+                                                        'matricule' => $row[8], 
+                                                        'grad' => $row[9],
+                                                        'user_id' => $user->id, 
+                                                    ]);
+                                                }
 
                                     }   // fin if user
 
@@ -141,22 +162,21 @@ class DataController extends Controller
 
                                     }
                                 
-                                } 
+                            } 
                     } 
                     else{
-                        return redirect()->back()->with('error', 'Le fichier CSV n\'est pas structuré correctement.');
+                        return redirect()->back()->with('message', 'Le fichier CSV n\'est pas structuré correctement.');
                     }     
             }
          
         }     
       else {
-        return redirect()->back()->with('error', 'Veuillez saisir un fichier csv.');
+        return redirect()->back()->with('message', 'Veuillez saisir un fichier csv.');
       }
      
         return redirect()->back()->with('message', 'Doonées importés avec succès');
    
     }
-
 
 
     public function importSocieteCSV (Request $request)

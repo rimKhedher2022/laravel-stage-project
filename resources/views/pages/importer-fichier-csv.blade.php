@@ -2,7 +2,7 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'exporter fichier'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Remplir la base de données'])
   
    <div id="alert">
         @include('components.alert')
@@ -11,7 +11,7 @@
 
     <div class="container-fluid py-4">
         @if (session('message'))
-        <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
+            <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
         @endif
         <div class="row">
             <div class="col-md-8">
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                  --}}
-                                 <label for="example-text-input" class="form-control-label">Remplir la base de données de l'année scolaire: </label>
+                                 <label for="example-text-input" class="form-control-label">Remplir la base de données par les utilisateurs de l'année scolaire: </label>
 
                                 <div class="col-md-6">
                                     <div class="form-group">

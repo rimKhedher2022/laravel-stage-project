@@ -32,10 +32,10 @@
                                         etat</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        date_soutenance</th>
+                                        date soutenance</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        societe_id 
+                                        societe 
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -75,27 +75,53 @@
                                         <p class="text-sm font-weight-bold mb-0">{{$stage->date_soutenance}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">{{$stage->societe_id}}</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{$stage->societe->nom}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        @if ($session_actuel)
+                                        @if ($stage->type=='pfe')
+                                            
+                                       
+                                            @if ($session_actuel_pfe)
                                             
                                                 
                                                 {{-- si la session est ouverte , l'admin envoi les messages --}}
-                                                @if ($aujourdui >= $session_actuel->date_debut &&  $aujourdui < $session_actuel->date_fin)  
+                                                @if ($aujourdui >= $session_actuel_pfe->date_debut &&  $aujourdui < $session_actuel_pfe->date_fin)  
 
                                                         <form method="post"  action="{{ route('message.store', $stage->id)}}" >
                                                             @csrf
                                                             @method('POST')
-                                                            <button type="submit" class="btn btn-success btn-sm ms-auto ">envoyer message</button>
+                                                            <button type="submit" class="btn btn-success btn-sm ms-auto ">Envoyer message</button>
                                                         </form>
                                                 @else
                                                         <p style="color:blue">pas de session ouverte</p>
                                                 @endif
-                                        @else
+                                            @else
 
                                                         <p style="color:blue">pas de session ouverte</p>
 
+                                            @endif
+                                        @elseif($stage->type=='sfe')
+                                        
+                                            @if ($session_actuel_sfe)
+                                            
+                                                
+                                                {{-- si la session est ouverte , l'admin envoi les messages --}}
+                                                @if ($aujourdui >= $session_actuel_sfe->date_debut &&  $aujourdui < $session_actuel_sfe->date_fin)  
+
+                                                        <form method="post"  action="{{ route('message.store', $stage->id)}}" >
+                                                            @csrf
+                                                            @method('POST')
+                                                            <button type="submit" class="btn btn-success btn-sm ms-auto ">Envoyer message</button>
+                                                        </form>
+                                                @else
+                                                        <p style="color:blue">pas de session ouverte</p> {{-- session fermé --}}
+                                                @endif
+                                            @else
+
+                                                        <p style="color:blue">pas de session ouverte</p> {{-- session pas crée --}}
+
+                                            @endif
+                                        
                                         @endif
                                         {{-- <a href='add-message/{{$stage->id}}'>
                                                     <button  class="btn btn-success btn-sm ms-auto">envoyer message</button>

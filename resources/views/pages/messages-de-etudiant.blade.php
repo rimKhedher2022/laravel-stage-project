@@ -53,7 +53,7 @@
                                             <tr>
                                                 <td class="text-sm font-weight-bold mb-0"> {{$message->description}}</td> 
                                                 <td class="text-sm font-weight-bold mb-0"> {{$message->stage->sujet}}</td> 
-                                                <td class="text-sm font-weight-bold mb-0">{{$message->created_at->format('Y-m-d')}}</td> 
+                                                <td class="text-sm font-weight-bold mb-0">{{$message->created_at->format('d-m-Y')}}</td> 
                                             </tr>
                                     {{-- @endif --}}
                                     @endforeach

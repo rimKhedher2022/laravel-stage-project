@@ -39,9 +39,30 @@ class StoreController extends Controller
 
         $this->authorize('create',MessageDeRappel::class);
         $stage = Stage::find($id) ;
-       // $etudiants_stage = $stage->etudiants ;
-            $session_actuel = SessionDeDepot::latest()->first();
-            $dateFin = Carbon::createFromFormat('Y-m-d', $session_actuel->date_fin); // Assuming the format is YYYY-MM-DD
+     
+       
+       
+
+        if ($stage->type == 'technicien' || $stage->type == 'ouvrier')
+        {
+            $session_actuel= SessionDeDepot::where('type_stage','Été')->latest()->first();
+            $dateFin = Carbon::createFromFormat('Y-m-d', $session_actuel->date_fin);
+        }
+
+        elseif($stage->type == 'pfe')
+        {
+            $session_actuel = SessionDeDepot::where('type_stage','PFE')->latest()->first();
+            $dateFin = Carbon::createFromFormat('Y-m-d', $session_actuel->date_fin);
+
+        }
+        elseif($stage->type == 'sfe')
+        {
+            $session_actuel = SessionDeDepot::where('type_stage','SFE')->latest()->first();
+            $dateFin = Carbon::createFromFormat('Y-m-d', $session_actuel->date_fin);
+        }
+
+   
+             // Assuming the format is YYYY-MM-DD
             $formattedDate = $dateFin->format('d-m-Y');
             $message = MessageDeRappel::create([
                 // 'titre'=> $request->titre ,
@@ -64,9 +85,11 @@ class StoreController extends Controller
            }
             
 
-        return back()->with('message', 'Message envoyé avec succés ');
+        return back()->with('message', 'Message envoyé avec succés.');
 
     }
+
+    
     public function send(MessageDeRappelStoreRequest $request , $id) { 
         $stage = Stage::find($id) ;
             $message = MessageDeRappel::create([
@@ -80,6 +103,6 @@ class StoreController extends Controller
            {
                 Mail::to($etudiant->user->email)->send(new MessageDeRappelMail($message));
            }
-        return back()->with('message', 'Message envoyé avec succés ');
+        return back()->with('message', 'Message envoyé avec succés.');
     }
 }

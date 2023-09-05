@@ -75,10 +75,10 @@
                                                     <p class="text-sm font-weight-bold mb-0">{{ $stage->type }}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_debut }}</p>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_debut}}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_fin }}</p>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $stage->date_fin}}</p>
                                                 </td>
                                                 <td class="text-sm font-weight-bold mb-0">
                                                     <p class="text-sm font-weight-bold mb-0">{{ $stage->sujet }}</p>

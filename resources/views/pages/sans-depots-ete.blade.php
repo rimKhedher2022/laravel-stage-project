@@ -80,15 +80,15 @@
                                     <td class="align-middle text-center text-sm">
                                         
                                         {{-- si la session est ouverte , l'admin envoi les messages --}}
-                                        @if ($session_actuel)
+                                        @if ($session_actuel_ete)
                                             
                                        
-                                                @if ($aujourdui >= $session_actuel->date_debut &&  $aujourdui < $session_actuel->date_fin)  
+                                                @if ($aujourdui >= $session_actuel_ete->date_debut &&  $aujourdui < $session_actuel_ete->date_fin)  
 
                                                         <form method="post"  action="{{ route('message.store', $stage->id)}}" >
                                                             @csrf
                                                             @method('POST')
-                                                            <button type="submit" class="btn btn-success btn-sm ms-auto ">envoyer message</button>
+                                                            <button type="submit" class="btn btn-success btn-sm ms-auto ">Envoyer message</button>
                                                         </form>
                                                 @else
                                                         <p style="color:blue">pas de session ouverte</p>
