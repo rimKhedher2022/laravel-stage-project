@@ -314,7 +314,7 @@ public function affecterJury (Request $request  , $id)
 
     if ($request->president_id !== '0')
     {
-        $role = 'president';
+        $role = 'président';
         $teachersWithRole1 = $stage->enseignants->filter(function ($enseignant) use ($role) {
             return $enseignant->pivot->role === $role;
         })->pluck('id')->toArray();
@@ -327,7 +327,7 @@ public function affecterJury (Request $request  , $id)
             EnseignantStage::create([  // 
                 'stage_id'=>$stage->id,
                 'enseignant_id'=> $request->president_id, // l'enseignant
-                'role'=> 'president'
+                'role'=> 'président'
                 ]);
         }
 
@@ -335,7 +335,7 @@ public function affecterJury (Request $request  , $id)
             EnseignantStage::create([  // 
                 'stage_id'=>$stage->id,
                 'enseignant_id'=> $request->president_id, // l'enseignant
-                'role'=> 'president'
+                'role'=> 'président'
                 ]);
         }
        
@@ -345,7 +345,7 @@ public function affecterJury (Request $request  , $id)
     }
 
     elseif ($request->president_id == '0'){
-        $role = 'president';
+        $role = 'président';
         $teachersWithRole1 = $stage->enseignants->filter(function ($enseignant) use ($role) {
             return $enseignant->pivot->role === $role;
         })->pluck('id')->toArray();
@@ -418,9 +418,16 @@ public function affecterJury (Request $request  , $id)
  }
         
 
+ public function choisirSoutenance($id)
+ {
+      $stage = Stage::find($id);
+      $this->authorize('choisirDateSoutenance',$stage );  // que l'enseignant responsable choisi la date de soutenance
+      
 
+    return  view('pages.add-soutenance',['stage' => $stage]);
+ }
 
-public function choisirSoutenance(Request $request  , $id){
+public function choisirSoutenance1(Request $request  , $id){
     $stage = Stage::find($id);
 
     $stage->update([

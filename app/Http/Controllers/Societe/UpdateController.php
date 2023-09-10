@@ -14,14 +14,17 @@ class UpdateController extends Controller
 
         $societe = Societe::find($id);
         $this->authorize('view', $societe ); // l'admin peut gérer les informations des societes
+        // dd( $request -> all());
         $societe->update(
-        //     [
-        //     'nom' => $request->nom ,
-        //     'telephone' =>$request->telephone  ,
-        //     'adresse' =>$request->adresse  ,
-        // ]
-        $request -> all()
+            [
+            'nom' => $request->nom ,
+            'telephone' =>$request->telephone  ,
+            'adresse' =>$request->adresse  ,
+            'pays' =>$request->pays  ,
+        ]
+       
     );
+    
     return back()->with('succes', 'société mise à jour. ');
     }
 }

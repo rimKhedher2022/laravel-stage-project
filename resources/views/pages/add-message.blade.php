@@ -3,16 +3,31 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'ajouter message'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Envoyer message'])
   
     <div id="alert">
         @include('components.alert')
     </div>
  
+
    
   
 
     <div class="container-fluid py-4">
+
+                @if (session('message'))
+                    <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
+                @endif
+
+        @if ($errors->any())
+        <div class="alert alert-secondary">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li style="color: rgba(247, 247, 247, 0.938)">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <div class="row">
             <div class="col-md-8">
                 <div class="card">

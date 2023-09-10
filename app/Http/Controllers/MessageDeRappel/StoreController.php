@@ -35,12 +35,12 @@ class StoreController extends Controller
 
 
 
-    public function store(MessageDeRappelStoreRequest $request , $id) { 
+    public function store($id) { 
 
         $this->authorize('create',MessageDeRappel::class);
         $stage = Stage::find($id) ;
      
-       
+    //    dd( $stage);
        
 
         if ($stage->type == 'technicien' || $stage->type == 'ouvrier')
@@ -61,7 +61,7 @@ class StoreController extends Controller
             $dateFin = Carbon::createFromFormat('Y-m-d', $session_actuel->date_fin);
         }
 
-   
+  
              // Assuming the format is YYYY-MM-DD
             $formattedDate = $dateFin->format('d-m-Y');
             $message = MessageDeRappel::create([
@@ -103,6 +103,6 @@ class StoreController extends Controller
            {
                 Mail::to($etudiant->user->email)->send(new MessageDeRappelMail($message));
            }
-        return back()->with('message', 'Message envoyé avec succés.');
+        return back()->with('message','Message envoyé avec succès.');
     }
 }

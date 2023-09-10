@@ -119,7 +119,7 @@
                                                                 </a>
                                                             @else
                                                                 <a href='rapports/{{ $stage->rapport?->id }}'>
-                                                                    <button class="btn btn-secondary btn-sm ms-auto">Modifier
+                                                                    <button class="btn btn-secondary btn-sm ms-auto" style="width: 10em">Modifier
                                                                         rapport</button>
                                                                 </a>
 
@@ -128,7 +128,7 @@
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit"
-                                                                        class="btn btn-danger btn-sm ms-auto ">supprimer</button>
+                                                                        class="btn btn-danger btn-sm ms-auto " style="width: 10em">supprimer</button>
                                                                 </form>
 
 

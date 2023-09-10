@@ -102,7 +102,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('/remplir',[DataController::class, 'show'])->name('remplir');
 	Route::post('/import-from-csv',[DataController::class, 'importCSV'])->name('data.import');
 	Route::post('/import-from-csv-societes',[DataController::class, 'importSocieteCSV'])->name('data.societes.import');
-	Route::get('/stages/soutenance/{id}',[EditController::class, 'choisirSoutenance'])->name('soutenance-stage'); //?????
+	Route::get('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('soutenance-stage'); //?????
 	Route::get('/stages/soutenance/pfesfe/{id}',[EditController::class, 'choisirSoutenancepfe'])->name('soutenance-stage'); //?????
 	// Route::get('/stages/affecter/{id}',EditController::class)->name('edit-stage'); // admin
 	Route::post('/stages/{id}',[UpdateController::class, 'update'])->name('stages.update');
@@ -112,7 +112,7 @@ Route::middleware('auth')->group(function () {
 	Route::post('/stages/affecter/{id}',[UpdateController::class, 'affecter'])->name('stages.affecter'); // admin
 	Route::post('/stages/encadrant/affecter/{id}',[UpdateController::class, 'affecterEncadrant'])->name('stages.affecterEncadrant'); // admin
 	Route::post('/stages/jury/affecter/{id}',[UpdateController::class, 'affecterJury'])->name('stages.affecterJury'); // admin
-	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance'])->name('stages.soutenance'); //?????
+	Route::post('/stages/soutenance/{id}',[UpdateController::class, 'choisirSoutenance1'])->name('stages.soutenance'); //?????
 	Route::post('/stages/soutenance/pfesfe/{id}',[UpdateController::class, 'Soutenancepfe'])->name('stages.soutenance.pfe'); //?????
 	Route::get('/stages',[StageIndexController::class,'ete'])->name('stages');
 
@@ -216,7 +216,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
-	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+	Route::post('/profile/{id}', [UserProfileController::class, 'update'])->name('profile.update');
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 

@@ -11,7 +11,7 @@
                         <h6>Sessions</h6>
                         <a href='add-session'>
                     
-                            <button  class="btn btn-primary btn-sm ms-auto">Ajouter session</button>
+                            <button  class="btn btn-primary btn-sm ms-auto">Ouvrir session</button>
                           
                         </a>
                   

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -14,76 +16,96 @@ class UserProfileController extends Controller
         return view('pages.user-profile',['user'=>$user,'image'=>$image]);
     }
 
-    public function update(Request $request)
+    public function update(UserUpdateRequest $request,$id)
     {
-        $attributes = $request->validate([
-            'nom' => ['required','max:255', 'min:2'],
-            'prenom' => ['max:100'],
-            'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
-            'image' => 'required|image', // name
+        // $attributes = $request->validate([
+        //     'nom' => ['required','max:255', 'min:2'],
+        //     'prenom' => ['max:100'],
+        //     'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
+        //     'image' => 'required|image', // name
            
       
-        ]);
+        // ]);
 
-
-        $imageName ='' ; 
-        if ($request->hasFile('image') && auth()->user()->image != 'null' )
+        $user = User::find($id);
+        // $this->authorize('update',$user);
+       
+        $imageName =$user->image ; 
+        // dd($request->hasFile('image'));
+        if ($request->hasFile('image'))
         {
-           
-            unlink(public_path('img/'.auth()->user()->image));
-         $imageName = time().'_'.$request->image->getClientOriginalName();
-         $request->image->move(public_path('/img'),$imageName);
-
-           
-        }
-        elseif(auth()->user()->image == 'null')
-        {
-            // dd(auth()->user()->image) ;
-            if ($request->hasFile('image'))
+            if($user->image)
             {
+                $oldImagePath = public_path('img/' . auth()->user()->image);
+                if (file_exists($oldImagePath)&& is_file($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+                $imageName = time().'_'.$request->image->getClientOriginalName();
+                $request->image->move(public_path('/img'),$imageName);
+            }
+
             $imageName = time().'_'.$request->image->getClientOriginalName();
             $request->image->move(public_path('/img'),$imageName);
-            }
-           
         }
-
-       
-
-        // if(auth()->user()->image != null)
-        // {
-        //     // dd(auth()->user()->image) ;
-        //     unlink(public_path('img/'.auth()->user()->image));
-        // }
-
-
-
-        
-        
-       
-
-        auth()->user()->update([
-            'nom' => $request->get('nom'),
-            'prenom' => $request->get('prenom'),
-            'email' => $request->get('email') ,
+    
+        $user->update(
+            [
+            'nom' => $request->nom,
+            'prenom' =>$request->prenom,
+            'email' =>$request->email,
             'image' => $imageName, // name
-     
-        ]);
+        ] 
+    );
 
-        if (auth()->user()->role->value === 'etudiant')
+
+        // auth()->user()->update([
+        //     'nom' => $request->get('nom'),
+        //     'prenom' => $request->get('prenom'),
+        //     'email' => $request->get('email') ,
+        //     'image' => $imageName, // name
+     
+        // ]);
+
+        if ($user->role->value === 'etudiant')
         {
-            auth()->user()->etudiant->update([
+            
+            
+        $user->update(
+            [
+            'nom' => $request->nom,
+            'prenom' =>$request->prenom,
+            'email' =>$request->email,
+            'image' => $imageName, // name
+            ] 
+            );
+
+
+            $user->etudiant->update([
+                
                 'cin' => $request->cin,
-                'niveau' =>$request->niveau,
-                'specialite' =>$request->specialite,
-                'numero_inscription' =>$request->numero_inscription,
-                'diplôme' =>$request->diplôme,
+                // 'niveau' =>$request->niveau,
+                // 'specialite' =>$request->specialite,
+                // 'numero_inscription' =>$request->numero_inscription,
+                // 'diplôme' =>$request->diplôme,
     
             ]);
     
         }
-        if (auth()->user()->role->value === 'enseignant')
+        if ($user->role->value === 'enseignant')
         {
-            auth()->user()->enseignant->update([
+
+                 
+        $user->update(
+            [
+            'nom' => $request->nom,
+            'prenom' =>$request->prenom,
+            'email' =>$request->email,
+            'image' => $imageName, // name
+            ] 
+            );
+
+            $user->enseignant->update([
+             
                 'matricule' => $request->matricule,
               
     

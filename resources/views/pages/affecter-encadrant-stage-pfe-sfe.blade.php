@@ -45,7 +45,7 @@
                             
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">sujet</label>
+                                        <label for="example-text-input" class="form-control-label">Sujet</label>
                                         <input class="form-control" type="text" name="sujet" disabled value="{{old('sujet', $stage->sujet)}}">
                                     </div>
                                 </div>

@@ -25,7 +25,19 @@ class EditController extends Controller
    //  $etudiants_list = Etudiant::where('user_id','<>',auth()->id())->get();
     $etudiants_stage = $stage->etudiants; // 2 et 3
   
-    $etudiants = Etudiant::where('user_id', '!=', auth()->id())->get()  ;  // que les etudiants <> du l'etudiant connecté
+    // $etudiants = Etudiant::where('user_id', '!=', auth()->id())->get()  ;  // que les etudiants <> du l'etudiant connecté
+
+
+    $loggedInStudent = Etudiant::where('user_id', auth()->id())->first();
+    $niveau = $loggedInStudent->niveau ; 
+    $diplôme = $loggedInStudent->diplôme ; 
+    $societes = Societe::where('validation_state','approved by admin')->get() ; 
+
+    $etudiants = Etudiant::where('user_id', '!=', auth()->id())
+    ->where('niveau', $loggedInStudent->niveau)
+    ->where('diplôme', $loggedInStudent->diplôme)
+    ->where('specialite', $loggedInStudent->specialite)
+    ->get() ;  // pour le binome
 
     $binome = $etudiants_stage->filter(function  ($value, $key) use($id_auth) {
       return $value->id != $id_auth;
@@ -37,7 +49,7 @@ class EditController extends Controller
   // dd ($stage->enseignants) ;
 
 
-    $societes = Societe::all();
+    // $societes = Societe::all();
     return  view('pages.edit-stage',['stage' => $stage,
     'societes' => $societes , 
     'etudiants' => $etudiants,
@@ -125,7 +137,7 @@ class EditController extends Controller
                                 $rapporteur = $enseignant ; 
                             }
 
-                             if ($enseignant->pivot->role == 'president')   
+                             if ($enseignant->pivot->role == 'président')   
                               {
                                 $president = $enseignant ; 
                               }
@@ -163,14 +175,7 @@ class EditController extends Controller
 
 
 
-   public function choisirSoutenance($id)
-   {
-        $stage = Stage::find($id);
-        $this->authorize('choisirDateSoutenance',$stage );  // que l'enseignant responsable choisi la date de soutenance
-        
-  
-      return  view('pages.add-soutenance',['stage' => $stage]);
-   }
+   
    public function choisirSoutenancepfe($id)
    {
         $stage = Stage::find($id);

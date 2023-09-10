@@ -7,14 +7,32 @@
    <div id="alert">
         @include('components.alert')
     </div> 
-   
+    
+  
 
     <div class="container-fluid py-4">
-        @if (session('message'))
-            <div class="alert alert-success" style="color: rgb(8, 2, 59)">{{ session('message') }}</div>
-        @endif
+       
+
+     
+
         <div class="row">
             <div class="col-md-8">
+
+                @if ($errors->any())
+                <div class="alert alert-secondary">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li style="color: rgba(247, 247, 247, 0.938)">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+                @if (session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                @endif
                 <div class="card">
                     
                     <form role="form" method="POST"  action="{{ route('data.import') }}" enctype="multipart/form-data">
@@ -44,9 +62,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                        
-                                        <input class="form-control" type="text" name="annee" placeholder="exemple:2022-2023" required>
+                                        <input class="form-control" type="text" name="annee" placeholder="exemple:2022-2023">
                                     </div>
+
+
+                                   
                                 </div>
+
 
                                 
                                 <div class="d-flex align-items-center">

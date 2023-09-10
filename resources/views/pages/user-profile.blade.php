@@ -37,7 +37,7 @@
         <div class="row ">
             <div class="col-md-8 card" style="margin-left:20px">
                 <div class="card">
-                    <form role="form" method="POST" action={{ route('profile.update') }} enctype="multipart/form-data">
+                    <form role="form" method="POST" action={{ route('profile.update', auth()->user()->id) }} enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
@@ -91,15 +91,15 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label">Niveau</label>
-                                                <input class="form-control" type="text" name="niveau"
+                                                <label for="example-text-input" class="form-control-label" >Niveau</label>
+                                                <input disabled class="form-control" type="text" name="niveau"
                                                     value="{{ old('niveau', $user->etudiant->niveau) }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Spécialité</label>
-                                                <input class="form-control" type="text" name="specialite"
+                                                <input disabled class="form-control" type="text" name="specialite"
                                                     value="{{ old('specialite', $user->etudiant->specialite) }}">
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
                                             <div class="form-group">
                                                 <label for="example-text-input"
                                                     class="form-control-label">Numero d'inscription</label>
-                                                <input class="form-control" type="text" name="numero_inscription"
+                                                <input class="form-control" type="text" name="numero_inscription" disabled
                                                     value="{{ old('numero_inscription', $user->etudiant->numero_inscription) }}">
                                             </div>
                                         </div>
@@ -115,7 +115,7 @@
                                             <div class="form-group">
                                                 <label for="example-text-input"
                                                     class="form-control-label">Diplôme</label>
-                                                <input class="form-control" type="text" name="diplôme"
+                                                <input disabled class="form-control" type="text" name="diplôme"
                                                     value="{{ old('diplôme', $user->etudiant->diplôme) }}">
                                             </div>
                                         </div>

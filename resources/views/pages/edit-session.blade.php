@@ -2,7 +2,7 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier un session'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Modifier une session'])
   
     <div id="alert">
         @include('components.alert')

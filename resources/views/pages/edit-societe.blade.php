@@ -75,8 +75,10 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Pays</label>
                                      
-                                        <select class="form-control" name="pays" id="pays" value="{{old('pays', $societe->pays)}}">
-                                           
+                                        <select class="form-control" name="pays" id="pays">
+                                           <option value="{{old('pays', $societe->pays)}}" selected>
+                                                {{$societe->pays}}
+                                           </option>
                                             <!-- Les options de pays seront ajoutées ici par JavaScript -->
                                         </select>
                                        
@@ -128,7 +130,7 @@
                                         // Create options for each country in the filtered data
                                         for (const countryCode in countryMapping) {
                                             const option = document.createElement("option");
-                                            option.value = countryCode;
+                                            option.value = countryMapping[countryCode];
                                             option.textContent = countryMapping[countryCode];
                                             selectElement.appendChild(option);
                                         }

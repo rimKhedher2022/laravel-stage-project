@@ -24,8 +24,16 @@ class MessageDeRappelStoreRequest extends FormRequest
         return [
           
             'stage_id'=>'string',
-            // 'user_id'=>'required',
+            'description'=>'required',
            
+           
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+        'description'=>'veuillez remplir le champ Message',
         ];
     }
 }

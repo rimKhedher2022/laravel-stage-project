@@ -82,7 +82,7 @@
                                                 <a href='stages/jury/affecter/{{$stage->id}}'>
 
                                                         {{-- @if  (!empty($stage->enseignants->pluck('id')->toArray())  ) --}}
-                                                            <button  class="btn btn-success btn-sm ms-auto">Modifier jurys</button>
+                                                            <button  class="btn btn-success btn-sm ms-auto" style="width: 10rem;">Modifier jurys</button>
                                                         {{-- @endif --}}
 
 
@@ -102,7 +102,7 @@
                                                         @csrf
                                                         @method('POST')
                                                         <button type="submit" class="btn btn-sm ms-auto "
-                                                            style="background-color: rgb(157, 174, 250);color:rgb(2, 2, 36);">valider
+                                                            style="background-color: rgb(157, 174, 250);color:rgb(2, 2, 36); width: 10rem;">Valider
                                                             stage</button>
                                                     </form> 
                                                 @endif

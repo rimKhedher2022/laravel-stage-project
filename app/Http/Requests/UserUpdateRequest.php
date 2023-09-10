@@ -25,6 +25,7 @@ class UserUpdateRequest extends FormRequest
             'nom' => 'string',
             'prenom' => 'string',
             'email' => 'string | email ',
+            
             // 'cin' => 'string ' ,
             // 'niveau' => 'string' ,
             // 'specialite' => 'string' ,

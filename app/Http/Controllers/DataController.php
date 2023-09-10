@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DataStoreRequest;
 use App\Models\Enseignant;
 use App\Models\Etudiant;
 use App\Models\MessageDeRappel;
@@ -26,13 +27,19 @@ class DataController extends Controller
      }
 
 
-    public function importCSV(Request $request)
+    public function importCSV(DataStoreRequest $request)
     {
         $file = $request->file('csv_file');
-        $request->validate([
-            'csv_file' => 'required',
-            'annee' => 'required', 
-        ]);
+        $anneeScolaire = $request->input('annee');
+
+        if (empty($anneeScolaire)) {
+            return redirect()->back()->with('message', 'Veuillez saisir le champ annee-scolaire.');
+        }
+        // $request->validate([
+        //     'csv_file' => 'required',
+        //     'annee' => 'required', 
+        // ]);
+
         
         if ($request->file('csv_file'))
 
