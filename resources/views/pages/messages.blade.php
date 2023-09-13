@@ -45,7 +45,7 @@
                                         <p class="text-sm font-weight-bold mb-0">{{$message->titre}}</p>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">{{$message->description}}</p>
+                                        <p class="text-sm mb-0">{{$message->description}}</p>
                                     </td>
                                    
                                     <td>
@@ -61,15 +61,15 @@
                                     <td >
                                        
                                             
-                                            
+{{--                                             
                                                 <a href='messages/{{$message->id}}'>
                                                     <button  class="btn btn-secondary btn-sm ms-auto text-wrap" style="width: 9rem;">Modifier message</button>
-                                                </a>
+                                                </a> --}}
                                              
                                                 <form method="post"  action="{{ route('messages.delete', $message->id) }}" >
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm ms-auto ">supprimer</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm ms-auto">supprimer</button>
                                                 </form>
                                           
                                       

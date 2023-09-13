@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter une session'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Ouvrir une session'])
   
     <div id="alert">
         @include('components.alert')
@@ -27,8 +27,8 @@
                         <div class="card-header pb-0">
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter une session</p>
-                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Ajouter</button>
+                                    <p class="mb-0">Ouvrir une session</p>
+                                    <button type="submit" class="btn btn-primary btn-sm ms-auto">Ouvrir</button>
                                 </div>
                                 
                         </div>
