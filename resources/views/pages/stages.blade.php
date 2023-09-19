@@ -154,7 +154,7 @@
                                                         <button class="btn"  style="background-color: rgb(157, 252, 144); width: 10rem;">plus d'info</button>
                                                     </a>
 
-                                                    @else
+                                                    @elseif ($stage->etat == 'crée')
                                                         <a href='stages/{{ $stage->id }}'>
                                                             <button class="btn btn-secondary btn-sm" style="width: 5rem;">Modifier
                                                                 stage</button>
@@ -173,6 +173,11 @@
                                                         <a href="/plusinfo/etudiant/stages/{{ $stage->id }}">
                                                             <button class="btn btn-sm"  style="background-color: rgb(157, 252, 144);width: 10rem;">plus d'info</button>
                                                         </a>
+                                                    @else
+                                                    <a href="/plusinfo/etudiant/stages/{{ $stage->id }}">
+                                                        <button class="btn btn-sm"  style="background-color: rgb(157, 252, 144);width: 10rem;">plus d'info</button>
+                                                    </a>
+                                                         
                                                     @endif
                                                 @elseif ($role->value === 'administrateur' && ($stage->type ==='ouvrier' || $stage->type ==='technicien') )
                                                     <a href='stages/enseignant/affecter/{{ $stage->id }}'>
@@ -392,14 +397,14 @@
                                                     @endif
 
                                                     @if ($stage->etat == 'validé')
-                                                        <form method="post"
+                                                        {{-- <form method="post"
                                                             action="{{ route('stages.annulerValidation', $stage->id) }}">
                                                             @csrf
                                                             @method('POST')
                                                             <button type="submit" class="btn btn-sm ms-auto "
                                                                 style="background-color: rgb(137, 252, 152) ; color:rgb(2, 2, 36) ; width: 10rem;">annuler
                                                                 validation</button>
-                                                        </form>
+                                                        </form> --}}
 
                                                         <a href="/plusinfo/stages/{{ $stage->id }}">
                                                             <button class="btn"  style="background-color: rgb(157, 252, 144); width: 10rem;">plus d'info</button>
