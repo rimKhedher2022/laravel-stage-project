@@ -34,7 +34,7 @@ class StoreController extends Controller
         ->where('specialite', $loggedInStudent->specialite)
         ->get() ;  // pour le binome
 
-        return view('pages.add-stage',['societes' => $societes , 'etudiants' => $etudiants , 'niveau'=>$niveau ,'diplôme'=>$diplôme]);
+        return view('pages.ajouter-stage',['societes' => $societes , 'etudiants' => $etudiants , 'niveau'=>$niveau ,'diplôme'=>$diplôme]);
     }
 
 

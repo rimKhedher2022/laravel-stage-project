@@ -90,7 +90,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-	Route::get('/add-stage',[StageStoreController::class,'show'])->name('add-stage');
+	Route::get('/ajouter-stage',[StageStoreController::class,'show'])->name('ajouter-stage');
 	Route::get('/stages/{id}',[EditController::class, 'edit'])->name('edit-stage');
 	Route::get('/plusinfo/stages/{id}',[StageStoreController::class, 'plusInfo'])->name('plusinfo-stage'); // pour enseignant
 	Route::get('/plusinfo/etudiant/stages/{id}',[StageStoreController::class, 'plusInfoEtudiant'])->name('plusinfo-stage-etudiant'); // pour etudiant

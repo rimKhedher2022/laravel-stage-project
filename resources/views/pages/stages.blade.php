@@ -15,7 +15,7 @@
 
                     @if ($role->value === 'etudiant')
                         <h6>Stages</h6>
-                        <a href='add-stage'>
+                        <a href='ajouter-stage'>
                             <button class="btn btn-primary btn-sm ms-auto">Ajouter stage</button>
                         </a>
                     @elseif ($role->value === 'administrateur')

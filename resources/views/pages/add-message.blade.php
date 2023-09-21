@@ -3,7 +3,7 @@
 
 @section('content')
   
-    @include('layouts.navbars.auth.topnav', ['title' => 'Envoyer message'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Demande de correction :'])
   
     <div id="alert">
         @include('components.alert')
@@ -37,7 +37,7 @@
 
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Envoyer un message de correction au stagiaire :</p>
+                                    <p class="mb-0">Demande de correction :</p>
                                     {{-- {{$stage}} --}}
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Envoyer</button>
                                 </div>
