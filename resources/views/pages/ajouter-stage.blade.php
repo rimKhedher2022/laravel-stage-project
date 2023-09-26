@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter un stage'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Saisie des informations de stage'])
   
     <div id="alert">
         @include('components.alert')
@@ -31,7 +31,7 @@
                         <div class="card-header pb-0">
 
                                 <div class="d-flex align-items-center">
-                                    <p class="mb-0">Ajouter un stage</p>
+                                    <p class="mb-0">Saisie des informations de stage</p>
                                     <button type="submit" class="btn btn-primary btn-sm ms-auto">Enregistrer</button>
                                 </div>
                                 
